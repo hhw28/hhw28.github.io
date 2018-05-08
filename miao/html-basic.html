@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>html标签练习</title>
+    <link rel="icon" href="icon.jpg"> <!-- 网页标题图标 -->
 </head>
 <body>
     <h1>Lorem.</h1>
@@ -194,10 +195,14 @@
     </map>
     <hr/>
 
-    <a href="https://www.mi.com" target="frame1">点击我会在下面的frame里打开小米商城，但为什么打不开呢？</a>
+    <a href="https://www.mi.com" target="frame1">点击我会在下面的frame1里打开小米商城，但为什么打不开呢？</a>
     <p>答：小米商城X-Frame-Options设置为sameorigin，frame页面的地址只能为同源域名下的页面，所以无法打开</p>
     <br/>
     <iframe src="https://nodejs.org" name="frame1" frameborder="1"></iframe>
+
+    <iframe src="a.html" name="frame2" frameborder="1" width="500" height="200">
+        <p>您的浏览器不支持框架，请升级您的浏览器</p>
+    </iframe>
 
     <p>一堆空格&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;在这里？</p>
     <p>使用转义符表示&lt;，可以显示标签&lt;span>&lt;/span></p>
