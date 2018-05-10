@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>qq-mail布局</title>
+    <style>
+
+        body>div:nth-child(1){
+            height: 100px;
+            border: 2px solid black;
+        }
+        body>div:nth-child(2){
+            border: 2px solid black;
+            height: 500px;
+            border-top: 0px;
+            min-width: 400px;
+        }
+        body>div:nth-child(2)>div{
+            float: left;
+        }
+        body>div:nth-child(2)>div:first-child{
+            border-right: 2px solid black;
+            height: 100%;
+            width: 220px;
+        }
+    </style>
+</head>
+<body>
+    <div>height:100px</div>
+    <div>
+        <div>width:200px</div>
+        <div>border:2px</div>
+    </div>
+
+</body>
+</html>
