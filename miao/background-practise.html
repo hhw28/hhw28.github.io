@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>background</title>
+    <style>
+        html,body{
+            margin: 0;
+            padding: 0;
+        }
+        body{
+            background: white fixed top left no-repeat url(background-practise-img/glassy.jpg);
+        }
+        .content{
+            min-width: 750px;
+            border:5px solid;
+            padding: 40px;
+            margin: 60px;
+            background: white fixed 0 0 no-repeat url(background-practise-img/glassy-1.jpg);
+        }
+        .content>h1{
+            padding:25px;
+            border: 0.5px solid;
+            margin-left: -20px;
+            margin-right: -20px;
+            background: #c9c9c9 fixed top left no-repeat url(background-practise-img/glassy-c9.jpg);
+        }
+        .content>h2{
+            border: 0.5px solid black;
+            color: white;
+            margin: 0 -45px;
+            padding: 10px 20px;
+            background: #c9c9c9 fixed top left no-repeat url(background-practise-img/glassy-c9.jpg);
+        }
+        .content>div{
+            background-repeat:no-repeat;
+            background-position: center;
+            background-attachment: fixed; /*1.图像不会随文档滚动 2.图像放置由可视区大小确定，而不是包含图像的元素大小(如图可见设置了bg-position:center并未居中)*/
+        }
+        .box1{
+            padding-bottom: 25px;
+        }
+        .box2{
+            background-image: url(background-practise-img/porsche-model.png);
+            padding-top: 25px;
+        }
+        .box3{
+            background-image:url(background-practise-img/porsche-model-1.png);
+        }
+        .box4{
+            background-image:url(background-practise-img/porsche-model-2.png);
+        }
+        textarea{
+            background-image:url(background-practise-img/01.jpg);
+            background-repeat:repeat;
+        }
+        select{
+            background-image:url(background-practise-img/01.jpg);
+        }
+        optgroup{
+            background-image: inherit;
+        }
+        option{
+            background-image: inherit;
+        }
+        p{
+            border: 1px solid;
+            width: 800px;
+            padding: 10px;
+            background-image: url(background-practise-img/02.jpg);
+            background-repeat:no-repeat;
+            background-position: right 20px;
+        }
+        .mi{
+            display: inline-block;
+            height: 70px;
+            width: 70px;
+            background-image: url(background-practise-img/mi.png);
+            overflow: hidden;
+            transition: 0.2s;
+        }
+        .mi:hover{
+            background-position: 70px;
+        }
+    </style>
+</head>
+<body>
+    <div class="content">
+        <h1>Lorem ipsum dolor sit</h1>
+        <div class="box1">
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Id, ex facere. Delectus, eaque exercitationem asperiores quae minus quidem, quasi quod cupiditate natus eligendi similique nostrum, culpa at doloremque ullam! Sapiente.
+            Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quia assumenda laboriosam quo est odio, corporis quisquam, nesciunt iusto ipsum suscipit possimus sint blanditiis enim quae deleniti porro minima esse similique!
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Officiis eos laudantium quisquam! Eveniet fugit illo fuga optio soluta similique, obcaecati beatae odio quod? Rerum hic quod pariatur laborum dicta ut.
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Reprehenderit qui impedit amet, animi, aut eligendi praesentium adipisci esse nulla nemo vero sequi voluptatem dolores vel! Reprehenderit nisi cum nobis delectus?
+            Lorem, ipsum dolor sit amet consectetur adipisicing elit. Recusandae repellat, exercitationem, in a placeat asperiores mollitia veniam non illum dolorum obcaecati. Excepturi nostrum impedit cumque distinctio culpa aspernatur. Enim, iste.
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Reprehenderit qui impedit amet, animi, aut eligendi praesentium adipisci esse nulla nemo vero sequi voluptatem dolores vel! Reprehenderit nisi cum nobis delectus?
+            Lorem ipsum dolor sit amet consectetur adipisicing elit.
+        </div>
+        <h2>Lorem, ipsum dolor sit amet</h2>
+        <div class="box2">
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Id, ex facere. Delectus, eaque exercitationem asperiores quae minus quidem, quasi quod cupiditate natus eligendi similique nostrum, culpa at doloremque ullam! Sapiente.
+            Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quia assumenda laboriosam quo est odio, corporis quisquam, nesciunt iusto ipsum suscipit possimus sint blanditiis enim quae deleniti porro minima esse similique!
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Officiis eos laudantium quisquam! Eveniet fugit illo fuga optio soluta similique, obcaecati beatae odio quod? Rerum hic quod pariatur laborum dicta ut.
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Reprehenderit qui impedit amet, animi, aut eligendi praesentium adipisci esse nulla nemo vero sequi voluptatem dolores vel! Reprehenderit nisi cum nobis delectus?
+            Lorem, ipsum dolor sit amet consectetur adipisicing elit. Recusandae repellat, exercitationem, in a placeat asperiores mollitia veniam non illum dolorum obcaecati. Excepturi nostrum impedit cumque distinctio culpa aspernatur. Enim, iste.
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Id, ex facere. Delectus, eaque exercitationem asperiores quae minus quidem, quasi quod cupiditate natus eligendi similique nostrum, culpa at doloremque ullam! Sapiente.
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Reprehenderit qui impedit amet, animi, aut eligendi praesentium adipisci esse nulla nemo vero sequi voluptatem dolores vel! Reprehenderit nisi cum nobis delectus?
+            Lorem, ipsum dolor sit amet consectetur adipisicing elit. Recusandae repellat, exercitationem, in a placeat asperiores mollitia veniam non illum dolorum obcaecati. Excepturi nostrum impedit cumque distinctio culpa aspernatur. Enim, iste.
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Id, ex facere. Delectus, eaque exercitationem asperiores quae minus quidem, quasi quod cupiditate natus eligendi similique nostrum, culpa at doloremque ullam! Sapiente.
+            Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quia assumenda laboriosam quo est odio, corporis quisquam, nesciunt iusto ipsum suscipit possimus sint blanditiis enim quae deleniti porro minima esse similique!
+        </div>
+        <div class="box3">
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Id, ex facere. Delectus, eaque exercitationem asperiores quae minus quidem, quasi quod cupiditate natus eligendi similique nostrum, culpa at doloremque ullam! Sapiente.
+            Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quia assumenda laboriosam quo est odio, corporis quisquam, nesciunt iusto ipsum suscipit possimus sint blanditiis enim quae deleniti porro minima esse similique!
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Officiis eos laudantium quisquam! Eveniet fugit illo fuga optio soluta similique, obcaecati beatae odio quod? Rerum hic quod pariatur laborum dicta ut.
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Reprehenderit qui impedit amet, animi, aut eligendi praesentium adipisci esse nulla nemo vero sequi voluptatem dolores vel! Reprehenderit nisi cum nobis delectus?
+            Lorem, ipsum dolor sit amet consectetur adipisicing elit. Recusandae repellat, exercitationem, in a placeat asperiores mollitia veniam non illum dolorum obcaecati. Excepturi nostrum impedit cumque distinctio culpa aspernatur. Enim, iste.
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Id, ex facere. Delectus, eaque exercitationem asperiores quae minus quidem, quasi quod cupiditate natus eligendi similique nostrum, culpa at doloremque ullam! Sapiente.
+            Lorem, ipsum dolor sit amet consectetur adipisicing elit. Recusandae repellat, exercitationem, in a placeat asperiores mollitia veniam non illum dolorum obcaecati. Excepturi nostrum impedit cumque distinctio culpa aspernatur. Enim, iste.
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Id, ex facere. Delectus, eaque exercitationem asperiores quae minus quidem, quasi quod cupiditate natus eligendi similique nostrum, culpa at doloremque ullam! Sapiente.
+            Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quia assumenda laboriosam quo est odio, corporis quisquam, nesciunt iusto ipsum suscipit possimus sint blanditiis enim quae deleniti porro minima esse similique!
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Officiis eos laudantium quisquam! Eveniet fugit illo fuga optio soluta similique, obcaecati beatae odio quod? Rerum hic quod pariatur laborum dicta ut.
+        </div>
+        <div class="box4">
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Id, ex facere. Delectus, eaque exercitationem asperiores quae minus quidem, quasi quod cupiditate natus eligendi similique nostrum, culpa at doloremque ullam! Sapiente.
+            Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quia assumenda laboriosam quo est odio, corporis quisquam, nesciunt iusto ipsum suscipit possimus sint blanditiis enim quae deleniti porro minima esse similique!
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Officiis eos laudantium quisquam! Eveniet fugit illo fuga optio soluta similique, obcaecati beatae odio quod? Rerum hic quod pariatur laborum dicta ut.
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Reprehenderit qui impedit amet, animi, aut eligendi praesentium adipisci esse nulla nemo vero sequi voluptatem dolores vel! Reprehenderit nisi cum nobis delectus?
+            Lorem, ipsum dolor sit amet consectetur adipisicing elit. Recusandae repellat, exercitationem, in a placeat asperiores mollitia veniam non illum dolorum obcaecati. Excepturi nostrum impedit cumque distinctio culpa aspernatur. Enim, iste.
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Id, ex facere. Delectus, eaque exercitationem asperiores quae minus quidem, quasi quod cupiditate natus eligendi similique nostrum, culpa at doloremque ullam! Sapiente.
+            Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quia assumenda laboriosam quo est odio, corporis quisquam, nesciunt iusto ipsum suscipit possimus sint blanditiis enim quae deleniti porro minima esse similique!
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Officiis eos laudantium quisquam! Eveniet fugit illo fuga optio soluta similique, obcaecati beatae odio quod? Rerum hic quod pariatur laborum dicta ut.
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Reprehenderit qui impedit amet, animi, aut eligendi praesentium adipisci esse nulla nemo vero sequi voluptatem dolores vel! Reprehenderit nisi cum nobis delectus?
+            Lorem, ipsum dolor sit amet consectetur adipisicing elit. Recusandae repellat, exercitationem, in a placeat asperiores mollitia veniam non illum dolorum obcaecati. Excepturi nostrum impedit cumque distinctio culpa aspernatur. Enim, iste.
+        </div>
+    </div>
+    <textarea name="" id="" cols="30" rows="10"></textarea>
+    <select name="" id="">
+        <optgroup label="少年"> <!-- optgroup 用于组合选项 -->
+            <option value="1-6岁">1-6岁</option>
+            <option value="6-12岁" selected>6-12岁</option>
+        </optgroup>
+        <optgroup label="青年">
+            <option value="13-15岁" disabled>13-15岁</option><!-- disabled被禁用 -->
+            <option value="16-18岁">16-18岁</option>
+        </optgroup>
+        <optgroup label="壮年" disabled><!-- 整组都被禁用 -->
+            <option value="18-22岁">18-22岁</option>
+            <option value="22-38岁">22-38岁</option>
+            <option value="22-38岁" hidden>22-38岁</option><!-- hidden被隐藏 -->
+        </optgroup>
+    </select>
+    <a class="mi" href="http://www.mi.com"></a>
+    <p>
+       Lorem ipsum dolor sit amet consectetur adipisicing elit. Rerum consequuntur odit ab error eos quisquam ducimus obcaecati molestiae cupiditate modi iusto, amet dicta deserunt nesciunt dolore eum animi aliquid dolorum?
+       Lorem ipsum dolor sit amet consectetur adipisicing elit. Rerum consequuntur odit ab error eos quisquam ducimus obcaecati molestiae cupiditate modi iusto, amet dicta deserunt nesciunt dolore eum animi aliquid dolorum?
+    </p>
+</html>

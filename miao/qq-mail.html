@@ -6,39 +6,56 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>qq-mail布局</title>
     <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
         html,body{
             margin: 0;
             height: 100%;
         }
         header{
             height: 100px;
-            border: 2px solid black;
             box-sizing: border-box;
-            background: pink;
+            display: flex;
+            align-items: center;
         }
-        div{
-            border: 2px solid black;
+        header>.head-left{
+
+        }
+        .content{
+            background-color: #89b5e9;
             border-top: 0px;
             height: calc(100% - 100px);  /*父元素高度减去header高度，即为整个窗口剩下高度*/
             box-sizing: border-box;
-            background: aqua;
+            margin-left: 7px;
+            padding-top: 6px;
+            border-top-left-radius: 8px;
         }
         aside{
-            border-right: 2px solid black;
-            height:100%;
+            height:calc(100% - 6px);
             width: 200px;
-            background: teal;
+            background-color: white;
+            margin-left: 6px;
+            border-radius: 6px;
         }
         main{
             box-sizing: border-box;
-            margin-left: 200px;
-            margin-top: calc(-100vh + 100px);
+            margin-left: 212px;
+            margin-top: calc(-100vh + 112px);
+            background-color: white;
+            border-top-left-radius: 6px;
+            height:calc(100%);
         }
     </style>
 </head>
 <body>
-    <header>height:100px</header>
-    <div>
+    <header>
+        <div class="head-left">
+            <img class="qq-mail-logo" src="qq-mail-logo.png" alt="">
+        </div>
+    </header>
+    <div class="content">
         <aside>width:200px</aside>
         <main>border:2px
             <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Magni recusandae expedita, ut dicta distinctio aliquid quam? Fugiat totam, quod id earum ex rerum itaque dicta non, quae ut quia placeat.</p>
