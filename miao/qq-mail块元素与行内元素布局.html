@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta http-equiv="refresh" content="3">
+    <title>QQ邮箱-块元素及行内元素布局</title>
+    <style>
+        body{
+            margin: 0;  /*使浏览器无空白边框，被内容填满*/
+        }
+        /*块元素布局方式*/
+        xheader{
+            height: 100px;
+            box-sizing: border-box;  /*使border的宽度包含在height*/
+            border-bottom: 2px solid;
+        }
+        xaside{
+            width: 220px;
+            box-sizing: border-box;
+            border-right: 2px solid #000;
+            height: calc(100vh - 100px);  /*100vh代表浏览器视口高度，减去header的高度，剩余的高度刚好填满*/
+        }
+        xmain{
+            background-color: pink;
+            margin-left: 200px;
+            margin-top: calc(-100vh + 100px );  /*向上偏移*/
+            height: calc(100vh - 100px);
+        }
+        /*行内元素布局方式*/
+        header,aside,main{
+            display: inline-block;  /*行内块元素可设置宽高，行内元素不可设置宽高*/
+            background-color: #ccc;
+            /* font-size: 16px; 若去除缝隙使用的是 font-size:0,则需要对该元素设置字体大小*/
+        }
+        body{
+            /* 块元素换行会有空白，所以设置为行内块元素后在同一行显示会有缝隙，需要对父元素进行以下设置*/
+            /* 第一种办法：font-size: 0px; 该办法设置后对后代字体会产生影响，不建议使用 */
+            /*第二种办法*/
+            display: flex;
+        }
+        header{
+            height: 100px;
+            width: 100vw;
+            border-bottom: 2px solid;
+            box-sizing: border-box;
+        }
+        aside{
+            width: 220px;
+            margin-top: 100px;
+            margin-left: -100vw;
+            height: calc(100vh - 100px);
+            background-color: pink;
+            border-right: 2px solid;
+            box-sizing: border-box;
+        }
+        main{
+            margin-top:100px;
+            width: calc(100vw - 220px);
+            background-color: teal;
+        }
+
+    </style>
+</head>
+<body>
+    <header>高度100px</header>
+    <aside>宽度220px</aside>
+    <main>除我以外边线都是2px</main>
+</body>
+</html>
