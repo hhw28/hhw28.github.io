@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <!-- <meta http-equiv="refresh" content="3"> -->
+    <title>input-beauty</title>
+</head>
+<style>
+    p{
+        background-color: #ccc;
+    }
+    .p1>span{
+        font-size: 30px;
+    }
+    .p1 input{
+        vertical-align: 30%; /*可尝试使用各种数值*/
+        zoom:1;
+    }
+    .p2 input{
+        zoom: 2; /*放大2倍，该元素兼容性差*/
+    }
+    .p3 input{
+        transform: scale(2); /*放大2倍*/
+    }
+    .p4 input{
+        display: none;
+    }
+    .p4 label{
+        border: solid;
+        display: inline-block;  /*label为行内元素，若要设置宽高需设置为行内块元素*/
+        width: 20px;
+        height: 20px;
+        border-radius: 5px;
+        line-height: 20px;  /*使内容和边框居中*/
+        text-align: center;
+    }
+    .p4 input:checked + label{
+        color: red;
+    }
+
+    .p6{
+        line-height: 4;  /*input元素会影响行框高度，所以最好设置一下超过input高度以免被影响*/
+    }
+    .p6 input{
+        width: 300px;
+        font-family: inherit;  /*默认文字格式不同，从父元素继承可以让文字更协调*/
+        font-size: inherit;
+        /* display: none;  此行为测试input元素会对父元素行框高度产生影响*/
+        margin: -5px auto;  /*垂直方向设置margin后，对父元素行框高度不产生影响了*/
+        border: solid rgb(119, 119, 119);
+        border-radius: 10px;
+        padding: 5px;
+    }
+
+    .p5{
+        line-height: 4;
+        background-color: #fff;
+        display: flex;
+        align-items: center;
+    }
+    .p5 input{
+        display: none;
+    }
+    .p5 label{
+        display: inline-block;
+        width: 50px;
+        height: 50px;
+        background-color: #fff;
+        border: 3px solid #e5e5e5;
+        box-sizing: border-box;
+        border-radius: 50%;
+        transition: 0.3s;
+    }
+    .p5 label.left{
+        margin-right: -10px;
+    }
+    .p5 label.right{
+        margin-left: -10px;
+    }
+    .p5 label.middle{
+        position: relative;
+        right: 55px;
+        border-left: 0;
+        border-right: 0;
+        border-radius: 0%;
+        width: 30px;
+    }
+    .p5 label.button{
+        background: #fff;
+        border-color: #fff;
+        width: 44px;
+        height: 44px;
+        position: relative;
+        right: 106px;
+        box-shadow: 0px 3px 15px #cacaca;
+    }
+    .p5 input:checked ~ label{
+        background: #4cd964;
+        border-color: #4cd964;
+    }
+    .p5 input:checked ~ label.button{
+        background: #fff;
+        border-color: #fff;
+        right: 77px;
+        box-shadow: 0px 3px 5px #3fb453;
+    }
+    /* .p5 label::before{
+        content: '';
+        display: inline-block;
+        border: 3px solid #e5e5e5;
+        box-sizing: border-box;
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        background-color: #fff;
+        position: absolute;
+        right: 15px;
+        top:-3px;
+    }
+    .p5 label::after{
+        content: '';
+        display: inline-block;
+        border: 3px solid #e5e5e5;
+        box-sizing: border-box;
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        background-color: #fff;
+        position: absolute;
+        left: 15px;
+        top:-3px;
+    } */
+</style>
+<body>
+    <p class="p1">
+        <span>让checkbox跟当前行的文字垂直居中</span>
+        <input type="checkbox" name="" value="">
+        <input type="checkbox" name="" value="" checked>
+        <input type="checkbox" name="" value="" checked>
+    </p>
+    <p class="p2">
+        zoom:1 放大了input，并影响了p元素的行框高
+        <input type="checkbox" name="" value="">
+    </p>
+    <p class="p3">
+        transform: scale(2) 放大了按钮，但未影响p元素的行框高
+        <input type="checkbox" name="" value="">
+    </p>
+    <p class="p4">
+        让checkbox样式更好看，原样式无法更改，新增label元素当作新的checkbox
+        <input type="checkbox" name="" id="good" value="">
+        <label for="good">✔</label>  <!-- 当label中的内容被点击时，id为good的input会被选中 -->
+    </p>
+    <p class="p5">
+        拓展题：使用纯css实现ios系统的checkbox动画
+        <input type="checkbox" name="" id="ios" value="">
+        <label class="left" for="ios"></label>
+        <label class="right" for="ios"></label>
+        <label class="middle" for="ios"></label>
+        <label class="button" for="ios"></label>
+    </p>
+
+    <p class="p6">让input元素跟前行的文字更协调
+        <input type="text" placeholder="本身输入内容大小与前行文字不同">
+    </p>
+
+</body>
+</html>
