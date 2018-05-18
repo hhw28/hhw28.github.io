@@ -4,29 +4,42 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>qq-mail布局</title>
+    <link rel="shortcut icon" href="qq-mail-img/qq-mail-icon.png" type="image/x-icon">
+    <title>QQ邮箱布局</title>
     <style>
         *{
             margin: 0;
             padding: 0;
+            font-family: "lucida Grande",Verdana,"Microsoft YaHei";
         }
         html,body{
             margin: 0;
             height: 100%;
         }
         header{
-            height: 100px;
+            height: 66px;
             box-sizing: border-box;
             display: flex;
             align-items: center;
+            font-size: 12px;
         }
-        header>.head-left{
-
+        ::placeholder {
+            font-size: 12px;
+            color: #a0a0a0;
+            background: url(qq-mail-img/search-icon.bmp) no-repeat;
+            background-size: 17px;
+        }
+        header a{
+            text-decoration-line: none;
+            color: #1e5494
+        }
+        header a:hover{
+            text-decoration-line: underline;
         }
         .content{
             background-color: #89b5e9;
             border-top: 0px;
-            height: calc(100% - 100px);  /*父元素高度减去header高度，即为整个窗口剩下高度*/
+            height: calc(100% - 66px);  /*父元素高度减去header高度，即为整个窗口剩下高度*/
             box-sizing: border-box;
             margin-left: 7px;
             padding-top: 6px;
@@ -42,17 +55,75 @@
         main{
             box-sizing: border-box;
             margin-left: 212px;
-            margin-top: calc(-100vh + 112px);
+            margin-top: calc(-100vh + 78px);
             background-color: white;
             border-top-left-radius: 6px;
             height:calc(100%);
         }
+        .head-left>div.user,.head-left>.qq-mail-logo{
+            float: left;
+        }
+        .head-left>.user{
+            vertical-align: middle;
+            margin-top: 1em;
+        }
+
+        .head-left>div select{
+            border: none;
+        }
+        .head-right{
+            height: 100%;
+            width: 486px;
+            background:url(qq-mail-img/head-right.jpg) fixed no-repeat right top;
+            float: right;
+        }
+        .head-right>.help,.head-right>input{
+            float: right;
+        }
+        .head-right>.help{
+            margin:10px;
+        }
+        .head-right>input{
+            margin-top: 3.1em;
+            margin-right: -13em;
+            width: 276px;
+        }
+        .clearfix{
+            content: '';
+            display: block;
+            clear: both;
+        }
     </style>
 </head>
 <body>
-    <header>
+    <header class="clearfix">
         <div class="head-left">
-            <img class="qq-mail-logo" src="qq-mail-logo.png" alt="">
+            <img class="qq-mail-logo" src="qq-mail-img/qq-mail-logo.png" alt="">
+            <div class="user">
+                <div>
+                    <b>123456789</b>
+                    <select name="user" id="number">
+                        <option value="123456789" selected>&lt;123456789@qq.com></option>
+                    </select>
+                </div>
+                <a href="">邮箱首页</a>
+                <em>|</em>
+                <a href="">设置</a>
+                <em>-</em>
+                <a href="">换肤</a>
+            </div>
+        </div>
+        <div class="head-right">
+            <div class="help">
+                <span class="icon"></span>
+                <em>|</em>
+                <a href="">反馈建议</a>
+                <em>|</em>
+                <a href="">帮助中心</a>
+                <em>|</em>
+                <a href="">退出</a>
+            </div>
+            <input type="text" placeholder="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;邮件全文搜索...">
         </div>
     </header>
     <div class="content">
