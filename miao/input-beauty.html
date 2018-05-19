@@ -68,73 +68,66 @@
     }
     .p5 label{
         display: inline-block;
-        width: 50px;
+        width: 80px;
         height: 50px;
         background-color: #fff;
         border: 3px solid #e5e5e5;
+        border-radius: 999px;
         box-sizing: border-box;
-        border-radius: 50%;
         transition: 0.3s;
-    }
-    .p5 label.left{
-        margin-right: -10px;
-    }
-    .p5 label.right{
-        margin-left: -10px;
-    }
-    .p5 label.middle{
-        position: relative;
-        right: 55px;
-        border-left: 0;
-        border-right: 0;
-        border-radius: 0%;
-        width: 30px;
-    }
-    .p5 label.button{
-        background: #fff;
-        border-color: #fff;
-        width: 44px;
-        height: 44px;
-        position: relative;
-        right: 106px;
-        box-shadow: 0px 3px 15px #cacaca;
     }
     .p5 input:checked ~ label{
         background: #4cd964;
         border-color: #4cd964;
     }
-    .p5 input:checked ~ label.button{
+    .p5 label::before,.p5 label::after{
+        content: '';
+        display: inline-block;
         background: #fff;
         border-color: #fff;
-        right: 77px;
-        box-shadow: 0px 3px 5px #3fb453;
-    }
-    /* .p5 label::before{
-        content: '';
-        display: inline-block;
-        border: 3px solid #e5e5e5;
-        box-sizing: border-box;
-        width: 50px;
-        height: 50px;
         border-radius: 50%;
-        background-color: #fff;
-        position: absolute;
-        right: 15px;
-        top:-3px;
+        width: 44px;
+        height: 44px;
+        position: relative;
+        box-shadow: 0px 3px 15px #cacaca;
+        transition: 0.3s;
     }
     .p5 label::after{
-        content: '';
+        display: none;
+        left: 30px;
+        box-shadow: 0px 3px 5px #3fb453;
+    }
+    .p5 input:checked ~ label::before{
+        display: none;
+    }
+    .p5 input:checked ~ label::after{
         display: inline-block;
-        border: 3px solid #e5e5e5;
-        box-sizing: border-box;
+    }
+    .p5 input:active ~ label::before,.p5 input:active ~ label::after{
         width: 50px;
-        height: 50px;
-        border-radius: 50%;
-        background-color: #fff;
-        position: absolute;
-        left: 15px;
-        top:-3px;
-    } */
+        border-radius: 999px;
+    }
+    .p5 input:active ~ label::after{
+        left: 24px;
+    }
+
+    .p7 input{
+        display: none;
+    }
+    .p7 label{
+        display: inline-block;
+        width: 100px;
+        height: 100px;
+        vertical-align: middle;
+        background: url(css-sprite-img/heart_animation.png) no-repeat;
+        background-position: 0 0;
+        transition: background-position 1s steps(28); /*雪碧图一共29种样式，从第一种到最后一种需要走28步*/
+        transition-duration: 0s;
+    }
+    .p7 input:checked ~ label{
+        transition-duration: 1s;
+        background-position: -2800px 0;
+    }
 </style>
 <body>
     <p class="p1">
@@ -157,16 +150,19 @@
         <label for="good">✔</label>  <!-- 当label中的内容被点击时，id为good的input会被选中 -->
     </p>
     <p class="p5">
-        拓展题：使用纯css实现ios系统的checkbox动画&nbsp;
+        使用纯css实现ios系统的checkbox动画&nbsp;
         <input type="checkbox" name="" id="ios" value="">
-        <label class="left" for="ios"></label>
-        <label class="right" for="ios"></label>
-        <label class="middle" for="ios"></label>
-        <label class="button" for="ios"></label>
+        <label class="ios-back" for="ios"></label>
+        <!-- <label class="ios-button" for="ios"></label> -->
     </p>
 
     <p class="p6">让input元素跟前行的文字更协调
         <input type="text" placeholder="本身输入内容大小与前行文字不同">
+    </p>
+    <p class="p7">
+        twitter点赞动画&nbsp;
+        <input type="checkbox" name="" id="heart" value="">
+        <label class="k" for="heart"></label>
     </p>
 
 </body>
