@@ -57,59 +57,6 @@
         padding: 5px;
     }
 
-    .p5{
-        line-height: 4;
-        background-color: #fff;
-        display: flex;
-        align-items: center;
-    }
-    .p5 input{
-        display: none;
-    }
-    .p5 label{
-        display: inline-block;
-        width: 80px;
-        height: 50px;
-        background-color: #fff;
-        border: 3px solid #e5e5e5;
-        border-radius: 999px;
-        box-sizing: border-box;
-        transition: 0.3s;
-    }
-    .p5 input:checked ~ label{
-        background: #4cd964;
-        border-color: #4cd964;
-    }
-    .p5 label::before,.p5 label::after{
-        content: '';
-        display: inline-block;
-        background: #fff;
-        border-color: #fff;
-        border-radius: 50%;
-        width: 44px;
-        height: 44px;
-        position: relative;
-        box-shadow: 0px 3px 15px #cacaca;
-        transition: 0.3s;
-    }
-    .p5 label::after{
-        display: none;
-        left: 30px;
-        box-shadow: 0px 3px 5px #3fb453;
-    }
-    .p5 input:checked ~ label::before{
-        display: none;
-    }
-    .p5 input:checked ~ label::after{
-        display: inline-block;
-    }
-    .p5 input:active ~ label::before,.p5 input:active ~ label::after{
-        width: 50px;
-        border-radius: 999px;
-    }
-    .p5 input:active ~ label::after{
-        left: 24px;
-    }
 
     .p7 input{
         display: none;
@@ -149,12 +96,7 @@
         <input type="checkbox" name="" id="good" value="">
         <label for="good">✔</label>  <!-- 当label中的内容被点击时，id为good的input会被选中 -->
     </p>
-    <p class="p5">
-        使用纯css实现ios系统的checkbox动画&nbsp;
-        <input type="checkbox" name="" id="ios" value="">
-        <label class="ios-back" for="ios"></label>
-        <!-- <label class="ios-button" for="ios"></label> -->
-    </p>
+
 
     <p class="p6">让input元素跟前行的文字更协调
         <input type="text" placeholder="本身输入内容大小与前行文字不同">
