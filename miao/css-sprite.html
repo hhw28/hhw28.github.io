@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <!-- <meta http-equiv="refresh" content="3"> -->
+    <title>css sprite</title>
+    <style>
+        div{
+            border: solid;
+            float: left;
+
+        }
+        .arrows-left{
+            width: 30px;
+            height: 30px;
+            background: url(css-sprite-img/google.png) no-repeat;
+            background-position: 7px -15px;
+        }
+        .arrows-right{
+            width: 30px;
+            height: 30px;
+            background: url(css-sprite-img/google.png) no-repeat;
+            background-position: -310px -15px;
+        }
+        /*运算符号*/
+        .calculator-add{
+            width: 30px;
+            height: 30px;
+            background: url(css-sprite-img/google.png) no-repeat;
+            background-position: -305px -197px;
+        }
+        .calculator-add-border{
+            width: 30px;
+            height: 30px;
+            background: url(css-sprite-img/google.png) no-repeat;
+            background-position: -304px -138px;
+        }
+        .calculator-add{
+            width: 30px;
+            height: 30px;
+            background: url(css-sprite-img/google.png) no-repeat;
+            background-position: -305px -197px;
+        }
+        .calculator-sub{
+            width: 30px;
+            height: 30px;
+            background: url(css-sprite-img/google.png) no-repeat;
+            background-position: -275px -197px;
+        }
+        .calculator-sub-border{
+            width: 30px;
+            height: 30px;
+            background: url(css-sprite-img/google.png) no-repeat;
+            background-position: -304px -166px;
+        }
+        .calculator-mul{
+            width: 30px;
+            height: 30px;
+            background: url(css-sprite-img/google.png) no-repeat;
+            background-position: -275px -167px;
+        }
+        /*电话*/
+        .tel-black{
+            width: 32px;
+            height: 35px;
+            background: url(css-sprite-img/google.png) no-repeat;
+            background-position: 4px -177px;
+        }
+        .tel-italic{
+            width: 45px;
+            height: 40px;
+            background: url(css-sprite-img/google.png) no-repeat;
+            background-position: -208px -158px;
+        }
+    </style>
+</head>
+<body>
+    <img src="css-sprite-img/google.png" alt="">
+    <div class="arrows-left"></div>
+    <div class="arrows-right"></div>
+
+    <div class="calculator-add"></div>
+    <div class="calculator-add-border"></div>
+    <div class="calculator-sub"></div>
+    <div class="calculator-sub-border"></div>
+    <div class="calculator-mul"></div>
+
+    <div class="tel-black"></div>
+    <div class="tel-italic"></div>
+
+</body>
+</html>
