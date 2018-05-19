@@ -34,7 +34,7 @@
             padding: 10px 20px;
             background: #c9c9c9 fixed top left no-repeat url(./background-practise-img/glassy-c9.jpg);
         }
-        .content>div{
+        .content>div.box1,.box2,.box3,.box4{
             background-repeat:no-repeat;
             background-position: center;
             background-attachment: fixed; /*1.图像不会随文档滚动 2.图像放置由可视区大小确定，而不是包含图像的元素大小(如图可见设置了bg-position:center并未居中)*/
@@ -43,6 +43,7 @@
             padding-bottom: 25px;
         }
         .box2{
+
             background-image: url(./background-practise-img/porsche-model.png);
             padding-top: 25px;
         }
@@ -84,6 +85,29 @@
         .mi:hover{
             background-position: 70px;
         }
+
+        .box5,.box6,.box7{
+            border: 10px solid rgba(33, 33, 33, 0.3);
+            padding: 30px;
+            background-image: url(http://www.daqulife.com/pic/uploadimg/2017-1/20171782727_01214-1.jpg);
+            background-repeat: no-repeat;
+        }
+        .box5{
+            background-size: 90%;
+            background-origin: border-box; /*padding-box;content-box; 设置相应属性后背景图存在于相应box*/
+        }
+        .box6{
+            -webkit-background-clip: text;  /*裁剪背景图片，目前仅*/
+            font-weight: bold;
+            line-height: 12px;
+            color: transparent;  /* 字体设置透明后，才能看到被裁剪的图片 */
+            background-size: 100%;
+        }
+        .box7{
+            -webkit-background-clip: text;
+            background-image: linear-gradient(blue,white);  /*线性渐变*/
+            color:transparent;
+        }
     </style>
 </head>
 <body>
@@ -124,6 +148,42 @@
             Lorem ipsum dolor sit amet, consectetur adipisicing elit. Officiis eos laudantium quisquam! Eveniet fugit illo fuga optio soluta similique, obcaecati beatae odio quod? Rerum hic quod pariatur laborum dicta ut.
         </div>
         <div class="box4">
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Id, ex facere. Delectus, eaque exercitationem asperiores quae minus quidem, quasi quod cupiditate natus eligendi similique nostrum, culpa at doloremque ullam! Sapiente.
+            Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quia assumenda laboriosam quo est odio, corporis quisquam, nesciunt iusto ipsum suscipit possimus sint blanditiis enim quae deleniti porro minima esse similique!
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Officiis eos laudantium quisquam! Eveniet fugit illo fuga optio soluta similique, obcaecati beatae odio quod? Rerum hic quod pariatur laborum dicta ut.
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Reprehenderit qui impedit amet, animi, aut eligendi praesentium adipisci esse nulla nemo vero sequi voluptatem dolores vel! Reprehenderit nisi cum nobis delectus?
+            Lorem, ipsum dolor sit amet consectetur adipisicing elit. Recusandae repellat, exercitationem, in a placeat asperiores mollitia veniam non illum dolorum obcaecati. Excepturi nostrum impedit cumque distinctio culpa aspernatur. Enim, iste.
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Id, ex facere. Delectus, eaque exercitationem asperiores quae minus quidem, quasi quod cupiditate natus eligendi similique nostrum, culpa at doloremque ullam! Sapiente.
+            Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quia assumenda laboriosam quo est odio, corporis quisquam, nesciunt iusto ipsum suscipit possimus sint blanditiis enim quae deleniti porro minima esse similique!
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Officiis eos laudantium quisquam! Eveniet fugit illo fuga optio soluta similique, obcaecati beatae odio quod? Rerum hic quod pariatur laborum dicta ut.
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Reprehenderit qui impedit amet, animi, aut eligendi praesentium adipisci esse nulla nemo vero sequi voluptatem dolores vel! Reprehenderit nisi cum nobis delectus?
+            Lorem, ipsum dolor sit amet consectetur adipisicing elit. Recusandae repellat, exercitationem, in a placeat asperiores mollitia veniam non illum dolorum obcaecati. Excepturi nostrum impedit cumque distinctio culpa aspernatur. Enim, iste.
+        </div>
+        <div class="box5">
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Id, ex facere. Delectus, eaque exercitationem asperiores quae minus quidem, quasi quod cupiditate natus eligendi similique nostrum, culpa at doloremque ullam! Sapiente.
+            Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quia assumenda laboriosam quo est odio, corporis quisquam, nesciunt iusto ipsum suscipit possimus sint blanditiis enim quae deleniti porro minima esse similique!
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Officiis eos laudantium quisquam! Eveniet fugit illo fuga optio soluta similique, obcaecati beatae odio quod? Rerum hic quod pariatur laborum dicta ut.
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Reprehenderit qui impedit amet, animi, aut eligendi praesentium adipisci esse nulla nemo vero sequi voluptatem dolores vel! Reprehenderit nisi cum nobis delectus?
+            Lorem, ipsum dolor sit amet consectetur adipisicing elit. Recusandae repellat, exercitationem, in a placeat asperiores mollitia veniam non illum dolorum obcaecati. Excepturi nostrum impedit cumque distinctio culpa aspernatur. Enim, iste.
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Id, ex facere. Delectus, eaque exercitationem asperiores quae minus quidem, quasi quod cupiditate natus eligendi similique nostrum, culpa at doloremque ullam! Sapiente.
+            Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quia assumenda laboriosam quo est odio, corporis quisquam, nesciunt iusto ipsum suscipit possimus sint blanditiis enim quae deleniti porro minima esse similique!
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Officiis eos laudantium quisquam! Eveniet fugit illo fuga optio soluta similique, obcaecati beatae odio quod? Rerum hic quod pariatur laborum dicta ut.
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Reprehenderit qui impedit amet, animi, aut eligendi praesentium adipisci esse nulla nemo vero sequi voluptatem dolores vel! Reprehenderit nisi cum nobis delectus?
+            Lorem, ipsum dolor sit amet consectetur adipisicing elit. Recusandae repellat, exercitationem, in a placeat asperiores mollitia veniam non illum dolorum obcaecati. Excepturi nostrum impedit cumque distinctio culpa aspernatur. Enim, iste.
+        </div>
+        <div class="box6">
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Id, ex facere. Delectus, eaque exercitationem asperiores quae minus quidem, quasi quod cupiditate natus eligendi similique nostrum, culpa at doloremque ullam! Sapiente.
+            Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quia assumenda laboriosam quo est odio, corporis quisquam, nesciunt iusto ipsum suscipit possimus sint blanditiis enim quae deleniti porro minima esse similique!
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Officiis eos laudantium quisquam! Eveniet fugit illo fuga optio soluta similique, obcaecati beatae odio quod? Rerum hic quod pariatur laborum dicta ut.
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Reprehenderit qui impedit amet, animi, aut eligendi praesentium adipisci esse nulla nemo vero sequi voluptatem dolores vel! Reprehenderit nisi cum nobis delectus?
+            Lorem, ipsum dolor sit amet consectetur adipisicing elit. Recusandae repellat, exercitationem, in a placeat asperiores mollitia veniam non illum dolorum obcaecati. Excepturi nostrum impedit cumque distinctio culpa aspernatur. Enim, iste.
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Id, ex facere. Delectus, eaque exercitationem asperiores quae minus quidem, quasi quod cupiditate natus eligendi similique nostrum, culpa at doloremque ullam! Sapiente.
+            Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quia assumenda laboriosam quo est odio, corporis quisquam, nesciunt iusto ipsum suscipit possimus sint blanditiis enim quae deleniti porro minima esse similique!
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Officiis eos laudantium quisquam! Eveniet fugit illo fuga optio soluta similique, obcaecati beatae odio quod? Rerum hic quod pariatur laborum dicta ut.
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Reprehenderit qui impedit amet, animi, aut eligendi praesentium adipisci esse nulla nemo vero sequi voluptatem dolores vel! Reprehenderit nisi cum nobis delectus?
+            Lorem, ipsum dolor sit amet consectetur adipisicing elit. Recusandae repellat, exercitationem, in a placeat asperiores mollitia veniam non illum dolorum obcaecati. Excepturi nostrum impedit cumque distinctio culpa aspernatur. Enim, iste.
+        </div>
+        <div class="box7">
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Id, ex facere. Delectus, eaque exercitationem asperiores quae minus quidem, quasi quod cupiditate natus eligendi similique nostrum, culpa at doloremque ullam! Sapiente.
             Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quia assumenda laboriosam quo est odio, corporis quisquam, nesciunt iusto ipsum suscipit possimus sint blanditiis enim quae deleniti porro minima esse similique!
             Lorem ipsum dolor sit amet, consectetur adipisicing elit. Officiis eos laudantium quisquam! Eveniet fugit illo fuga optio soluta similique, obcaecati beatae odio quod? Rerum hic quod pariatur laborum dicta ut.
