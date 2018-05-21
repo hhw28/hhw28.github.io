@@ -70,32 +70,35 @@
 
         label[for="ios"]{
             display: inline-block;
-            width: 5.4em;
+            width: 6em;
             height: 3.4em;
             background-color: #fff;
             border: 0.2em solid #e5e5e5;
             box-sizing: border-box;
             border-radius: 999px;
-            transition: 0.3s;
+            box-shadow: 0em 0em 0em 0 #4cd964 inset;
+            transition: 0.2s;
+            cursor: pointer;
         }
         label[for="ios"].ios-button{
             background: #fff;
             border-color: #fff;
-            width: 3em;
-            height: 3em;
+            width: 2.9em;
+            height: 2.9em;
             position: relative;
-            right: 5.2em;
-            box-shadow: 0px 0.2em 1em #cacaca;
+            right: 5.8em;
+            box-shadow: 0em 0.2em 1em #6668;  /*颜色最后一位为透明度*/
         }
         input[id="ios"]:checked ~ label[for="ios"].ios-back{
-            background: #4cd964;
-            border-color: #4cd964;
+            /* background: #4cd964;
+            border-color: #4cd964; */
+            box-shadow: 0.1em 0em 0em 2em #4cd964 inset;
+
         }
         input[id="ios"]:checked ~ label[for="ios"].ios-button{
             background: #fff;
             border-color: #fff;
-            right: 3.2em;
-            box-shadow: 0px 0.2em 0.3em #3fb453;
+            right: 3.1em;
         }
     </style>
 </head>
