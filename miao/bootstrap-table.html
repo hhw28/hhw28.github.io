@@ -32,27 +32,33 @@
         }
 
 
-        div.table{
+        div{
             display: table;
-            border-collapse: separate;
-        }
-        div.table-1,div.table-2{
-            /*border-collapse: separate;
-            border-spacing: 0;  当边框模型为callapse时，无法对border设置radius，故此使用border-spacing解决边框缝隙问题*/
+            margin: 0 auto;
+            margin-bottom: 24px;
+            text-align: center;
+            width: 80vw;
+            line-height: 50px;
             background-color: #eee;
             border: 1px solid #ccc;
             border-radius: 10px;
             overflow: hidden;
-            width: 80%;
+            /*border-collapse: separate;
+            border-spacing: 0;  当边框模型为callapse时，无法对border设置radius，故此使用border-spacing解决边框缝隙问题*/
+
         }
         div>span,div>input{
             display: table-cell;
+            box-sizing: border-box;  /*？？？若是content-box，2中的span元素会前移*/
+            padding: 0 20px;
         }
-        div.table>input{
+        div>span{
+            width: 1%;
+        }
+        div>input{
             font: inherit;  /*默认文字格式不同，从父元素继承可以让文字更协调*/
             width: 100%;
             border:none;  /*清楚input默认边框样式*/
-            padding: 0 20px;
         }
         div.table-1>input{
             border-left:1px solid #ccc;
@@ -64,11 +70,11 @@
     </style>
 </head>
 <body>
-    <div class="table table-1">
+    <div class="table-1">
         <span>@@@</span>
         <input type="text" placeholder="Username">
     </div>
-    <div class="table table-2">
+    <div class="table-2">
         <input type="text" placeholder="Username">
         <span>@Username.com</span>
     </div>
