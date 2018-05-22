@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <!-- <meta http-equiv="refresh" content="3"> -->
+    <title>表单</title>
+    <style>
+        .table{
+            border-collapse: collapse;  /*边框模型(默认separate)，collapse为合并边框模型，作用与display值为table或inline-table的元素*/
+            margin: 0 auto;
+            margin-bottom: 24px;
+            text-align: center;
+            width: 80vw;
+            line-height: 50px;
+        }
+        .table tr{
+            border-top: 1px solid #dee2e2;
+        }
+        .table>thead tr:first-child{
+            border-bottom:2px solid #dee2e2;
+        }
+        .table-hover tbody>tr:hover{
+            background-color: #ececec;
+        }
+        .table-bordered tr>th,.table-bordered tr>td{
+            border: 1px solid #dee2e2;
+        }
+        .table-striped tbody>tr:nth-child(odd){
+            background-color: #ececec;
+        }
+
+
+        div.table{
+            display: table;
+            border-collapse: separate;
+        }
+        div.table-1,div.table-2{
+            /*border-collapse: separate;
+            border-spacing: 0;  当边框模型为callapse时，无法对border设置radius，故此使用border-spacing解决边框缝隙问题*/
+            background-color: #eee;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            overflow: hidden;
+            width: 80%;
+        }
+        div>span,div>input{
+            display: table-cell;
+        }
+        div.table>input{
+            font: inherit;  /*默认文字格式不同，从父元素继承可以让文字更协调*/
+            width: 100%;
+            border:none;  /*清楚input默认边框样式*/
+            padding: 0 20px;
+        }
+        div.table-1>input{
+            border-left:1px solid #ccc;
+        }
+        div.table-2>input{
+            border-right:1px solid #ccc;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="table table-1">
+        <span>@@@</span>
+        <input type="text" placeholder="Username">
+    </div>
+    <div class="table table-2">
+        <input type="text" placeholder="Username">
+        <span>@Username.com</span>
+    </div>
+
+
+<table class="table">
+  <caption>table</caption>
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">First</th>
+      <th scope="col">Last</th>
+      <th scope="col">Handle</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th scope="row">1</th>
+      <td>Mark</td>
+      <td>Otto</td>
+      <td>@mdo</td>
+    </tr>
+    <tr>
+      <th scope="row">2</th>
+      <td>Jacob</td>
+      <td>Thornton</td>
+      <td>@fat</td>
+    </tr>
+    <tr>
+      <th scope="row">3</th>
+      <td>Larry</td>
+      <td>the Bird</td>
+      <td>@twitter</td>
+    </tr>
+  </tbody>
+</table>
+
+<table class="table table-hover">
+  <caption>table-hover</caption>
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">First</th>
+      <th scope="col">Last</th>
+      <th scope="col">Handle</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th scope="row">1</th>
+      <td>Mark</td>
+      <td>Otto</td>
+      <td>@mdo</td>
+    </tr>
+    <tr>
+      <th scope="row">2</th>
+      <td>Jacob</td>
+      <td>Thornton</td>
+      <td>@fat</td>
+    </tr>
+    <tr>
+      <th scope="row">3</th>
+      <td colspan="2">Larry the Bird</td>
+      <td>@twitter</td>
+    </tr>
+  </tbody>
+</table>
+
+<table class="table table-bordered">
+  <caption>table-bordered</caption>
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">First</th>
+      <th scope="col">Last</th>
+      <th scope="col">Handle</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th scope="row">1</th>
+      <td>Mark</td>
+      <td>Otto</td>
+      <td>@mdo</td>
+    </tr>
+    <tr>
+      <th scope="row">2</th>
+      <td>Jacob</td>
+      <td>Thornton</td>
+      <td>@fat</td>
+    </tr>
+    <tr>
+      <th scope="row">3</th>
+      <td colspan="2">Larry the Bird</td>
+      <td>@twitter</td>
+    </tr>
+  </tbody>
+</table>
+
+<table class="table table-striped">
+  <caption>table-striped</caption>
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">First</th>
+      <th scope="col">Last</th>
+      <th scope="col">Handle</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th scope="row">1</th>
+      <td>Mark</td>
+      <td>Otto</td>
+      <td>@mdo</td>
+    </tr>
+    <tr>
+      <th scope="row">2</th>
+      <td>Jacob</td>
+      <td>Thornton</td>
+      <td>@fat</td>
+    </tr>
+    <tr>
+      <th scope="row">3</th>
+      <td>Larry</td>
+      <td>the Bird</td>
+      <td>@twitter</td>
+    </tr>
+  </tbody>
+</table>
+</body>
+</html>

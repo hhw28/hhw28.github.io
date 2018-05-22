@@ -1,0 +1,17 @@
+html,body,ul{
+    margin: 0;
+    padding: 0;
+}
+ul{
+    list-style-type: none;
+    /*前面的小圆点：
+    disc(默认值，实心圆点)，circle(),square,https://developer.mozilla.org/zh-CN/docs/Web/CSS/list-style-type*/
+}
+a{
+    text-decoration: none;
+}
+.clearfix{
+    content: '';
+    display:none;
+    clear: both;
+}
