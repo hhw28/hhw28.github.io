@@ -1,3 +1,7 @@
+html,body{
+    width: 100%;
+    font: 14px/1.5 "Helvetica Neue",Helvetica,Arial,"Microsoft Yahei","Hiragino Sans GB","Heiti SC","WenQuanYi Micro Hei",sans-serif
+}
 html,body,ul{
     margin: 0;
     padding: 0;

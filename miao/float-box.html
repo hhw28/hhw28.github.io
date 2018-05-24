@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <!-- <meta http-equiv="refresh" content="3"> -->
+    <title>float-box</title>
+    <style>
+        ul,li{
+            border:solid;
+            box-sizing: border-box;
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            /* display: flow-root; */
+        }
+        ul{
+            margin: auto;
+            box-sizing: content-box;
+            width: 680px;
+            padding: 40px 40px 0 40px;
+        }
+        li{
+            width: 200px;
+            height: 200px;
+            float:left;
+            margin-right: 40px;
+            margin-bottom: 40px;
+            overflow:auto;    /*当内容超出时才出现滚动条*/
+        }
+        li:nth-child(3n){
+            margin-right: 0;
+        }
+    </style>
+</head>
+<body>
+    <ul>
+        <li>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Doloremque nostrum earum repellat veritatis iste numquam atque totam vel praesentium ex accusamus enim quo labore distinctio rerum ullam nisi, explicabo illo.</li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+    </ul>
+</body>
+</html>
