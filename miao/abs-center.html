@@ -4,70 +4,102 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>css水平 垂直居中</title>
+    <!-- <meta http-equiv="refresh" content="3"> -->
+    <title>css水平垂直居中的五种办法</title>
     <style>
         html,body{
             box-sizing: border-box;
-            height: 100%;
-            width: 100%;
-            margin: 0;
-            /*水平居中：第二种方法*/  /* text-align: center; */
-
         }
-        div{
-            border: 1px solid #000;
-            /*水平居中：第一种方法*/
-            margin: auto;
-
-            /*垂直居中：第二种方法(还需搭配margin:auto)*/
+        * {
+            background-color: rgba(0,0,0,0.1);
+        }
+        section{
+            height: 400px;
+            width: 600px;
+            margin-bottom: 20px;
+        }
+        /*绝对定位，负margin,需要给定宽高*/
+        .s1{
+            position: relative;
+        }
+        .s1>div{
+            height: 200px;
+            width: 300px;
+            position: absolute;
+            left: 300px;
+            top: 200px;
+            margin-left: -150px;
+            margin-top: -100px;
+        }
+        /*绝对定位，margin:auto，需要给定宽高*/
+        .s2{
+            position: relative;
+        }
+        .s2>div{
             position: absolute;
             top: 0;
+            left: 0;
             right: 0;
             bottom: 0;
-            left: 0;
+            width: 200px;
+            height: 100px;
+            margin: auto;
+        }
+        /*绝对定位，transform:translate();*/
+        .s3{
+            position: relative;
+        }
+        .s3>div{
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%,-50%);
+        }
 
+        /*display:flex*/
+        .s4{
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
-        body{
-            border: 2px solid red;
+        /*display:table-cell*/
+        .s5{
+            display: table-cell;
+            vertical-align: middle;
+            text-align: center;
         }
-        body,div{
-            /*水平居中：第三种方法*/
-            /* display: flex;
-            justify-content: center; */
-            /*垂直居中：第一种方法*/  /* align-items:center; */
 
-        }
-        .content{
-            width: 70%;
-            height: 70%;
-            /*水平居中：第二种方法*/  /* display:inline-block; */
-
-           /*垂直居中：第三种方法（对body设置table-cell属性时，body的宽高=content）*/
-            /* display: table-cell;
-            vertical-align: middle; */
-
-        }
-        .content>div{
-            width: 30%;
-            height: 30%;
-            /*水平居中：第二种方法*/  /* display:inline-block; */
-
-            /*垂直居中：第三种方法（对body设置table-cell属性时，body的宽高=content）*/
-            /* display: table-cell;
-            vertical-align: middle; */
-        }
-        .content>div>div{
-            width: 15%;
-            height: 15%;
-            /*水平居中：第二种方法*/  /* display:inline-block; */
-        }
     </style>
 </head>
 <body>
-    <div class="content">
-        <div>
-            <div></div>
-        </div>
-    </div>
+    <section class="s1">
+        <div>1、absolute，负margin，需要给定宽高</div>
+    </section>
+    <section class="s2">
+        <div>2、absolute，margin:auto，需要给定宽高</div>
+    </section>
+    <section class="s3">
+        <div>3、absolute,transform:translate();</div>
+    </section>
+    <section class="s4">
+        <div>4、display:flex;</div>
+    </section>
+    <section class="s5">
+        <div>5、display:table-cell;</div>
+    </section>
+
+    <table>
+        <caption></caption>
+        <thead>
+            <th></th>
+        </thead>
+        <tbody>
+            <tr>
+                <th></th>
+                <td></td>
+            </tr>
+        </tbody>
+        <tfoot></tfoot>
+    </table>
 </body>
 </html>
