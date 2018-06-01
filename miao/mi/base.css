@@ -1,0 +1,25 @@
+html,body{
+    width: 100%;
+    font: 14px/1.5 "Helvetica Neue",Helvetica,Arial,"Microsoft Yahei","Hiragino Sans GB","Heiti SC","WenQuanYi Micro Hei",sans-serif
+}
+html,body,ul,h4,h2{
+    margin: 0;
+    padding: 0;
+}
+ul{
+    list-style-type: none;
+    /*前面的小圆点：
+    disc(默认值，实心圆点)，circle(),square,https://developer.mozilla.org/zh-CN/docs/Web/CSS/list-style-type*/
+}
+a{
+    text-decoration: none;
+    color: black;
+}
+.clearfix::before{
+    content: '';
+    display:block;  /*也可以是table,list-item(IE浏览器，伪元素不支持display:list-item)*/
+    clear: both;
+}
+input,textarea,img,video,object{
+    box-sizing: border-box;    /*替换元素尺寸由内部元素决定，只能通过对替换元素设置宽度100%自适应父元素，这样就不能宽度分离，只能和border\padding同在，这个时候border-box就非常有用了*/
+}

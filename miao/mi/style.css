@@ -1,6 +1,9 @@
 body{
     min-width: 1226px;
-    background-color: #fafafa;
+    xbackground-color: #fafafa;
+}
+i.iconfont{
+    color: #b0b0b0;
 }
 .adware{
     background-position: center 0;
@@ -13,17 +16,20 @@ body{
     height: 120px;
 }
 header{
-    height: 40px;
     width: 100%;
-    background-color: #333;
     font-size: 12px;
 }
 header a{
     color: #b0b0b0;
 }
 header>div.nav{
-    width: 1226px;
+    background-color: #333;
     margin: auto;
+    display: flow-root;
+}
+header .nav-width{
+    margin: auto;
+    width: 1226px;
 }
 header .nav-left>li{
     float: left;
@@ -50,7 +56,7 @@ header .nav-text>li:hover a{
 header .shopping-car{
     float: right;
     background-color: #424242;
-    line-height: 40px;
+    line-height: 38px;
     padding: 0 20px;
     margin-left: 25px;
     position: relative;
@@ -58,7 +64,7 @@ header .shopping-car{
 header .shopping-car:hover{
     background-color: #fff;
 }
-header .shopping-car:hover a{
+header .shopping-car:hover a,header .shopping-car:hover i{
     color: #ff6700;
 }
 .shopping-car>.car-list{
@@ -77,17 +83,20 @@ header .shopping-car:hover a{
 }
 header .shopping-car:hover .car-list{
     display: block;
+    z-index: -100;
 }
 header .nav-right-user>li{
     float: right;
     line-height: 40px;
 }
-
+footer{
+    background: #fafafa;
+}
 footer .background{
     background-color: #fff;
 }
 footer div.text{
-    width: 1260px;
+    width: 1226px;
     height: 272px;
     margin: auto;
 }
@@ -100,11 +109,19 @@ footer .text>.top>li{
     float: left;
     font-size: 16px;
     width: 19.7%;
-    color: #616161;
     border-right: 1px solid #e0e0e0;
 }
 footer .text>.top>li:last-child{
     border-right: none;
+}
+footer .text>.top>li i{
+    color: #616161;
+    font-size: 25px;
+    margin-right: 5px;
+}
+footer .text>.top>li a{
+    color: #616161;
+    vertical-align: 18%;
 }
 footer a:hover {
     color:#ff6700;
@@ -124,6 +141,7 @@ footer .help>li{
 .help h4{
     font-weight: 400;
     color: #424242;
+    margin-bottom: 25px;
 }
 .help a{
     color: #757575;
@@ -153,18 +171,27 @@ footer .help>li{
 .tel a{
     color: #ff6700;
     border: 1px solid;
-    padding: 6px 35px;
-    margin:5px;
+    padding: 6px 28px;
+    margin: 0 5px;
+    font-size: 12px;
+}
+.tel a i{
+    color: #ff6700;
+    margin-right: 5px;
+    font-size:14px;
 }
 .tel a:hover{
     background-color: #ff6700;
     color: #fff;
 }
+.tel a:hover i{
+    color: #fff;
+}
 
 footer .footer{
-    width: 1260px;
+    width: 1226px;
     margin: auto;
-    padding:30px;
+    padding:30px 0;
 }
 footer .footer .logo{
     width: 56px;
@@ -227,8 +254,4 @@ footer .footer>ul{
 footer .footer>img{
     display: block;
     margin:10px auto 0 auto;
-}
-
-main{
-    height: 1000px;
 }
