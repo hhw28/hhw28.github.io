@@ -100,6 +100,7 @@ header{
     width: 1226px;
     margin: auto;
     margin-top:100px;
+    margin-bottom: 10px;
     div.position{
       height: 460px;
       margin-bottom: 15px;
@@ -226,28 +227,62 @@ header{
         margin-left: 14px;
       }
     }
-    a{
-      display: block;
-      margin-bottom: 42px;
-      img{
-        width: 1226px;
-      }
-    }
-  }
 
+  }
+}
+a.hr-banner{
+  display: block;
+  margin-bottom: 37px;
+  img{
+    width: 1226px;
+  }
 }
 h2.title{
   font-size: 22px;
   font-weight: 200;
   color:#333;
+  line-height: 59px;
 }
 main{
   background-color: #f5f5f5;
+  overflow: hidden;
   div.main-width{
     width: 1226px;
     margin: auto;
     padding: 20px 0;
-    div.phone{
+
+    a.hr-banner{
+      margin-bottom: 15px;
+    }
+    div.product{
+      overflow: hidden;
+      margin-bottom: 28px;
+
+      div.product-box{
+
+        div.product-left{
+          xwidth: 234px;
+          float: left;
+          img{
+            width: 234px;
+          }
+        }
+        ul.product-list{
+          li{
+            float: left;
+            background-color: #fff;
+            width: 234px;
+            height: 300px;
+            margin-left: 14px;
+            margin-bottom: 14px;
+            padding: 20px;
+            box-sizing: border-box;
+            img{
+              width: 160px;
+            }
+          }
+        }
+      }
 
     }
   }

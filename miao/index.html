@@ -8,8 +8,47 @@
     <!-- <meta http-equiv="refresh" content="3"> -->
     <meta name="viewport" content="width=device-width">   <!--让手机以device-width的宽度为初始包含块渲染页面。（device-width根据设备的不同而不同，也可以填写一个纯数值-->
     <title>Document</title>
+    <style>
+        body,html{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            height: 100%;
+            position: relative;
+        }
+        div{
+            box-sizing: border-box;
+            position: absolute;
+        }
+        .green{
+            background-color: green;
+            width: 47.2%;
+            height: 27.1%;
+            border: 8px solid black;
+            left: 38.53%;
+            top: 3.8%;
+        }
+        .blue{
+            background-color: #00a3e9;
+            width: 36.93333%;
+            height: 33.9%;
+            border: 1px solid black;
+            left: 35.866667%;
+            top: 34.5%;
+        }
+        .red{
+            background-color: red;
+            width: 36.066667%;
+            height: 26.6%;
+            border: 5px solid black;
+            top: 15.7%;
+            left: 8.66667%;
+        }
+    </style>
 </head>
 <body>
-    It Works!
+    <div class="red"></div>
+    <div class="green"></div>
+    <div class="blue"></div>
 </body>
 </html>
