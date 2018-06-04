@@ -1,3 +1,6 @@
+li{
+  box-sizing: border-box;
+}
 header{
   div.nav-search{
     width: 1226px;
@@ -127,9 +130,67 @@ header{
               color:rgba(255,255,255,0.5);
             }
           }
+          ul.hover-list{
+
+            position: absolute;
+            top: 0px;
+            left: 100%;
+            height: 460px;
+            column-width:248px;
+            column-gap:0;
+            box-shadow: 0 8px 16px rgba(0,0,0,0.18),248px 8px 16px rgba(0,0,0,0.11);
+            xdisplay: none;
+            z-index: 200;
+            li{
+              background-color: #fff;
+              padding: 18px 20px;
+              width: 248px;
+              a{
+                color: #333;
+
+                img{
+                  display: inline-block;
+                  width: 40px;
+                  vertical-align: middle;
+                  margin-right: 12px;
+                }
+              }
+            }
+            li:nth-child(6n+1){
+              border-top: 1px solid #e0e0e0;
+            }
+            li:nth-child(6n){
+              padding-bottom: 20px;
+              border-bottom: 1px solid #e0e0e0;
+              box-shadow: 0 8px 16px rgba(0,0,0,0.18);
+            }
+            li:last-child::after{
+              content: '';
+              position: absolute;
+              top: 0;
+              width: 100%;
+              height: 99.8%;
+              background-color: #fff;
+              z-index: -1;
+              border: 1px solid #e0e0e0;
+              border-left: none;
+              border-top: none;
+              box-shadow: 0 8px 16px rgba(0,0,0,0.18),-248px 8px 16px rgba(0,0,0,0.11);
+              margin-left:-107.3px;
+            }
+            li:hover{
+              background-color: #fff;
+              a{
+                color:#ff6700;
+              }
+            }
+          }
         }
         li:hover{
           background-color: #ff6700;
+        }
+        li:hover ul.hover-list{
+          display: block;
         }
       }
     }
@@ -170,7 +231,7 @@ header{
         bottom: -4px;
         left: 6px;
         width: 65px;
-        border-bottom: 1px solid #665e57
+        border-bottom: 1px solid #665e57;
       }
       li:hover{
         a{
