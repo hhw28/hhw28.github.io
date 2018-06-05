@@ -2,53 +2,269 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"><!--让手机以device-width的宽度为初始包含块渲染页面。（device-width根据设备的不同而不同，也可以填写一个纯数值-->
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
     <!-- <meta http-equiv="refresh" content="3"> -->
-    <meta name="viewport" content="width=device-width">   <!--让手机以device-width的宽度为初始包含块渲染页面。（device-width根据设备的不同而不同，也可以填写一个纯数值-->
-    <title>Document</title>
-    <style>
-        body,html{
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            height: 100%;
-            position: relative;
+    <title>哆啦A梦</title>
+
+    <style type="text/scss">
+        body{
+            height: 100vh;
+            background: url(333.bmp) no-repeat center center;
         }
         div{
-            box-sizing: border-box;
-            position: absolute;
+            box-sizing:border-box;
         }
-        .green{
-            background-color: green;
-            width: 47.2%;
-            height: 27.1%;
-            border: 8px solid black;
-            left: 38.53%;
-            top: 3.8%;
+        .dolaemon{
+            border: 5px solid red;
+            width: 324px;
+            height: 500px;
+            position: relative;
+
+            div.head{
+                width: 314px;
+                height: 280px;
+                border:2px solid;
+                background-color: #0cb2dc;
+                border-radius: 47%;
+                position: relative;
+                overflow: hidden;
+
+                .face{
+                    background-color: #fff;
+                    border:2px solid;
+                    width:261px;
+                    height:204px;
+                    border-radius: 49%;
+                    position: absolute;
+                    bottom:3px;
+                    left: 0;
+                    right: 0;
+                    margin:auto;
+
+                    &::before{
+                        content: '';
+                        display: block;
+                        width: 1px;
+                        height: 1px;
+                        border-radius: 50%;
+                        box-shadow: 254px -92px 82px 78px rgba(255, 255, 255, 0.7);
+
+                    }
+                    .eye{
+                        background-color: #fff;
+                        border:2px solid;
+                        width: 76px;
+                        height: 88px;
+                        position: absolute;
+                        top: -35px;
+                        left: 0;
+                        right: 0;
+                        margin: auto;
+                        border-radius: 35px;
+
+                        &::before{
+                            content: '';
+                            display: block;
+                            width: 14px;
+                            height: 14px;
+                            background-color: #333;
+                            border-radius: 45%;
+                            position: absolute;
+                            bottom: 18px;
+                        }
+                    }
+                    .eye-left{
+                        position: absolute;
+                        left: -75px;
+
+                        &::before{
+                            left: 46px;
+                        }
+                    }
+                    .eye-right{
+                        position: absolute;
+                        right: -76px;
+                        &::before{
+                            left: 11px;
+                        }
+                    }
+                    .nose{
+                        width: 35px;
+                        height: 35px;
+                        background-color: #c93e00;
+                        border:2px solid;
+                        border-radius: 50%;
+                        position: absolute;
+                        left: 0;
+                        right: 0;
+                        margin: auto;
+                        top: 39px;
+
+                        &::before{
+                            content: '';
+                            display: block;
+                            width: 3px;
+                            height: 3px;
+                            background-color: #fff;
+                            border-radius: 50%;
+                            box-shadow: 0 0 5px 4px #fcf4f1;
+                            position: absolute;
+                            left: 21px;
+                            top: 10px;
+                        }
+                        &::after{
+                            content: '';
+                            display: block;
+                            height: 88px;
+                            width: 3px;
+                            background-color: black;
+                            position: absolute;
+                            left: 0;
+                            right: 0;
+                            margin: auto;
+                            top: 33px;
+                        }
+                    }
+
+                    .moustache{
+                        width: 60px;
+                        height: 2px;
+                        background-color: black;
+                        position: absolute;
+                        left: 0;
+                        right: 0;
+                        margin: auto;
+                        top: 86px;
+
+                        &::before{
+                            content: '';
+                            display: block;
+                            width: 60px;
+                            height: 2px;
+                            background-color: black;
+                            position: absolute;
+                            top: 20px;
+                            transform: rotate(-20deg);
+                        }
+                        &::after{
+                            content: '';
+                            display: block;
+                            width: 60px;
+                            height: 2px;
+                            background-color: black;
+                            position: absolute;
+                            bottom: 20px;
+                            transform: rotate(20deg);
+                        }
+                    }
+
+                    .moustache-left{
+                        left: -160px;
+                    }
+                    .moustache-right{
+                        right: -160px;
+                        transform: scaleX(-1);   /*水平翻转*/
+                    }
+
+                }
+            }
+            .neck{
+                background-color: #c13900;
+                width: 222px;
+                height: 24px;
+                border: 2px solid;
+                border-radius: 10px;
+                position: absolute;
+                left: 0;
+                right: 0;
+                margin: auto;
+                top: 256px;
+
+                .bell{
+                    width: 43px;
+                    height: 43px;
+                    background-color: #f9f12a;
+                    border:2px solid;
+                    border-radius:50%;
+                    position:absolute;
+                    left: 0;
+                    right: 0;
+                    margin:auto;
+                    top:9px;
+                    box-shadow:-4px 3px 10px 0px #999;
+
+                    &::before{
+                        content: '';
+                        display: block;
+                        width: 3px;
+                        height: 3px;
+                        background-color: #fff;
+                        border-radius: 50%;
+                        box-shadow: 0 0 5px 4px rgba(255,255,255,0.9);
+                        position: absolute;
+                        left: 26px;
+                        top: 8px;
+                    }
+                    span.line{
+                        display: inline-block;
+                        width: 36px;
+                        height: 2px;
+                        border: 2px solid;
+                    }
+                    span.dot{
+                        display: inline-block;
+                        width: 11px;
+                        height: 10px;
+                        background-color: #333;
+                        border-radius: 45%;
+                        position: absolute;
+                        left: 0;
+                        right: 0;
+                        margin: auto;
+                        box-shadow:0px 10px 15px 0px #999;
+
+                        &::after{
+                            content: '';
+                            display: block;
+                            height: 18px;
+                            width: 3px;
+                            background-color: #333;
+                            position: absolute;
+                            left: 0;
+                            right: 0;
+                            margin: auto;
+
+                        }
+
+                    }
+                }
+            }
         }
-        .blue{
-            background-color: #00a3e9;
-            width: 36.93333%;
-            height: 33.9%;
-            border: 1px solid black;
-            left: 35.866667%;
-            top: 34.5%;
-        }
-        .red{
-            background-color: red;
-            width: 36.066667%;
-            height: 26.6%;
-            border: 5px solid black;
-            top: 15.7%;
-            left: 8.66667%;
-        }
+
     </style>
 </head>
 <body>
-    <div class="red"></div>
-    <div class="green"></div>
-    <div class="blue"></div>
+    <div class="dolaemon">
+        <div class="head">
+            <div class="face">
+                <div class="eye eye-left"></div>
+                <div class="eye eye-right"></div>
+                <div class="nose"></div>
+                <div class="moustache moustache-left"></div>
+                <div class="moustache moustache-right"></div>
+            </div>
+        </div>
+        <div class="neck">
+            <div class="bell">
+                <span class="line"></span>
+                <span class="dot"></span>
+            </div>
+        </div>
+        <div class="body"></div>
+    </div>
+
 </body>
+<script src="less.min.js"></script>
+<script src="sass.link.min.js"></script>
 </html>
