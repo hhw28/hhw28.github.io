@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"><!--让手机以device-width的宽度为初始包含块渲染页面，device-width根据设备的不同而不同，也可以填写一个纯数值-->
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <!-- <meta http-equiv="refresh" content="3"> 网页每隔3秒自动刷新 -->
+    <title>Document</title>
+
+    <style>
+        div{
+            font-size:80px;
+            font-weight: 100;
+            color:transparent;
+            -webkit-background-clip:text;
+            position: relative;
+        }
+        .animate1{
+            background-image:linear-gradient(#ff993f,#fe6436);
+        }
+        .animate1:hover{
+            animation: bouncelnLeft 0.5s;
+        }
+        .animate2{
+            background-image:linear-gradient(#40bfff,#00a2c1);
+        }
+        @keyframes bouncelnLeft{
+            0%{
+                left:-500px;
+            }
+            80%{
+                left:50px;
+            }
+            100%{
+                left:0;
+            }
+        }
+        @keyframes swing{
+            0%{
+
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="animate1">Animate.css</div>
+    <div class="animate2">Animate.css</div>
+</body>
+
+
+</html>
