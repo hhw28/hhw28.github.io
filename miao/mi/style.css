@@ -9,6 +9,8 @@ i.iconfont{
     background-position: center 0;
     background-image: url(image/top.bmp);
     background-repeat: no-repeat;
+    display: none;
+
 }
 .adware a{
     display: block;
@@ -57,7 +59,7 @@ header .shopping-car{
     float: right;
     background-color: #424242;
     line-height: 38px;
-    padding: 0 20px;
+    padding: 0 20px 1px;
     margin-left: 25px;
     position: relative;
 }
@@ -69,22 +71,26 @@ header .shopping-car:hover a,header .shopping-car:hover i{
 }
 .shopping-car>.car-list{
     position: absolute;
-    top: 40px;
+    top: 41px;
     right: 0;
     width:316px;
-    height: 100px;
+    line-height:  0px;
+    /* line-height: 160px; */
     background-color: #fff;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.15);
+    font-size: 0;
+    box-shadow: 0px 4px 10px rgba(0,0,0,0.15);
     color: #424242;
-    line-height: 100px;
     text-align: center;
-    display: none;
-    transition: display 1s;
+    transition: 0.1s;
+    z-index: 10;
 }
-header .shopping-car:hover .car-list{
-    display: block;
-    z-index: -100;
+
+header .shopping-car:hover .car-list,header .shopping-car .car-list:hover{
+    line-height: 100px;
+    font-size: 12px;
 }
+
+
 header .nav-right-user>li{
     float: right;
     line-height: 40px;

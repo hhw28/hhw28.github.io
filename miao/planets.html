@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"><!--让手机以device-width的宽度为初始包含块渲染页面，device-width根据设备的不同而不同，也可以填写一个纯数值-->
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <!-- <meta http-equiv="refresh" content="3"> 网页每隔3秒自动刷新 -->
+    <title>公转但不自转的行星</title>
+
+    <style type="text/scss">
+        body{
+            width: 100vw;
+            height: 100vh;
+            background-color: #000;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .solar{
+            xborder: 1px solid #fff;
+            width: 900px;
+            height: 900px;
+            border-radius: 50%;
+            background: url(planets-img/sun.jpg) center center no-repeat;
+            /* animation: 5s rotate infinite linear; */
+            position: relative;
+        }
+        .earth{
+            width: 80px;
+            height: 80px;
+            background: url(planets-img/eight-planets-earth.png) center center no-repeat;
+            background-size: cover;
+            animation: 5s rotate-reverse infinite linear;
+            position: absolute;
+            top: 290px;
+            left: 300px;
+        }
+        .jupiter{
+            width: 120px;
+            height: 120px;
+            background: url(planets-img/eight-planets-jupiter.png) center center no-repeat;
+            background-size: cover;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            margin-top:-60px;
+            margin-left: -60px;
+            animation: rotate-jupiter 5s infinite linear;
+
+        }
+
+        @keyframes rotate{
+            from{
+                transform: rotate(0deg);
+            }
+            to{
+                transform: rotate(360deg);
+            }
+        }
+        @keyframes rotate-reverse{
+            from{
+                transform: rotate(360deg);
+            }
+            to{
+                transform: rotate(0deg);
+            }
+        }
+        @keyframes rotate-jupiter{
+            from{
+                transform: rotate(0deg) translateX(258px) rotate(0deg);
+            }
+            to{
+                transform: rotate(360deg) translateX(258px) rotate(-360deg);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="solar">
+        <div class="earth"></div>
+        <div class="jupiter"></div>
+    </div>
+</body>
+
+<script>
+
+
+</script>
+<script src="../less.min.js"></script>
+<script src="../sass.link.min.js"></script>
+
+</html>
