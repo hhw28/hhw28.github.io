@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"><!--让手机以device-width的宽度为初始包含块渲染页面，device-width根据设备的不同而不同，也可以填写一个纯数值-->
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>slider-demo1</title>
+
+
+    <style type="text/scss">
+        body{
+            font-family: Cambria, Palatino, "Palatino Linotype", "Palatino LT STD", Georgia, serif;
+            width: 100vw;
+            height: 100vh;
+            margin: 0;
+            background-image: url(slider-img/bg.jpg);
+            display: flex;
+            justify-content: center;
+            z-index: -10;
+        }
+        @keyframes outLeft{
+            from{
+                left: 100%;
+            }
+            to{
+                left: 0;
+            }
+        }
+        @keyframes outRight {
+            from {
+                left: 0;
+            }
+            to {
+                left: 100%;
+            }
+        }
+        .container{
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-top: 35px;
+
+            h1{
+                font-size: 35px;
+                line-height: 35px;
+                font-weight: 800;
+                color: rgba(26,89,120,0.9);
+                text-shadow: 1px 1px 1px rgba(0,0,0,0.1);
+                span{
+                    color:#7cbcd6;
+                }
+            }
+            /* input{
+                display: none;
+            }
+            input[name="btn-demo"] + label{
+                text-decoration: none;
+                display: inline-block;
+                width:60px;
+                height:60px;
+                color:#fff;
+                background-color: rgba(104,171,194,0.5);
+                text-align:center;
+                line-height:60px;
+                border-radius:50%;
+                margin:5px;
+                font-style:italic;
+                font-weight:500;
+                font-size:14px;
+                text-shadow:1px 1px 1px rgba(0,0,0,0.1);
+                box-shadow:0px 1px 1px rgba(0,0,0,0.1);
+                cursor: pointer;
+
+            }
+            input[name="btn-demo"] + label:hover{
+                background-color: #4fa2c4;
+            }
+            input[name="btn-demo"] + label:active{
+                background-color: #fff;
+                color: rgba(104,171,194,1);
+            }
+            input[name="btn-demo"]:checked + label{
+                background-color: #fff;
+                color: rgba(104,171,194,1);
+            }
+            input[name="btn-demo"]:checked + label:hover{
+                background-color: #fff;
+                color: rgba(104,171,194,1);
+            } */
+            .nav{
+                margin-bottom: 35px;
+                a{
+                    text-decoration: none;
+                    display: inline-block;
+                    width:60px;
+                    height:60px;
+                    color:#fff;
+                    background-color: rgba(104,171,194,0.5);
+                    text-align:center;
+                    line-height:60px;
+                    border-radius:50%;
+                    margin:5px;
+                    font-style:italic;
+                    font-weight:500;
+                    font-size:14px;
+                    text-shadow:1px 1px 1px rgba(0,0,0,0.1);
+                    box-shadow:0px 1px 1px rgba(0,0,0,0.1);
+                }
+                a:hover{
+                    background-color: #4fa2c4;
+                }
+                a:nth-child(1){
+                    background-color: #fff;
+                    color: rgba(104,171,194,1);
+                }
+            }
+            .content{
+                width: 600px;
+                height: 400px;
+                border: 20px solid #fff;
+                position: relative;
+
+                input{
+                    display: none;
+
+                    /*当按钮被选中的时候*/
+                    &:nth-child(1):checked ~ #label-btn-1,
+                    &:nth-child(2):checked ~ #label-btn-2,
+                    &:nth-child(3):checked ~ #label-btn-3,
+                    &:nth-child(4):checked ~ #label-btn-4{
+                        color: #68abc2;
+
+                        &::before{
+                            background-color: #fff;
+                            box-shadow: 0px 0px 0px 4px rgba(104,171,194,0.6);
+                        }
+                    }
+                    /* 照片渐变动画 */
+                    &:nth-child(1):checked ~ .img>div>span:nth-child(1),
+                    &:nth-child(2):checked ~ .img>div>span:nth-child(2),
+                    &:nth-child(3):checked ~ .img>div>span:nth-child(3),
+                    &:nth-child(4):checked ~ .img>div>span:nth-child(4){
+                        left: 0;
+                        z-index: 20;
+                        transition: left 0.5s;
+                    }
+                    &:nth-child(1):not(:checked) ~ .img>div>span:nth-child(1),
+                    &:nth-child(2):not(:checked) ~ .img>div>span:nth-child(2),
+                    &:nth-child(3):not(:checked) ~ .img>div>span:nth-child(3),
+                    &:nth-child(4):not(:checked) ~ .img>div>span:nth-child(4){
+                        left: -150px;
+                        z-index: 15;
+                        animation: outRight 0.5s;
+                    }
+
+                    /* 文字渐变 */
+                    &:nth-child(1):checked ~ .caption>div:nth-child(1),
+                    &:nth-child(2):checked ~ .caption>div:nth-child(2),
+                    &:nth-child(3):checked ~ .caption>div:nth-child(3),
+                    &:nth-child(4):checked ~ .caption>div:nth-child(4){
+                        opacity: 1;
+                    }
+                }
+                label{
+                    width: 150px;
+                    color: #fff;
+                    float: left;
+                    position: relative;
+                    z-index: 1000;
+
+                    /*按钮数字*/
+                    &::before{
+                        content: attr(class);
+                        display: block;
+                        width: 35px;
+                        height: 35px;
+                        background-color: rgba(130,195,217,0.9);
+                        border-radius: 50%;
+                        box-shadow: 0px 0px 0px 4px rgba(255,255,255,0.3);
+                        text-align: center;
+                        line-height: 35px;
+                        font-size: 25px;
+                        font-style: italic;
+                        margin: auto;
+                        margin-top:348px;
+                        cursor: pointer;
+                    }
+                    /*渐变的白色分割线*/
+                    &::after{
+                        content: '';
+                        display: block;
+                        width: 1px;
+                        height: 400px;
+                        background-image: -webkit-linear-gradient(top, rgba(255,255,255,0) 0%,rgba(255,255,255,1) 100%);
+                        position: absolute;
+                        top: 0;
+                    }
+                }
+                .img{
+                    width: 100%;
+                    height: 100%;
+                    position: relative;
+
+                    div{
+                        width:25%;
+                        height: 100%;
+                        position: absolute;
+                        overflow: hidden;
+
+                        &:nth-child(1){
+                            span{
+                                left: 0;
+                            }
+                        }
+                        &:nth-child(2){
+                            left: 150px;
+                            span{
+                                background-position: -150px 0;
+                            }
+                        }
+                        &:nth-child(3){
+                            left: 300px;
+                            span{
+                                background-position: -300px 0;
+                            }
+                        }
+                        &:nth-child(4){
+                            left: 450px;
+                            span{
+                                background-position: -450px 0;
+                            }
+                        }
+                        span{
+                            display: block;
+                            width: 100%;
+                            height: 100%;
+                            position:absolute;
+
+
+                            &:nth-child(1){
+                                background-image: url(slider-img/1.jpg);
+                                background-repeat: no-repeat;
+                            }
+                            &:nth-child(2){
+                                background-image: url(slider-img/2.jpg);
+                                background-repeat: no-repeat;
+
+                            }
+                            &:nth-child(3){
+                                background-image: url(slider-img/3.jpg);
+                                background-repeat: no-repeat;
+                            }
+                            &:nth-child(4){
+                                background-image: url(slider-img/4.jpg);
+                                background-repeat: no-repeat;
+                            }
+                        }
+                    }
+                }
+                .caption{
+
+                    div{
+                        width:100%;
+                        position:absolute;
+                        top: 178px;
+                        color: #fff;
+                        text-align:center;
+                        text-shadow: 1px 1px 1px rgba(0,0,0,0.1);
+                        z-index: 1000;
+                        opacity: 0;
+                        transition: opacity 1s ease-in-out;
+
+                        h1{
+                            color: #fff;
+                            font-size:66px;
+                            letter-spacing:3px;   /*字符间距*/
+                            margin-bottom: 30px;
+                        }
+                        p{
+                            width: 100%;
+                            background-color: rgba(104,171,194,0.9);
+                            padding: 10px 0 ;
+                            font-size: 14px;
+                            font-style: italic;
+                        }
+                    }
+                }
+
+
+            }
+        }
+    </style>
+    <script src="../sass.link.min.js"></script>
+
+</head>
+<body>
+    <div class="container">
+        <h1>Sliding Image Panels <span>with CSS3</span></h1>
+        <div class="nav">
+            <a href="css-slider.html">demo 1</a>
+            <a href="css-slider2.html">demo 2</a>
+            <a href="css-slider3.html">demo 3</a>
+            <a href="css-slider4.html">demo 4</a>
+        </div>
+        <!-- <input type="radio" name="btn-demo" id="demo1" checked>
+        <label for="demo1">Demo1</label>
+
+        <input type="radio" name="btn-demo" id="demo2">
+        <label for="demo2">Demo2</label>
+
+        <input type="radio" name="btn-demo" id="demo3">
+        <label for="demo3">Demo3</label>
+
+        <input type="radio" name="btn-demo" id="demo4">
+        <label for="demo4">Demo4</label> -->
+
+        <div class="content">
+            <input type="radio" id="btn-1" name="btn-img" checked>
+            <input type="radio" id="btn-2" name="btn-img">
+            <input type="radio" id="btn-3" name="btn-img">
+            <input type="radio" id="btn-4" name="btn-img">
+
+            <label for="btn-1" class="1" id="label-btn-1"></label>
+            <label for="btn-2" class="2" id="label-btn-2"></label>
+            <label for="btn-3" class="3" id="label-btn-3"></label>
+            <label for="btn-4" class="4" id="label-btn-4"></label>
+
+            <div class="img">
+                <div>
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+                <div>
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+                <div>
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+                <div>
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+
+            <div class="caption">
+                <div>
+                    <h1>SERENDIPITY</h1>
+                    <p>What you've been dreaming of</p>
+                </div>
+                <div>
+                    <h1>ADVENTURE</h1>
+                    <p>Where the fun begins</p>
+                </div>
+                <div>
+                    <h1>NATURE</h1>
+                    <p>Unforgettable eperiences</p>
+                </div>
+                <div>
+                    <h1>SERENITY</h1>
+                    <p>When silence touches nature</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+
+</html>
