@@ -32,7 +32,6 @@
             flex-direction: column;
             align-items: center;
             margin-top: 35px;
-
             h1{
                 font-size: 35px;
                 line-height: 35px;
@@ -43,43 +42,6 @@
                     color:#7cbcd6;
                 }
             }
-            /* input{
-                display: none;
-            }
-            input[name="btn-demo"] + label{
-                text-decoration: none;
-                display: inline-block;
-                width:60px;
-                height:60px;
-                color:#fff;
-                background-color: rgba(104,171,194,0.5);
-                text-align:center;
-                line-height:60px;
-                border-radius:50%;
-                margin:5px;
-                font-style:italic;
-                font-weight:500;
-                font-size:14px;
-                text-shadow:1px 1px 1px rgba(0,0,0,0.1);
-                box-shadow:0px 1px 1px rgba(0,0,0,0.1);
-                cursor: pointer;
-
-            }
-            input[name="btn-demo"] + label:hover{
-                background-color: #4fa2c4;
-            }
-            input[name="btn-demo"] + label:active{
-                background-color: #fff;
-                color: rgba(104,171,194,1);
-            }
-            input[name="btn-demo"]:checked + label{
-                background-color: #fff;
-                color: rgba(104,171,194,1);
-            }
-            input[name="btn-demo"]:checked + label:hover{
-                background-color: #fff;
-                color: rgba(104,171,194,1);
-            } */
             .nav{
                 margin-bottom: 35px;
                 a{
@@ -148,9 +110,6 @@
                         z-index: 15;
                         animation: outScale 0.8s ease-in-out;
                     }
-
-
-
                     /* 文字渐变 */
                     &:checked ~ .caption div *{
                         opacity: 0;
@@ -285,8 +244,8 @@
                             letter-spacing:3px;
                             margin-bottom: 30px;
                             text-shadow: 0px 0px 10px #fff;
-                            transition: text-shadow 0.8s ease-in-out,
-                                        opacity 0.8s ease-in-out;
+                            transition: text-shadow 8s ease-in-out,
+                                        opacity 8s ease-in-out;
                         }
                         p{
                             width: 100%;
@@ -294,7 +253,7 @@
                             padding: 10px 0 ;
                             font-size: 14px;
                             font-style: italic;
-                            transition: opacity 0.8s ease-in-out;
+                            transition: opacity 8s ease-in-out;
                         }
                     }
                 }
@@ -308,23 +267,11 @@
     <div class="container">
         <h1>Sliding Image Panels <span>with CSS3</span></h1>
         <div class="nav">
-            <a href="css-slider.html">demo 1</a>
+            <a href="css-slider1.html">demo 1</a>
             <a href="css-slider2.html">demo 2</a>
             <a href="css-slider3.html">demo 3</a>
             <a href="css-slider4.html">demo 4</a>
         </div>
-        <!-- <input type="radio" name="btn-demo" id="demo1" checked>
-        <label for="demo1">Demo1</label>
-
-        <input type="radio" name="btn-demo" id="demo2">
-        <label for="demo2">Demo2</label>
-
-        <input type="radio" name="btn-demo" id="demo3">
-        <label for="demo3">Demo3</label>
-
-        <input type="radio" name="btn-demo" id="demo4">
-        <label for="demo4">Demo4</label> -->
-
         <div class="content">
             <input type="radio" id="btn-1" name="btn-img" checked>
             <input type="radio" id="btn-2" name="btn-img">
@@ -384,6 +331,4 @@
         </div>
     </div>
 </body>
-
-
 </html>

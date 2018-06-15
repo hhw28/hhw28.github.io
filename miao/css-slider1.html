@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0"><!--让手机以device-width的宽度为初始包含块渲染页面，device-width根据设备的不同而不同，也可以填写一个纯数值-->
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>slider-demo3</title>
+    <title>slider-demo1</title>
 
 
     <style type="text/scss">
@@ -20,10 +20,10 @@
         }
         @keyframes outLeft{
             from{
-                left: 0;
+                left: 100%;
             }
             to{
-                left: -100%;
+                left: 0;
             }
         }
         @keyframes outRight {
@@ -32,22 +32,6 @@
             }
             to {
                 left: 100%;
-            }
-        }
-        @keyframes outBottom{
-            from{
-                top: 0;
-            }
-            to{
-                top: 100%;
-            }
-        }
-        @keyframes outTop {
-            from {
-                top: 0;
-            }
-            to {
-                top: -100%;
             }
         }
         .container{
@@ -88,7 +72,7 @@
                 a:hover{
                     background-color: #4fa2c4;
                 }
-                a:nth-child(3){
+                a:nth-child(1){
                     background-color: #fff;
                     color: rgba(104,171,194,1);
                 }
@@ -119,47 +103,25 @@
                     &:nth-child(2):checked ~ .img>div>span:nth-child(2),
                     &:nth-child(3):checked ~ .img>div>span:nth-child(3),
                     &:nth-child(4):checked ~ .img>div>span:nth-child(4){
-                        top: 0;
+                        left: 0;
                         z-index: 20;
-                        transition: top 0.8s
+                        transition: left 0.5s;
                     }
-                    &:nth-child(1):not(:checked) ~ .img>div:nth-child(1)>span:nth-child(1),
-                    &:nth-child(1):not(:checked) ~ .img>div:nth-child(3)>span:nth-child(1),
-                    &:nth-child(2):not(:checked) ~ .img>div:nth-child(1)>span:nth-child(2),
-                    &:nth-child(2):not(:checked) ~ .img>div:nth-child(3)>span:nth-child(2),
-                    &:nth-child(3):not(:checked) ~ .img>div:nth-child(1)>span:nth-child(3),
-                    &:nth-child(3):not(:checked) ~ .img>div:nth-child(3)>span:nth-child(3),
-                    &:nth-child(4):not(:checked) ~ .img>div:nth-child(1)>span:nth-child(4),
-                    &:nth-child(4):not(:checked) ~ .img>div:nth-child(3)>span:nth-child(4){
-                        top: 400px;
+                    &:nth-child(1):not(:checked) ~ .img>div>span:nth-child(1),
+                    &:nth-child(2):not(:checked) ~ .img>div>span:nth-child(2),
+                    &:nth-child(3):not(:checked) ~ .img>div>span:nth-child(3),
+                    &:nth-child(4):not(:checked) ~ .img>div>span:nth-child(4){
+                        left: -150px;
                         z-index: 15;
-                        animation: outTop 0.8s
-                    }
-                    &:nth-child(1):not(:checked) ~ .img>div:nth-child(2)>span:nth-child(1),
-                    &:nth-child(1):not(:checked) ~ .img>div:nth-child(4)>span:nth-child(1),
-                    &:nth-child(2):not(:checked) ~ .img>div:nth-child(2)>span:nth-child(2),
-                    &:nth-child(2):not(:checked) ~ .img>div:nth-child(4)>span:nth-child(2),
-                    &:nth-child(3):not(:checked) ~ .img>div:nth-child(2)>span:nth-child(3),
-                    &:nth-child(3):not(:checked) ~ .img>div:nth-child(4)>span:nth-child(3),
-                    &:nth-child(4):not(:checked) ~ .img>div:nth-child(2)>span:nth-child(4),
-                    &:nth-child(4):not(:checked) ~ .img>div:nth-child(4)>span:nth-child(4){
-                        top: -400px;
-                        z-index: 15;
-                        animation: outBottom 0.8s
+                        animation: outRight 0.5s;
                     }
 
                     /* 文字渐变 */
                     &:nth-child(1):checked ~ .caption>div:nth-child(1),
                     &:nth-child(2):checked ~ .caption>div:nth-child(2),
                     &:nth-child(3):checked ~ .caption>div:nth-child(3),
-                    &:nth-child(4):checked ~ .caption>div:nth-child(4),{
+                    &:nth-child(4):checked ~ .caption>div:nth-child(4){
                         opacity: 1;
-                    }
-                    &:nth-child(1):checked ~ .caption>div:nth-child(1)>h1,
-                    &:nth-child(2):checked ~ .caption>div:nth-child(2)>h1,
-                    &:nth-child(3):checked ~ .caption>div:nth-child(3)>h1,
-                    &:nth-child(4):checked ~ .caption>div:nth-child(4)>h1{
-                        transform: translateY(0px);
                     }
                 }
                 label{
@@ -269,15 +231,13 @@
                         text-shadow: 1px 1px 1px rgba(0,0,0,0.1);
                         z-index: 1000;
                         opacity: 0;
-                        transition: opacity 0.5s ease-in-out;
+                        transition: opacity 1s ease-in-out;
 
                         h1{
                             color: #fff;
                             font-size:66px;
                             letter-spacing:3px;   /*字符间距*/
                             margin-bottom: 30px;
-                            transform: translateY(-150px);
-                            transition: transform 0.5s ease-in-out;
                         }
                         p{
                             width: 100%;
