@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        var a = ""
+        for(var i=0;i<7;i++){
+            a = a + "#"
+            console.log(a)
+        }
+
+
+        for(var i=0;i<=100;i++){
+            if(i%3==0 && i%5==0){
+                console.log(i,'FizzBuzz')
+            }else if(i%5==0 && i%3!==0){
+                console.log(i,'Buzz')
+            }else if(i%3==0 && i%5!==0){
+                console.log(i,'Fizz')
+            }else{
+                console.log(i)
+            }
+        }
+
+        var size = 8,
+            str = ''
+        for(var i=0;i<size;i++){
+
+            for(var a=0; a<size;a++){
+                if((a+i)%2!==0){
+                    str = str + ' '
+                }else{
+                    str = str + '#'
+                }
+            }
+
+            str = str + '\n'
+        }
+        console.log(str)
+
+        // function findSolution(target){
+        //     function find(start,history){
+        //         if(start == target){
+        //             return history
+        //         }else if(start > target){
+        //             return null
+        //         }else{
+        //             return find( start+5, "("+history+"+5)" ) ||
+        //                    find( start+5, "("+history+"+5)" )
+        //         }
+        //     }
+        //     return find(1,"1")
+        // }
+        // console.log(findSolution(24))
+
+        function findMin(a,b){
+            if(a==b){
+                console.log('两值相等没有最小值')
+            }else if(a<b){
+                console.log(a)
+            }else{
+                console.log(b)
+            }
+        }
+        findMin(95,90)
+
+        function isEven(number){
+
+        }
+        isEven(50)
+        isEven(75)
+
+        function countBs(string){
+
+        }
+
+</script>
+</body>
+</html>
