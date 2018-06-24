@@ -1,0 +1,91 @@
+<!-- 猜数字 -->
+<script type="xxx">
+
+  var number = parseInt(Math.random()*100)
+  console.log(number)
+  var inputNumber
+  var count = 0
+
+  while( inputNumber !== number ){
+
+    inputNumber = Number(prompt('猜数字'))
+    count = count + 1
+
+    if( inputNumber < number){
+    alert('太小了')
+    }else if( inputNumber > number){
+      alert('太大了')
+    }
+  }
+  alert('花了'+ count +'次猜对了')
+
+</script>
+
+<!-- 统计输入数字总和 -->
+<script type="xxx">
+  var count = 0
+  for(var i=1;i<=10;i++){
+    var inputNumber = Number(prompt('请输入第'+i+'个数字'))
+
+    count = count + inputNumber
+  }
+  console.log(count)
+</script>
+
+<!-- 实现评委打分
+首先，询问用户有多少个评委
+然后输入每个评委的评分
+然后去掉一个最高分，去掉一个最低分，求剩余的平均分 -->
+<script type="xxx">
+  var judge = Number(prompt('请问有几位评委'))
+  var gradeFirst = Number(prompt('请第1位评委打分'))
+  var grade
+  var gradeMin = gradeFirst
+  var gradeMax = gradeFirst
+  var gradeCount = 0
+
+  for(var i=1;i<judge;i++){
+     grade = Number(prompt('请第'+ (i+1) +'位评委打分'))
+
+     if(grade > gradeMax){
+       gradeMax = grade
+     }
+     if(grade < gradeMin){
+       gradeMin = grade
+     }
+
+     gradeCount = gradeCount + grade
+  }
+  console.log('总分:'+gradeCount)
+  console.log('最高分:'+gradeMax)
+  console.log('最低分:'+gradeMin)
+  console.log('评委:'+judge)
+  console.log('平均分:'+(gradeCount + gradeFirst - gradeMax - gradeMin)/(judge - 2))
+</script>
+
+<!-- 如果没有%符号
+你如何判断一个
+数能否被另一个
+数整除呢？ -->
+<script>
+  var a = Number(prompt('请输入一个数字'))
+  var b = Number(prompt('请输入另一个数字'))
+
+  for(var i=1;i<=a;i++){
+    if(a/b==i){
+      console.log(i)
+    }
+    if((b*i) > a){
+      break;
+    }
+  }
+  var c = a - b*(i-1)
+
+  if(c==0){
+    console.log(a+'能被'+b+'整除')
+  }else{
+    console.log(a+'不能被'+b+'整除，余数是'+c)
+    console.log(a%b)
+  }
+
+</script>
