@@ -1,9 +1,120 @@
 <!-- 所有的输入使用prompt函数输入
 所有的输出使用console.log输出
 并且不要有额外的输出，否则会被判定为错误 -->
-<script id="ch0103/01">
-  var a = parseInt(Number(prompt('请输入数字A')))
-  var b = parseInt(Number(prompt('请输入数字B')))
+<script id="ch0103/01" type="x">
+  var a = parseInt(Number(prompt('请输入整数A')))
+  var b = parseInt(Number(prompt('请输入整数B')))
 
   console.log(a+b)
+</script>
+
+<script id="ch0103/02" type="x">
+  var a = parseInt(Number(prompt('请输入整数A')))
+  var b = parseInt(Number(prompt('请输入整数B')))
+  var c = parseInt(Number(prompt('请输入整数C')))
+
+  console.log((a+b)*c)
+</script>
+
+<script id="ch0103/03" type="x">
+  var a = parseInt(Number(prompt('请输入整数A')))
+  var b = parseInt(Number(prompt('请输入整数B')))
+  var c = parseInt(Number(prompt('请输入整数C')))
+
+  console.log((a+b)/c)
+</script>
+
+<script id="ch0103/04" type="x">
+  var a = parseInt(Number(prompt('请输入整数A')))
+  var b = parseInt(Number(prompt('请输入整数B')))
+
+  console.log(parseInt(a/b),a%b)
+</script>
+
+<script id="ch0103/05" type="x">
+  var a = parseInt(Number(prompt('请输入整数A')))
+  var b = parseInt(Number(prompt('请输入整数B')))
+
+  var c = a/b
+  console.log(c.toFixed(9))
+</script>
+
+<script id="ch0103/06" type="x">
+  var a = parseInt(Number(prompt('请输入确诊数')))
+  var b = parseInt(Number(prompt('请输入死亡数')))
+
+  var c = b/a*100
+  console.log(c.toFixed(3)+'%')
+</script>
+
+<script id="ch0103/12" type="x">
+  var a = parseInt(Number(prompt('请输入球的半径')))
+  if(a<=0){
+
+  }else if(a>100){
+
+  }else{
+    var v = 4/3*3.14*Math.pow(a,3)
+    console.log(v.toFixed(2))
+  }
+</script>
+
+<script id="ch0103/13" type="x">
+  var a = prompt('请输入一个三位数')
+  if(a<100){
+
+  }else if(a>999){
+
+  }else{
+    a = a.split('').reverse().join('')
+    console.log(a)
+  }
+</script>
+
+<script id="ch0103/14" type="x">
+  var h = prompt('请输入小圆桶的深度h，单位厘米')
+  var r = prompt('请输入小圆桶的底面半径r，单位厘米')
+
+  var a = 3.14159*Math.pow(r,2)*h/1000
+  console.log((parseInt(20/a)+1))
+</script>
+
+<script id="ch0103/15" type="x">
+  var n = prompt('请输入你买了几个苹果')
+  var x = prompt('请输入虫子几小时能吃掉一个苹果')
+  var y = prompt('请输入经过了几个小时')
+
+  if( y<=(n*x) ){
+    var a = n - (parseInt((y/x))+1)
+    console.log(a)
+  }else{
+
+  }
+
+</script>
+
+<script id="ch0103/16" type="x">
+  var xa = prompt('请输入点Xa')
+  var ya = prompt('请输入点Ya')
+  var xb = prompt('请输入点Xb')
+  var yb = prompt('请输入点Yb')
+
+  var a = Math.sqrt(Math.pow((xb-xa),2)+Math.pow((yb-ya),2))
+  console.log(a.toFixed(3))
+</script>
+
+<script id="ch0103/19" type="x">
+  var a = Number(prompt('请输入整数A'))
+  var b = Number(prompt('请输入整数B'))
+
+  console.log(a*b)
+</script>
+
+<script id="ch0103/20" type="x">
+  var n = Number(prompt('请输入非负整数n,0 <= n < 31'))
+
+  if( 0<=n<31){
+    a = Math.pow(2,n)
+    console.log(a)
+  }
 </script>
