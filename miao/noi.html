@@ -21,7 +21,7 @@
   var b = parseInt(Number(prompt('请输入整数B')))
   var c = parseInt(Number(prompt('请输入整数C')))
 
-  console.log((a+b)/c)
+  console.log(parseInt((a+b)/c))
 </script>
 
 <script id="ch0103/04" type="x">
@@ -117,4 +117,74 @@
     a = Math.pow(2,n)
     console.log(a)
   }
+</script>
+
+<script id="ch0104/01" type="x">
+  var n = Number(prompt('请输入一个整数N，-109<=N<=109'))
+
+  if((-Math.pow(10,9))<n<0){
+    console.log('negative')
+  }else if(n==0){
+    console.log('zero')
+  }else if(0<n<=Math.pow(10,9)){
+    console.log('positive')
+  }
+</script>
+
+<script id="sort" sample-input="4 1 7" sample-output="1 4 7" comment="输入三个数，把此三个数按升序输出">
+  var a = prompt('输入第一个数字')
+  var b = prompt('输入第二个数字')
+  var c = prompt('输入第三个数字')
+  var min = -Infinity
+  var max = Infinity
+
+  if(a>b){
+    min = b
+    max = a
+    if(c<min){
+      min = c
+      console.log(min,b,max)
+    }
+    if(c>max){
+      max = c
+      console.log(min,a,max)
+    }
+  }
+</script>
+
+<script id="narcissistic " sample-input="153" sample-output="YES" comment="判断一个数是否为水仙花数">
+
+</script>
+<script id="narcissistics" sample-input="" sample-output="" comment="找出100到10000以内所有的水仙花数">
+
+</script>
+<script id="palindrom" sample-input="12321" sample-output="YES" comment="判断一个非负整数是否为回文数字">
+
+</script>
+<script id="weekday" sample-input="2018 6" sample-output="5" comment="输入年份与月份，给出该年该月的第一天是星期几">
+
+</script>
+<script id="complete-number" sample-input="6" sample-output="YES" comment="判断一个数是否为完全数">
+
+</script>
+<script id="complete-numbers" sample-input="" sample-output="" comment="输出10000以内所有的完全数">
+
+</script>
+<script id="prime" sample-input="7" sample-output="YES" comment="判断一个数是否为素数">
+
+</script>
+<script id="primes" sample-input="" sample-output="" comment="输出100以内所有的素数">
+
+</script>
+<script id="itob" sample-input="123" sample-output="123" comment="数字转换成字符串">
+
+</script>
+<script id="lcf&lcm" sample-input="12 9" sample-output="36 3" comment="给定两个数，求它们的最小公倍数和最大公约数">
+
+</script>
+<script id="7" sample-input="" sample-output="" comment="敲7">
+
+</script>
+<script id="sqrt" sample-input="2" sample-output="1.414" comment="不使用Math.sqrt，求一个非负数的平方根，至少精确到小数点后3位">
+
 </script>

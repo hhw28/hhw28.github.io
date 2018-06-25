@@ -25,5 +25,93 @@
 </script>
 <script>
   // YOUR CODE GOES HERE
+
+  //实线
+  for(var i=0;i<400;i++){
+    dot(i,10)
+  }
+
+  for(var i=0;i<400;i++){
+    dot(i,5,'hsl('+i+',80%,60%)')
+  }
+  //一个实点一个空点的虚线
+  for(var i=0;i<400;i+=2){
+    dot(i,20)
+  }
+  //两个实点两个空点的虚线
+  for(var i=0;i<400;i+=4){
+    dot(i,30)
+    dot(i+1,30)
+  }
+  //三个实点两个空点的虚线
+  for(var i=0;i<400;i+=5){
+    dot(i,40)
+    dot(i+1,40)
+    dot(i+2,40)
+  }
+
+  for(var i=0;i<400;i++){
+    var a = i%20
+    if(a<4){
+      dot(i,50)
+    }else if(a<12){
+      dot(i,50,'red')
+    }
+  }
+  // 画一条45度的斜线
+  for(var i=0;i<300;i++){
+    dot(i,i)
+  }
+  // 画一条跨越画布左上角和右下角的对角线
+  for(var i=0;i<400;i++){
+    //斜率=300/400=0.75
+    var y = 0.75 * i
+    dot(i,y)
+  }
+
+  var x = 0
+  var y = 300
+  while(x<400){
+    dot(x,y)
+    x += 1
+    y -= 0.75
+  }
+
+  // 画一个实心矩形
+  var x = 150
+  var y = 150
+  for(var i=0;i<50;i++){
+    for(var j=0;j<50;j++){
+      dot(x+i,y+j)
+    }
+  }
+  // 画一个rgb色彩空间的某一面
+  for(var g=0;g<255;g++){
+    for(var b=0;b<255;b++){
+      dot(b/3+50,g/3+200,'rgb(255,'+ g +','+ b +')')
+    }
+  }
+  for(var y=200;y<250;y++){
+    for(var x=200;x<250;x++){
+      var g = (y-200)/50*256
+      var b = (x-200)/50*256
+      var color = 'rgb(255,'+g+','+b+')'
+      dot(x,y,color)
+    }
+  }
+
+  // 画一个空心的圆
+  var r = 50
+  for(var theta=0;theta<6.28;theta+=0.01){
+    var x = r*Math.sin(theta)+100
+    var y = r*Math.cos(theta)+110
+    dot(x,y)
+  }
+
+  //sin函数
+  for(var x=0;x<400;x+=0.01){
+    var y = Math.sin(x)*20+150
+    dot(x*20,y)
+  }
 </script>
 </html>
