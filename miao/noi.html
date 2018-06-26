@@ -131,60 +131,215 @@
   }
 </script>
 
-<script id="sort" sample-input="4 1 7" sample-output="1 4 7" comment="输入三个数，把此三个数按升序输出">
+<script type="x" id="sort" sample-input="4 1 7" sample-output="1 4 7" comment="输入三个数，把此三个数按升序输出">
   var a = prompt('输入第一个数字')
   var b = prompt('输入第二个数字')
   var c = prompt('输入第三个数字')
   var min = -Infinity
   var max = Infinity
+  var mid = Infinity - 1
 
   if(a>b){
-    min = b
     max = a
-    if(c<min){
-      min = c
-      console.log(min,b,max)
-    }
-    if(c>max){
+    min = b
+    if(c>a){
       max = c
-      console.log(min,a,max)
+      mid = a
+    }
+    if(c<a){
+      if(c>b){
+        mid = c
+      }else if(c<b){
+        min = c
+        mid = b
+      }
+    }
+    console.log(min,mid,max)
+  }
+  if(b>a){
+    max = b
+    min = a
+  }
+</script>
+
+<table border="1">
+<script type="x" comment="在控制输出九九乘法表">
+  // document.write('<table border=1>')
+  for(var a=1;a<=9;a++){
+    document.write('<tr>')
+    for(var b=1;b<=a/*或者9*/;b++){
+      document.write('<td>'+a+'x'+b+'='+(a*b)+'</td>')
+    }
+    document.write('</tr>')
+  }
+  // document.write('</table>')
+</script>
+</table>
+
+<script type="x" id="narcissistic " sample-input="153" sample-output="YES" comment="判断一个数是否为水仙花数">
+  var num = prompt('请输入数字')
+  var gewei = num%10
+  var shiwei = parseInt(num/10 % 10)
+  var baiwei = parseInt(num/100 % 10)
+
+  var l = num.length
+  var c = gewei**l+shiwei**l+baiwei**l
+  if(c == num){
+    console.log('YES')
+  }
+
+</script>
+
+<script type="x" id="narcissistics" sample-input="" sample-output="" comment="找出100到10000以内所有的水仙花数">
+  for(var i=100;i<10000;i++){
+    var gewei = i%10
+    var shiwei = parseInt(i/10 % 10)
+    var baiwei = parseInt(i/100 % 10)
+    var qianwei = parseInt(i/1000 % 10)
+    var l = i.toString().length
+
+    if(gewei**l+shiwei**l+baiwei**l+qianwei**l == i){
+      console.log(i)
     }
   }
 </script>
 
-<script id="narcissistic " sample-input="153" sample-output="YES" comment="判断一个数是否为水仙花数">
+<script type="x" id="palindrom" sample-input="12321" sample-output="YES" comment="判断一个非负整数是否为回文数字">
+  var num = prompt('请输入一个非负整数,我来判断是否为回文数字')
+  var numB = num.split('').reverse().join('')
+  if(num == numB){
+    console.log('YES')
+  }else{
+    console.log('no')
+  }
+</script>
+
+<script type="x" id="weekday" sample-input="2018 6" sample-output="5" comment="输入年份与月份，给出该年该月的第一天是星期几">
+  //2000年的1月1日是星期六
+  var year = prompt('输入年份')
+  var month = prompt('输入月份')
+
 
 </script>
-<script id="narcissistics" sample-input="" sample-output="" comment="找出100到10000以内所有的水仙花数">
-
+<script type="x" id="complete-number" sample-input="6" sample-output="YES" comment="判断一个数是否为完全数">
+  //如果一个数的所有小于它的约数之和等于它自己，则它是一个完全数
+  var num = Number(prompt('请输入一个数字，我会判断它是否为完全数'))
+  var count
+  for(var i=0;i<num;i++){
+    if(num%i == 0){
+      count += i  //所有小于它的约数之和
+    }
+  }
+  if(count = num){
+    console.log('YES')
+  }
 </script>
-<script id="palindrom" sample-input="12321" sample-output="YES" comment="判断一个非负整数是否为回文数字">
 
+<script type="x" id="complete-numbers" sample-input="" sample-output="" comment="输出10000以内所有的完全数">
+  for(var n=1;n<10000;n++){
+    var count = 0
+    for(var i=0;i<n;i++){
+      if(n%i == 0){
+        count += i
+      }
+    }
+    if(count == n){
+        console.log(n)
+    }
+  }
 </script>
-<script id="weekday" sample-input="2018 6" sample-output="5" comment="输入年份与月份，给出该年该月的第一天是星期几">
 
-</script>
-<script id="complete-number" sample-input="6" sample-output="YES" comment="判断一个数是否为完全数">
-
-</script>
-<script id="complete-numbers" sample-input="" sample-output="" comment="输出10000以内所有的完全数">
-
-</script>
 <script id="prime" sample-input="7" sample-output="YES" comment="判断一个数是否为素数">
 
 </script>
 <script id="primes" sample-input="" sample-output="" comment="输出100以内所有的素数">
 
 </script>
-<script id="itob" sample-input="123" sample-output="123" comment="数字转换成字符串">
+
+<script type="x" id="itob" sample-input="123" sample-output="123" comment="数字转换成字符串">
+  var n = Number(prompt('请输入一个数字'))
+  var digit
+  var result = ''
+
+  do {  //为了满足当输入的数字为0时不能进入循环，所以强制执行一次
+    digit = n % 10
+    result = String.fromCharCode(digit+48) + result
+    n = (n - digit) / 10
+  } while (n>0)
+
+  console.log(result)
+</script>
+
+<script type="x" id="lcf&lcm" sample-input="12 9" sample-output="36 3" comment="给定两个数，求它们的最小公倍数和最大公约数">
+  var a = Number(prompt('给定两个数，求它们的最小公倍数和最大公约数，请输入第一个数'))
+  var b = Number(prompt('给定两个数，求它们的最小公倍数和最大公约数，请输入第二个数'))
+  //最大公约数
+  var max = a > b ? a : b  //条件为真时，选a;条件为假时，选b
+  for(var i=max;i>0;i--){
+    if(a%i==0 && b%i==0){
+      console.log('最大公约数：'+i)
+      console.log('最小公倍数：'+a*b/i) //a*b = 最大公约数*最小公倍数
+      break
+    }
+  }
+  max = i
+
+  //最小公倍数
+  var min = a < b ? a : b
+
+  for(var i=min;;i++){
+    if(i%a==0 && i%b==0){
+      console.log('最小公倍数：'+i)
+      break
+    }
+  }
+
+  for(var i = min ;; i += max ){
+    if(i%a==0 && i%b==0){
+      console.log('最小公倍数：'+i)
+      break
+    }
+  }
+
+ //辗转相除法 求 最大公约数
+  while(!(y==0)){
+    var y = max%min
+    max = min
+    min = y
+    if(y==0){
+      console.log(max)
+      break
+    }
+  }
+
 
 </script>
-<script id="lcf&lcm" sample-input="12 9" sample-output="36 3" comment="给定两个数，求它们的最小公倍数和最大公约数">
 
-</script>
-<script id="7" sample-input="" sample-output="" comment="敲7">
+<script type="x" id="7" sample-input="" sample-output="" comment="敲7">
+  //输出1到100以内所有7的倍数以及数字中包含7的数
+  //如7\14（7的倍数），37（不是倍数但数位中包含7）都需要输出，依次类推
 
+  for(var i=0;i<100;i++){
+    var num = i
+    var knocked = false
+    if(i%7 == 0){
+      knocked = true
+    }else{
+      while(num>0){     //遍历每一位上的数字，查看是否为7
+        digit = i%10
+        if(digit == 7){
+          knocked = true
+          break
+        }
+        num = (num - digit)/10
+      }
+    }
+    if(!knocked){
+      console.log(i)
+    }
+  }
 </script>
+
 <script id="sqrt" sample-input="2" sample-output="1.414" comment="不使用Math.sqrt，求一个非负数的平方根，至少精确到小数点后3位">
 
 </script>
