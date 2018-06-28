@@ -47,6 +47,72 @@
   console.log(c.toFixed(3)+'%')
 </script>
 
+<script id="ch0103/07" type="x">
+  var x = Number(prompt('请输入数字x'))
+  var a = Number(prompt('请输入数字a'))
+  var b = Number(prompt('请输入数字b'))
+  var c = Number(prompt('请输入数字c'))
+  var d = Number(prompt('请输入数字d'))
+
+  fx(x,a,b,c,d)
+
+  function fx(x,a,b,c,d){
+    for(var i=0;i<arguments.length;i++){
+      if( Math.abs(arguments[i]) < 100 ){  //每个数都是绝对值不超过100的双精度浮点数
+        var a = a
+        var b = b
+        var c = c
+        var d = d
+        var x = x
+      }else{
+        console.log('输入的第'+ (i+1) +'个数字" '+ arguments[i] +' "不符合绝对值不超过100的双精度浮点数')
+      }
+    }
+    var result = a*(x**3) + b*(x**2) + c*x + d
+    console.log(result.toFixed(7))
+  }
+
+</script>
+
+<script id="ch0103/08" type="x" >
+  var f = Number(prompt('请输入数字f表示华氏温度,f >= -459.67'))
+
+  if(f >= -459.67){
+    var c = 5*(f - 32) / 9
+    console.log(c.toFixed(5))
+  }
+</script>
+
+<script id="ch0103/09" type="x">
+  var r = Number(prompt('请输入圆的半径r(0 < r <= 10,000)，求圆的直径、周长和面积'))
+  var pi = 3.14159
+  if( 0 < r <= 10000){
+    var zj = (2*r).toFixed(4)
+    var zc = (2*pi*r).toFixed(4)
+    var mj = (pi*r*r).toFixed(4)
+
+    console.log(zj,zc,mj)
+  }
+
+</script>
+
+<script id="ch0103/10" type="x">
+  var r1 = Number(prompt('请输入电阻阻值r1'))
+  var r2 = Number(prompt('请输入电阻阻值r2'))
+
+  var R = 1/(1/r1 + 1/r2)
+  console.log(R.toFixed(2))
+</script>
+
+<script id="ch0103/11" type="x">
+  var a = Number(prompt('请输入数字a'))
+  var b = Number(prompt('请输入数字b'))
+
+  var y = a % b
+  console.log(y.toFixed(4))
+
+</script>
+
 <script id="ch0103/12" type="x">
   var a = parseInt(Number(prompt('请输入球的半径')))
   if(a<=0){
@@ -79,28 +145,42 @@
   console.log((parseInt(20/a)+1))
 </script>
 
-<script id="ch0103/15" type="x">
-  var n = prompt('请输入你买了几个苹果')
-  var x = prompt('请输入虫子几小时能吃掉一个苹果')
-  var y = prompt('请输入经过了几个小时')
-
-  if( y<=(n*x) ){
-    var a = n - (parseInt((y/x))+1)
-    console.log(a)
-  }else{
-
-  }
-
-</script>
-
 <script id="ch0103/16" type="x">
   var xa = prompt('请输入点Xa')
   var ya = prompt('请输入点Ya')
   var xb = prompt('请输入点Xb')
   var yb = prompt('请输入点Yb')
 
-  var a = Math.sqrt(Math.pow((xb-xa),2)+Math.pow((yb-ya),2))
+  var a = Math.sqrt( Math.pow((xb-xa),2) + Math.pow((yb-ya),2) )
   console.log(a.toFixed(3))
+</script>
+
+<script id="ch0103/17" type="x">
+  // var x1 = prompt('请输入点X1')
+  // var y1 = prompt('请输入点X1')
+  // var x2 = prompt('请输入点X2')
+  // var y2 = prompt('请输入点X2')
+  // var x3 = prompt('请输入点X3')
+  // var y3 = prompt('请输入点X3')
+  var x1 = 0
+  var y1 = 0
+  var x2 = 4
+  var y2 = 0
+  var x3 = 0
+  var y3 = 3
+
+  var a = Math.sqrt( (x2-x1)**2 - (y2-y1)**2 )
+  var b = Math.sqrt( (x3-x2)**2 - (y3-y2)**2 )
+  var c = Math.sqrt( (x1-x3)**2 + (y1-y3)**2 )
+
+  //海伦公式
+  // 1\ s(周长的一半) = （a+b+c）/2
+
+  var s = (a+b+c) / 2
+
+  var mj = Math.sqrt( s*(s-a)*(s-b)*(s-c) )
+  console.log(mj)
+
 </script>
 
 <script id="ch0103/19" type="x">
@@ -130,6 +210,349 @@
     console.log('positive')
   }
 </script>
+
+<script id="ch0104/02" type="x">
+  var n = Number(prompt('输入一个浮点数，其绝对值不超过10000'))
+
+  if(Math.abs(n)<10000){
+    console.log(Math.abs(n))
+  }
+</script>
+
+<script id="ch0104/03" type="x">
+  var n = Number(prompt('给定一个大于零的正整数n，判断该数是奇数还是偶数'))
+
+  if( n%2 ==0 ){
+    console.log('even')
+  }else{
+    console.log('odd')
+  }
+</script>
+
+<script id="ch0104/04" type="X" comment="字符转ASCII码">
+  var str = prompt('任意输入一个字符，判断其ASCII是否是奇数')
+
+  str = str.charCodeAt()
+
+  if(str%2 == 0){
+    console.log('No')
+  }else{
+    console.log('YES')
+  }
+
+</script>
+
+<script id="ch0104/05" type="x" >
+  var a = Number(prompt('输入两个整数，比较它们的大小,请输入第一个'))
+  var b = Number(prompt('输入两个整数，比较它们的大小,请输入第二个'))
+
+  if(a>b){
+    console.log('>')
+  }else if(a==b){
+    console.log('=')
+  }else{
+    console.log('<')
+  }
+</script>
+
+<script id="ch0104/06" type="x">
+  var n = Number(prompt('判断一个正整数是否是两位数（即大于等于10且小于等于99'))
+
+  if( n>=10 && n<=99){
+    console.log(1)
+  }else{
+    console.log(0)
+  }
+</script>
+
+<script id="ch0104/07" type="x">
+  var a = Number(prompt('拥有的印有“幸运”的瓶盖数'))
+  var b = Number(prompt('拥有的印有“鼓励”的瓶盖数'))
+
+
+  if(a>=10 || b>=20){
+    console.log(1)
+  }else{
+    console.log(0)
+  }
+</script>
+
+<script id="ch0104/08"  type="X">
+  var n = Number(prompt('判断一个数n 能否同时被3和5整除'))
+
+
+  if(n%3==0  && n%5==0){
+    console.log('YES')
+  }else{
+    console.log('NO')
+  }
+</script>
+
+<script id="ch0104/09" type="x">
+  var n = Number(prompt('判断一个数n 判断能否被3，5，7整除'))
+// 1、能同时被3，5，7整除（直接输出3 5 7，每个数中间一个空格）；
+// 2、只能被其中两个数整除（输出两个数，小的在前，大的在后。例如：3 5或者 3 7或者5 7,中间用空格分隔）；
+// 3、只能被其中一个数整除（输出这个除数）；
+// 4、不能被任何数整除，输出小写字符‘n’,不包括单引号。
+
+  if(n%3==0 && n%5==0 && n%7==0){
+    console.log(3,5,7)
+  }else if(n%3==0){
+    if(n%5==0){
+      console.log(3,5)
+    }else if(n%7==0){
+      console.log(3,7)
+    }else{
+      console.log(3)
+    }
+  }else if(n%5==0 && n%7==0){
+    console.log(5,7)
+  }else if(n%5==0){
+    console.log(5)
+  }else if(n%7==0){
+    console.log(7)
+  }else{
+    console.log('既不能被3整除，也不能被5整除，也不能被7整除')
+  }
+</script>
+
+<script id="ch0104/10"  type="X">
+  var a = Number(prompt('给出一名学生的成绩，判断他是否恰好有一门课不及格（成绩小于60分),语文成绩是'))
+  var b = Number(prompt('给出一名学生的成绩，判断他是否恰好有一门课不及格（成绩小于60分),语文成绩是'))
+
+
+  if(a<60 || b<60){
+    console.log(1)
+  }else{
+    console.log(0)
+  }
+</script>
+
+<script id="ch0104/11"  type="X">
+  var a = Number(prompt('用数字1到7表示从星期一到星期日'))
+
+
+  if(a==7){
+    console.log('YES')
+  }else if(a%2==0){
+    console.log('YES')
+  }else{
+    console.log('NO')
+  }
+</script>
+
+<script id="ch0104/12" type="x">
+  var n = Number(prompt('请输入一次办事要行走的距离,单位为米'))
+
+  var n = 80
+
+  var bikeTime = 27 + 23 + (n/3)
+  var walkTime = n/1.2
+
+  if(bikeTime > walkTime){
+    console.log('Bike')
+  }else if(bikeTime < walkTime){
+    console.log('Walk')
+  }else if(bikeTime == walkTime){
+    console.log('All')
+  }
+</script>
+
+<script id="ch0104/13" type="x">
+  var n = Number(prompt('一个浮点数N,0 <= N < 20'))
+  var fn
+
+  if( 0<=n && n<5 ){
+    fn = -n+2.5
+  }
+  if( 5<=n && n<10 ){
+    fn = 2-1.5*(n-3)*(n-3)
+  }
+  if( 10<=n && n<20 ){
+    fn = n/2 - 1.5
+  }
+  console.log(fn.toFixed(3))
+</script>
+
+<script id="ch0104/14" type="x">
+  var n = Number(prompt('请输入邮件的重量'))
+  var urgent = prompt('请问是否加急，y加急，n不加急')
+  var sum
+
+  if(urgent == 'y'){
+    sum = 5
+  }else if(urgent == 'n'){
+    sum = 0
+  }
+
+  if(n<=1000){
+    sum = sum + 8
+  }if(n>1000){
+    sum = sum + 8
+    n = n - 1000
+    do{
+      sum += 4
+      n = n - 500
+    }while(n>0)
+  }
+  console.log(sum)
+</script>
+
+<script id="ch0104/15" type="x">
+  var a = Number(prompt('请输入数字a'))
+  var b = Number(prompt('请输入数字b'))
+  var c = Number(prompt('请输入数字c'))
+
+  var max
+
+  if(a>b){
+    if(a > c){
+      max = a
+    }else if(a < c){
+      max = c
+    }
+  }else if(a < b){
+    if(b>c){
+      max = b
+    }else if(b<c){
+      max = c
+    }
+  }
+  console.log(max)
+
+
+
+</script>
+
+<script id="ch0104/16" comment="构成三角形的条件" type="x">
+  var a = Number(prompt('请输入数字a'))
+  var b = Number(prompt('请输入数字b'))
+  var c = Number(prompt('请输入数字c'))
+
+  //任意两条边的和 > 第三条边
+
+  if((a+b)>c && (a+c)>b && (b+c)>a){
+    console.log('yes')
+  }else{
+    console.log('no')
+  }
+
+
+</script>
+
+<script id="ch0104/17" comment="闰年" type="x">
+  var y = Number(prompt('请输入年份，0 < y < 3000'))
+
+  if( y == 3200){
+    console.log('N')
+  }else if(y%400 == 0){
+    console.log('Y')
+  }else if(y%100 == 0 ){  //此处为不能被400整除的数
+    console.log('N')
+  }else if(y%4 == 0){
+    console.log('Y')
+  }else{
+    console.log('N')
+  }
+
+
+
+</script>
+
+<script id="ch0104/18" type="x">
+  var x = Number(prompt('请输入x'))
+  var y = Number(prompt('请输入y'))
+
+  if( -1<=x && x<=1 && -1<=y && y<=1){
+    console.log('yes')
+  }else{
+    console.log('no')
+  }
+</script>
+
+<script id="ch0104/19" type="x">
+  var a = Number(prompt('请输入第一个参数a'))
+  var b = Number(prompt('请输入第二个参数b'))
+
+  switch(prompt('请输入运算符')){
+    case '+':
+      console.log(a+b)
+      break
+    case '-':
+      console.log(a-b)
+      break
+    case '*':
+      console.log(a*b)
+      break
+    case '/':
+      if(a/b == 0){
+        console.log('Divided by zero!')
+      }else{
+        console.log(a/b)
+      }
+      break
+    default:
+      console.log('Invalid operator!')
+      break
+  }
+
+</script>
+
+<script id="ch0104/20"comment="求一元二次方程的根">
+/*利用公式
+x1 = (-b + sqrt(b*b-4*a*c))/(2*a)
+x2 = (-b - sqrt(b*b-4*a*c))/(2*a)
+求一元二次方程ax**2 + bx + c =0的根，其中a不等于0。
+
+若b2 = 4 * a * c,则两个实根相等，则输出形式为：x1=x2=...。
+若b2 > 4 * a * c,则两个实根不等，则输出形式为：x1=...;x2 = ...，其中x1>x2。
+若b2 < 4 * a * c,则有两个虚根，则输出：x1=实部+虚部i; x2=实部-虚部i，即x1的虚部系数大于等于x2的虚部系数，实部为0时不可省略。实部 = -b / (2*a), 虚部 = sqrt(4*a*c-b*b) / (2*a)
+*/
+  var a = Number(prompt('请输入第一个参数a'))
+  var b = Number(prompt('请输入第二个参数b'))
+  var c = Number(prompt('请输入第二个参数c'))
+
+  var x1
+  var x2
+
+  if(b**2 == 4*a*c){
+
+    x1 = (-b + sqrt(b*b-4*a*c))/(2*a)
+    console.log('x1=x2='+x1.toFixed(5))
+
+  }else if(b**2 > 4*a*c){
+
+    x1 = (-b + sqrt(b*b-4*a*c))/(2*a)
+    x2 = (-b - sqrt(b*b-4*a*c))/(2*a)
+
+    console.log( 'x1=' + x1.toFixed(5) + ';x2=' + x2.toFixed(5) )
+
+  }else if(b**2 < 4 * a * c){
+
+    var s = -b / (2*a)
+    var x = Math.sqrt(4*a*c-b*b) / (2*a)
+
+    x1 = s.toFixed(5) + '+' + x.toFixed(5) + 'i'
+    x2 = s.toFixed(5) + '-' + x.toFixed(5) + 'i'
+    console.log('x1=' + x1 + ';x2=' + x2)
+  }
+
+</script>
+
+<script id="ch0103/15" id="ch0104/21" comment="虫子和苹果">
+  var n = prompt('请输入你买了几个苹果')
+  var x = prompt('请输入虫子几小时能吃掉一个苹果')
+  var y = prompt('请输入经过了几个小时')
+
+  if( y<=(n*x) ){
+    var a = n - (parseInt((y/x))+1)
+    console.log(a)
+  }else{
+
+  }
+</script>
+
+
 
 <script type="x" id="sort" sample-input="4 1 7" sample-output="1 4 7" comment="输入三个数，把此三个数按升序输出">
   var a = prompt('输入第一个数字')
@@ -249,25 +672,93 @@
   }
 </script>
 
-<script id="prime" sample-input="7" sample-output="YES" comment="判断一个数是否为素数">
+<script type="x" id="prime" sample-input="7" sample-output="YES" comment="判断一个数是否为素数">
+  var num = Number(prompt('请输入一个数，判断一个数是否为素数'))
+  var count = 0
 
+  if(num == 2){
+    console.log('YES')
+  }
+
+  for(var i=2;i<num;i++){
+    if(num%i == 0){
+      count = 0
+      break  //当有约数，不是素数的时候结束循环，确保count=0
+    }else{
+      count++
+    }
+  }
+
+  if(count == 0){
+    console.log('NO')
+  }else{
+    console.log('YES')
+  }
 </script>
+
 <script id="primes" sample-input="" sample-output="" comment="输出100以内所有的素数">
+/*
+  var count = 0
+  // debugger
+  for(var i=0;i<100;i++){
+    var isPrime = false
+
+    if(i==2){
+      count = count + 1
+      console.log(i)
+    }
+
+    for(var a=2;a<i;a++){
+      if(i%a == 0){
+        isPrime = false
+        break
+      }else{
+        isPrime = true
+      }
+    }
+
+    if(isPrime){
+      console.log(i)
+      count = count + 1
+    }
+
+  }
+  console.log('质数个数：'+count)
+*/
 
 </script>
 
 <script type="x" id="itob" sample-input="123" sample-output="123" comment="数字转换成字符串">
-  var n = Number(prompt('请输入一个数字'))
+  var num = Number(prompt('请输入一个数字，将转换成字符串'))
   var digit
   var result = ''
 
-  do {  //为了满足当输入的数字为0时不能进入循环，所以强制执行一次
-    digit = n % 10
-    result = String.fromCharCode(digit+48) + result
-    n = (n - digit) / 10
-  } while (n>0)
+  if(num<0){
+    var num = Math.abs(num)
 
-  console.log(result)
+    while(num > 0 ){
+      var digit = num % 10
+      result = String.fromCharCode(digit + 48) + result
+      var num = (num - digit) / 10
+    }
+    result = '-' + result
+    console.log(result)
+  }
+  if(num>0){
+    while (num>0) {
+      digit = num % 10
+      result = String.fromCharCode(digit+48) + result
+      num = (num - digit) / 10
+    }
+    console.log(result)
+  }
+  if(num == 0){
+    digit = num % 10
+    result = String.fromCharCode(digit+48) + result
+    num = (num - digit) / 10
+    console.log(result)
+  }
+
 </script>
 
 <script type="x" id="lcf&lcm" sample-input="12 9" sample-output="36 3" comment="给定两个数，求它们的最小公倍数和最大公约数">
@@ -340,6 +831,71 @@
   }
 </script>
 
-<script id="sqrt" sample-input="2" sample-output="1.414" comment="不使用Math.sqrt，求一个非负数的平方根，至少精确到小数点后3位">
+<script type="x" id="sqrt" sample-input="2" sample-output="1.414" comment="不使用Math.sqrt，求一个非负数的平方根，至少精确到小数点后3位">
+  var num = Number(prompt('不使用Math.sqrt，求一个非负数的平方根，请输入一个数字'))
+  var count = 0
+/*
+  for(var i = 0; i <= 2; i += 0.00000001) {
+    count++
+    if (Math.abs(i * i - num) < 0.00001) {  //Math.abs()返回绝对值
+      //console.log(count)  //计算了141421004次
+      console.log(i.toFixed(3))
+      break
+    }
+  }
+*/
 
+/*
+  var x
+  var low = 0
+  var high = num
+
+  while((high - low) > 0.000000000000001) {
+    count++
+    x = (low + high) / 2
+
+    if (x * x > num) {
+      high = x
+    } else if (x * x < num) {
+      low = x
+    }
+  }
+  //console.log(count) //计算了51次
+  console.log((high + low) / 2)
+*/
+
+
+  var x = 2
+  while(count < 3) {  //若只需要精确到3位小数，只需要三次计算
+    count++
+    x = x - (x * x - 2) / (2 * x)
+  }
+  console.log(x.toFixed(3))
+</script>
+
+<script type="x">
+  //将一个数字的各位加起来求和。如果该和大于10，将得到这个数字继续进行这种操作，直到其只有一位数。
+  //例如：469->4+6+9->19->1+9->10->1+0->1
+  a(469)
+
+  function a(n){
+    var count = n
+    while(count>=10){
+      n = count
+      count = 0
+      while(n>0){
+        var digit = n % 10
+        count = count + digit
+        n = (n - digit) / 10
+      }
+    }
+    console.log(count)
+  }
+</script>
+
+<script>
+//   找出唯一的满足a + b + c = 1000的毕达哥拉斯三元组{a, b, c}。
+// 一个毕达哥拉斯三元组是一个包含三个自然数的集合，a<b<c，满足条件：a^2 + b^2 = c^2
+//例如：3^2 + 4^2 = 9 + 16 = 25 = 5^2.（说白了就是一组勾股数）
+// 已知存在并且只存在一个毕达哥拉斯三元组满足条件a + b + c = 1000。找出这个三元组。
 </script>
