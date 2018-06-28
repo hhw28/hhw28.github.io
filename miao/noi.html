@@ -169,18 +169,26 @@
   var x3 = 0
   var y3 = 3
 
-  var a = Math.sqrt( (x2-x1)**2 - (y2-y1)**2 )
-  var b = Math.sqrt( (x3-x2)**2 - (y3-y2)**2 )
-  var c = Math.sqrt( (x1-x3)**2 + (y1-y3)**2 )
+  var a = Math.sqrt( (x2-x1)**2 + (y2-y1)**2 )
+  var b = Math.sqrt( (x1-x3)**2 + (y1-y3)**2 )
+  var c = Math.sqrt( (x2-x3)**2 + (y2-y3)**2 )
 
   //海伦公式
-  // 1\ s(周长的一半) = （a+b+c）/2
-
+  // 1: s(周长的一半) = （a+b+c）/2
+  // 2: 面积 = Math.sqrt( s*(s-a)*(s-b)*(s-c) )
   var s = (a+b+c) / 2
 
   var mj = Math.sqrt( s*(s-a)*(s-b)*(s-c) )
-  console.log(mj)
+  console.log(mj.toFixed(2))
+</script>
 
+<script id="ch0103/18" type="x">
+  var a1 = Number(prompt('请输入整数a1, -100 <= a1 <= 100'))
+  var a2 = Number(prompt('请输入整数a2, -100 <= a2 <= 100'))
+  var n = Number(prompt('请输入第N项,0 < n <= 1000'))
+
+  var x = a1 + (n-1) * (a2 - a1)
+  console.log(x)
 </script>
 
 <script id="ch0103/19" type="x">
@@ -498,7 +506,7 @@
 
 </script>
 
-<script id="ch0104/20"comment="求一元二次方程的根">
+<script id="ch0104/20" type="x" comment="求一元二次方程的根">
 /*利用公式
 x1 = (-b + sqrt(b*b-4*a*c))/(2*a)
 x2 = (-b - sqrt(b*b-4*a*c))/(2*a)
@@ -517,13 +525,13 @@ x2 = (-b - sqrt(b*b-4*a*c))/(2*a)
 
   if(b**2 == 4*a*c){
 
-    x1 = (-b + sqrt(b*b-4*a*c))/(2*a)
+    x1 = (-b + Math.sqrt(b*b-4*a*c))/(2*a)
     console.log('x1=x2='+x1.toFixed(5))
 
   }else if(b**2 > 4*a*c){
 
-    x1 = (-b + sqrt(b*b-4*a*c))/(2*a)
-    x2 = (-b - sqrt(b*b-4*a*c))/(2*a)
+    x1 = (-b + Math.sqrt(b*b-4*a*c))/(2*a)
+    x2 = (-b - Math.sqrt(b*b-4*a*c))/(2*a)
 
     console.log( 'x1=' + x1.toFixed(5) + ';x2=' + x2.toFixed(5) )
 
@@ -539,7 +547,7 @@ x2 = (-b - sqrt(b*b-4*a*c))/(2*a)
 
 </script>
 
-<script id="ch0103/15" id="ch0104/21" comment="虫子和苹果">
+<script id="ch0103/15" type="x" comment="虫子和苹果1">
   var n = prompt('请输入你买了几个苹果')
   var x = prompt('请输入虫子几小时能吃掉一个苹果')
   var y = prompt('请输入经过了几个小时')
@@ -547,8 +555,249 @@ x2 = (-b - sqrt(b*b-4*a*c))/(2*a)
   if( y<=(n*x) ){
     var a = n - (parseInt((y/x))+1)
     console.log(a)
-  }else{
+  }
+</script>
 
+<script id="ch0104/21" type="x" comment="虫子和苹果2">
+  var n = prompt('请输入你买了几个苹果')
+  var x = prompt('请输入虫子几小时能吃掉一个苹果')
+  var y = prompt('请输入经过了几个小时')
+
+  var s = parseInt((y/x)) + 1
+  console.log( n-s )
+</script>
+
+<script id="ch0105/01" type="x">
+
+  var n = Number(prompt('学生人数'))
+  var sum = 0
+  for(var i=0;i<n;i++){
+    var a = Number(prompt('请输入第'+(i+1)+'位学生年龄，取值为15到25'))
+    sum = sum + a
+  }
+  var average = sum / n
+  console.log(average.toFixed(2))
+</script>
+
+<script id="ch0105/02" type="x">
+  var sum = 0
+  for(var i=0;i<12;i++){
+    var money = Number(prompt('请输入每个月结余的资金'))
+    sum = sum + money
+  }
+  var average = sum / 12
+  console.log('$'+average)
+</script>
+
+<script id="ch0105/03" type="x">
+    var n = Number(prompt('样本容量'))
+    var sum = 0
+    for(var i=0;i<n;i++){
+      var a = Number(prompt('请输入第'+(i+1)+'个样本数据，取值为-1000到1000'))
+      sum = sum + a
+    }
+    var average = sum / n
+    console.log(average.toFixed(4))
+</script>
+
+<script id="ch0105/04" type="x">
+  var n = Number(prompt('样本容量'))
+  var sum = 0
+  for(var i=0;i<n;i++){
+    var a = Number(prompt('请输入第'+(i+1)+'个样本数据，取值为-10000到10000'))
+    sum = sum + a
+  }
+  var average = sum / n
+  console.log(sum,average.toFixed(5))
+</script>
+
+<script id="ch0105/05" type="x">
+  var n = Number(prompt('参加这次考试的人数,1 <= n < 100'))
+  var sum = 0
+  for(var i=0;i<n;i++){
+    var a = Number(prompt('请输入第'+(i+1)+'个样本数据，取值为-10000到10000'))
+    var sum = Math.max(sum,a)
+  }
+  console.log(sum)
+</script>
+
+<script id="ch0105/06" type="x">
+  var n = Number(prompt('序列个数，1 <= n <= 1000'))
+  var max = 0
+  var min = 0
+  for(var i=0;i<n;i++){
+    var a = Number(prompt('请输入第'+(i+1)+'个样本数据，取值为0到1000'))
+    var max = Math.max(max,a)
+    var min = Math.min(min,a)
+  }
+  console.log(max-min)
+</script>
+
+<script id="ch0105/07" type="x">
+  var n = Number(prompt('天数'))
+
+  var a = 0
+  var b = 0
+  var c = 0
+
+  for(var i=0;i<n;i++){
+
+    for(var j=0;j<3;j++){
+      var jp = Number(prompt('请输入第'+(i+1)+'天获得的奖牌数'))
+      if(j==0){
+        a = a + jp
+      }
+      if(j==1){
+        b = b + jp
+      }
+      if(j==2){
+        c = c + jp
+      }
+    }
+  }
+  var sum = a+b+c
+  console.log(a,b,c,sum)
+</script>
+
+<script id="ch0105/08" type="x">
+  var n = Number(prompt('请输入是n变形'))
+  var sum = 180
+  for(var i=0;i<(n-1);i++){
+
+    var du = Number(prompt('请输入第'+(i+1)+'个已知的内角度数'))
+    sum = sum - du
+  }
+
+  console.log(sum)
+</script>
+
+<script id="ch0105/09" type="x">
+  var m = Number(prompt('请输入是m,0 <= m <= n <= 300'))
+  var n = Number(prompt('请输入是n,0 <= m <= n <= 300'))
+
+  var sum = 0
+
+  if(m%2==0){
+    for(var i=m+1 ; i<=n ; i+=2 ){
+      sum += i
+    }
+  }else{
+    for(var i=m ; i<=n ; i+=2 ){
+      sum += i
+    }
+  }
+
+  console.log(sum)
+</script>
+
+<script id="ch0105/10" type="x">
+  var m = Number(prompt('请输入是m,0 <= m <= n <= 300'))
+  var n = Number(prompt('请输入是n,0 <= m <= n <= 300'))
+
+  var sum = 0
+
+  for(var i=m ; i<=n ;i++){
+    if(i%17 == 0){
+      sum += i
+    }
+  }
+
+  console.log(sum)
+</script>
+
+<script id="ch0105/11" type="x">
+  var n = Number(prompt('个数，1 <= n <= 1000'))
+
+  var a = 0
+  var b = 0
+  var c = 0
+
+  for(var i=0;i<n;i++){
+
+    switch(Number(prompt('请输入第'+(i+1)+'个整数'))){
+      case 1:
+        a++
+        break
+      case 5:
+        b++
+        break
+      case 10:
+        c++
+        break
+      default:
+        break
+    }
+  }
+  console.log(a,b,c)
+</script>
+
+<script id="ch0105/12" type="x">
+  var n = Number(prompt('个数，1 <= n <= 1000'))
+
+  var m = Number(prompt('请输入指定对比的数字'))
+  var a = 0
+
+  for(var i=0;i<n;i++){
+
+    switch(Number(prompt('请输入第'+(i+1)+'个整数'))){
+      case m:
+        a++
+        break
+      default:
+        break
+    }
+  }
+  console.log(a)
+</script>
+
+<script id="ch0105/13" type="x">
+  var a = Number(prompt('请输入整数a'))
+
+  var n = Number(prompt('请输入正整数'))
+
+  console.log(Math.pow(a,n))
+</script>
+
+<script id="ch0105/14" type="x" >
+  var x = Number(prompt('请输入当前的人口数，单位亿，1 <= x <= 100'))
+
+  var n = Number(prompt('请输入n年后，1 <= n <= 100'))
+
+  for(var i=0;i<n;i++){
+    var x = x + (x*0.001)
+  }
+  console.log(x.toFixed(4))
+</script>
+
+<script id="ch0105/15" type="x">
+
+  var R = Number(prompt('请输入复合年利率为R（0到20之间的整数）'))
+  var M = Number(prompt('请输入现有总值为M的钱（100到1,000,000之间的整数）'))
+  var Y = Number(prompt('请输入投资Y年（范围0到400）'))
+
+  for(var i=0;i<Y;i++){
+    var M = M + (M*(R*0.01))
+  }
+  console.log(parseInt(M))
+</script>
+
+<script id="ch0105/16">
+
+  var N = Number(prompt('请输入年薪，10 <= N <= 50'))
+  var K = Number(prompt('请输入每年百分之K增长,K（1 <= K <= 20）'))
+
+  var fj = 200
+
+  for(var i=1;i<20;i++){
+    var fj = fj + (fj*(K*0.01))
+
+    if(N*i >= fj){
+      var M = i
+      console.log(M)
+      break
+    }else{
+      console.log('Impossible')
+    }
   }
 </script>
 
