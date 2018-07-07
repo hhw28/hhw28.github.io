@@ -781,7 +781,7 @@ x2 = (-b - sqrt(b*b-4*a*c))/(2*a)
   console.log(parseInt(M))
 </script>
 
-<script id="ch0105/16">
+<script id="ch0105/16" type="x">
 
   var N = Number(prompt('请输入年薪，10 <= N <= 50'))
   var K = Number(prompt('请输入每年百分之K增长,K（1 <= K <= 20）'))
@@ -789,15 +789,14 @@ x2 = (-b - sqrt(b*b-4*a*c))/(2*a)
   var fj = 200
 
   for(var i=1;i<20;i++){
-    var fj = fj + (fj*(K*0.01))
+
 
     if(N*i >= fj){
       var M = i
       console.log(M)
       break
-    }else{
-      console.log('Impossible')
     }
+    var fj = fj + (fj*(K*0.01))
   }
 </script>
 
@@ -848,7 +847,7 @@ x2 = (-b - sqrt(b*b-4*a*c))/(2*a)
 </script>
 </table>
 
-<script type="x" id="narcissistic " sample-input="153" sample-output="YES" comment="判断一个数是否为水仙花数">
+<script  id="narcissistic " sample-input="153" sample-output="YES" comment="判断一个数是否为水仙花数">
   var num = prompt('请输入数字')
   var gewei = num%10
   var shiwei = parseInt(num/10 % 10)
@@ -896,14 +895,22 @@ x2 = (-b - sqrt(b*b-4*a*c))/(2*a)
 <script type="x" id="complete-number" sample-input="6" sample-output="YES" comment="判断一个数是否为完全数">
   //如果一个数的所有小于它的约数之和等于它自己，则它是一个完全数
   var num = Number(prompt('请输入一个数字，我会判断它是否为完全数'))
-  var count
-  for(var i=0;i<num;i++){
-    if(num%i == 0){
-      count += i  //所有小于它的约数之和
+  var count = 1
+  var sqNum = Math.floor(Math.sqrt(num))
+
+  if(num == 1){
+    return false
+  }
+
+  for(var i=2; i<=sqNum;i++){
+    if( num%i == 0 ){
+      count += (num/i) + i
     }
   }
-  if(count = num){
-    console.log('YES')
+  if( count == num ){
+    console.log(true)
+  }else{
+    console.log(false)
   }
 </script>
 
@@ -945,8 +952,8 @@ x2 = (-b - sqrt(b*b-4*a*c))/(2*a)
   }
 </script>
 
-<script id="primes" sample-input="" sample-output="" comment="输出100以内所有的素数">
-/*
+<script id="primes" type="x" sample-input="" sample-output="" comment="输出100以内所有的素数">
+
   var count = 0
   // debugger
   for(var i=0;i<100;i++){
@@ -973,7 +980,7 @@ x2 = (-b - sqrt(b*b-4*a*c))/(2*a)
 
   }
   console.log('质数个数：'+count)
-*/
+
 
 </script>
 
@@ -1080,9 +1087,10 @@ x2 = (-b - sqrt(b*b-4*a*c))/(2*a)
   }
 </script>
 
-<script type="x" id="sqrt" sample-input="2" sample-output="1.414" comment="不使用Math.sqrt，求一个非负数的平方根，至少精确到小数点后3位">
+<script id="sqrt" sample-input="2" sample-output="1.414" comment="不使用Math.sqrt，求一个非负数的平方根，至少精确到小数点后3位">
   var num = Number(prompt('不使用Math.sqrt，求一个非负数的平方根，请输入一个数字'))
   var count = 0
+
 /*
   for(var i = 0; i <= 2; i += 0.00000001) {
     count++
@@ -1114,6 +1122,7 @@ x2 = (-b - sqrt(b*b-4*a*c))/(2*a)
 */
 
 
+//牛顿迭代法
   var x = 2
   while(count < 3) {  //若只需要精确到3位小数，只需要三次计算
     count++
