@@ -1,5 +1,6 @@
 window['hhw28'] = {
   // chunk(['a', 'b', 'c', 'd','e'], 3)  =>  [["a", "b", "c"],["d", "e"]]
+
   chunk: function(array, size) {
     var sum = []
     for(var i=0;i<array.length;i+=size){
@@ -10,16 +11,18 @@ window['hhw28'] = {
 
   // compact([0, 1, false, 2, '', 3])  =>  [1, 2, 3]
   compact: function(array){
-    for(var i=0;i<array.length;i++){
-      if( !array[i] ){
-        array[i].splice(i,1)
+    var arr = array
+    for(var i=0;i<arr.length;i++){
+      if( !arr[i] ){
+        arr.splice(i,1)
+        i--
       }
     }
-    return array
+    return arr
   },
 
 
-  concat: function(){
+  concat: function(array){
     var arr = []
     for(var i=0;i<array.length;i++){
       arr.push(array[i])
@@ -31,17 +34,17 @@ window['hhw28'] = {
   },
 
 
-  difference: function(){
+  difference: function(array, values){
     var arr = []
-    for(var i=0;i<array.length;i++){
+    for(var i=0;i<array.length;i++){   //i代表array的每一项
       var same = false
-      for(var k=1;k<arguments.length;k++){
-        if( arguments[k].includes( array[i] ) ){
+      for(var k=1;k<arguments.length;k++){  //k代表 arguments 的每一项
+        if( arguments[k].includes(array[i]) ){
           same = true
           break
         }
       }
-      if(!same){
+      if(!same){  //没有相同项,加入进新数组
         arr.push(array[i])
       }
     }
@@ -50,6 +53,9 @@ window['hhw28'] = {
 
 
   drop: function(array,n){
+    if( n == 0){
+      return array
+    }
     n = n || 1
     array.splice(0,n)
     return array
@@ -101,4 +107,11 @@ window['hhw28'] = {
 
     return indexOf(ary, val) !== -1
   },
+
+
+  negate:function(f){
+    return function(...args){
+      return !f(...args)
+    }
+  }
 }

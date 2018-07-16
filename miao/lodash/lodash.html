@@ -1,4 +1,22 @@
 <script>
+
+  var compact = function(array){
+    // debugger
+    var arr = array
+    for(var i=0;i<arr.length;i++){
+      if( !arr[i] ){
+        arr.splice(i,1)
+        i--
+      }
+    }
+    // console.log(arr)
+    return arr
+  }
+  compact([0, 1, false, 2, '', 3])  //[1,2,3]
+  compact([0, 1, false, 2, '', 3])  //[1,2,3]
+  compact([1, 0, false, '', null])  //[1]
+
+
   var difference = function(array, values) {
     // debugger
     var arr = []
@@ -27,8 +45,62 @@
     // console.log(arr)
     return arr
   }
-  difference([1,2,3,4,5,6,7,8,],[1,3],[4,8],[6])  //2,5,7
+  difference([2,1],[2,3])  //1
+  difference([2,1],[2,3])  //1
+  difference([1,2,3,4],[2,3,4,5])  //1
+  difference([1,2,3,4],[1,3],[4])  //2
+  difference([1,2,3,4,5,6,7,8],[1,3],[4,8],[6])  //2,5,7
 
+
+
+  var differenceBy = function(array, values, action) {
+
+    var arr = array
+    var same
+    var newArr = []
+    var index = -1
+// debugger
+    arr.forEach(element => {
+      same = false
+
+      var a = action(element)
+      index++
+
+      arguments[1].forEach(element => {
+        var b = action(element)
+        if(a == b){
+          same = true
+        }
+      })
+      if(!same){
+        newArr.push(arr[index])
+      }
+    })
+    console.log(newArr)
+    return newArr
+
+  }
+  differenceBy([2.1, 1.2], [2.3, 3.4], Math.floor)  //[1.2]
+  // differenceBy([{ 'x': 2 }, { 'x': 1 }], [{ 'x': 1 }], 'x')
+
+
+
+  var drop = function(array,n){
+    if( n == 0){
+      // console.log(array)
+      return array
+    }
+    n = n || 1
+    array.splice(0,n)
+    // console.log(array)
+    return array
+  }
+  drop([1,2,3]) //[2,3]
+  drop([1,2,3],2) //[3]
+  drop([1,2,3],5) //[]
+  drop([1,2,3],0) //[1,2,3]
+  drop([1,2,3],5) //[]
+  drop([1,2,3]) //[2,3]
 
 
   var dropRight = function(array,n){
@@ -36,7 +108,6 @@
     if( n != 0 ){
       n = n || 1
     }
-
     // if(array.length-n >= 0 ){
     //   startIndex = array.length - n
     // }else{
@@ -49,6 +120,9 @@
   }
   dropRight([1,2,3],0)
 
+
+
+
   var fill = function(array, value, start, end){
     start = start || 0
     end = end || array.length
@@ -56,8 +130,28 @@
     for(var i=start;i<end;i++){
       array.splice(i,1,value)
     }
-    console.log(array)
+    // console.log(array)
     return array
   }
-  fill([4, 6, 8, 10], '*', 1, 3)
+  fill([4, 6, 8, 10], '*', 1, 3)   //
+
+
+
+
+
+
+//原函数取反
+  function negate(f){
+    return function(...args){
+      return !f(...args)
+    }
+  }
+
+
+
+
+
+
+
+
 </script>
