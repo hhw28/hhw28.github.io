@@ -88,6 +88,7 @@ window['hhw28'] = {
     return -1
   },
 
+  //hhw28.includes([1, 2, 3], 1)   //true
   includes:function(ary,val){
     if (val !== val) {
       for(var i = 0; i<ary.length; i++) {
@@ -102,9 +103,9 @@ window['hhw28'] = {
   },
 
   //原函数取反
-  negate: function(f){
+  negate: function(fn){
     return function(...args){
-      return !f(...args)
+      return !fn(...args)
     }
   },
 
@@ -116,7 +117,7 @@ window['hhw28'] = {
   },
   filter: function(array,fn){
     return array.reduce(function(result,item,index,array){
-      if( fn(item,index,ary) ){
+      if( fn(item,index,array) ){
         result.push(item)
       }
       return result
@@ -125,18 +126,21 @@ window['hhw28'] = {
   forEach: function(){
 
   },
-  slice: function(){
+  //hhw28.slice([1,2,3],0,2)  //[1,2]
+  slice: function(array,start=0,end=array.length){
     return array.reduce(function(result,item,index,array){
-
+      if( index >= start && index < end  ){
+        result.push(item)
+      }
+      return result
     },[])
   },
 //fill([4, 6, 8, 10], '*', 1, 3)   //[4,'*'，'*'，10]
-  fill: function(array,value,start,end){
-    start = start || 0
-    end = end || array.length
-
+  fill: function(array,value,start=0,end=array.length){
+    // start = start || 0
+    // end = end || array.length
+//方法1
     return array.reduce(function(result,item,index,array){
-
       if( index >= start && index < end ){
         result.push( value )
       }else{
@@ -144,19 +148,27 @@ window['hhw28'] = {
       }
       return result
     },[])
-
+//方法2
     // for(var i=start;i<end;i++){
     //   array.splice(i,1,value)
     // }
     // return array
   },
+
+  //hhw28.concat([1],2,[3],[[4]])  //[1,2,3,[4]]
   concat: function(array){
     var arr = []
     for(var i=0;i<array.length;i++){
       arr.push(array[i])
     }
     for(var i=array.length;i<arguments.length;i++){
-      arr.push(arguments[i])
+      if(Array.isArray(arguments[i])){
+        for(var j=0;j<arguments[i].length;j++){
+          arr.push(arguments[i][j])
+        }
+      }else{
+        arr.push(arguments[i])
+      }
     }
     return arr
   },
@@ -167,15 +179,37 @@ window['hhw28'] = {
   //   b:2,
   //   x:5,
   // })    //5
-  property:function(){
-    return function(obj){
-      return obj[propName]
+  property:function(propName){
+//方法1
+    // return function(obj){
+    //   return obj[propName]
+    // }
+//方法2
+    return this.get.bind(null,propName)
+  },
+  get:function(name,obj){
+    return obj[name]
+  },
+  //hhw28.head([1,2,3])  //[1]
+  //hhw28.head([])  //[undefined]
+  head:function(array){
+    if(!array[0]){
+      return array[0]
     }
+    return array[0]
+  },
+  //hhw28.initial([1,2,3])  //[1,2]
+  initial:function(array){
+    return this.slice(array,0,array.length-1)
+  },
+  //hhw28.intersection([2,1],[2,3])
+  intersection:function(array){
+
   },
 
 
-  identity:function(v){
-    return v
+  identity:function(value){
+    return value
   },
   sum:function(ary){
     // var result = 0
@@ -183,7 +217,7 @@ window['hhw28'] = {
     //   result += ary[i]
     // }
     // return result
-    return sumBy(ary,identity)
+    return this.sumBy(ary,this.identity)
   },
 
   sumBy:function(ary,iteratee){
@@ -194,16 +228,23 @@ window['hhw28'] = {
     return result
   },
 
-  matches:function(scr){
+  matches:function(source){
     return function(obj){
-      for(var key in src){
-        if(src[key] != obj[key]){
+      //return obj是否是source的超集
+      for(var key in source){
+        if(source[key] != obj[key]){
           return false
         }
       }
       return true
     }
   },
+  bind:function(f,...fixedArgs){
+    return function(...args){
+      return f(...fixedArgs,...args)
+    }
+  },
+
 
   //hhw28.flatten([1, [2, [3, [4]], 5]])   //[1,2,[3,[4]],5]
   flatten:function(ary){
@@ -236,7 +277,10 @@ window['hhw28'] = {
     // return [].concat(...ary)
 
 //方法4
-    return this.flattenDepth(ary,1)
+    // return this.flattenDepth(ary,1)
+
+//方法5
+    return [].concat.apply.bind([].concat,[])
   },
 
   //hhw28.flattenDeep([1, [2, [3, [4]], 5]])   //[1,2,3,4,5]
@@ -274,5 +318,62 @@ window['hhw28'] = {
     return result
   },
 
+  add:function(augend,addend){
+    return augend + addend
+  },
+  //hhw28.ceil(4.006)  //5
+  //hhw28.ceil(6.004,2)  //6.01
+  //hhw28.ceil(6040)  //6100
+  ceil:function(number,precision=0){
 
+  },
+
+  groupBy:function(ary,propName){
+//方法1
+    // var map = {}
+    // for(var item of ary){
+    //   var key = predicate(item)
+    //   if(key in map){
+    //     map[key].push(item)
+    //   }else{
+    //     map[key] = [item]
+    //   }
+    // }
+    // return map
+//方法2
+    return ary.ruduce(function(map,item,index,ary){
+      var key = predicate(item)
+      if(key in map){
+        map[key].push(item)
+      }else{
+        map[key] = [item]
+      }
+      return map
+    },{})
+  },
+
+  ary:function(fn, n = fn.length){
+    return function(...args){
+      return fn(...args.slice(0,n))
+    }
+  },
+  //
+  unary:function(fn){
+    return function(...args){
+      return fn(...args)
+    }
+  },
+
+  flip:function(fn){
+    return function(...args){
+      return fn(...args.reverse())
+    }
+  },
+
+  spread:function(fn,start=0){
+    return function(ary){
+      // return fn(...args)
+      return fn.apply(null,ary)
+    }
+  },
 }
