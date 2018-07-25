@@ -134,6 +134,12 @@ window['hhw28'] = {
       }
       return result
     },[])
+
+    // var result = []
+    // for(var i=start;i<end;i++){
+    //   result.push(array[i])
+    // }
+    // return result
   },
 //fill([4, 6, 8, 10], '*', 1, 3)   //[4,'*'，'*'，10]
   fill: function(array,value,start=0,end=array.length){
@@ -274,10 +280,10 @@ window['hhw28'] = {
     // },[])
 
 //方法3
-    // return [].concat(...ary)
+    // return this.flattenDepth(ary,1)
 
 //方法4
-    // return this.flattenDepth(ary,1)
+    // return [].concat(...ary)
 
 //方法5
     return [].concat.apply.bind([].concat,[])
@@ -375,5 +381,7 @@ window['hhw28'] = {
       // return fn(...args)
       return fn.apply(null,ary)
     }
+
+    // return f => f.apply.bind(f,null)
   },
 }

@@ -1,0 +1,1419 @@
+<script>
+  //27、移除元素
+    var removeElement = function(nums, val) {
+      // debugger
+
+      for(var i=0 ; i<nums.length ; i++){
+        if(nums[i] == val){
+          nums.splice(i,1)
+          i--
+        }
+      }
+      // console.log(nums.length)
+      return nums.length
+    }
+    // removeElement([3,2,2,3],3)
+    removeElement([0,1,2,2,3,0,4,2],2)
+
+
+  //66、加一
+    var plusOne = function(digits) {
+  //方法1
+      // var carry = 0
+      // for(var i=digits.length - 1 ; i>=0 ; i--){
+      //   digits[i] = digits[i] + carry
+      //   //循环到数组的最后一位数时，给最后一位加上 1
+      //   if( i == digits.length - 1  ){
+      //     digits[i] = digits[i] + 1
+      //   }
+      //   //若加上一位后大于10了，需要进位
+      //   if(digits[i]==10){
+      //     digits[i] = 0   //进位后，当前位置 为 0
+      //     carry = 1
+      //   }else{
+      //     carry = 0
+      //   }
+      // }
+      // //循环结束之后，若后面的产生过进位，则需要在最前面加上一个 1
+      // if(carry == 1){
+      //   digits.unshift(carry)
+      // }
+      // return digits
+
+  //方法2：高精度加法
+      var l = digits.length
+
+      digits[l-1]++   //给数组最后一位值+1
+
+      for(var i = l-1;i>0;i--) {
+        if (digits[i] == 10) {  //若最后一位值 == 10，说明需要进位
+          digits[i] = 0
+          digits[i-1]++
+        } else {
+          return digits
+        }
+      }
+      if (digits[0] == 10) {  //若第一项为10，需要进位
+        digits[0] = 0
+        digits.unshift(1)
+      }
+      return digits
+    }
+    plusOne([9])
+    plusOne([8,9])
+    plusOne([9,9])
+
+  //415、Add Strings,字符串相加
+    var addStrings = function(num1, num2) {
+      // debugger
+      var length = Math.max(num1.length,num2.length)
+      var num1 = num1.padStart(length,'0')
+      var num2 = num2.padStart(length,'0')
+
+      var sum = 0
+      var digit = 0
+      var strNum = ''
+
+      for(var i=length-1;i>=0;i--){
+        var sum = parseInt(num1[i]) + parseInt(num2[i]) + digit
+
+        digit = sum>=10 ? 1 : 0
+
+        if( sum >= 10 ){
+          strNum = ""+(sum-10)+"" + strNum
+        }else{
+          strNum = sum.toString() + strNum
+        }
+      }
+      if( digit>0 ){
+        strNum = '1' + strNum
+      }
+      // console.log(strNum)
+      return strNum
+    }
+    addStrings('5099','5011')
+
+  //67、Add Binary,二进制求和
+    var addBinary = function(a, b) {
+      var length
+      var digit = 0
+      var sum = 0
+      var str = ""
+  // debugger
+  //按长的字符串确定循环次数，长度不足的补零补齐长度
+      if( a.length>b.length ){
+        length = a.length
+        while(a.length != b.length){
+          b = "0"+b
+        }
+      }else{
+        length = b.length
+        while(a.length != b.length){
+          a = "0"+a
+        }
+      }
+      for(var i=length-1;i>=0;i--){
+        sum = parseInt(a[i]) + parseInt(b[i]) + digit
+  //先判断是否需要进位，当sum>=2说明需要进位了，保存一个1
+        if(sum >= 2){
+          digit = 1
+        }else{
+          digit = 0
+        }
+  //再判断当前位置数字
+  //若=2说明进位1，当前位0；
+  //若=3说明进位1，当前位也是1；
+  //若=1或0，说明不用进位，当前位=sum的值
+        if(sum == 2){
+          str = "0" + str
+        }else if(sum == 3){
+          str = "1" + str
+        }else {
+          str = sum.toString() + str
+        }
+      }
+  //最后判断digit是否还有数字，若有，需要在最前面+1
+      if(digit>0){
+        str = '1' + str
+      }
+      // console.log(str)
+      return str
+    }
+    // addBinary("111","1010")  //"100"
+    // addBinary("1010","1011")  //"10101"
+
+
+  //136、只出现一次的数字
+    var singleNumber = function(nums) {
+      return nums.reduce( (a,b) => a^b )
+      //相同数字 异或 为 0 ，a^b^b^a^c == c
+    }
+    singleNumber([4,1,2,1,2])
+
+
+    var singleNumber3 = function(nums) {
+        let firstFind = []
+
+        for (let i = 0; i < nums.length; i++) {
+            if (!firstFind.includes(nums[i])) {
+              firstFind.push(nums[i])
+            } else {
+              firstFind.splice(firstFind.indexOf(nums[i]), 1)
+            }
+        }
+
+        return firstFind
+    }
+    singleNumber3([1,2,1,3,2,5])
+
+
+  //167、两数之和
+    var twoSum = function(numbers, target) {
+  //方法1
+      // for(var i=0;i<numbers.length;i++){
+      //   if(numbers[i] <= target){
+      //     var a = numbers[i]
+      //     var b = target - a
+      //     if( numbers.indexOf(b) !== -1 ){
+      //       break
+      //     }
+      //   }
+      // }
+      // if( a>b ){
+      //   var index1 = numbers.indexOf(b)
+      //   var index2 = numbers.indexOf(a)
+      // }else if(a<b){
+      //   var index1 = numbers.indexOf(a)
+      //   var index2 = numbers.indexOf(b)
+      // }else if(a==b){
+      //   var index1 = numbers.indexOf(a)
+      //   numbers.splice(index1,1,a+1)
+
+      //   var index2 = numbers.indexOf(b)
+      // }
+      // var numbers = []
+      // numbers.push(index1+1,index2+1)
+      // // console.log(numbers)
+      // return numbers
+  //方法2
+      var map = {}   //valToIndexMap,
+      /*
+      {
+        val:index,
+        0:0,
+        0:1,
+        3:2,
+        4:3
+      }
+      */
+      for(var i=0;i<numbers.length;i++){
+        var need = target - numbers[i]
+        if(need in map){
+          return [i,map[need]]
+        }else{
+          map[numbers[i]] == i
+        }
+      }
+    }
+    twoSum([0,0,3,4],0)  //0,1
+
+
+  //20、有效的括号
+    var isValid = function(s) {
+      var length = s.length
+      var arr = []
+  // debugger
+      if(length == 1){
+        // console.log(false)
+        return false
+      }
+
+      for(var i=0; i<length ;i++){
+        if( s[i]=='(' || s[i]=='{' || s[i]=='[' ){
+          arr.push(s[i])
+        }else{
+
+          var l = arr.length - 1
+          if(s[i]==')' && arr[l]=='(' || s[i]=='}' && arr[l]=='{' || s[i]==']' && arr[l]=='['){
+            arr.pop()
+          }else{
+            // console.log(false)
+            return false
+          }
+        }
+      }
+
+      if(arr.length == 0){
+        // console.log(true)
+        return true
+      }else{
+        // console.log(false)
+        return false
+      }
+
+    }
+    // isValid("(])")
+    // isValid("{[]}")
+    // isValid("([)]")
+    // isValid("()[]{}")
+
+
+  //35、搜索插入位置
+    var searchInsert = function(nums, target) {
+      var index = nums.indexOf(target)
+
+      if( index == -1 ){
+        for(var i=0;i<nums.length;i++){
+          if( nums[i] > target ){
+            // console.log(i)
+            return i
+          }
+        }
+        // console.log(nums.length)
+        return nums.length
+      }else{
+        // console.log(index)
+        return index
+      }
+    }
+    searchInsert([1,3,5,6], 5)  //2
+    searchInsert([1,3,5,6], 2)  //1
+    searchInsert([1,3,5,6], 7)  //4
+
+  //349. 两个数组的交集
+    var intersection = function(nums1, nums2) {
+      var arr = []
+  // debugger
+      for(var i = 0 ; i<nums1.length ; i++){
+        for(var j = 0; j<nums2.length ; j++){
+
+          if( arr.indexOf(nums2[j]) == -1 ){
+
+            if( nums2[j] == nums1[i] ){
+              arr.push(nums2[j])
+            }
+          }
+        }
+      }
+      // console.log(arr)
+      return arr
+    }
+    intersection([1,9,0,2,2,1,3],[1,9,0,2,2])
+
+
+
+  //485. 最大连续1的个数
+    var findMaxConsecutiveOnes = function(nums) {
+      var count = 0
+      var max = 0
+      for(var i=0; i<nums.length;i++){
+        if( nums[i] == 1 ){
+          count++
+        }else{
+          count = 0
+        }
+
+        if(count > max){
+          max = count
+        }
+      }
+      // console.log(max)
+      return max
+    }
+    findMaxConsecutiveOnes([1,0,1,1,0,1])  //2
+
+
+
+  //728. 自除数
+  /*
+  取出每一位上的数字，判断能否被除尽
+  若遇上0直接return
+  */
+    var selfDividingNumbers = function(left, right) {
+  // debugger
+      var arr = []
+
+      for(var i=left ; i<=right ; i++){
+
+        var num = i
+
+        do{
+          var digit = num % 10
+
+          if(digit == 0 ){
+            break
+          }
+          if( i % digit != 0 ){
+            break
+          }
+          num = ( num - digit ) / 10
+        }while( num > 0)
+
+
+        if( digit == 0 ){
+          continue
+        }
+        if( i % digit != 0 ){
+          continue
+        }
+
+        arr.push(i)
+      }
+
+      // console.log(arr)
+      return arr
+    }
+    selfDividingNumbers(1,22)
+
+
+    var isPowerOfTwo = function(n) {
+      // return Math.log2(n) % 1 == 0
+
+      // 位运算，所有2的幂次方都为100…00形式，减去1,为01…11形式
+      // return (n & n-1) == 0   //& 优先级最低
+      return (n | n-1) - 2*n == -1
+    }
+
+    var isPowerOfFour = function(n) {
+      /*4^n = (2^2)^n = 2^(2n)
+      转化成二进制
+      2^2n次方后面有偶数个零 100,10000……，说明1一定在奇数位置上
+      使用 a = 1010 和 2^2n次方 与 运算
+      */
+      if(n<0){
+        return false
+      }else{
+        return isPowerOfTwo(n) && (n&0xaaaaaaaa)==0
+      }
+    }
+
+    var isPowerOfThree = function(n) {
+      if(n<0){
+        return false
+      }else{
+        return Math.pow(3,19)%n == 0
+      }
+    }
+
+
+  //7、快乐数
+    var isHappy = function(n) {
+  //不快乐数的数位平方和计算，最后都会进入 4 → 16 → 37 → 58 → 89 → 145 → 42 → 20 → 4 的循环中
+      var sum = 0
+  // debugger
+      while( n != 1 && n != 4 ){
+
+        while(n>0){
+          var digit = n % 10
+          sum = sum + Math.pow(digit,2)
+          n = ( n - digit ) / 10
+        }
+
+        n = sum
+        sum = 0
+      }
+
+      if( n == 1){
+        // console.log(true)
+        return true
+      }else if( n == 4 ){
+        // console.log(false)
+        return false
+      }
+    }
+    isHappy(19)
+
+
+  //263、丑数
+    var isUgly = function(num) {
+    //只能被2、3、5整除的数
+      if(num<1){
+        return false
+      }
+      while(num%2 == 0){
+        num = num/2
+      }
+      while(num%3 == 0){
+        num = num/3
+      }
+      while(num%5 == 0){
+        num = num/5
+      }
+
+      if(num == 1){
+        return true
+      }else{
+        return false
+      }
+      // var uglyPrimes = [2,3,5]
+      // for (var i=0; i<uglyPrimes.length; i++) {
+      //     while ( num % uglyPrimes[i] === 0) {
+      //         num = num / uglyPrimes[i]
+      //     }
+      // }
+      // return num===1
+
+    }
+
+  // 264. 丑数 II
+    var nthUglyNumber = function(n) {
+
+      // var arr = [1]
+      // var t
+      // var nxt
+
+      // while (arr.length < n) {
+
+      //     t = arr[arr.length - 1]  //数组中的末尾项
+      //     nxt = t * 2  //末尾项的两倍
+
+      //     for (var i = 0; i < arr.length; i++) {
+      //         if (arr[i] * 2 > t) {
+      //             nxt = Math.min(arr[i] * 2, nxt)
+      //         }
+      //     }
+      //     for (var i = 0; i < arr.length; i++) {
+      //         if (arr[i] * 3 > t) {
+      //             nxt = Math.min(arr[i] * 3, nxt)
+      //         }
+      //     }
+      //     for (var i = 0; i < arr.length; i++) {
+      //         if (arr[i] * 5 > t) {
+      //             nxt = Math.min(arr[i] * 5, nxt)
+      //         }
+      //     }
+      //     arr.push(nxt)
+      // }
+      // return arr[n - 1]s
+
+
+        if (n <= 1){
+          return 1
+        }
+
+        var p = 1
+        var p2 = 0, p3 = 0, p5 = 0
+        var result = [1]
+        while (p < n) {
+            var r2 = result[p2] * 2
+            var r3 = result[p3] * 3
+            var r5 = result[p5] * 5
+            var r = Math.min(r2, r3, r5)
+            if (r === r2)
+                p2++
+            if (r === r3)
+                p3++
+            if (r === r5)
+                p5++
+            result.push(r)
+            p++
+        }
+        return result[result.length - 1]
+    }
+    nthUglyNumber(1407) //536870912
+
+
+
+
+  //367、有效的完全平方数，1\4\9\16\25
+    var isPerfectSquare = function(num) {
+  // debugger
+      if(num <= 0){
+        return false
+      }
+      for(var i=0;i<=(num/2)+1;i++){
+        if(i*i == num){
+          // console.log(true)
+          return true
+        }
+      }
+      console.log(false)
+      return false
+    }
+
+
+
+  //461、汉明距离
+  // 1011101与1001001之间的汉明距离是2
+  // 2143896与2233796之间的汉明距离是3
+  // "toned"与"roses"之间的汉明距离是3
+    var hammingDistance = function(x, y) {
+  //方法1
+      // var digit1,digit2
+      // var count = 0
+      // do{
+      //   digit1 = x % 2
+      //   digit2 = y % 2
+      //   count += ( digit1 === digit2 ? 0 : 1 )  //若取出的个位数不同，则计数+1
+      //   x = ( x - digit1 ) / 2
+      //   y = ( y - digit2 ) / 2
+      // }while( x > 0 || y > 0)
+
+      // console.log(count)
+      // return count
+
+  //方法2:异或
+      // debugger
+      var digit
+      var sum = x^y //1010^1011 => 0001
+      var count = 0
+      do{
+        digit = sum % 2
+        count += digit
+        sum = (sum - digit) / 2
+      }while( sum > 0 )
+
+      // console.log(count)
+      return count
+    }
+    hammingDistance(1,4)
+
+    var hammingWeight = function(n) {
+      var digit
+      var count = 0
+
+      do{
+        digit = n % 2
+        count += digit
+        n = ( n - digit ) / 2
+      }while(n>0)
+
+      // console.log(count)
+      return count
+    }
+    hammingWeight(2147483648)  //1
+    hammingWeight(4294967295)  //32
+    hammingWeight(11)  //3
+    hammingWeight(128)  //1
+
+
+  //13、罗马数字转整数
+    var romanToInt = function(s) {
+      var sum = 0
+  // debugger
+      for(var i=0 ;i<s.length;i++){
+        if( s[i]=="I" && (s[i+1] == "V" || s[i+1]=="X") && (s[i+1] != "I") && (s[i+1] != undefined) ){
+          switch( s[i+1] ){
+            case "V":
+              sum += 4
+              break
+            case "X":
+              sum += 9
+              break
+          }
+          i += 1
+          continue
+        }
+
+        if( s[i]=="X" && (s[i+1] == "L" || s[i+1]=="C") && (s[i+1] != "X") && (s[i+1] != undefined) ){
+          switch( s[i+1] ){
+            case "L":
+              sum += 40
+              break
+            case "C":
+              sum += 90
+              break
+          }
+          i += 1
+          continue
+        }
+
+        if( s[i]=="C" && (s[i+1] == "D" || s[i+1]=="M") && (s[i+1] != "C") && (s[i+1] != undefined) ){
+          switch( s[i+1] ){
+            case "D":
+              sum += 400
+              break
+            case "M":
+              sum += 900
+              break
+          }
+          i += 1
+          continue
+        }
+
+        switch(s[i]){
+          case "I":
+            sum += 1
+            break
+          case "V":
+            sum += 5
+            break
+          case "X":
+            sum += 10
+            break
+          case "L":
+            sum += 50
+            break
+          case "C":
+            sum += 100
+            break
+          case "D":
+            sum += 500
+            break
+          case "M":
+            sum += 1000
+            break
+          default:
+            break
+        }
+      }
+      console.log(sum)
+    }
+    // romanToInt("DCXXI")  //621
+    // romanToInt("IV")  //4
+    // romanToInt("IX") //9
+    // romanToInt("III")  //3
+    // romanToInt("XC")  //90
+    // romanToInt("MCM")  //1900
+    // romanToInt("MCMXCIV")  //1994
+
+
+  //69、 x 的平方根
+    var mySqrt = function(x) {
+
+      // var mid
+      // var low = 0
+      // var high = x
+      // var count = 0
+
+      // while( high - low > 0.00000001 ){
+      //   count++
+      //   mid = ( high + low ) / 2
+
+      //   if( mid * mid > x ){
+      //     high = mid
+      //   }else if( mid * mid < x ){
+      //     low = mid
+      //   }
+      // }
+      // // console.log(count)
+      // return parseInt(mid)
+
+      var low = 1
+      var high = Math.floor( x/2 )+1
+      var mid
+
+      while( low <= high ){
+        mid = Math.floor( (high+low)/2 )
+
+        if(mid * mid > x){
+          hight = mid - 1
+        }else if( mid * mid < x ){
+          low = mid + 1
+        }else {
+          return mid
+        }
+      }
+
+      return low
+
+    }
+    // mySqrt(8)
+
+
+  //338. Bit位计数
+    var countBits = function(num) {
+      // debugger
+      // var arr = []
+      // var arr1 = []
+      // var count = 0
+
+      // for(var i=0;i<=num;i++){
+      //   var a = i.toString(2)
+      //   arr.push(a)
+      // }
+      // for(var j=0;j<arr.length;j++){
+
+      //   do{
+      //     var digit = arr[j] % 10
+      //     if( digit == 1 ){
+      //       count++
+      //     }
+      //     arr[j] = (arr[j] - digit) / 10
+      //   }while( arr[j] > 0 )
+
+      //   arr1.push(count)
+      //   count = 0
+      // }
+      // console.log(arr1)
+      // return arr1
+  //方法2
+      if(num == 0){
+        return [0]
+      }
+      if(num == 1){
+        return [0,1]
+      }
+      var result = [0, 1]
+      for(var i =2; i<=num; i++){
+         //if even
+         if(i%2 == 0){
+           result.push(result[Math.floor(i/2)])  //如果是偶数和它的一半是一样的
+         }else{
+           result.push(result[i-1] +1)  //如果是奇数，1的数量比前一项+1
+         }
+      }
+      return result
+
+  //方法3
+      // if (n === 0) {
+      //   return [0]
+      // }
+
+      // var result = [0]
+      // var m = 1
+
+      // var copyIndex
+
+      // for (var i = 1; i <= n; i++) {
+      //   if (i === m) {
+      //     result.push(1)
+      //     m = m * 2
+      //   } else {
+      //     copyIndex = i - m / 2
+      //     result.push(result[copyIndex] + 1)
+      //   }
+      // }
+
+      // return result
+  //方法4
+      // if (n === 0) {
+      //   return [0]
+      // }
+      // var result = [0]
+      // var m = 1
+      // var copyIndex
+      // for (var i = 1; i <= n; i++) {
+      //   copyIndex = i - 2 ** Math.floor(Math.log(i) / Math.log(2))
+      //   result.push(result[copyIndex] + 1)
+      // }
+      // return result
+    }
+    countBits(5)  //[0,1,1,2,1,2]
+
+
+
+  //498、对角线遍历
+    var findDiagonalOrder = function(matrix) {
+      var x = 0
+      var y = 0
+      var m = matrix.length
+      var n = matrix[0].length
+      var arr = []
+      var up = true
+  // debugger
+      for(var i=0;i<m*n;i++){
+        arr.push(matrix[x][y])
+        //往右上走,行y在减，列x在加，有三种情况停止右上：
+        //1、到了第一行，不能再往上了；
+        //2、到了最右边列，不能再往右了；
+        //3、到了最右下角的元素，这时候要全部结束遍历。
+        if( up ){
+          if( (x-1)>=0 && (y+1)<n ){
+            x--
+            y++
+          }else if( (y+1) < n ){
+            y++
+            up = false
+          }else if( (x+1) < m ){
+            x++
+            up = false
+          }else{
+            break
+          }
+        }else{
+          // 往左下，行在加，列在减，有三种情况停止左下：
+          // 1、到了第一列，不能在往左了；
+          // 2、到了最下边的行，不能再往下了；
+          // 3、到了最右下角的元素，这时候要全部结束遍历。
+          if ( (x+1) < m && (y-1) >= 0 ) {
+              x++
+              y--
+          } else if ( (x+1) < m ) {
+              x++
+              up = true;
+          } else if ( (y+1) <n ) {
+              y++
+              up = true
+          } else break
+        }
+      }
+      // console.log(arr)
+      return arr
+    }
+    findDiagonalOrder([[1,2,3],[4,5,6],[7,8,9]])  //[1,2,4,7,5,3,6,8,9]
+
+
+  //387. 字符串中的第一个唯一字符
+    var firstUniqChar = function(s) {
+      var map = {}
+      /*
+      {
+        a:{
+          count:1,
+          firstIndex:1
+        }
+      }
+      */
+  //方法1
+      // for(var i=0;i<s.length;i++){
+      //   if( s[i] in map){
+      //     map[s[i]].count++
+      //   }else{
+      //     map[s[i]] = {
+      //       count:1,
+      //       firstIndex:i,
+      //     }
+      //   }
+      // }
+      // for(var char in map){
+      //   var charInfo = map[char]
+      //   if(charInfo.count === 1){
+      //     return charInfo.firstIndex
+      //   }
+      // }
+  //方法2
+      for(var i=0;i<s.length;i++){
+        if( s[i] in map ){
+          map[s[i]]++
+        }else{
+          map[s[i]] = 1
+        }
+      }
+      for(var i=0;i<s.length;i++){
+        if( map[s[i]]===1 ){
+          return i
+        }
+      }
+
+      return -1
+
+    }
+
+
+
+    var addDigits = function(num) {
+
+  //     var sum = 0
+  // debugger
+  //     if( num < 10 ){
+  //       return num
+  //     }
+  //     do{
+  //       sum = 0
+  //       while(num>0){
+  //         var digit = num % 10
+  //         var num = (num - digit) / 10
+  //         sum = sum + digit
+  //       }
+  //       num = sum
+  //     }while( sum >= 10 )
+
+  //     console.log(sum)
+  //     return sum
+
+     if(num == 0){
+      return 0
+     }
+     var sum = num%9
+     if(sum == 0){
+      return 9
+     }else{
+      return sum
+     }
+
+
+
+    }
+    addDigits(19)
+
+
+    var intersect = function(nums1, nums2) {
+      // debugger
+      var l1 = nums1.length
+      var l2 = nums2.length
+
+    }
+    intersect([1,2,2,1],[2])  //[2]
+    intersect([1,2,2,1],[2,2])  //[2]
+    intersect([2,1],[1,2])  //[1,2]
+
+
+
+    var deleteNode = function(node,n) {
+      var p = node
+      var a = 100
+      console.log(111)
+
+
+      if( p.next.value == n ){
+
+      }
+    }
+
+    var mergeTwoLists = function(l1, l2) {
+      var head = new ListNode(0)
+      var preNode = head
+
+      while( l1 && l2 ){
+        if( l1.val <= l2.val ){
+          preNode.next = l1
+          l1 = l1.next
+        }else{
+          preNode.next = l2
+          l2 = l2.next
+        }
+        preNode = preNode.next
+      }
+
+      if(l1){
+        preNode.next = l1
+      }else if( l2 ){
+        preNode.next = l2
+      }
+
+      return head.next
+  }
+
+    var intersect = function(nums1, nums2) {
+      var result = []
+
+      for(var i=0;i<nums1.length;i++){
+        for(var j=0;j<nums2.length;j++){
+
+          if( nums1[i] == nums2[j] ) {
+            result.push(nums1[i])
+
+            nums1.splice(i,1)
+            nums2.splice(j,1)
+
+            i--
+            break
+          }
+
+        }
+      }
+      // console.log(result.sort())
+      return result.sort()
+    }
+    intersect([1,2,2,1],[2,2])  //[2,2]
+    intersect([2,1],[1,2])   //[1,2]
+    intersect([1,2,2,1],[2])    //2
+
+
+
+    var containsNearbyDuplicate = function(nums, k) {
+      var l = nums.length
+      var result = []
+      var j = -1
+      // debugger
+      for(var i=0; i<l; i++){
+        if( result.indexOf(nums[i]) == -1 ){
+
+          result.push(nums[i])
+
+        }else if( j != -1){
+
+          if( nums[i] == nums[j] ){
+            if( Math.abs(i-j) <= k ){
+              return true
+            }else{
+              j = i
+            }
+          }
+
+        }else{
+          var j = result.indexOf(nums[i])
+
+          if( nums[i] == nums[j] ){
+            if( Math.abs(i-j) <= k ){
+              return true
+            }else{
+              j = i
+            }
+          }
+        }
+
+      }
+      return false
+    }
+    containsNearbyDuplicate([1,2,3,1],3)   //true
+    containsNearbyDuplicate([1,0,1,1],1)   //true
+    containsNearbyDuplicate([1,2,3,1,2,3],2)  //false
+
+    var findComplement = function(num) {
+      var num1 = num.toString(2)
+      var result = ''
+      for(var i of num1){
+
+        result +=  i == '1'?  '0': '1';
+
+      }
+
+      return parseInt(result,2)
+
+
+    }
+    findComplement(5)
+
+
+    var reverseWords = function(s) {
+      var arr = s.split(' ')
+      var result = []
+      for(var i=0;i<arr.length;i++){
+        result.push(arr[i].split('').reverse().join(''))
+      }
+      // console.log(result)
+      return result.join(' ')
+    }
+    reverseWords("Let's take LeetCode contest")
+
+
+    var majorityElement = function(nums) {
+      var arr = []
+      var n2 = nums/2
+      var count = 0
+      for(var i=0;i<nums.length;i++){
+        if( !arr.includes(nums[i]) ){
+
+        }else{
+          count++
+        }
+      }
+      arr.filter(function(){
+        if( arr.count > n2 ){
+          return arr.values
+        }
+      })
+    }
+
+
+    majorityElement([3,2,3])  //3
+
+  var canConstruct = function(ransomNote, magazine) {
+
+  }
+
+  function isUpperCase(letter){
+    return letter >= 'A' && letter <= 'Z'
+  }
+  function isLowerCase(letter){
+    return letter >= 'a' && letter <= 'z'
+  }
+
+  var judgeSquareSum = function(c) {
+    if( c<=1 ){
+      // console.log(true)
+      return true
+    }
+    if( Math.sqrt(c)%1 == 0 ){
+      // console.log(true)
+      return true
+    }
+
+    var i = 1
+    var j = Math.ceil(Math.sqrt(c))
+// debugger
+
+
+    while( i <= j ){
+      if( i**2+j**2 > c ){
+        j--
+      }else if( i**2+j**2 < c ){
+        i++
+      }else{
+        // console.log(true)
+        return true
+      }
+    }
+    // console.log(false)
+    return false
+
+  }
+  // judgeSquareSum(5)
+  // judgeSquareSum(67)
+  // judgeSquareSum(33)
+  judgeSquareSum(4)
+  judgeSquareSum(1)
+  judgeSquareSum(2)
+
+  var findShortestSubArray = function(nums) {
+    // debugger
+    var map = {}
+    //记录每个数字出现次数，以及第一次出现的index和最后一次出现的index
+    for(var i=0;i<nums.length;i++){
+      if( nums[i] in map ){
+        map[nums[i]].count++
+        map[nums[i]].lastIndex = i
+      }else{
+        map[nums[i]] = {
+          count:1,
+          firstIndex:i,
+          lastIndex:i,
+        }
+      }
+    }
+
+    //遍历对象，找出count次数最多，并且最后一次出现和第一次出现距离最短的数组
+    var keys = Object.keys(map)
+    var maxNum = 0
+    var maxEle
+    var result = Infinity
+
+    for( var i=0;i<keys.length;i++ ){
+      if( map[keys[i]].count > maxNum){
+
+        maxNum = map[keys[i]].count
+        maxEle = keys[i]
+        result = map[keys[i]].lastIndex - map[keys[i]].firstIndex
+
+
+      }else if(map[keys[i]].count == maxNum){
+
+        if( map[keys[i]].lastIndex - map[keys[i]].firstIndex < result ){
+          maxEle = keys[i]
+          result = map[keys[i]].lastIndex - map[keys[i]].firstIndex
+        }
+
+      }
+    }
+    // console.log(map[maxEle])
+    // console.log(map[maxEle].lastIndex - map[maxEle].firstIndex + 1)
+    return map[maxEle].lastIndex - map[maxEle].firstIndex + 1
+
+
+
+
+  }
+  findShortestSubArray([1,2,2,3,1])    //2
+  findShortestSubArray([2,3,0,6,8,2,2,3,3,5,6,2,3,5])    //12
+  findShortestSubArray([0])   //1
+  findShortestSubArray([1,1,1,1,1])   //5
+  findShortestSubArray([1,2,2,3,1,4,2])   //6
+  findShortestSubArray([1,3,2,2,3,1])   //2
+
+  var rob = function(nums) {
+    var sumA = 0
+    var sumB = 0
+// debugger
+    for(var i=0;i<nums.length;i++){
+      if( i%2 == 0 ){
+        sumA = Math.max( sumA+nums[i],sumB )
+      }else{
+        sumB = Math.max( sumA,sumB+nums[i] )
+      }
+    }
+    return Math.max(sumA,sumB)
+  }
+
+  rob([1,2,3,1])
+  rob([2,7,9,3,1])
+  rob([2,1,1,2])
+  rob([1,2])
+
+
+
+  var findRestaurant = function(list1, list2) {
+    var map = {}
+  // debugger
+    for(var i=0;i<list1.length;i++){
+      if( list2.includes( list1[i] ) ){
+        map[list1[i]] = {
+          val:list1[i],
+          index:i,
+        }
+      }
+    }
+
+    for(var i=0;i<list2.length;i++){
+      if( list1.includes( list2[i] ) ){
+        if( list2[i] in map ){
+          map[list2[i]].index += i
+        }else{
+          map[list2[i]] = {
+            val:list2[i],
+            index:i,
+          }
+        }
+      }
+    }
+
+    //找出index数字最小的项
+    var minIndex = Infinity
+    for(var char in map){
+      var charInfo = map[char]
+
+      if( charInfo.index < minIndex ){
+        minIndex = charInfo.index
+        var result = []
+        result.push(charInfo.val)
+      }else if( charInfo.index == minIndex ){
+        result.push(charInfo.val)
+      }
+    }
+    // console.log(result)
+    return result
+
+  }
+  findRestaurant(["Shogun","Tapioca Express","Burger King","KFC"],["KFC","Burger King","Tapioca Express","Shogun"])
+
+
+  var maxProfit = function(prices) {
+    var result = 0
+    for(var i=0;i<prices.length;i++){
+      for(var j=i+1;j<prices.length;j++){
+        if( prices[j] - prices[i] > result ){
+          result = prices[j] - prices[i]
+        }
+      }
+    }
+    return result
+  }
+  maxProfit([7,6,4,3,1])
+
+  var dominantIndex = function(nums) {
+    // debugger
+      var max = 0
+      var maxIndex
+      for(var i=0;i<nums.length;i++){
+        if(nums[i] > max){
+          max = nums[i]
+          maxIndex = i
+        }
+      }
+      nums.splice(maxIndex,1)
+
+      var secondMax = 0
+      for(var i=0;i<nums.length;i++){
+        if(nums[i] > secondMax){
+          secondMax = nums[i]
+        }
+      }
+
+      if( max >= secondMax*2 ){
+        return maxIndex
+      }else{
+        return -1
+      }
+  };
+  dominantIndex([0,0,2,3])
+
+  var findContentChildren = function(g, s) {
+    // debugger
+    g.sort(function(a,b){return a - b})
+    s.sort(function(a,b){return a - b})
+
+    var result = 0
+    s.forEach(function( n ){
+      if( n >= g[result] ){
+        result++
+      }
+    })
+    return result
+  };
+  findContentChildren([10,9,8,7],[5,6,7,8])
+
+  var titleToNumber = function(s) {
+    var result = 0
+    var ary = []
+    // debugger
+    for(var i=s.length-1;i>=0;i--){
+      ary.push(s[i])
+    }
+    for(var i=0;i<ary.length;i++){
+
+      result += 26**i * (ary[i].charCodeAt() - 64)
+    }
+    return result
+  };
+  titleToNumber("ZYA")
+
+  var convertToTitle = function(n) {
+    var keys = ['Z','A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y']
+    var digit
+    var result = ''
+// debugger
+    while (n > 0) {
+        digit = n % 26
+        result = keys[digit] + result
+        n = Math.floor((n - 1) / 26)
+    }
+    return result
+
+  }
+  convertToTitle(18227)
+
+
+  var merge = function(nums1, m, nums2, n) {
+    // debugger
+    nums1.splice(m,m)
+    nums2.splice(n,n)
+
+    nums1 = nums1.concat(nums2)
+    nums1.sort((a,b) => a-b)
+    // console.log(nums1)
+  }
+  merge([1,2,3,0,0,0],3,[2,5,6],3)
+
+
+  var ary = [1,2,3,4]
+  function average(result,item,index,ary){
+    // debugger
+    if(item == ary[ary.length-1]){
+      result += item
+      return result/ary.length
+    }
+    result += item
+    return result
+  }
+
+  ary.reduce(average)
+
+
+
+  var maximumProduct = function(nums) {
+    // debugger
+    var result = 1
+    var max = [nums[0],nums[1],nums[2]]
+
+    for(var i=0;i<nums.length;i++){
+
+      var max = max.map(a => Math.abs(a))
+      var minNum = Math.min(max[0],max[1],max[2])
+      var minIndex = max.indexOf(minNum)
+
+
+      if( nums[i] > minNum ){
+        max[minIndex] = nums[i]
+      }
+    }
+
+    for(var i=0;i<max.length;i++){
+      result *= max[i]
+    }
+    return result
+
+  }
+  maximumProduct([-4,-3,-2,-1,60])
+
+
+  var isAnagram = function(s, t) {
+    // debugger
+    if(t.length != s.length)
+        return false;
+    let array = [];
+    array.length = 26;
+    array.fill(0);
+    for(let i = 0; i < s.length; i++) {
+        array[s.charCodeAt(i)-97]++;
+        array[t.charCodeAt(i)-97]--;
+    }
+    for(let i = 0; i < array.length; i++) {
+        if(array[i] > 0)
+            return false;
+    }
+    return true;
+  }
+  isAnagram("","")
+  </script>
+

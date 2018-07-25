@@ -1,0 +1,122 @@
+<script>
+
+  function array2tree(ary,rootIndex = 0){
+    if( ary[rootIndex] == null ){
+      return null
+    }
+    return {
+      val:ary[rootIndex],
+      left:array2tree(ary,rootIndex * 2 + 1),
+      right:array2tree(ary,rootIndex * 2 + 2),
+    }
+
+  }
+
+  function unary(fn){
+    return function(...arg){
+      return fn(...arg)
+    }
+  }
+
+  var tree2array = unary(function tree2array(rootNode,rootIndex = 0,result = []){
+    if(!rootNode){
+      return result
+    }
+
+    result[rootIndex] = rootNode.val
+
+    var leftRootIndex = rootIndex * 2 + 1
+    var rightRootIndex = rootIndex * 2 + 2
+
+    tree2array(rootNode.left,leftRootIndex,result)
+    tree2array(rootNode.right,rightRootIndex,result)
+
+    return result
+  })
+
+  function condensedArray2tree(ary){
+    if( ary.length == 0 ){
+      return null
+    }
+
+    var queue = []
+    var root = {
+      val:ary[0],
+      left:null,
+      right:null,
+    }
+    queue.push(node)
+    var node
+
+    for(var i=1;i<ary.length;i++){
+      node = queue.shift()
+
+      if( ary[i] != null ){
+        node.left = {
+          val:ary[i],
+          left:null,
+          right:null,
+        }
+        queue.push(node.left)
+      }
+      i++
+      if( ary[i] != null ){
+        node.right = {
+          val:ary[i],
+          left:null,
+          right:null,
+        }
+        queue.push(node.right)
+      }
+    }
+    return root
+  }
+
+  function tree2CondensedArray(root){
+    if(!root){
+      return []
+    }
+    var result = [root.val]
+    var queue = [root]
+    var node
+
+    while( node = queue.shift() ){
+
+      if( node.left != null ){
+        result.push(node.left.val)
+        queue.push(node.left)
+      }else{
+        result.push(null)
+      }
+
+      if( node.right != null ){
+        result.push(node.right.val)
+        queue.push(node.right)
+      }else{
+        result.push(null)
+      }
+    }
+
+    return result
+
+
+  }
+
+
+  var t1 = array2tree([1,3,2,5])
+  var t2 = array2tree([2,1,3,null,4,null,7])
+
+
+  var mergeTrees = function(t1, t2) {
+    console.log(t1.val+t2.valk)
+    var t3 = TreeNode(t1.val+t2.val)
+    console.log(t3)
+
+  }
+  mergeTrees(t1,t2)
+  function TreeNode(val){
+    this.val = val
+    this.left = this.right = null
+  }
+
+</script>

@@ -1,0 +1,99 @@
+<script>
+  var protoRibbit = {
+    speak:function(line){
+      // console.log('the ' + this.type + " rabbit says '" + line + "'")
+    }
+  }
+
+  var killerRibbit = Object.create(protoRibbit)
+  killerRibbit.type = "killer"
+  killerRibbit.speak('SKREEEE!')
+
+
+
+  // function Person(name,age,job){
+  //   this.name = name
+  //   this.age = age
+  //   this.job = job
+
+  //   this.sayName = sayName
+  // }
+  // // Person.prototype.sayName = function(){
+  // //   console.log(this.name)
+  // // }
+  // function sayName(){
+  //   console.log(this.name)
+  // }
+
+
+  function Person(){
+
+  }
+  Person.prototype.name = 'aaa'
+  Person.prototype.sayName = function(){
+    // console.log(this.name)
+  }
+
+  var p1 = new Person()
+  p1.sayName()
+  var p2 = new Person()
+  p2.name = 'bbb'
+  p2.sayName()
+
+
+
+// 判断实例上是否存在属性
+//   p1.hasOwnProperty.('属性')
+// 判断原型上是否存在属性
+//   hasPrototypeProperty(Person,'属性')
+
+// 判断是否可以通过对象访问到属性，无论实例或原型
+//   '属性' in p1
+
+// 得到所有实例的属性
+//   Object.getOwnPropertyNames(p2.__proto__)    //["constructor", "name", "sayName"]
+
+//   Object.keys(p2.__proto__)   //["name", "sayName"]
+
+// 判断原型和实例之间的关系
+//   p1 instanceof Person   //true,p1是person的实例
+
+//   Object.prototype.isPrototypeOf(p1)   //true,p1是Object.prototype的实例
+
+
+
+function SuperType(name){
+  this.name = name
+  this.colors = ['red','blue','green']
+}
+SuperType.prototype.sayName = function(){
+  console.log(this.name)
+}
+
+function SubType(name, age){
+  SuperType.call(this, name)
+  this.age = age
+}
+
+SubType.prototype = new SuperType()
+SubType.prototype.constructor = SubType
+SubType.prototype.sayAge = function(){
+  console.log(this.age)
+}
+
+var instance1 = new SubType('aaa',1)
+instance1.colors.push('black')
+console.log(instance1.colors)
+instance1.sayName()
+instance1.sayAge()
+
+
+var instance1 = new SubType('bbb',2)
+console.log(instance1.colors)
+instance1.sayName()
+instance1.sayAge()
+
+
+
+
+</script>

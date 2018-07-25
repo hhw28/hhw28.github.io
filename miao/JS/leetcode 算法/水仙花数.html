@@ -1,0 +1,44 @@
+<script>
+  function numberWidth(n){
+
+    var width = 0
+
+    do{
+      var digit = n % 10
+      width++
+      n = ( n - digit ) / 10
+    }while(n>0)
+
+    return width
+  }
+
+  function isWaterFlower(n){
+
+    var width = numberWidth(n)
+    var sum = 0
+    var num = n
+
+    for(var i=0;i<width;i++){
+      var digit = n % 10
+      sum = sum + Math.pow(digit,width)
+      n = ( n - digit ) / 10
+
+    }
+
+    if( sum == num ){
+      return true
+    }else{
+      return false
+    }
+  }
+
+  //判断是否为水仙花数
+  isWaterFlower(153)
+
+  //输出100~10000的全部水仙花数
+  for(var i=100;i<10000;i++){
+    if(isWaterFlower(i)){
+      console.log(i)
+    }
+  }
+</script>

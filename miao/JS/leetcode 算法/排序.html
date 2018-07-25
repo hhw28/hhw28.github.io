@@ -1,0 +1,99 @@
+<script>
+function swap(ary,i,j){
+  var tmp = ary[i]
+  ary[i] = ary[j]
+  ary[j] = tmp
+}
+//冒泡排序
+function bubbleSort(ary){
+  for(var i=ary.length-1;i>0;i--){
+    var flag = false
+    for(var j=0;j<i;j++){
+
+      if( ary[j] > ary[j+1] ){
+        swap(ary,j,j+1)
+        flag = true
+      }
+    }
+    if(!flag){
+      return ary
+    }
+  }
+  return ary
+}
+
+
+
+
+
+//选择排序
+function selectSort(ary){
+  // debugger
+
+
+  for(var i=0;i<ary.length-1;i++){
+    var minIndex = i
+    for(var j=i+1;j<ary.length;j++){
+
+      if( ary[j] < ary[minIndex] ){
+        minIndex = j
+      }
+    }
+    swap(ary,i,minIndex)
+  }
+  console.log(ary)
+  return ary
+}
+xxx([3,34,2,5,3,3])
+
+
+//插入排序
+
+
+
+//二叉树排序
+
+// 把val插入到排序树root中
+// 并返回（可能的）新的树根
+function insert(root,val){
+  if(!root){
+    return {
+      val:val,
+      left:null,
+      right:null,
+    }
+  }else{
+    if( val < root.val ){
+      root.left = insert(root.left,val)
+    }else{
+      root.right = insert(root.right,val)
+    }
+    return root
+  }
+}
+function bstSort(ary){
+  var root = null
+  for(var i=0;i<ary.length;i++){
+    root = insert(root,ary[i])
+  }
+
+
+  var i = 0
+  inOrderTraverse(root, val => {
+    ary[i++] = val
+  })
+
+  return ary
+}
+function inOrderTraverse(root, action = console.log) {
+  if (root) {
+    inOrderTraverse(root.left, action)
+    action(root.val)
+    inOrderTraverse(root.right, action)
+  }
+}
+
+
+
+
+</script>

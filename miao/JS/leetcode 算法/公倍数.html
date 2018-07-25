@@ -1,0 +1,49 @@
+<script >
+  var a = Number(prompt('给定两个数，求它们的最小公倍数和最大公约数，请输入第一个数'))
+  var b = Number(prompt('给定两个数，求它们的最小公倍数和最大公约数，请输入第二个数'))
+
+
+  function lowestCommonMultiple(){
+
+  }
+  //最大公约数
+  var max = a > b ? a : b  //条件为真时，选a;条件为假时，选b
+  for(var i=max;i>0;i--){
+    if(a%i==0 && b%i==0){
+      console.log('最大公约数：'+i)
+      console.log('最小公倍数：'+a*b/i) //a*b = 最大公约数*最小公倍数
+      break
+    }
+  }
+  max = i
+
+  //最小公倍数
+  var min = a < b ? a : b
+
+  for(var i=min;;i++){
+    if(i%a==0 && i%b==0){
+      console.log('最小公倍数：'+i)
+      break
+    }
+  }
+
+  for(var i = min ;; i += max ){
+    if(i%a==0 && i%b==0){
+      console.log('最小公倍数：'+i)
+      break
+    }
+  }
+
+ //辗转相除法 求 最大公约数
+  while(!(y==0)){
+    var y = max%min
+    max = min
+    min = y
+    if(y==0){
+      console.log(max)
+      break
+    }
+  }
+
+
+</script>

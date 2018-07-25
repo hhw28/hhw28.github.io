@@ -1,0 +1,65 @@
+<script >
+
+//判断是否为素数
+  function isPrime1(n) {
+    if (n < 2) {
+      return false
+    }
+    if (n == 2 || n == 3) {
+      return true
+    }
+  //素数两性定理
+    if (n % 6 !== 1 && n % 6 !== 5) {
+      return false
+    }
+    var sqrtn = Math.sqrt(n)
+    for(var i = 2; i <= sqrtn; i++) {
+      if (n % i === 0) {
+        return false
+      }
+    }
+    return true
+  }
+//输出数字n以内的素数数量
+  var countPrimes1 = function(n) {
+    var count = 0
+    for(var i=0;i<n;i++){
+      if(isPrime1(i)){
+        count++
+      }
+    }
+    return count
+  }
+
+
+  // countPrimes(100)
+  // countPrimes1(100)
+
+
+
+  var primeList = []
+
+  function isPrime(n) {
+    var sqrtN = Math.sqrt(n)
+
+    for(var i = 0; primeList[i] <= sqrtN; i++) {
+      if (n % primeList[i] === 0) {
+        return false
+      }
+    }
+
+    return true
+  }
+  function countPrimes(n) {
+    var count = 1
+    for(var i = 3; i < n; i+=2) {
+      if (isPrime(i)) {
+        primeList.push(i)
+        count++
+      }
+    }
+    return count
+  }
+
+
+</script>

@@ -1,0 +1,32 @@
+<script>
+var convertToBase7 = function(num) {
+  var result = ''
+  var digit
+
+  if(num<0){
+    var num = Math.abs(num)
+
+    while(num > 0 ){
+      var digit = num % 7
+      result = String.fromCharCode(digit+48) + result
+      var num = (num - digit) / 7
+    }
+    result = '-' + result
+    return result
+  }
+  if(num>0){
+    while (num>0) {
+      digit = num % 7
+      result = String.fromCharCode(digit+48) + result
+      num = (num - digit) / 7
+    }
+    return result
+  }
+  if(num == 0){
+    digit = num % 7
+    result = String.fromCharCode(digit+48) + result
+    num = (num - digit) / 7
+    return result
+  }
+};
+</script>

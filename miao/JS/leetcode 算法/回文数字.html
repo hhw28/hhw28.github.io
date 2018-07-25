@@ -1,0 +1,70 @@
+<script>
+  function numberWidth(n){
+
+    var width = 0
+
+    do{
+      var digit = n % 10
+      width++
+      n = ( n - digit ) / 10
+    }while(n>0)
+
+    return width
+  }
+
+//方法1：把首尾两端的数字分别取出做对比，全部循环一遍数字没有发现不同，说明是回文，不能判断负数
+  function isPalindrom1(n) {
+    var width = numberWidth(n)
+
+    var count = Math.floor(width / 2)
+
+    for (var i = 0; i < count; i++) {
+      var rightNum = parseInt(n / 10 ** i) % 10
+      var leftNum = parseInt(n / 10 ** (width - i - 1)) % 10  //  1234321/10**6= 1.234321
+      if (rightNum != leftNum) {
+        return false
+      }
+    }
+
+    return true
+  }
+
+//方法2：把数字从后面一位位取出，然后拼接后与原数字对比，若一致则为回文
+  function isPalindrom2(n) { //1234
+    if(n < 0 && n > 10){
+      return false
+    }
+    var digit = 0
+    var sum = 0
+    var num = n
+
+    do {
+      digit = n % 10           //末尾数字 4
+      sum = sum * 10 + digit   //把末尾数字*10 > 4*10 + 末尾数字
+      n = (n - digit) / 10
+    } while(n > 0)
+
+    console.log(sum==num)
+    return sum === num
+  }
+  isPalindrom2(-8)
+
+
+//方法3：转成字符串拼接
+  function isPalindrom3(n){
+    // debugger
+    var num = n.toString().split('').reverse().join('')
+    if(num == n){
+      return true
+    }else{
+      return false
+    }
+  }
+
+  isPalindrom3(121)
+  isPalindrom3(-121)
+  isPalindrom3(-1)
+
+
+
+</script>
