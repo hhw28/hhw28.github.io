@@ -208,8 +208,8 @@ window['hhw28'] = {
   initial:function(array){
     return this.slice(array,0,array.length-1)
   },
-  //hhw28.intersection([2,1],[2,3])
-  intersection:function(array){
+  //hhw28.intersection([2,1],[2,3])   //[2]
+  intersection:function(arrays){
 
   },
 
