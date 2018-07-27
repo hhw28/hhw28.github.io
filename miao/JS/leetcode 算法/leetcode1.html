@@ -1415,5 +1415,39 @@
     return true;
   }
   isAnagram("","")
+
+  var reverseWords = function(str) {
+
+    var ary = str.split(' ')
+    var result = ''
+
+    var newAry = ary.filter(element => element!='')
+
+    for(var i=newAry.length-1;i>=0;i--){
+      result += newAry[i]
+
+      if(i!=0){
+        result += ' '
+      }
+    }
+    return result
+  }
+  reverseWords(" 1")
+  reverseWords("   a   b ")
+  reverseWords("the sky is blue")
+
+  var isToeplitzMatrix = function(matrix) {
+    // debugger
+      for(var i=0;i<matrix.length-1;i++){
+        for(var j=0;j<matrix[i].length-1;j++){
+          // console.log(matrix[j][i])
+          if( matrix[i][j] != matrix[i+1][j+1] ){
+            return false
+          }
+        }
+      }
+      return true
+  }
+  isToeplitzMatrix([[1,2,3,4],[5,1,2,3],[9,5,1,2]])
   </script>
 

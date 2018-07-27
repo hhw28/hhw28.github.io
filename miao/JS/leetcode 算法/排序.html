@@ -94,6 +94,29 @@ function inOrderTraverse(root, action = console.log) {
 }
 
 
+//快速排序
+function partition(ary,start = 0,end = ary.length-1){
+  var pivotIndex = ary.length * Math.random() | 0
+  var pivot = ary[pivotIndex]
+
+  swap(ary,pivotIndex,ary.length-1)
+
+  for(var i=-1,j=0;j<ary.length;j++){
+    if(ary[j] <= pivot){
+      i++
+      swap(ary,i,j)
+    }
+  }
+  return ary
+}
+
+
+//归并排序
+function mergeSort(ary){
+  var mid = ary.length / 2 | 0
+  var left = ary.slice(0,mid)
+  var right = ary.slice(mid)
+}
 
 
 </script>

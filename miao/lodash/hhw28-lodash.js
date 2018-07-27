@@ -72,22 +72,6 @@ window['hhw28'] = {
   },
 
 
-  indexOf:function(ary, val, startPos){
-    // if (startPos === undefined) {
-    //   startPos = 0
-    // }
-    startPos = startPos || 0
-    // if (arguments.length === 2) {
-    //   startPos = 0
-    // }
-    for(var i = startPos; i<ary.length;i++) {
-      if (val === ary[i]) {
-        return i
-      }
-    }
-    return -1
-  },
-
   //hhw28.includes([1, 2, 3], 1)   //true
   includes:function(ary,val){
     if (val !== val) {
@@ -209,7 +193,12 @@ window['hhw28'] = {
     return this.slice(array,0,array.length-1)
   },
   //hhw28.intersection([2,1],[2,3])   //[2]
-  intersection:function(arrays){
+  intersection:function(...arrays){
+    let array = []
+    array.push(...arrays)
+    array.reduce(function(){
+
+    },[])
 
   },
 
@@ -226,8 +215,9 @@ window['hhw28'] = {
     return this.sumBy(ary,this.identity)
   },
 
-  sumBy:function(ary,iteratee){
+  sumBy:function(ary, iteratee=hhw28.identity){
     var result = 0
+    iteratee = hhw28.iteratee(iteratee)
     for(var i=0;i<ary.length;i++){
        result += iteratee(ary[i])
     }
@@ -283,10 +273,10 @@ window['hhw28'] = {
     // return this.flattenDepth(ary,1)
 
 //方法4
-    // return [].concat(...ary)
+    return [].concat(...ary)
 
 //方法5
-    return [].concat.apply.bind([].concat,[])
+    // return [].concat.apply.bind([].concat,[])
   },
 
   //hhw28.flattenDeep([1, [2, [3, [4]], 5]])   //[1,2,3,4,5]
@@ -365,8 +355,8 @@ window['hhw28'] = {
   },
   //
   unary:function(fn){
-    return function(...args){
-      return fn(...args)
+    return function(value){
+      return fn(value)
     }
   },
 
@@ -384,4 +374,53 @@ window['hhw28'] = {
 
     // return f => f.apply.bind(f,null)
   },
+
+  //hhw28.join(['a', 'b', 'c'], '~')    //'a~b~c'
+  //hhw28.join([1,2,3],4)     //'14243'
+  join:function(array, separator=','){
+    var str = ''
+    for(var i=0;i<array.length;i++){
+      str += array[i]
+      if(i != array.length - 1){
+        str += separator
+      }
+    }
+    return str
+  },
+
+  //hhw28.last([1,2,3])    //3
+  last:function(array){
+    return array[array.length-1]
+  },
+
+  //hhw28.lastIndexOf([1,2,1,2],2)    //3
+  //hhw28.lastIndexOf([1, 2, 1, 2], 2, 2)    //1
+  //与indexOf类似，区别是从右往左遍历元素，找到第一个值后返回索引值
+  lastIndexOf:function(array, value, fromIndex=array.length-1){
+    for(var i=fromIndex; i>0; i--){
+      if( value === array[i] ){
+        return i
+      }
+    }
+    return -1
+  },
+
+  indexOf:function(ary, val, fromIndex=0){
+    for(var i = fromIndex; i<ary.length;i++) {
+      if (val === ary[i]) {
+        return i
+      }
+    }
+    return -1
+  },
+
+  //hhw28.pull(['a', 'b', 'c', 'a', 'b', 'c'], 'a', 'c')    //['b', 'b']
+  pull: function(array, ...values){
+    var val = [...values]
+    return array.filter(function(element){
+      return val.indexOf(element) == -1
+    })
+  },
+
+
 }

@@ -15,7 +15,6 @@
   //   this.name = name
   //   this.age = age
   //   this.job = job
-
   //   this.sayName = sayName
   // }
   // // Person.prototype.sayName = function(){
@@ -42,23 +41,7 @@
 
 
 
-// 判断实例上是否存在属性
-//   p1.hasOwnProperty.('属性')
-// 判断原型上是否存在属性
-//   hasPrototypeProperty(Person,'属性')
 
-// 判断是否可以通过对象访问到属性，无论实例或原型
-//   '属性' in p1
-
-// 得到所有实例的属性
-//   Object.getOwnPropertyNames(p2.__proto__)    //["constructor", "name", "sayName"]
-
-//   Object.keys(p2.__proto__)   //["name", "sayName"]
-
-// 判断原型和实例之间的关系
-//   p1 instanceof Person   //true,p1是person的实例
-
-//   Object.prototype.isPrototypeOf(p1)   //true,p1是Object.prototype的实例
 
 
 
@@ -67,7 +50,7 @@ function SuperType(name){
   this.colors = ['red','blue','green']
 }
 SuperType.prototype.sayName = function(){
-  console.log(this.name)
+  // console.log(this.name)
 }
 
 function SubType(name, age){
@@ -78,22 +61,163 @@ function SubType(name, age){
 SubType.prototype = new SuperType()
 SubType.prototype.constructor = SubType
 SubType.prototype.sayAge = function(){
-  console.log(this.age)
+  // console.log(this.age)
 }
 
 var instance1 = new SubType('aaa',1)
 instance1.colors.push('black')
-console.log(instance1.colors)
+// console.log(instance1.colors)
 instance1.sayName()
 instance1.sayAge()
 
 
 var instance1 = new SubType('bbb',2)
-console.log(instance1.colors)
+// console.log(instance1.colors)
 instance1.sayName()
 instance1.sayAge()
 
 
+
+// var ary = {
+//   0:1,
+//   1:2,
+//   2:3,
+//   3:4,
+//   _length:4,
+//   get length(){
+//     return this._length
+//   }
+//   set length(l){
+//     if(l < this._length){
+//       for(var i=l;i<this._length;i++){
+//         delete this[i]
+//       }
+//     }
+//     this._length = l
+//   }
+// }
+
+function NEW(F, ...args) {
+  var obj = {}
+  obj.__proto__ = F.prototype
+  var result = F.apply(obj, args)
+  if (!result) {
+    return obj
+  }
+  if (typeof result === 'object') {
+    return result
+  }
+  return obj
+}
+
+function objToString(val){
+  if( val === null ){
+    return '[Object Null]'
+  }
+  if( val === undefined ){
+    return '[Object Undefined]'
+  }
+  return '[Object '+ val.constructor.name + ']'
+
+}
+
+function Vector(x,y){
+  this.x = x
+  this.y = y
+}
+Vector.prototype.plus = function(){
+
+}
+Vector.prototype.minus = function(){
+
+}
+
+
+//行高
+// rows 所有的每行
+// row  一行中所有的单元格
+// row  中每项表示每个单元格 cell
+function rowHeights(rows){
+  return rows.map(function(row){
+    return row.reduce(function(max, cell){
+      return Math.max(max, cell.minHeight())
+    },0)
+  })
+}
+//列宽
+function colWidths(rows){
+  return rows[0].map(function(_, i){
+    return rows.reduce(function(max, row){
+      return Math.max(max, row[i].minWidth())
+    },0)
+  })
+}
+
+function drawTable(rows){
+  var heights = rowHeights(rows)
+  var widths = colWidths(rows)
+
+  function drawLine(blocks, lineNo){
+    return blocks.map(function(block){
+      return block[lineNo]
+    }).join(' ')
+  }
+
+  function drawRow(row, rowNum){
+    var blocks = row.map(function(cell, colNum){
+      return cell.draw(widths[colNum], heights[rowNum])
+    })
+
+    return blocks[0].map(function(_, lineNo){
+      return drawLine(blocks, lineNo)
+    }).join('\n')
+
+    return rows.map(drawRow).join('\n')
+  }
+}
+
+
+function repeat(string, times){
+  var result = ''
+  for(var i=0;i<times;i++){
+    result += string
+  }
+  return result
+}
+
+function TextCell(text){
+  this.text = text.split('\n')
+}
+TextCell.prototype.minWidth = function(){
+  return this.text.reduce(function(width, line){
+    return Math.max(width, line.length)
+  }, 0)
+}
+TextCell.prototype.minHeight = function(){
+  return this.text.length
+}
+TextCell.prototype.draw = function(){
+  var result = []
+  for(var i=0;i<height;i++){
+    var line = this.text[i] || ""
+    result.push(line + repeat(' ', width - line.length))
+  }
+  return result
+}
+
+var rows = []
+for(var i=0;i<5;i++){
+  var row = []
+  for(var j=0;j<5;j++){
+    if( (i+j) % 2 == 0 ){
+      row.push(new TextCell('##'))
+    }else{
+      row.push(new TextCell('  '))
+    }
+  }
+  rows.push(row)
+}
+console.log(drawTable(rows))
 
 
 </script>
