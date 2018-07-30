@@ -422,5 +422,50 @@ window['hhw28'] = {
     })
   },
 
+  //hhw28.reverse([3,2,1])     //[1,2,3]
+  reverse: function(array){
+    var result = []
+    for(var i=array.length-1;i>=0;i--){
+      result.push(array[i])
+    }
+    return result
+  },
 
+  //hhw28.sortedIndex([30,50],40)    //1
+  //hhw28.sortedIndex([1,2,2,2,2,3],2)   //1
+  sortedIndex: function(array, value){
+    for(var i=0;i<array.length;i++){
+      if( array[i] >= value ){
+        return i
+      }
+    }
+  },
+
+  //hhw28.union([2],[1,2],[3,4])    //[2,1,3,4]
+  union: function(...arrays){
+    var result = []
+    for(var i=0;i<arrays.length;i++){
+      for(var j=0;j<arrays[i].length;j++){
+        if( result.indexOf(arrays[i][j]) == -1 ){
+          result.push(arrays[i][j])
+        }
+      }
+    }
+    return result
+  },
+
+  uniq: function(array){
+    var result = []
+    for(var i=0;i<array.length;i++){
+      if( result.indexOf(array[i]) == -1 ){
+        result.push(array[i])
+      }
+    }
+    return result
+  },
+
+
+  map: function(){
+
+  }
 }
