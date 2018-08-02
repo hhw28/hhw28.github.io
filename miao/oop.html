@@ -1,0 +1,202 @@
+<script>
+
+  //var m = new Map([['Michael', 95], ['Bob', 75], ['Tracy', 85]])
+
+
+
+
+  var MyMap = (function(){
+    var MyMap = function(array){
+      if( !array instanceof Array ){
+        throw new Error('argument is not a array')
+      }
+      this._keys = []
+      this._values = []
+
+      for(var index in array){
+        this._keys.push(array[index][0])
+        this._values.push(array[index][1])
+      }
+    }
+    MyMap.prototype.get = function(key){
+
+    }
+    MyMap.prototype.set = function(key, value){
+      var index = this._keys.indexOf(key)
+      if( index != -1 ){
+        this._keys.push(key)
+        this._values.push(value)
+      }
+    }
+
+    return MyMap
+  }())
+
+  var m = new MyMap([[1,2],[1,3],[2,3]])
+  console.log(m)
+
+  // var MyMap = function(array){
+  //   //debugger
+  //   this.obj = {}
+  //   for(var index in array ){
+  //     this.obj[array[index][0]] = array[index][1]
+  //   }
+  // }
+  // MyMap.prototype = {
+  //   clear: function(){
+  //     this.obj = {}
+  //   },
+  //   delete: function(key){
+  //     for(var index in this.obj){
+  //       if( index == key ){
+  //         delete this.obj[index]
+  //       }
+  //     }
+  //   },
+  //   entries: function(){
+  //     return MyMapIterator = this.obj
+  //   },
+  //   forEach: function(callbackFn){
+
+  //   },
+  //   get: function(key){
+  //     for(var index in this.obj){
+  //       if( index == key ){
+  //         return this.obj[index]
+  //       }
+  //     }
+  //     return undefined
+  //   },
+  //   has: function(key){
+  //     for(var index in this.obj){
+  //       if(index == key){
+  //         return true
+  //       }
+  //     }
+  //     return false
+  //   },
+  //   keys: function(){
+  //     var MyMapIterator = {}
+  //     for(var index in this.obj){
+  //       MyMapIterator[index] = index
+  //     }
+  //     return MyMapIterator
+  //   },
+  //   set: function(key, value){
+  //     for(var index in this.obj){
+  //       if(index == key){
+  //         this.obj[index] = value
+  //       }
+  //     }
+  //     this.obj[key] = value
+  //     return this.obj
+  //   },
+  //   value: function(){
+  //     var MyMapIterator = {}
+  //     for(var index in this.obj){
+  //       MyMapIterator[this.obj[index]] = this.obj[index]
+  //     }
+  //     return MyMapIterator
+  //   }
+  // }
+
+
+
+
+  var MySet = function(array){
+    if( !array instanceof Array ){
+      return new Error('arguments is not a array')
+    }
+    this.values = []
+    for(var index in array){
+      this.add(index)
+    }
+  }
+  MySet.prototype.add = function(value){
+    if(this.values.indexOf(value) == -1){
+      this.values.push(value)
+    }
+    return this.values
+  }
+  var s = new MySet(['a','b'])
+  console.log(s)
+
+  // var MySet = function(value){
+  //   this.obj = {}
+  //   if(value instanceof Array){
+  //     for(var i=0;i<value.length;i++){
+  //       this.obj[value[i]] = value[i]
+  //     }
+  //   }else{
+  //     this.obj[value] = value
+  //   }
+  // }
+  // MySet.prototype = {
+  //   add: function(value){
+  //     if(!this.has(value)){
+  //       this.obj[value] = value
+  //     }
+  //   },
+  //   clear: function(){
+  //     this.obj = {}
+  //   },
+  //   delete: function(value){
+  //     for(var index in this.obj){
+  //       if(index == value){
+  //         delete this.obj[index]
+  //       }
+  //     }
+  //   },
+  //   entries: function(){
+
+  //   },
+  //   forEach: function(callbackFn){
+
+  //   },
+  //   has: function(value){
+  //     for(var index in this.obj){
+  //       if( index === value ){
+  //         return true
+  //       }
+  //     }
+  //     return false
+  //   },
+  //   values: function(){
+
+  //   },
+  // }
+
+
+
+
+  var MyArray = function(...arg){
+//debugger
+    if(arg.length == 0){
+      return []
+    }
+    this.arr = [...arg][0]
+    this.length = this.arr.length
+    return this.arr
+  }
+  MyArray.prototype = {
+    splice: function(start=0, deleteCount=this.length-start, ...arg){
+      this.arr.reduce(function(result, item, index){
+        if( index > start && index < deleteCount ){
+          return result.push(item)
+        }else{
+          if(arg.length != 0){
+            return result.push(...arg)
+          }
+        }
+      },[])
+    },
+    concat: function(){
+      var ary = []
+      return ary.push(this.arr)
+    },
+  }
+
+
+  var a = new MyArray([1,2,3,4])
+  var b = new MyArray([1,2,2])
+</script>

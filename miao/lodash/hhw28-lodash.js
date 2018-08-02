@@ -194,11 +194,6 @@ window['hhw28'] = {
   },
   //hhw28.intersection([2,1],[2,3])   //[2]
   intersection:function(...arrays){
-    let array = []
-    array.push(...arrays)
-    array.reduce(function(){
-
-    },[])
 
   },
 
@@ -320,7 +315,7 @@ window['hhw28'] = {
   //hhw28.ceil(4.006)  //5
   //hhw28.ceil(6.004,2)  //6.01
   //hhw28.ceil(6040)  //6100
-  ceil:function(number,precision=0){
+  ceil:function(number, precision=0){
 
   },
 
@@ -464,8 +459,60 @@ window['hhw28'] = {
     return result
   },
 
+  //hhw28.zip(['a', 'b'], [1, 2], [true, false])    //[['a', 1, true], ['b', 2, false]]
+  zip: function(...arrays){
+    // debugger
+    var result = []
+    for(var i=0;i<arguments[i].length;i++){
+      var ary = []
+      for(var j=0;j<arguments.length;j++){
+        ary.push(arguments[j][i])
+      }
+      result.push(ary)
+    }
+    return result
+  },
 
-  map: function(){
+  //hhw28.unzip([['a', 1, true], ['b', 2, false]])    //['a', 'b'], [1, 2], [true, false]
+  unzip: function(array){
+    // debugger
+    var result = []
+    for(var i=0;i<array[0].length;i++){
+      var ary = []
+      for(var j=0;j<array.length;j++){
+        ary.push(array[j][i])
+      }
+      result.push(ary)
+    }
+    return result
+  },
 
-  }
+  //hhw28.without([2, 1, 2, 3], 1, 2)    //[3]
+  without: function(array, ...values){
+    return array.filter(function(item){
+       return !values.includes(item)
+    })
+  },
+
+  //hhw28.xor([2, 1], [2, 3])    //[1,3]
+  //hhw28.xor([1,2,3,4], [2,3,4,5],[5,8])    //[1,8]
+  xor: function(...arrays){
+    var ary = [].concat(...arrays)
+
+    return ary.reduce(function(result, item){
+      var index = result.indexOf(item)
+      if( index == -1 ){
+        result.push(item)
+      }else{
+        result.splice(index,1)
+      }
+      return result
+    },[])
+  },
+
+  cloneDeep: function(obj){
+    // return Object.assign({}, obj)
+
+    return JSON.parse(JSON.stringify(obj))
+  },
 }
