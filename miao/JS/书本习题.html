@@ -110,7 +110,30 @@
 
     //8-1
     function primitiveMultiply(a,b){
-        return a*b
+        if(Math.random()>0.5){
+            return a*b
+        }else{
+            throw new MultiplicatorUnitFailure('xxx')
+        }
+    }
+    class MultiplicatorUnitFailure extends Error{
+        constructor(msg){
+            super(msg)
+        }
+    }
+    function multiply(a,b){
+        while(true){
+            try{
+                return primitiveMultiply(a, b)
+            }catch(e){
+                if(e instanceof MultiplicatorUnitFailure){
+                    continue
+                }else{
+                    throw e
+                }
+            }
+        }
+
     }
     function assert(test,message){
 

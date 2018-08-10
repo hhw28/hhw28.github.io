@@ -1,0 +1,25 @@
+<script>
+
+  var d = 0
+
+  function describe(text, f) {
+    // debugger
+    d++
+    console.log(' '.repeat(d * 2) + text)
+    f()
+    d--
+  }
+
+  describe('foo', function FOO() {
+    describe('bar', function FOO() {
+      describe('a', function FOO() {
+        describe('a.a', function FOO() {})
+      })
+      describe('b', function FOO() {})
+    })
+    describe('baz', function FOO() {
+      describe('aa', function FOO() {})
+      describe('bb', function FOO() {})
+    })
+  })
+</script>

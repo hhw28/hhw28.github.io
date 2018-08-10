@@ -1449,5 +1449,277 @@
       return true
   }
   isToeplitzMatrix([[1,2,3,4],[5,1,2,3],[9,5,1,2]])
+
+
+  var nextGreaterElement = function(findNums, nums) {
+    // debugger
+    var result = []
+    for(var i=0;i<findNums.length;i++){
+        var index = nums.indexOf(findNums[i])
+
+        for(var j=index;j<nums.length;j++){
+
+          if(findNums[i] < nums[j]){
+            result.push(nums[j])
+            break
+          }
+        }
+        if(j == nums.length){
+          result.push(-1)
+        }
+    }
+    return result
+  };
+  nextGreaterElement([4,1,2],[1,3,4,2])
+
+  var nextGreatestLetter = function(letters, target) {
+    // debugger
+    if(target === 'z'){
+       return letters[0]
+       }
+    var target = target.charCodeAt()
+    for(var i=0;i<letters.length;i++){
+      if(target < letters[i].charCodeAt()){
+        return letters[i]
+      }else if(target == letters[i].charCodeAt()){
+        if(i == letters.length-1){
+          return letters[0]
+        }else{
+          return letters[i+1]
+        }
+      }
+    }
+  }
+  nextGreatestLetter(["c","f","j"],"j")
+
+
+  var generate = function(numRows) {
+    var result = []
+    for(var i=0;i<numRows;i++){
+      var ary = []
+      for(var j=0;j<=i;j++){
+        if(j==0){
+          ary.push(1)
+        }else if(j==i){
+          ary.push(1)
+        }else{
+          var a = result[i-1][j-1] + result[i-1][j]
+          ary.push(a)
+        }
+      }
+      result.push(ary)
+    }
+    return result
+  }
+  generate(5)
+
+  var findDuplicates = function(nums) {
+// debugger
+    var result = []
+    var l = nums.length
+    for(var i=0;i<l;i++){
+        var a = nums.shift()
+        if( nums.includes(a)){
+          result.push(a)
+        }
+    }
+    return result
+  }
+  findDuplicates([10,2,5,10,9,1,1,4,3,7])
+
+  var countSegments = function(s) {
+    return s.split(' ').filter(x => x.length>0).length
+  }
+  countSegments("Hello, my name is John")   //5
+  countSegments("the world,   ")    //2
+  countSegments("world,")    //1
+  countSegments(" world,   ")    //1
+  countSegments("wor'ld")    //1
+  countSegments("     ")    //0
+  countSegments("......avv123go")  //1
+
+
+  var repeatedSubstringPattern = function(str) {
+    var len = str.length;
+    var half = Math.floor(len / 2);
+    for(var i = 1; i <= half; i ++){
+        if(len % i !== 0){
+            continue;
+        }
+        var cur = str.substr(0, i);
+        var flag = true;
+        for(var j = i; j <= len - i; j += i){
+            if(str.substr(j, i) !== cur){
+                flag = false;
+                break;
+            }
+        }
+        if(flag){
+            return true;
+        }
+    }
+    return false;
+  };
+  repeatedSubstringPattern("abcabcabcabc")
+
+  var reverseVowels = function(s) {
+    // debugger
+    var str = ''
+      for(var i=0;i<s.length;i++){
+        if(s[i] == 'a' || s[i] == 'e' || s[i] == 'i' || s[i] == 'o' || s[i] == 'u' || s[i] == 'A' || s[i] == 'E' || s[i] == 'I' || s[i] == 'O' || s[i] == 'U'){
+          str += s[i]
+        }
+      }
+    var result = ''
+    var count = str.length-1
+      for(var i=0;i<s.length;i++){
+
+        if(s[i] == 'a' || s[i] == 'e' || s[i] == 'i' || s[i] == 'o' || s[i] == 'u' || s[i] == 'A' || s[i] == 'E' || s[i] == 'I' || s[i] == 'O' || s[i] == 'U'){
+          result += str[count--]
+        }else{
+          result += s[i]
+        }
+      }
+      return result
+  }
+  reverseVowels('aA')
+
+  var rotateString = function(A, B) {
+    // debugger
+    var ary = A.split('')
+    for(var i=0;i<A.length;i++){
+
+      var n = ary.shift()
+      ary.push(n)
+      ary = ary.join('')
+      if(ary == B){
+        return true
+      }
+      ary = ary.split('')
+    }
+    return false
+  }
+  rotateString("abcde","cdeab")
+
+  var shortestToChar = function(S, C) {
+
+    var result = []
+      var ary = []
+      for(var i=0;i<S.length;i++){
+        if(S[i] == C){
+          ary.push(i)
+        }
+      }
+
+      for(var i=0;i<S.length;i++){
+        var min = Infinity
+        for(var j=0;j<ary.length;j++){
+          var n = Math.abs(i - ary[j])
+          if( n<min ){
+            min = n
+          }
+        }
+        result.push(min)
+      }
+    return result
+  }
+  shortestToChar("loveleetcode","e")
+
+
+  var findPoisonedDuration = function(timeSeries, duration) {
+
+    var result = 0
+    for(var i=0;i<timeSeries.length;i++){
+      if( i == timeSeries.length-1){
+
+        return result += duration
+      }
+
+      if( timeSeries[i+1] - timeSeries[i] >= duration){
+        result += duration
+      }else{
+        result += timeSeries[i+1]-timeSeries[i]
+      }
+    }
+}
+findPoisonedDuration([1,4,5],5)
+
+
+  var restoreIpAddresses = function(s, nums=[], idx=0, result=[]){
+// debugger
+    if (nums.length === 4 ) {
+      if(idx === s.length){
+        result.push(nums.join('.'))
+      }
+      return result
+    }
+
+    for (let i = idx; i < s.length; i++) {
+      if (i !== idx && s[idx] === '0'){
+        return result
+      }
+      var num = parseInt(s.slice(idx, i+1))
+      if (num > 255) {
+        return result
+      }
+      nums.push(num)
+      restoreIpAddresses(s, nums, i+1, result)
+      nums.pop()
+    }
+
+    return result
+
+  }
+  restoreIpAddresses("25525511135")
+  restoreIpAddresses('010010')
+
+  var nextGreaterElements = function(nums) {
+    // debugger
+  var result = []
+  var flag
+
+    for(var i=0;i<nums.length;i++){
+      flag = false
+      var j = i+1
+
+      while(j !== i){
+        if( j >= nums.length){
+          j = 0
+          if( j === i){
+            break
+          }
+        }
+        if( nums[i] < nums[j]){
+          result.push(nums[j])
+          flag = true
+          break
+        }
+        j++
+      }
+      if(flag){
+        continue
+      }
+      result.push(-1)
+    }
+  return result
+};
+nextGreaterElements([5,4,3,2,1])
+
+
+
+
+function letterCasePermutation(S, i=0, str='', result=[]){
+    if (i === S.length) {
+        result.push(str)
+        return
+    }
+    letterCasePermutation(S, i+1, str + S[i].toLowerCase(), result)
+    if( /[a-zA-Z]/.test(S[i]) ){
+      letterCasePermutation(S, i+1, str + S[i].toUpperCase(), result)
+    }
+    return result
+}
+letterCasePermutation("a1b1")
+
   </script>
 

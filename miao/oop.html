@@ -1,5 +1,16 @@
 <script>
-
+  // MyArray.prototype.spliced = function(start=0, deleteCount=this.length-start, ...arg){
+  //   console.log(11)
+  //   this.arr.reduce(function(result, item, index){
+  //       if( index > start && index < deleteCount ){
+  //         return result.push(item)
+  //       }else{
+  //         if(arg.length != 0){
+  //           return result.push(...arg)
+  //         }
+  //       }
+  //     },[])
+  // }
   //var m = new Map([['Michael', 95], ['Bob', 75], ['Tracy', 85]])
 
 
@@ -28,6 +39,12 @@
         this._values.push(value)
       }
     }
+
+    Object.defineProperty(MyMap.prototype, 'size', {
+      get: function(){
+        return this._keys.length
+      }
+    })
 
     return MyMap
   }())
@@ -109,7 +126,7 @@
     }
     this.values = []
     for(var index in array){
-      this.add(index)
+      this.add(array[index])
     }
   }
   MySet.prototype.add = function(value){
@@ -118,8 +135,31 @@
     }
     return this.values
   }
+  MySet.prototype.clear = function(){
+    return this.values = []
+  }
+  MySet.prototype.has = function(value){
+    if( this.values.indexOf(value) == -1 ){
+      return false
+    }else{
+      return true
+    }
+  }
+  MySet.prototype.delete = function(value){
+    var index = this.values.indexOf(value)
+    if(index != -1){
+      this.values.splice(index,1)
+    }
+    return this.values
+  }
+
   var s = new MySet(['a','b'])
   console.log(s)
+
+//自动实现继承
+  class MySet extends Array{
+
+  }
 
   // var MySet = function(value){
   //   this.obj = {}
@@ -167,36 +207,16 @@
   // }
 
 
-
-
   var MyArray = function(...arg){
-//debugger
-    if(arg.length == 0){
-      return []
-    }
-    this.arr = [...arg][0]
-    this.length = this.arr.length
-    return this.arr
-  }
-  MyArray.prototype = {
-    splice: function(start=0, deleteCount=this.length-start, ...arg){
-      this.arr.reduce(function(result, item, index){
-        if( index > start && index < deleteCount ){
-          return result.push(item)
-        }else{
-          if(arg.length != 0){
-            return result.push(...arg)
-          }
-        }
-      },[])
-    },
-    concat: function(){
-      var ary = []
-      return ary.push(this.arr)
-    },
+
+    this.array = [...arg]
+    return this.array
   }
 
 
-  var a = new MyArray([1,2,3,4])
-  var b = new MyArray([1,2,2])
+
+
+  var a = new MyArray(0,1,2,3,4,5)
+  console.log(a)
+  var b = new MyArray(1,2)
 </script>

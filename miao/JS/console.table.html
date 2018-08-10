@@ -1,0 +1,51 @@
+<script>
+
+
+
+function table(ary) {
+  var keys = Array.from(new Set([].concat(...ary.map(Object.keys))))
+
+  var tableHtml = `
+    <style>
+      .number {
+        color: blue;
+      }
+      .string {
+        color: red;
+      }
+      .string::before {
+        content: '"'
+      }
+      .string::after {
+        content: '"'
+      }
+    </style>
+  `
+
+
+  tableHtml += '<table border=1><tr>'
+  for(var key of keys) {
+    tableHtml += `<th>${key}</th>`
+  }
+  tableHtml += '</tr>'
+
+  for(var item of ary) {
+    tableHtml += '<tr>'
+    for(var key of keys) {
+      if (key in item) {
+        var type = typeof item[key]
+        tableHtml += `<td class="${type}">${item[key]}</td>`
+      } else {
+        tableHtml += `<td class="empty"></td>`
+      }
+    }
+    tableHtml += '</tr>'
+  }
+
+  return tableHtml += '</table>'
+}
+
+document.write(table([{a:1,b:2},{a:2,b:3},{b:'bar',a:'foo',c:'baz'}, {foo:8}]))
+console.table([{a:1,b:2},{a:2,b:3},{b:'bar',a:'foo',c:'baz'}, {foo:8}])
+
+</script>

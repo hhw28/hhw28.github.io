@@ -426,6 +426,12 @@ window['hhw28'] = {
     return result
   },
 
+  cloneDeep: function(obj){
+    // return Object.assign({}, obj)
+
+    return JSON.parse(JSON.stringify(obj))
+  },
+
   //hhw28.sortedIndex([30,50],40)    //1
   //hhw28.sortedIndex([1,2,2,2,2,3],2)   //1
   sortedIndex: function(array, value){
@@ -450,13 +456,15 @@ window['hhw28'] = {
   },
 
   uniq: function(array){
-    var result = []
-    for(var i=0;i<array.length;i++){
-      if( result.indexOf(array[i]) == -1 ){
-        result.push(array[i])
-      }
-    }
-    return result
+    // var result = []
+    // for(var i=0;i<array.length;i++){
+    //   if( result.indexOf(array[i]) == -1 ){
+    //     result.push(array[i])
+    //   }
+    // }
+    // return result
+
+    Array.from(new Set(array))
   },
 
   //hhw28.zip(['a', 'b'], [1, 2], [true, false])    //[['a', 1, true], ['b', 2, false]]
@@ -510,9 +518,5 @@ window['hhw28'] = {
     },[])
   },
 
-  cloneDeep: function(obj){
-    // return Object.assign({}, obj)
 
-    return JSON.parse(JSON.stringify(obj))
-  },
 }
