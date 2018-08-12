@@ -107,9 +107,7 @@ window['hhw28'] = {
       return result
     },[])
   },
-  forEach: function(){
 
-  },
   //hhw28.slice([1,2,3],0,2)  //[1,2]
   slice: function(array,start=0,end=array.length){
     return array.reduce(function(result,item,index,array){
@@ -503,19 +501,106 @@ window['hhw28'] = {
   },
 
   //hhw28.xor([2, 1], [2, 3])    //[1,3]
-  //hhw28.xor([1,2,3,4], [2,3,4,5],[5,8])    //[1,8]
+  //hhw28.xor([1,2,3,4], [2,3,4,5],[2,4,5,6,7],[5,6,7,8])    //[1,8]
   xor: function(...arrays){
     var ary = [].concat(...arrays)
 
-    return ary.reduce(function(result, item){
-      var index = result.indexOf(item)
-      if( index == -1 ){
-        result.push(item)
-      }else{
-        result.splice(index,1)
+    return ary.filter(item => {
+      return ary.indexOf(item) === ary.lastIndexOf(item)
+    })
+  },
+
+  //hhw28.trim('  abc  ')    //'abc'
+  trim: function(str){
+    return str.replace(/^\s+|\s+$/g, '')
+  },
+  //hhw28.trimEnd('  abc  ')    //'  abc'
+  trimEnd: function(str){
+    return str.replace(/\s+$/g, '')
+  },
+  //hhw28.trimStart('  abc  ')    //'abc  '
+  trimStart: function(str){
+    return str.replace(/^\s+/g, '')
+  },
+
+  //hhw28.size({"a":1,"b":2})   //2
+  size: function(collection){
+    if(typeof(collection) === 'number' || typeof(collection) === 'string'){
+      return collection.length
+    }else{
+      return Object.keys(collection).length
+    }
+  },
+
+  //hhw28.isArguments([1, 2, 3])    //false
+  //hhw28.isArguments(function() { return arguments; }())    //true
+  isArguments: function(value){
+    return Object.prototype.toString.call(value)  === '[object Arguments]'
+  },
+  //hhw28.isArray([1, 2, 3])    //true
+  //hhw28.isArray(document.body.children)    //false
+  //hhw28.isArray('abc')    //false
+  isArray: function(value){
+    return value instanceof Array
+  },
+  isBoolean: function(value){
+    return Object.prototype.toString.call(value) === '[object Boolean]'
+  },
+  isDate: function(value){
+    return Object.prototype.toString.call(value) === '[object Date]'
+  },
+  isElement: function(value){
+    return Object.prototype.toString.call(value) === '[object HTMLBodyElement]'
+  },
+  isFunction: function(){
+    return Object.prototype.toString.call(value) === '[object Function]'
+  },
+  isNumber: function(){
+    return Object.prototype.toString.call(value) === '[object Number]'
+  },
+  isObject: function(){
+    return Object.prototype.toString.call(value) === '[object Object]'
+  },
+  isRegExp: function(){
+    return Object.prototype.toString.call(value) === '[object RegExp]'
+  },
+  isString: function(){
+    return Object.prototype.toString.call(value) === '[object String]'
+  },
+  isError: function(){
+    return Object.prototype.toString.call(value) === '[object Error]'
+  },
+  isNull: function(){
+    return Object.prototype.toString.call(value) === '[object Null]'
+  },
+  isUndefined: function(){
+    return Object.prototype.toString.call(value) === '[object Undefined]'
+  },
+  //hhw28.isEmpty(null)
+  isEmpty: function(value){
+    for(var i in value){
+      if(value.hasOwnProperty(i)){
+        return false
       }
-      return result
-    },[])
+    }
+    return true
+  },
+  isNaN: function(value){
+    return value !== value ? true : false
+  },
+
+  isFinite: function(){
+
+  },
+  isMatch: function(){
+
+  },
+
+  isNil: function(){
+
+  },
+  toArray: function(){
+
   },
 
 
