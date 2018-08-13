@@ -552,28 +552,28 @@ window['hhw28'] = {
   isElement: function(value){
     return Object.prototype.toString.call(value) === '[object HTMLBodyElement]'
   },
-  isFunction: function(){
+  isFunction: function(value){
     return Object.prototype.toString.call(value) === '[object Function]'
   },
-  isNumber: function(){
+  isNumber: function(value){
     return Object.prototype.toString.call(value) === '[object Number]'
   },
-  isObject: function(){
+  isObject: function(value){
     return Object.prototype.toString.call(value) === '[object Object]'
   },
-  isRegExp: function(){
+  isRegExp: function(value){
     return Object.prototype.toString.call(value) === '[object RegExp]'
   },
-  isString: function(){
+  isString: function(value){
     return Object.prototype.toString.call(value) === '[object String]'
   },
-  isError: function(){
-    return Object.prototype.toString.call(value) === '[object Error]'
+  isError: function(value){
+    return value instanceof Error
   },
-  isNull: function(){
+  isNull: function(value){
     return Object.prototype.toString.call(value) === '[object Null]'
   },
-  isUndefined: function(){
+  isUndefined: function(value){
     return Object.prototype.toString.call(value) === '[object Undefined]'
   },
   //hhw28.isEmpty(null)
@@ -586,20 +586,20 @@ window['hhw28'] = {
     return true
   },
   isNaN: function(value){
-    return value !== value ? true : false
+    return Object.prototype.toString.call(value) === '[object Number]' && isNaN(value)
   },
 
-  isFinite: function(){
+  isFinite: function(value){
 
   },
-  isMatch: function(){
+  isMatch: function(value){
 
   },
 
-  isNil: function(){
+  isNil: function(value){
 
   },
-  toArray: function(){
+  toArray: function(value){
 
   },
 
