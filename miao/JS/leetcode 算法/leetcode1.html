@@ -1721,5 +1721,43 @@ function letterCasePermutation(S, i=0, str='', result=[]){
 }
 letterCasePermutation("a1b1")
 
+  var thirdMax = function(nums) {
+// debugger
+    if(nums.length < 3){
+      return Math.max(...nums)
+    }
+    var i = 0
+
+    var result = -Infinity
+    var preResult = -Infinity
+    var index
+    var ary = []
+
+    while( i<3 ){
+
+      result = Math.max(...nums)
+      if( result === preResult ){
+        i--
+      }
+
+      index = nums.indexOf(result)
+      if(index == -1){
+        break
+      }
+      var num = nums.splice(index,1)
+      if(!ary.includes(num[0])){
+        ary.push(num[0])
+      }
+      i++
+      preResult = result
+    }
+
+    if(ary.length !== 3){
+      return Math.max(...ary)
+    }
+    return result
+
+  }
+  thirdMax([1,1,2])  //1
   </script>
 

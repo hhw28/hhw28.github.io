@@ -205,10 +205,10 @@ window['hhw28'] = {
     //   result += ary[i]
     // }
     // return result
-    return this.sumBy(ary,this.identity)
+    return this.sumBy(ary, this.identity)
   },
-
-  sumBy:function(ary, iteratee=hhw28.identity){
+  //hhw28.sumBy([{ 'n': 4 }, { 'n': 2 }, { 'n': 8 }, { 'n': 6 }], 'n')    //20
+  sumBy:function(ary, iteratee = hhw28.identity){
     var result = 0
     iteratee = hhw28.iteratee(iteratee)
     for(var i=0;i<ary.length;i++){
@@ -454,15 +454,15 @@ window['hhw28'] = {
   },
 
   uniq: function(array){
-    // var result = []
-    // for(var i=0;i<array.length;i++){
-    //   if( result.indexOf(array[i]) == -1 ){
-    //     result.push(array[i])
-    //   }
-    // }
-    // return result
+    var result = []
+    for(var i=0;i<array.length;i++){
+      if( result.indexOf(array[i]) == -1 ){
+        result.push(array[i])
+      }
+    }
+    return result
 
-    Array.from(new Set(array))
+    // Array.from(new Set(array))
   },
 
   //hhw28.zip(['a', 'b'], [1, 2], [true, false])    //[['a', 1, true], ['b', 2, false]]
@@ -511,16 +511,16 @@ window['hhw28'] = {
   },
 
   //hhw28.trim('  abc  ')    //'abc'
-  trim: function(str){
-    return str.replace(/^\s+|\s+$/g, '')
+  trim: function(str, chars='\\s'){
+    return str.replace(RegExp(`^[${chars}]+|[${chars}]+$`, 'gi'), '')
   },
   //hhw28.trimEnd('  abc  ')    //'  abc'
-  trimEnd: function(str){
-    return str.replace(/\s+$/g, '')
+  trimEnd: function(str, chars='\\s'){
+    return str.replace(RegExp(`[${chars}]+$`, 'gi'), '')
   },
   //hhw28.trimStart('  abc  ')    //'abc  '
-  trimStart: function(str){
-    return str.replace(/^\s+/g, '')
+  trimStart: function(str, chars='\\s'){
+    return str.replace(RegExp(`^[${chars}]+`, 'gi'), '')
   },
 
   //hhw28.size({"a":1,"b":2})   //2
@@ -588,20 +588,57 @@ window['hhw28'] = {
   isNaN: function(value){
     return Object.prototype.toString.call(value) === '[object Number]' && isNaN(value)
   },
-
+  //hhw28.isFinite(3)    // => true
+  //hhw28.isFinite(Number.MIN_VALUE)    // => true
+  //hhw28.isFinite(Infinity)    // => false
+  //hhw28.isFinite('3')    // => false
   isFinite: function(value){
-
+    return Object.prototype.toString.call(value) === '[object Number]' && (value !== Infinity)
   },
-  isMatch: function(value){
-
+  //hhw28.isMatch({ 'a': 1, 'b': 2 }, { 'b': 2 })   //true
+  //hhw28.isMatch({ 'a': 1, 'b': 2 }, { 'b': 1 })   //false
+  //hhw28.isMatch({"a":1,"b":{"c":1}},{"b":{"c":1}})   //true
+  isMatch: function(object, source){
+    for(var key in object){
+      if( source.hasOwnProperty(key) ){
+        if( typeof source[key] === 'object'){
+          return this.isMatch(object[key], source[key])
+        }else if(source[key] === object[key]){
+          return true
+        }
+      }
+    }
+    return false
   },
-
+  //判断是否为undefined或null
   isNil: function(value){
-
+    return value === undefined || value === null
   },
+  //hhw28.toArray({ 'a': 1, 'b': 2 })    //[1, 2]
+  //hhw28.toArray('abc')    //['a', 'b', 'c']
+  //hhw28.toArray(1)    //[]
+  //hhw28.toArray(null)    //[]
   toArray: function(value){
-
+    var result = []
+    if( typeof value === 'object' ){
+      for(var key in value){
+        result.push(value[key])
+      }
+    }else if( typeof value === 'string' ){
+      for(var key in value){
+        result.push(value[key])
+      }
+    }
+    return result
   },
+  //hhw28.max([4, 2, 8, 6])    // => 8
+  //hhw28.max([])    // => undefined
+  max: function(array){
+    if(array.length === 0 ){
+      return undefined
+    }
+    return Math.max(...array)
+  }
 
 
 }

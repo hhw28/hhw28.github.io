@@ -1,0 +1,136 @@
+<script>
+
+  var parse = function() {
+    var i = 0
+
+    return function parse(str) {
+      i = 0
+      return parseValue()
+    }
+
+    function parseValue() {
+      var c = str[i]
+      if (c === '[') {
+        return parseArray()
+      } else if (c === '{') {
+        return parseObject()
+      } else if (c === '"') {
+        return parseString()
+      } else if (c === 't') {
+        return parseTrue()
+      } else if (c === 'f') {
+        return parseFalse()
+      } else if (c === 'n') {
+        return parseNull()
+      } else {
+        return parseNumber()
+      }
+    }
+
+    function isNumberChar(c) {
+      if (c >= '0' && c <= '9') {
+        return true
+      }
+      if (c === '.' || c === '+' || c ==='-' || c === 'e' || c === 'E') {
+        return true
+      }
+      return false
+    }
+
+    function parseNumber() {
+      var j = i
+      while(isNumberChar(str[j])) {
+        j++
+      }
+      var numString = str.slice(i, j)
+      i = j
+      return parseFloat(numString)
+    }
+
+    function parseObject() {
+      i++
+      if (str[i] === '}') {
+        return {}
+      }
+      var result = {}
+
+      while(true) {
+        var key = parseString()
+        i++
+        var value = parseValue()
+        result[key] = value
+        if (str[i] === ',') {
+          i++
+          continue
+        } else if (str[i] === '}') {
+          i++
+          return result
+        }
+      }
+    }
+
+    function parseArray() {
+      i++
+      var result = []
+      var val
+      if (str[i] === ']') {
+        return result
+      }
+
+      while(true) {
+        val = parseValue()
+        result.push(val)
+        if (str[i] === ',') {
+          i++
+          continue
+        } else if (str[i] === ']') {
+          i++
+          return result
+        }
+      }
+    }
+
+    function parseTrue() {
+      var token = str.slice(i, i + 4)
+      if (token === 'true') {
+        i = i + 4
+        return true
+      } else {
+        throw new SyntaxError('unexpected token at position ' + i)
+      }
+    }
+
+    function parseFalse() {
+      var token = str.slice(i, i + 5)
+      if (token === 'false') {
+        i = i + 5
+        return false
+      } else {
+        throw new SyntaxError('unexpected token at position ' + i)
+      }
+    }
+
+    function parseNull() {
+      var token = str.slice(i, i + 4)
+      if (token === 'null') {
+        i = i + 4
+        return null
+      } else {
+        throw new SyntaxError('unexpected token at position ' + i)
+      }
+    }
+
+    function parseString() {
+      for(var j = i + 1; ;j++) {
+        if (str[j] === '"') {
+          break
+        }
+      }
+
+      var result = str.slice(i + 1, j)
+      i = j + 1
+      return result
+    }
+  }()
+
+</script>
