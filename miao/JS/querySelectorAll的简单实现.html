@@ -1,0 +1,50 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body class="box">
+
+  <script>
+    //document.body.matches('html > body')   //true
+
+    function isMatchSelector(node, selector){
+      var comboSelectors = selector.split(' ')
+      isMatchComSelector(comboSelectors, selector)
+    }
+
+    function isMatchComSelector(node, selector){
+      var singleSelectors = selector.split(/(?=\.|#|\[|:)/g)
+      return singleSelectors.every( selector => {
+        return isMatchSingleSelector(node, selector)
+      })
+    }
+
+    function isMatchSingleSelector(){
+      switch(selector[0]){
+        case '.':
+          return isMatchClassSelector(node,selector)
+        case '#':
+          return isMatchIdSelector(node,selector)
+        case '[':
+          return isMatchAttrSelector(node,selector)
+        // case ':':
+        //   return isMatchPseudoSelector(node,selector)
+        default:
+          return isMatchElementSelector(node,selector)
+      }
+    }
+
+    function isMatchClassSelector(node,selector){
+      return node.classList.contains(selector.split(1))
+    }
+    function isMatchAttrSelector(node,selector){
+      return node.tagName === selector.toLocaleUpperCase()
+    }
+  </script>
+</body>
+</html>

@@ -425,9 +425,9 @@ window['hhw28'] = {
   },
 
   cloneDeep: function(obj){
-    // return Object.assign({}, obj)
+    return Object.assign({}, obj)
 
-    return JSON.parse(JSON.stringify(obj))
+    // return JSON.parse(JSON.stringify(obj))
   },
 
   //hhw28.sortedIndex([30,50],40)    //1
@@ -522,6 +522,52 @@ window['hhw28'] = {
   trimStart: function(str, chars='\\s'){
     return str.replace(RegExp(`^[${chars}]+`, 'gi'), '')
   },
+  //hhw28.pad('abc', 8)    // => '  abc   '
+  //hhw28.pad('abc', 8, '_-')    // => '_-abc_-_'
+  //hhw28.pad('abc', 3)    // => 'abc'
+  pad: function(string='', length=0, chars=' '){
+    var leftLength
+    var rightLength
+
+    if(string.length < length){
+      leftLength = Math.floor((length - string.length)/2)
+      rightLength = length - leftLength
+
+      for(var i=0;i<leftLength;i+=chars.length){
+        string = chars + string
+      }
+      for(var i=0;i<rightLength;i+=chars.length){
+        string += chars
+      }
+    }
+    return string.slice(0,length)
+  },
+  //hhw28.padEnd('abc', 6)    // => 'abc   '
+  //hhw28.padEnd('abc', 6, '_-')    // => 'abc_-_'
+  //hhw28.padEnd('abc', 3)    // => 'abc'
+  padEnd: function(string='', length=0, chars=' '){
+    var endLength = length - string.length
+    if(string.length < length){
+      for(var i=0; i < endLength; i+=chars.length){
+        string += chars
+      }
+    }
+    return string.slice(0,length)
+  },
+  //hhw28.padStart('abc', 6)    // => '   abc'
+  //hhw28.padStart('abc', 6, '_-')    // => '_-_abc'
+  //hhw28.padStart('abc', 3)    // => 'abc'
+  padStart: function(string='', length=0, chars=' '){
+    var startLength = length - string.length
+    var startStr = ''
+    if(string.length < length){
+      while(startStr.length < startLength){
+        startStr += chars
+      }
+    }
+    return string = startStr.slice(0,startLength) + string
+  },
+
 
   //hhw28.size({"a":1,"b":2})   //2
   size: function(collection){
@@ -638,7 +684,191 @@ window['hhw28'] = {
       return undefined
     }
     return Math.max(...array)
-  }
+  },
 
+  constant: function(value){
+    return () => value
+  },
+  uniqueId: function(prefix=''){
+    return prefix + '' + ++count
+  },
+  //hhw28.range(4)    // => [0, 1, 2, 3]
+  //hhw28.range(-4)    // => [0, -1, -2, -3]
+  //hhw28.range(1, 5)    // => [1, 2, 3, 4]
+  //hhw28.range(0, 20, 5)    // => [0, 5, 10, 15]
+  //hhw28.range(0, -4, -1)    // => [0, -1, -2, -3]
+  //hhw28.range(1, 4, 0)    // => [1, 1, 1]
+  //hhw28.range(0)    // => []
+  range: function(start=0, end, step=1){
+    var result = []
+
+    if(arguments.length === 1){
+      end = arguments[0]
+      start = 0
+
+      if(end < 0){
+        step = -step
+      }
+    }
+    if(step === 0){
+      while(result.length+1 < end){
+        result.push(start)
+      }
+      return result
+    }
+// debugger
+    for(var i=start;Math.abs(i)<Math.abs(end);i+=step){
+      result.push(i)
+    }
+    return result
+  },
+  //hhw28.rangeRight(4)    // => [3, 2, 1, 0]
+  //hhw28.rangeRight(-4)    // => [-3, -2, -1, 0]
+  //hhw28.rangeRight(1, 5)    // => [4, 3, 2, 1]
+  //hhw28.rangeRight(0, 20, 5)    // => [15, 10, 5, 0]
+  //hhw28.rangeRight(0, -4, -1)    // => [-3, -2, -1, 0]
+  //hhw28.rangeRight(1, 4, 0)    // => [1, 1, 1]
+  //hhw28.rangeRight(0)    // => []
+  rangeRight: function(start=0, end, step=1){
+    var result = []
+    if(arguments.length === 1){
+      end = arguments[0]
+      start = 0
+
+      if(end < 0){
+        step = -step
+      }
+    }
+    if(step === 0){
+      while(result.length+1 < end){
+        result.unshift(start)
+      }
+      return result
+    }
+// debugger
+    for(var i=start;Math.abs(i)<Math.abs(end);i+=step){
+      result.unshift(i)
+    }
+    return result
+  },
+  times: function(n, iteratee = identity){
+    var result = []
+    for (var i = 0; i < n; i++)
+        result.push(iteratee(i))
+    return result
+  },
+  //hhw28.repeat('*', 3)    // => '***'
+  //hhw28.repeat('abc', 2)    // => 'abcabc'
+  //hhw28.repeat('abc', 0)    // => ''
+  repeat: function(string='', n=1){
+    var result = ''
+    for(var i=0;i<n;i++){
+      result += string
+    }
+    return result
+  },
+  //hhw28.escape('fred, barney, & pebbles')   // => 'fred, barney, &amp; pebbles'
+  escape: function(string=''){
+    var ary = string.split(' ')
+    for(var i=0;i<ary.length;i++){
+      switch (ary[i]) {
+        case '&':
+          ary[i] = '&amp;'
+          break;
+        case '<':
+          ary[i] = '&lt;'
+          break;
+        case '>':
+          ary[i] = '&gt;'
+          break;
+        case '"':
+          ary[i] = '&quot;'
+          break;
+        default:
+          break;
+      }
+    }
+    return ary.join(' ')
+  },
+//hhw28.values({a: 1, b: 2})    // => [1, 2] (iteration order is not guaranteed)
+//hhw28.values('hi')    // => ['h', 'i']
+  values: function(object){
+    var result = []
+    // debugger
+    if( typeof object === 'object' ){
+      for(var key in object){
+        result.push(object[key])
+      }
+    }
+    if( typeof object === 'string' ){
+      for(var key of object){
+        result.push(key)
+      }
+    }
+    return result
+  },
+  //hhw28.keys({a: 1, b: 2})    // => ['a', 'b']
+  //hhw28.keys('hi')    // => ['0', '1']
+  keys: function(object){
+    var result = []
+    if( typeof object === 'object' ){
+      for(var key in object){
+        result.push(key)
+      }
+    }
+    if( typeof object === 'string' ){
+      for(var key in object){
+        result.push(''+key+'')
+      }
+    }
+    return result
+  },
+  //hhw28.toPairs({a: 1, b: 2})    //[['a', 1], ['b', 2]]
+  toPairs: function(object){
+    var result = []
+    var item = []
+    for(var key in object){
+      item.push(key)
+      item.push(object[key])
+      result.push(item)
+      item = []
+    }
+    return result
+  },
+  //hhw28.pick({'a':1,'b':'2','c':3},['a','c'])   //{'a':1,'c':3}
+  pick: function(object, paths){
+    var result = {}
+    for(var i=0;i<paths.length;i++){
+      for(var key in object){
+        if(key === paths[i]){
+          result[key] = object[key]
+        }
+      }
+    }
+    return result
+  },
+  //hhw28.omit({'a':1,'b':'2','c':3},['a','c'])   //{ 'b': '2' }
+  omit: function(object, paths){
+    var result = {}
+    for(var key in object){
+      if( !paths.includes(key) ){
+        result[key] = object[key]
+      }
+    }
+    return result
+  },
+  //hhw28.invert({ 'a': 1, 'b': 2, 'c': 1 })   //{ '1': 'c', '2': 'b' }
+  invert: function(object){
+    var obj1 = this.cloneDeep(object)
+    var result = {}
+    for(var key in object){
+      for(var char in obj1){
+        if( object[key] === obj1[char] ){
+          result[object[char]] = char
+        }
+      }
+    }
+    return result
+  },
 
 }

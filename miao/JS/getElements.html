@@ -1,0 +1,94 @@
+<script>
+
+  function getElementsByTagName(node, tagName, result = []) {
+    tagName = tagName.toUpperCase()
+
+    for(var child of node.childNodes) {
+      if (child.nodeType === document.ELEMENT_NODE) {
+        if (child.tagName === tagName) {
+          result.push(child)
+        }
+        getElementsByTagName(child, tagName, result)
+      }
+    }
+
+    return result
+  }
+
+
+
+
+  function getElementById(id) {
+    return helper(id)
+    function helper(id, node = document.documentElement) {
+      if (node.id === id) {
+        return node
+      } else {
+        for(var child of node.children) {
+          var result = helper(id, child)
+          if (result) {
+            return result
+          }
+        }
+      }
+      return null
+    }
+  }
+
+  var getElementById = unary(function getElementById(id, node = document.documentElement) {
+    if (node.id === id) {
+      return node
+    } else {
+      for(var child of node.children) {
+        var result = getElementById(id, child)
+        if (result) {
+          return result
+        }
+      }
+    }
+    return null
+  })
+
+
+  function getElementById(id) {
+    var result = null
+
+    traverseDom(document.documentElement, e => {
+      // console.log(e)
+      if (e.id === id) {
+        result = e
+        return false
+      }
+    })
+
+    return result
+
+    function traverseDom(node, action) {
+      var status = action(node)
+      if (status === false) {
+        return false
+      }
+      for(var child of node.children) {
+        status = traverseDom(child, action)
+        if (status === false) {
+          return false
+        }
+      }
+    }
+  }
+
+
+  function getElementsByClassName(node, className, result = []) {
+    for(var child of node.childNodes) {
+      if (child.nodeType === document.ELEMENT_NODE) {
+        if (className.split(' ').filter(it => it).every(name => child.classList.contains(name))) {
+          result.push(child)
+        }
+        getElementsByClassName(child, className, result)
+      }
+    }
+
+    return result
+  }
+
+</script>

@@ -1759,5 +1759,74 @@ letterCasePermutation("a1b1")
 
   }
   thirdMax([1,1,2])  //1
+
+  var maxProfit = function(prices) {
+    return prices.reduce((result,item,index,array) => {
+      return item > array[index-1] ? result + item - array[index-1] : result
+    },0)
+  }
+  maxProfit([7,1,5,3,6,4])
+
+
+
+var matrixReshape = function(nums, r, c) {
+    var x = nums.length
+    var y = nums[0].length
+    var result = []
+    var row = []
+
+    if( x*y !== r*c ){
+      return nums
+    }else{
+      var ary = []
+      for(var i=0;i<x;i++){
+        ary.push(...nums[i])
+      }
+// debugger
+      if(result.length < r){
+        for(var i=0;i<=ary.length;i++){
+          if(row.length < c){
+            row.push(ary[i])
+          }else{
+            result.push(row)
+            row = []
+            i--
+          }
+        }
+      }
+      return result
+
+    }
+
+  }
+  matrixReshape([[1,2,3],[3,4,5]],3,2)
+
+  var largeGroupPositions = function(S) {
+    var result = []
+    var a
+    var b
+
+    var strAry = S.match(/([a-zA-Z])\1{2,999}/g)
+
+    debugger
+    for(var i=0;i<strAry.length;i++){
+      a = S.indexOf(strAry[i])
+      b = a + strAry[i].length - 1
+      result.push([a,b])
+      S = S.replace(strAry[i],addStr(strAry[i].length))
+    }
+    return result
+
+    function addStr(n){
+      // debugger
+      var str = ''
+      for(var i=0;i<n;i++){
+        str += '1'
+      }
+      return str
+    }
+  }
+  largeGroupPositions("abbxxxxzzyxxxx")
+  largeGroupPositions("abcdddeeeeaabbbcd")
   </script>
 
