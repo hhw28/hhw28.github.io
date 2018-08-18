@@ -70,8 +70,6 @@ window['hhw28'] = {
     array.splice(startIndex,n)
     return array
   },
-
-
   //hhw28.includes([1, 2, 3], 1)   //true
   includes:function(ary,val){
     if (val !== val) {
@@ -82,8 +80,7 @@ window['hhw28'] = {
       }
       return false
     }
-
-    return indexOf(ary, val) !== -1
+    return ary.indexOf(val) !== -1
   },
 
   //原函数取反
@@ -190,12 +187,6 @@ window['hhw28'] = {
   initial:function(array){
     return this.slice(array,0,array.length-1)
   },
-  //hhw28.intersection([2,1],[2,3])   //[2]
-  intersection:function(...arrays){
-
-  },
-
-
   identity:function(value){
     return value
   },
@@ -330,7 +321,7 @@ window['hhw28'] = {
     // }
     // return map
 //方法2
-    return ary.ruduce(function(map,item,index,ary){
+    return ary.reduce(function(map,item){
       var key = predicate(item)
       if(key in map){
         map[key].push(item)
@@ -605,7 +596,7 @@ window['hhw28'] = {
     return Object.prototype.toString.call(value) === '[object Number]'
   },
   isObject: function(value){
-    return Object.prototype.toString.call(value) === '[object Object]'
+    return value instanceof Object
   },
   isRegExp: function(value){
     return Object.prototype.toString.call(value) === '[object RegExp]'
@@ -689,9 +680,6 @@ window['hhw28'] = {
   constant: function(value){
     return () => value
   },
-  uniqueId: function(prefix=''){
-    return prefix + '' + ++count
-  },
   //hhw28.range(4)    // => [0, 1, 2, 3]
   //hhw28.range(-4)    // => [0, -1, -2, -3]
   //hhw28.range(1, 5)    // => [1, 2, 3, 4]
@@ -769,71 +757,59 @@ window['hhw28'] = {
   },
   //hhw28.escape('fred, barney, & pebbles')   // => 'fred, barney, &amp; pebbles'
   escape: function(string=''){
-    var ary = string.split(' ')
-    for(var i=0;i<ary.length;i++){
-      switch (ary[i]) {
-        case '&':
-          ary[i] = '&amp;'
-          break;
-        case '<':
-          ary[i] = '&lt;'
-          break;
-        case '>':
-          ary[i] = '&gt;'
-          break;
-        case '"':
-          ary[i] = '&quot;'
-          break;
-        default:
-          break;
-      }
-    }
-    return ary.join(' ')
+    return string.replace(/&/g, "&amp;")
+                .replace(/</g, "&lt;")
+                .replace(/>/g, "&gt;")
+                .replace(/"/g, "&quot;")
+                .replace(/'/g, "&#39")
   },
 //hhw28.values({a: 1, b: 2})    // => [1, 2] (iteration order is not guaranteed)
 //hhw28.values('hi')    // => ['h', 'i']
   values: function(object){
-    var result = []
-    // debugger
-    if( typeof object === 'object' ){
-      for(var key in object){
-        result.push(object[key])
-      }
-    }
-    if( typeof object === 'string' ){
-      for(var key of object){
-        result.push(key)
-      }
-    }
-    return result
+    return Object.values(object)
+    // var result = []
+    // // debugger
+    // if( typeof object === 'object' ){
+    //   for(var key in object){
+    //     result.push(object[key])
+    //   }
+    // }
+    // if( typeof object === 'string' ){
+    //   for(var key of object){
+    //     result.push(key)
+    //   }
+    // }
+    // return result
   },
   //hhw28.keys({a: 1, b: 2})    // => ['a', 'b']
   //hhw28.keys('hi')    // => ['0', '1']
   keys: function(object){
-    var result = []
-    if( typeof object === 'object' ){
-      for(var key in object){
-        result.push(key)
-      }
-    }
-    if( typeof object === 'string' ){
-      for(var key in object){
-        result.push(''+key+'')
-      }
-    }
-    return result
+    return Object.keys(object)
+    // var result = []
+    // if( typeof object === 'object' ){
+    //   for(var key in object){
+    //     result.push(key)
+    //   }
+    // }
+    // if( typeof object === 'string' ){
+    //   for(var key in object){
+    //     result.push(''+key+'')
+    //   }
+    // }
+    // return result
   },
   //hhw28.toPairs({a: 1, b: 2})    //[['a', 1], ['b', 2]]
   toPairs: function(object){
-    var result = []
-    var item = []
-    for(var key in object){
-      item.push(key)
-      item.push(object[key])
-      result.push(item)
-      item = []
-    }
-    return result
+    return Object.entries(object)
+    // var result = []
+    // var item = []
+    // for(var key in object){
+    //   item.push(key)
+    //   item.push(object[key])
+    //   result.push(item)
+    //   item = []
+    // }
+    // return result
   },
   //hhw28.pick({'a':1,'b':'2','c':3},['a','c'])   //{'a':1,'c':3}
   pick: function(object, paths){
