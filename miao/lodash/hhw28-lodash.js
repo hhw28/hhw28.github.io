@@ -70,18 +70,6 @@ window['hhw28'] = {
     array.splice(startIndex,n)
     return array
   },
-  //hhw28.includes([1, 2, 3], 1)   //true
-  includes:function(ary,val){
-    if (val !== val) {
-      for(var i = 0; i<ary.length; i++) {
-        if (ary[i] === ary[i]) {
-          return true
-        }
-      }
-      return false
-    }
-    return ary.indexOf(val) !== -1
-  },
 
   //原函数取反
   negate: function(fn){
@@ -171,9 +159,6 @@ window['hhw28'] = {
     // }
 //方法2
     return this.get.bind(null,propName)
-  },
-  get:function(name,obj){
-    return obj[name]
   },
   //hhw28.head([1,2,3])  //[1]
   //hhw28.head([])  //[undefined]
@@ -301,36 +286,30 @@ window['hhw28'] = {
   add:function(augend,addend){
     return augend + addend
   },
-  //hhw28.ceil(4.006)  //5
-  //hhw28.ceil(6.004,2)  //6.01
-  //hhw28.ceil(6040)  //6100
-  ceil:function(number, precision=0){
 
-  },
-
-  groupBy:function(ary,propName){
-//方法1
-    // var map = {}
-    // for(var item of ary){
-    //   var key = predicate(item)
-    //   if(key in map){
-    //     map[key].push(item)
-    //   }else{
-    //     map[key] = [item]
-    //   }
-    // }
-    // return map
-//方法2
-    return ary.reduce(function(map,item){
-      var key = predicate(item)
-      if(key in map){
-        map[key].push(item)
-      }else{
-        map[key] = [item]
-      }
-      return map
-    },{})
-  },
+//   groupBy:function(ary,propName){
+// //方法1
+//     // var map = {}
+//     // for(var item of ary){
+//     //   var key = predicate(item)
+//     //   if(key in map){
+//     //     map[key].push(item)
+//     //   }else{
+//     //     map[key] = [item]
+//     //   }
+//     // }
+//     // return map
+// //方法2
+//     return ary.reduce(function(map,item){
+//       var key = predicate(item)
+//       if(key in map){
+//         map[key].push(item)
+//       }else{
+//         map[key] = [item]
+//       }
+//       return map
+//     },{})
+//   },
 
   ary:function(fn, n = fn.length){
     return function(...args){
@@ -416,9 +395,9 @@ window['hhw28'] = {
   },
 
   cloneDeep: function(obj){
-    return Object.assign({}, obj)
+    // return Object.assign({}, obj)
 
-    // return JSON.parse(JSON.stringify(obj))
+    return JSON.parse(JSON.stringify(obj))
   },
 
   //hhw28.sortedIndex([30,50],40)    //1
