@@ -1,4 +1,82 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>书本习题</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+        body{
+            width: 100vw;
+            height: 100vh;
+            position: relative;
+            margin: 0;
+            padding: 0;
+        }
+        .dog{
+            width: 100px;
+            position: absolute;
+        }
+
+    </style>
+</head>
+<body>
+
+    <img src="dog.gif" class="dog dog1" alt="">
+    <img src="dog.gif" class="dog dog2" alt="">
+    <img src="dog.gif" class="dog dog3" alt="">
+
+    <input type="text">
+
 <script>
+    //14-2
+    var dog1 = document.querySelector('.dog1')
+    var dog2 = document.querySelector('.dog2')
+    var dog3 = document.querySelector('.dog3')
+
+    document.onmousemove = function(e){
+        var mouseX = e.clientX
+        var mouseY = e.clientY
+
+        var lastTime = 0
+        var angle = 0
+        function animate(time){
+            if(lastTime !== null){
+                angle += (time - lastTime) * 0.1
+            }
+            lastTime = time
+
+            dog1.style.top = Math.sin(angle) * 150 + mouseY-50 + 'px'
+            dog1.style.left = Math.cos(angle) * 150 + mouseX-50 + 'px'
+
+            dog2.style.top = Math.sin(angle-30) * 150 + mouseY-50 + 'px'
+            dog2.style.left = Math.cos(angle-30) * 150 + mouseX-50 + 'px'
+
+            dog3.style.top = Math.sin(angle-90) * 150 + mouseY-50 + 'px'
+            dog3.style.left = Math.cos(angle-90) * 150 + mouseX-50 + 'px'
+
+            requestAnimationFrame(animate)
+        }
+        requestAnimationFrame(animate)
+    }
+
+
+
+    //14-1
+    var input = document.querySelector('input')
+    input.onkeydown = function(e){
+        if(e.key === 'q' || e.key === 'w' || e.key === 'x'){
+            input.setAttribute('readonly','true')
+        }else{
+            input.removeAttribute('readonly')
+        }
+    }
+    input.addEventListener('paste',function(e){
+        console.log(e)
+    })
+
+
     //2-1 LoopingaTriangle
     var a = ""
     for(var i=0;i<7;i++){
@@ -135,7 +213,7 @@
         }
 
     }
-    function assert(test,message){
 
-    }
 </script>
+</body>
+</html>

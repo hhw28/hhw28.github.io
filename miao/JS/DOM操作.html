@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>DOM操作</title>
+  <style>
+    #box{
+      font-size: 30px;
+    }
+    #box>.num{
+      color: red;
+    }
+    #box>.num>span{
+      color: green;
+    }
+    .box{
+      border: 1px solid red;
+      padding: 20px;
+      margin: 20px;
+    }
+    #quote{
+      border: 1px solid red;
+    }
+    .trans{
+      position: relative;
+      border: 1px solid red;
+      padding: 100px;
+    }
+    .square{
+      width: 50px;
+      height: 50px;
+      background: red;
+      position: absolute;
+    }
+    .square.square1{
+      background: green;
+    }
+    .square.square3{
+      background: blue;
+    }
+  </style>
+</head>
+<body>
+  <div id="box">
+    <p class="num num1">123
+      <span class="num num2">456</span>
+    </p>
+    <img src="" name="image" alt="">
+  </div>
+
+  <div class="list">
+    <ul>
+      <li>list1<li>
+      <li>list2<li>
+      <li>list3<li>
+    </ul>
+    <button class="btn">点我</button>
+  </div>
+
+
+  <p>One</p>
+  <p>Two</p>
+  <p>Three</p>
+
+  <p>The <img src="" alt="Cat">in the
+    <img src="" alt="Hat">.</p>
+
+  <blockquote id="quote">
+    No book
+  </blockquote>
+
+  <p>Here it is, the identity function:</p>
+  <pre data-language="javascript">
+    function id(x){return x}
+  </pre>
+
+  <p><span id="one"></span></p>
+  <p><span id="two"></span></p>
+
+  <div class="trans">
+      <div class="square square1"></div>
+      <div class="square square2"></div>
+      <div class="square square3"></div>
+  </div>
+
+<script>
+  //js动画
+  var square1 = document.querySelector('.square1')
+  var square2 = document.querySelector('.square2')
+  var square3= document.querySelector('.square3')
+
+  var i = 0
+  var lastTime = null
+  var angle = 0
+  var angle3 = 0
+
+  function animate(time){
+    if(lastTime !== null){
+      angle += (time - lastTime) * 0.001
+      angle3 += (time - lastTime) * 0.01
+    }
+    lastTime = time
+    var x = Math.sin(angle) * 40 + 75 + 'px'
+    var y = Math.cos(angle) * 300 + 300 + 'px'
+    square1.style.top = x
+    square1.style.left = y
+
+    square2.style.top = Math.sin(angle - 60) * 40 + 75 + 'px'
+    square2.style.left = Math.cos(angle - 60) * 300 + 300 + 'px'
+
+    square3.style.top = Math.sin(angle3 - 60) * 50 + parseInt(x) + 'px'
+    square3.style.left = Math.cos(angle3 - 60) * 50 + parseInt(y) + 'px'
+
+    requestAnimationFrame(animate)
+  }
+  requestAnimationFrame(animate)
+
+  //p175 构建两条直线
+  function time(name, action){
+    var start = Date.now()
+    action()
+    console.log(name, 'took', Date.now()-start, 'ms')
+  }
+  time('naive', function(){
+    var target = document.getElementById('one')
+    while(target.offsetWidth < 2000){
+      target.appendChild(document.createTextNode('_'))
+    }
+  })
+  time('clever', function(){
+    var target = document.getElementById('two')
+    target.appendChild(document.createTextNode('_____'))
+    var total = Math.ceil( 2000/(target.offsetWidth)/5)
+    for(var i=0;i<total;i++){
+      target.appendChild(document.createTextNode('_'))
+    }
+  })
+
+
+  !(function replaceImages(){
+    var images = document.body.getElementsByTagName('img')
+    for(var i=images.length-1;i>=0;i--){
+      var image = images[i]
+      if(image.alt){
+        var text = document.createTextNode(image.alt)
+        image.parentNode.replaceChild(text,image)
+      }
+    }
+  })()
+
+  var arrayIsh = {
+    0:"one",
+    1:"two",
+    length:2,
+  }
+  var real = Array.prototype.slice.call(arrayIsh, 0)
+  console.log(real)
+  real.forEach(element => {
+    console.log(element)
+  })
+
+
+  function elt(type){
+    var node = document.createElement(type)
+    for(var i=1; i<arguments.length; i++){
+      var child = arguments[i]
+      if(typeof child == "string"){
+        child = document.createTextNode(child)
+      }
+      node.appendChild(child)
+    }
+    return node
+  }
+  document.getElementById('quote').appendChild(
+    elt("footer",
+        "--",
+        elt("string", "Karl Popper"),
+        ",perface to the second editon of",
+        elt("em","the open society ande its enemies"),
+        ",1950")
+  )
+  function t(parts) {
+    var node = document.createElement('div')
+    node.innerHTML = parts.join('')
+    return node.firstChild
+  }
+
+  var dom = t`
+  <a>
+    <b>
+      foo
+      <i>bar</i>
+    </b>
+  </a>
+  `
+
+  document.write((new Date()).toString())
+
+  var paragraphs = document.getElementsByTagName('p')
+  document.body.insertBefore(paragraphs[2], paragraphs[1])
+
+
+  var elem = document.getElementById('box')   //通过id查找，由于id只有一个，注意只有这个才是Elelment 没有带s
+  var elements = document.getElementsByClassName("num")  //通过class名称查找
+  var paras = document.getElementsByTagName("p")   //通过标签名称查询
+  var images = document.getElementsByName("image")    // 用于选择拥有name属性的HTML元素，比如form、img、frame、embed和object，返回一个NodeList格式的对象，不会实时反映元素的变化。
+
+  console.log(elem)
+  console.log(elements)
+  console.log(paras)
+  console.log(images)
+
+  console.log(elem.innerText)     //123 456  返回文本
+  console.log(elem.innerHTML)     //<p>123<span>456</span></p>  返回儿孙标签+文本
+  console.log(elem.outerHTML)    //<div id="box"> <p>123<span>456</span></p> </div>  返回自身标签+文本
+
+  while(elem.firstChild){
+    elem.removeChild(elem.firstChild)
+  }
+
+  function $(str){
+  return document.querySelector(str)
+  }
+  function $$(str){
+  return document.querySelectorAll(str)
+  }
+  $('#box')   //调用函数查找id为box的
+  $$('.num')
+
+  function highlightCode(node, keywords){
+    // debugger
+    var text = node.textContent
+    node.textContent = ''
+
+    var match
+    var pos = 0
+
+    while(match = keywords.exec(text)){
+      var before = text.slice(pos, match.index)
+      node.appendChild(document.createTextNode(before))
+
+      var strong = document.createElement('strong')
+      strong.appendChild(document.createTextNode(match[0]))
+
+      node.appendChild(strong)
+      pos = keywords.lastIndex
+    }
+    var after = text.slice(pos)
+    node.appendChild(document.createTextNode(after))
+  }
+
+  function highlightAllCode(){
+    // debugger
+    var pres = document.body.getElementsByTagName("pre")
+    for(var i=0;i<pres.length;i++){
+      var pre = pres[i]
+      var lang = pre.getAttribute('data-language')
+      if(languages.hasOwnProperty(lang)){
+        highlightCode(pre, languages[lang])
+      }
+    }
+  }
+
+  var languages = {
+    javascript:/\b(function|return|var)\b/g
+  }
+
+  highlightAllCode()
+
+
+
+
+
+</script>
+
+</body>
+</html>

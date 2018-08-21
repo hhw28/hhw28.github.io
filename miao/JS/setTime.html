@@ -1,0 +1,17 @@
+
+<div>111</div>
+
+
+<script>
+
+  var div = document.querySelector('div')
+  var action = function(){
+    console.log('111')
+  }
+
+  var id
+  div.addEventListener('mousemove',function(){
+    clearTimeout(id)
+    id = setTimeout(action,3000)
+  })
+</script>
