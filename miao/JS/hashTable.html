@@ -1,0 +1,67 @@
+<script>
+
+  class Person{
+    constructor(name){
+      this.name = name
+
+      this.fullName = this.name
+      this.nameAry = this.fullName.split(' ')
+      this.firstName = this.nameAry[0]
+      this.lastName = this.nameAry[1]
+
+    }
+  }
+  var damiao = new Person('Xie Ran')
+  console.log(damiao.firstName)//Xie
+  console.log(damiao.lastName)//Ran
+
+  damiao.fullName = 'Da Miao'
+
+  console.log(damiao.firstName)//Da
+  console.log(damiao.lastName)//Miao
+
+  damiao.firstName = 'Xiao'
+
+  console.log(damiao.fullName)// Xiao Miao
+
+
+
+  class HashTable {
+    constructor(key = 17){
+      this.size = key
+      this.count = 0
+      this.keys = new Array(this.size)
+      this.values = new Array(this.size)
+    }
+    hash(key){
+      var hash = 0
+      var seed = 111
+      for(var i=0;i<key.length;i++){
+        hash = hash*seed + key.charCodeAt(i)
+      }
+      return hash % this.size
+    }
+    hash2(key,i){
+      return (this.hash(key) + this.f(i)) % this.size
+    }
+    f(i){
+      return i
+    }
+    get(key){
+      var pos = this.hash(key)
+
+      return undefined
+    }
+
+    set(key,value){
+      var pos = this.hash(key)
+      if( this.keys[pos] === key ){
+        for(var i=0;i<this.size;i++){
+
+        }
+      }
+    }
+  }
+
+  var h = new HashTable()
+</script>

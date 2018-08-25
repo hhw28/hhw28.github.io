@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>进度条</title>
+  <style>
+    .progress{
+      position:fixed;
+      top: 0;
+      left: 0;
+      height: 50px;
+      transition: 1s;
+    }
+    .progress-inner{
+      background: red;
+    }
+    .btn-box{
+      display: flex;
+      justify-content: center;
+    }
+    .btn{
+      width: 100px;
+      height: 40px;
+      border-radius: 5px;
+      border:none;
+      margin:60px 10px 0px 10px;
+      outline: none;
+      transition: 0.3s;
+    }
+    .btn:hover{
+      box-shadow: 1px 2px 10px 1px rgb(226, 226, 226);
+    }
+  </style>
+</head>
+<body>
+  <script>
+    class Progress {
+      constructor() {
+        this.innerEl = document.createElement('div')
+        this.outerEl = document.createElement('div')
+        this.innerEl.className = 'progress progress-inner'
+        this.outerEl.className = 'progress progress-outer'
+
+        this.btnBox = document.createElement('div')
+        this.btnBox.className = 'btn-box'
+        this.btnStart = document.createElement('button')
+        this.btnStart.className = 'btn btn-start'
+        this.btnStart.innerText = 'start'
+        this.btnIncrease = document.createElement('button')
+        this.btnIncrease.className = 'btn btn-increase'
+        this.btnIncrease.innerText = 'increase 5'
+        this.btnIncrease10 = document.createElement('button')
+        this.btnIncrease10.className = 'btn btn-increase'
+        this.btnIncrease10.innerText = 'increase 10'
+
+        this.btnEnd = document.createElement('button')
+        this.btnEnd.className = 'btn btn-end'
+        this.btnEnd.innerText = 'end'
+
+        this.outerEl.appendChild(this.innerEl)
+        document.body.appendChild(this.outerEl)
+        this.btnBox.appendChild(this.btnStart)
+        this.btnBox.appendChild(this.btnIncrease)
+        this.btnBox.appendChild(this.btnIncrease10)
+        this.btnBox.appendChild(this.btnEnd)
+        document.body.appendChild(this.btnBox)
+
+
+        this.status = 0
+        this.event()
+      }
+      event(){
+        this.btnStart.addEventListener('click',(e)=>{
+          this.start()
+        })
+        this.btnIncrease.addEventListener('click',(e)=>{
+          this.increase()
+        })
+        this.btnIncrease10.addEventListener('click',(e)=>{
+          this.increase(10)
+        })
+        this.btnEnd.addEventListener('click',(e)=>{
+          this.end()
+        })
+      }
+      start() {
+        this.set(1)
+      }
+
+      increase(val=5) {
+        this.set(this.status + val)
+      }
+
+      set(val) {
+        this.status = val
+        this.innerEl.style.width = this.status + '%'
+      }
+
+      end() {
+        this.set(100)
+        // setTimeout(()=>{
+        //   document.body.removeChild(this.outerEl)
+        // },300)
+        this.innerEl.addEventListener('transitionend',()=>{
+          document.body.removeChild(this.outerEl)
+        })
+      }
+    }
+    var p = new Progress()
+  </script>
+</body>
+</html>

@@ -1,17 +1,42 @@
 
 <div>111</div>
 
+<section>Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptates distinctio vitae quo fugiat fugit dicta deserunt repellat, quis consequatur neque ipsum. Harum consequuntur cupiditate distinctio magnam modi ut architecto similique?</section>
+
 
 <script>
 
   var div = document.querySelector('div')
+  var section = document.querySelector('section')
+
   var action = function(){
     console.log('111')
   }
 
   var id
-  div.addEventListener('mousemove',function(){
-    clearTimeout(id)
-    id = setTimeout(action,3000)
+  // div.addEventListener('mousemove',function(){
+  //   clearTimeout(id)
+  //   id = setTimeout(action,3000)
+  // })
+  function debounce(f,interval){
+    var id = null
+    return function(){
+      clearInterval(id)
+      id = setTimeout(f,duration)
+    }
+  }
+  div.addEventListener('mousemove',debounce())
+
+  var lastTime
+  section.addEventListener('mousemove',function(){
+    var now = Date.now()
+    if(now - lastTime > 3000){
+      action()
+      lastTime = now
+    }
   })
+
+
+
+
 </script>
