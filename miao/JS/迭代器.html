@@ -1,0 +1,44 @@
+
+<script>
+
+  Number.prototype[Symbol.iterator] = function * (){
+    for(var i=1;i<=this;i++){
+      yield i
+    }
+
+    // var self = this
+    // var i = 1
+    // return {
+    //   next: function() {
+    //     if (i <= self) {
+    //       return {
+    //         value: i++,
+    //         done: false
+    //       }
+    //     } else {
+    //       return {
+    //         value: undefined,
+    //         done: true
+    //       }
+    //     }
+    //   }
+    // }
+
+  }
+  for(let val of 10){
+    console.log(val)
+  }
+
+
+  function * h() {
+    yield 'a'
+    yield 'b'
+    yield 'c'
+  }
+  function * f(){
+    yield 1
+    yield * h()
+    yield 2
+  }
+  [...f()]   //[1,'a','b','c',2]
+</script>

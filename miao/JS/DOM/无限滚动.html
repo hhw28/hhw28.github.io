@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <style>
+    ul {
+      width: 1000px;
+      margin: auto;
+      list-style: none;
+    }
+    li {
+      height: 200px;
+      line-height: 200px;
+      text-align: center;
+      border: 1px solid;
+      margin: 5px;
+    }
+  </style>
+</head>
+<body>
+  <ul id="list">
+    <li>001</li>
+    <li>002</li>
+    <li>003</li>
+    <li>004</li>
+    <li>005</li>
+    <li>006</li>
+    <li>007</li>
+    <li>008</li>
+    <li>009</li>
+    <li>010</li>
+    <li>011</li>
+    <li>012</li>
+    <li>013</li>
+    <li>014</li>
+    <li>015</li>
+    <li>016</li>
+    <li>017</li>
+    <li>018</li>
+    <li>019</li>
+    <li>020</li>
+  </ul>
+  <p id="loadingText">LOADING...</p>
+
+  <script>
+    var loading = false
+    loadingText.style.display = 'none'
+
+    document.addEventListener('scroll', function(e) {
+      if (loading === false && document.documentElement.offsetHeight - pageYOffset - innerHeight < 100) {
+
+        loading = true
+        loadingText.style.display = 'block'
+
+        setTimeout(() => {
+          console.log('adding lis....')
+          new Array(10).fill(0).forEach(() => {
+            var li = document.createElement('li')
+            li.innerHTML = 'FOO'
+            list.appendChild(li)
+          })
+          loading = false
+          loadingText.style.display = 'none'
+        }, 3000)
+
+      }
+    })
+
+    document.addEventListener('scroll', function(e) {
+      var inViewport = Array.from(list.children).filter(it => {
+        var pos = it.getBoundingClientRect()
+        if (pos.bottom > 0 && pos.top < innerHeight) {
+          return true
+        }
+      })
+      var outViewport = Array.from(list.children).filter(it => {
+        var pos = it.getBoundingClientRect()
+        if (!(pos.bottom > 0 && pos.top < innerHeight)) {
+          return true
+        }
+      })
+
+      inViewport.forEach(it => {
+        it.innerHTML = 'FOO'
+      })
+
+      outViewport.forEach(it => {
+        it.innerHTML = ''
+      })
+
+    })
+  </script>
+</body>
+</html>

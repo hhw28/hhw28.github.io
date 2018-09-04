@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <style>
+    .menu {
+      position: fixed;
+      border: 1px solid;
+      padding: 0;
+      margin: 0;
+    }
+  </style>
+</head>
+<body>
+  <script>
+    function t(parts, ...interpolations) {
+      var node = document.createElement('div')
+
+      node.innerHTML = parts.reduce((result, part, i) => {
+        return result + interpolations[i - 1] + part
+      })
+
+      return node.firstElementChild
+    }
+
+    // window.addEventListener('mousedown', e => {
+    //   if (!e.target.matches('.menu, .menu *')) {
+    //     document.querySelectorAll('.menu').forEach(it => {
+    //       document.body.removeChild(it)
+    //     })
+    //   }
+    // })
+
+    window.addEventListener('contextmenu', function(e) {
+      e.preventDefault()
+      if (e.target.matches('.menu, .menu *')) {
+        return
+      }
+      
+      showContextMenu(event, [{
+        text: '打开',
+        handler: function() {
+          console.log('打开')
+        }
+      }, {
+        text: '保存',
+        handler: function() {
+          console.log('保存')
+
+        }
+      }, {
+        text: '按编码保存',
+        handler: function() {
+          console.log('按编码保存')
+
+        }
+      }])
+
+    })
+
+
+    function showContextMenu(event, menuItems) {
+      var menu = t`
+        <ul class="menu" tabindex="-1">
+          ${
+            menuItems.map(it => `<li>${it.text}</li>`).join('')
+          }
+        </ul>
+      `
+      // var isGoingToRemove = false
+
+      menu.addEventListener('click', function(e) {
+        // debugger
+        var clickedItemIndex = Array.from(menu.children).findIndex(it => it === e.target)
+
+        menuItems[clickedItemIndex].handler()
+
+        menu.blur()
+
+      })
+
+      menu.addEventListener('blur', function(){
+        // if (!isGoingToRemove) {
+          document.body.removeChild(menu)
+        // }
+      })
+
+      menu.style.top = event.clientY + 'px'
+      menu.style.left = event.clientX + 'px'
+
+      document.body.appendChild(menu)
+      menu.focus()
+    }
+  </script>
+</body>
+</html>
