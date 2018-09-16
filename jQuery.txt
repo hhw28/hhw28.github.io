@@ -1,0 +1,6 @@
+链式调用
+
+$('div a').__proto__ === jQuery.prototype
+$ === jQuery
+
+动画

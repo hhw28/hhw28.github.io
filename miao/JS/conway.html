@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <style>
+    pre{
+      font-family: consolas;
+    }
+  </style>
+  <title>Conway</title>
+</head>
+<body>
+
+
+  <pre id="world"></pre>
+
+  <script>
+
+
+
+    class Conway{
+      constructor(rows,cols){
+        this.world = new Array(rows).fill(0).map(it => new Array(cols).fill(0))
+      }
+
+      //遍历this.world每一项，以一定概率随机填充为0或1
+      randomFill(radio){
+        this.world.forEach(row => {
+          row.forEach((col,index) => {
+            row[index] = Math.random() < radio ? 1 : 0
+          })
+        })
+      }
+
+      get(row,col){
+        try{
+          if(this.world[row][col] == undefined){
+            return 0
+          }
+          return this.world[row][col]
+        } catch(e){
+          return 0
+        }
+      }
+
+      getNeighborCount(row,col){
+        var count = 0
+        for(var i = row - 1; i <= row + 1; i++){
+          for(var j= col - 1 ; j <= col + 1; j++){
+            if(!(i == row && j == col)){
+              count = count + this.get(i,j)
+            }
+          }
+        }
+        return count
+      }
+
+      nextGeneration(){
+        var tmpWorld = new Array(this.world.length).fill(0).map(it => new Array(this.world[0].length).fill(0))
+        this.world.forEach((row,rowIndex) => {
+          row.forEach((cell,colIndex) => {
+            var neighbors = this.getNeighborCount(rowIndex,colIndex)
+  //        console.log(this.world)
+  // debugger
+            if(cell == 1){
+              if(neighbors === 2 || neighbors === 3){
+                tmpWorld[rowIndex][colIndex] = 1
+              }else{
+                tmpWorld[rowIndex][colIndex] = 0
+              }
+            }else{
+              if(neighbors === 3) tmpWorld[rowIndex][colIndex] = 1
+            }
+          })
+        })
+        this.world = tmpWorld
+      }
+
+      toText(){
+        return this.world.map(it => it.map(it => it ? '.' : 'o').join('')).join('\n')
+      }
+      render(el){
+        el.textContent = this.toText()
+      }
+    }
+
+    var w = new Conway(30,100)
+    w.randomFill(0.5)
+
+    setInterval(function(){
+      w.render(world)
+      w.nextGeneration()
+    },300)
+
+  </script>
+</body>
+</html>

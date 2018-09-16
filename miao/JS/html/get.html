@@ -1,0 +1,24 @@
+
+
+<script>
+
+  function get(url, callback){
+    var xhr = XMLHttpRequest()
+    xhr.open('GET',url)
+    xhr.addEventListener('load',()=>{
+      callback(xhr.responseText)
+    })
+    xhr.send()
+  }
+
+
+  function syncGet(url){
+
+    get(url, function(data){
+
+    })
+
+    return data
+  }
+  var data = syncGet(url)
+</script>

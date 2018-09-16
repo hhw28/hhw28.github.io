@@ -1,34 +1,34 @@
 
-
 var net = require('net')
-var fs = require('fs')
 
 var server = net.createServer()
-const port = 8080
 
 server.on('connection',conn => {
-  conn.on('data', data=>{
+  //当连接的时候打印出，远程地址，远程端口，https://nodejs.org/api/net.html
+  console.log('a connection established:'+ conn.remoteAddress, conn.remotePort)
 
-    var d = data.toString()
-    var lines = d.split('\r\n')
-    var firstLine = lines.shift()
-    var [method, path] = firstLine.split(' ')
-
-    try{
-      var fileContent = fs.readFileSync('.' + path)
-    }catch(e){
-      fileContent = 'error'
-    }
-
-
-    conn.write(`HTTP/1.1 200 OK\r\n`)
-    // conn.write(`Content-Type: text/html\r\n`)
-    conn.write(`\r\n`)
-    conn.write(fileContent)
-    conn.end()
+  conn.on('data', data => {
+    console.log(conn.remoteAddress, data.toString())
+    conn.write(data.toString().toUpperCase())
   })
+  conn.on('error',()=>1)
 })
 
-server.listen(port,()=>{
-  console.log('server listening on port', port)
+server.listen(123, ()=>{
+  console.log('server listening on port', 123)
+})
+
+
+
+
+// node tcp-server.js
+
+var conn = net.connect(123,'192.168.31.9')
+
+conn.on('connect', () => {
+  conn.write('hello world')
+  conn.on('data', data => {
+    console.log(data.toString())
+  })
+  conn.close()
 })
