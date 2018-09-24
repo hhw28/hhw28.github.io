@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>并行加载串行显示</title>
+</head>
+<body>
+  <ul id="result"></ul>
+  <script>
+    function get(value){
+      console.log('开始请求' + value)
+      return new Promise((resolve, reject) => {
+        setTimeout(() => {
+          console.log(value + '请求完成')
+          resolve(value)
+        },5000 + Math.random() * 10000)
+      })
+    }
+    function addToPage(value){
+      var li = document.createElement('li')
+      li.innerText = value
+      result.appendChild(li)
+    }
+
+    ['111','222','333','444','555'].map(get)
+    .reduce((seq, promise) => {
+      return seq.then(() => promise)
+                .then(addToPage)
+    }, Promise.resolve())
+
+    // var promises = ['111','222','333','444','555'].map(get)
+    // Promise.resolve().then(()=>{
+    //   return promises[0]
+
+    // }).then(chapter0 => {
+    //   addToPage(chapter0)
+    //   return promises[1]
+
+    // }).then(chapter1 => {
+    //   addToPage(chapter1)
+    //   return promises[2]
+
+    // }).then(chapter2 => {
+    //   addToPage(chapter2)
+    //   return promises[3]
+
+    // }).then(chapter3 => {
+    //   addToPage(chapter3)
+    //   return promises[4]
+
+    // }).then(chapter4 => {
+    //   addToPage(chapter4)
+    // })
+  </script>
+</body>
+</html>
