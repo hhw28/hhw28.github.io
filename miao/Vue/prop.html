@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Prop</title>
+</head>
+<body>
+  <div id="blog-posts-events-demo">
+    <div :style="{ fontSize: postFontSize + 'em' }">
+      <blog-post
+        v-for="post in posts"
+        v-bind:key="post.id"
+        v-bind:post="post"
+        v-on:enlarge-text="onEnlargeText"
+      ></blog-post>
+    </div>
+  </div>
+
+  <div id="input-demo">
+    <custom-input v-model="searchText"></custom-input>
+    <!-- 等价于
+      <custom-input
+        v-bind:value="searchText"
+        v-on:input="searchText = $event"
+      ></custom-input> -->
+  </div>
+
+</body>
+<script src="vue-2.5.17.js"></script>
+<script>
+  Vue.component('custom-input', {
+    props: ['value'],
+    template: `
+      <input
+        v-bind:value="value"
+        v-on:input="$emit('input', $event.target.value)"
+      >
+    `
+  })
+  new Vue({
+    el:'#input-demo',
+    data:{
+      searchText:'',
+    },
+  })
+
+  Vue.component('blog-post', {
+    props: ['post'],
+    template: `
+      <div class="blog-post">
+        <h3>{{ post.title }}</h3>
+        <button v-on:click="$emit('enlarge-text', 0.2)">
+          Enlarge text
+        </button>
+        <div v-html="post.content"></div>
+      </div>
+    `
+  })
+
+  new Vue({
+    el: '#blog-posts-events-demo',
+    data: {
+      posts: [
+        { id: 1, title: 'My journey with Vue' },
+        { id: 2, title: 'Blogging with Vue' },
+        { id: 3, title: 'Why Vue is so fun' }
+      ],
+      postFontSize: 1
+    },
+    methods:{
+      onEnlargeText: function(enlargeAmount){
+        this.postFontSize += enlargeAmount
+      }
+    },
+  })
+</script>
+</html>

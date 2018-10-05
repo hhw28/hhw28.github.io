@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <title>Document</title>
+</head>
+<body>
+  <div id="app-1">
+    {{ message }}
+  </div>
+
+  <div id="app-2">
+    <span v-bind:title="message">
+    <!-- 缩写 <span :title="message"> -->
+      鼠标悬停几秒钟查看此处动态绑定的提示信息！
+    </span>
+  </div>
+
+  <div id="app-5">
+    <p>{{ message }}</p>
+    <button v-on:click="aaa">逆转消息</button>
+    <!-- 缩写 <button @click="aaa">逆转消息</button> -->
+  </div>
+
+  <div id="app-3">
+    <p v-if="seen">现在你看到我了</p>
+  </div>
+
+  <div id="app-4">
+    <ol>
+      <li v-for="todo in todos">
+        {{ todo.text }}
+      </li>
+    </ol>
+  </div>
+
+
+
+  <div id="app-6">
+    <pre>
+      <p>{{ message }}</p>
+    </pre>
+    <input v-model="message">
+    <!--
+      v-model.trim
+      v-model.lasy
+      v-model.number
+     -->
+  </div>
+
+  <div id="app-7">
+    <ol>
+      <!--
+        现在我们为每个 todo-item 提供 todo 对象
+        todo 对象是变量，即其内容可以是动态的。
+        我们也需要为每个组件提供一个“key”，稍后再
+        作详细解释。
+      -->
+      <todo-item
+        v-for="item in groceryList"
+        v-bind:todo="item"
+        v-bind:key="item.id">
+      </todo-item>
+    </ol>
+  </div>
+
+  <div id="app">
+    <app-nav></app-nav>
+    <app-view>
+      <app-sidebar></app-sidebar>
+      <app-content></app-content>
+    </app-view>
+  </div>
+
+  <div id="app-88">
+    <select v-model="from">
+        <option value="1">111</option>
+        <option value="2">222</option>
+        <option value="3">333</option>
+        <option value="4">444</option>
+        <option value="5">555</option><br>
+      </select>
+      {{from}}
+  </div>
+  <div id="app-8" >
+    <select v-model="dest" multiple>
+        <option value="1">111</option>
+        <option value="2">222</option>
+        <option value="3">333</option>
+        <option value="4">444</option>
+        <option value="5">555</option><br>
+      </select>
+      {{dest}}
+  </div>
+
+
+  <div id="app-9">
+    <!-- name > v-model -->
+    <label for="age-11">11</label>
+    <input type="radio" id="age-11" value="11" v-model="age">
+    <label for="age-22">22</label>
+    <input type="radio" id="age-22" value="22" v-model="age"><br>
+    {{age}}
+  </div>
+
+  <div id="app-10">
+    <p>{{ foo }}</p>
+    <!-- 这里的 `foo` 不会更新！ -->
+    <button v-on:click="foo = 'baz'">Change it</button>
+  </div>
+
+  <div id="app-11">
+    <table border="1">
+      <thead>
+        <tr>
+          <th>科目</th>
+          <th>成绩</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>英语</td>
+          <td><input type="text" v-model.number="english"></td>
+        </tr>
+        <tr>
+          <td>数学</td>
+          <td><input type="text" v-model.number="math"></td>
+        </tr>
+        <tr>
+          <td>总分</td>
+          <td>{{sum}}</td>
+        </tr>
+        <tr>
+          <td>平均分</td>
+          <td>{{average}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <p>Using mustaches: {{ rawHtml }}</p>
+  <p>Using v-html directive: <span v-html="rawHtml"></span></p>
+  {{ number + 1 }} -->
+
+
+
+  <template v-if="ok">
+    <h1>Title</h1>
+    <p>Paragraph 1</p>
+    <p>Paragraph 2</p>
+  </template>
+
+  <div id="app-14">
+    <p>{{amount}}</p>
+    数量：<input type="number" v-model="amount" id="">
+    单价：<input type="number" v-model="price" id="">
+    总额：<input type="number" v-model="total" id="">
+  </div>
+
+  <div id="components-demo1">
+    <button-counter></button-counter>
+  </div>
+  <div id="components-demo2">
+    <button-counter></button-counter>
+  </div>
+
+  <script>
+    //组件
+    var buttonCount = {
+      data: function () {
+        return {
+          count: 0
+        }
+      },
+      template: '<button v-on:click="count++">You clicked me {{ count }} times.</button>'
+    }
+
+    var app13 = new Vue({
+      el:'#components-demo1',
+      components:{
+        //元素名称 ： 被封装的组件对象
+        'button-counter':buttonCount
+      }
+    })
+    var app15 = new Vue({
+      el:'#components-demo2',
+      //该Vue未被添加'button-counter'组件，所以不会被渲染，Unknown custom element: <button-counter>
+    })
+
+    var app14 = new Vue({
+      el:'#app-14',
+      data:{
+        amount:0,
+        price:0,
+        total:0,
+      },
+      watch:{
+        amount:function(){
+          this.total = this.amount * this.price
+        },
+        price:function(){
+          this.total = this.amount * this.price
+        },
+        total:function(){
+          this.total = this.amount * this.price
+        },
+      }
+    })
+
+
+    //计算属性
+    var app11 = new Vue({
+      el:'#app-11',
+      data:{
+        english:30,
+        math:89,
+      },
+      computed:{
+        sum:function(){
+          return parseInt(this.english) + parseInt(this.math)
+        },
+        average:function(){
+          return Math.round(this.sum / 3)
+        }
+      }
+      // computed会有缓存 , method
+    })
+    var data = {
+      a:1,
+      foo:'bar'
+    }
+    // Object.freeze(data),阻止修改现有的属性，也意味着响应系统无法再追踪变化。
+    var vm = new Vue({
+      el:"#app-10",
+      data:data,    //vm.a === data.a ,修改任意a 两个都将被影响
+    })
+
+    // 生命周期
+    // created
+    // mounted
+    // updated
+    // destroyed
+
+    var app9 = new Vue({
+      el:"#app-9",
+      data:{
+        age:[],
+      }
+    })
+
+    var app8 = new Vue({
+      el:"#app-8",
+      data: {
+        dest:['1','3'],
+      }
+    })
+    var app88 = new Vue({
+      el:"#app-88",
+      data: {
+        from:3,
+      }
+    })
+
+    Vue.component('todo-item', {
+      props: ['todo'],
+      template: '<li>{{ todo.text }}</li>'
+    })
+
+    var app7 = new Vue({
+      el: '#app-7',
+      data: {
+        groceryList: [
+          { id: 0, text: '蔬菜' },
+          { id: 1, text: '奶酪' },
+          { id: 2, text: '随便其它什么人吃的东西' }
+          //app7.groceryList.push({id:3,text:'lalala'})
+        ]
+      }
+    })
+
+    var app6 = new Vue({
+      el: '#app-6',
+      data: {
+        message: 'Hello Vue!'
+      }
+    })
+    var app5 = new Vue({
+      el: '#app-5',
+      data: {
+        message: 'Hello Vue.js!'
+      },
+      methods: {
+        reverseMessage: function () {
+          this.message = this.message.split('').reverse().join('')
+        },
+        aaa: function(){
+          console.log('11111')
+        }
+      }
+    })
+    var app4 = new Vue({
+      el: '#app-4',
+      data: {
+        todos: [
+          { text: '学习 JavaScript' },
+          { text: '学习 Vue' },
+          { text: '整个牛项目' }
+        ]
+      }
+    })
+    var app3 = new Vue({
+      el: '#app-3',
+      data: {
+        seen: true
+      }
+    })
+    var app2 = new Vue({
+      el: '#app-2',
+      data: {
+        message: '页面加载于 ' + new Date().toLocaleString()
+      }
+    })
+    var app = new Vue({
+      el: '#app-1',
+      data: {
+        message: 'Hello Vue1111!'
+      }
+    })
+  </script>
+
+</body>
+</html>
