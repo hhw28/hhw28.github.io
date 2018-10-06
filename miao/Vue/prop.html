@@ -5,31 +5,77 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Prop</title>
+  <style>
+    body>div{
+      margin-bottom: 20px;
+      background: #f9f9f9;
+    }
+    body>div>section{
+      background: #eee;
+    }
+    ul,li{
+      list-style: none;
+    }
+    .checked{
+      border: 1px solid;
+    }
+  </style>
 </head>
 <body>
   <div id="blog-posts-events-demo">
     <div :style="{ fontSize: postFontSize + 'em' }">
-      <blog-post
-        v-for="post in posts"
-        v-bind:key="post.id"
-        v-bind:post="post"
-        v-on:enlarge-text="onEnlargeText"
-      ></blog-post>
-    </div>
+        <blog-post
+          v-for="post in posts"
+          v-bind:key="post.id"
+          v-bind:post="post"
+          v-on:enlarge-text="onEnlargeText"
+          v-on:shrink-text="onShrinkText"
+        ></blog-post>
+      </div>
   </div>
-
   <div id="input-demo">
     <custom-input v-model="searchText"></custom-input>
+    {{searchText}}<br>
     <!-- 等价于
       <custom-input
         v-bind:value="searchText"
         v-on:input="searchText = $event"
       ></custom-input> -->
+    <date v-model="date"></date>
+    {{date}}<br>
+    <list-input v-model="list"></list-input>
+    {{list}}<br>
+    <binary-input v-model="num"></binary-input>
+    {{num}}<br>
+    <json-input v-model="obj"></json-input>{{obj}}
   </div>
 
+  <div id="app">
+    <player
+      @volumechange
+      @pause
+      @resume
+      src="xxx.mp4"
+      :initVolume="65"
+      :autoplay="true"
+    ></player>
+
+    <slider
+      v-if="showSlider"
+      :interval="1000"
+      :slides="['a.jpg','b.jpg','c.jpg']"
+      :indicators="true"
+      :buttons="true"
+      @prev
+      @next
+    ></slider>
+
+  </div>
 </body>
 <script src="vue-2.5.17.js"></script>
 <script>
+  //demo2
+  //inputDemo.searchText
   Vue.component('custom-input', {
     props: ['value'],
     template: `
@@ -39,13 +85,223 @@
       >
     `
   })
-  new Vue({
+  //inputDemo.date
+  Vue.component('date', {
+    props: ['value'],
+    template: `
+      <input type="text" v-model="dateText">
+    `,
+    data() {
+      return {
+        dateText: this.value.toLocaleDateString()
+      }
+    },
+    watch: {
+      value: function(newVal) {
+        this.dateText = newVal.toLocaleDateString()
+      },
+      dateText: function(newVal) {
+        this.$emit('input', new Date(newVal))
+      }
+    },
+  })
+  //inputDemo.list
+  Vue.component('list-input', {
+    props:['value'],
+    template:`
+      <input type="text" v-model="listText">
+    `,
+    data(){
+      return {
+        listText: this.value.join(',')
+      }
+    },
+    watch:{
+      value: function(newVal) {
+        this.listText = this.value.join(',')
+      },
+      listText:function(newVal){
+        this.$emit('input', newVal.split(/,\s*/g))
+      }
+    }
+  })
+  //inputDemo.num
+  Vue.component('binary-input', {
+    props:['value'],
+    template:`
+      <div>
+        <input v-for="(flag, index) of status" v-model="status[index]" type="checkbox" />
+      </div>
+    `,
+    data(){
+      return {
+        status: this.value.toString(2).padStart(8,'0').split('').map(it => it === '1')
+      }
+    },
+    watch:{
+      status: function(newVal){
+        var value = parseInt(newVal.map(it => Number(it)).join(''),2)
+        this.$emit('input',value)
+      },
+      value: function(){
+        this.status = this.value.toString(2).padStart(8,'0').split('').map(it => it === '1')
+      }
+    },
+  })
+  //inputDemo.obj
+  // <json-input v-model="obj"></json-input>
+  Vue.component('json-input', {
+    props:['value'],
+    template:`
+      <input type="text" v-model="jsonText">
+    `,
+    data(){
+      return {
+        jsonText: JSON.stringify(this.value)
+      }
+    },
+    watch:{
+      value: function(newVal){
+        this.jsonText = JSON.stringify(newVal)
+      },
+      jsonText: function(newVal){
+        this.$emit('input', JSON.parse(newVal))
+      }
+    },
+    methods:{
+
+    }
+  })
+
+  var inputDemo = new Vue({
     el:'#input-demo',
     data:{
-      searchText:'',
+      searchText:'search?',
+      date:new Date(),
+      list:['a','b','c'],
+      num:7,
+      obj:{
+        'a':1,
+        'b':2,
+      },
     },
   })
 
+
+  //demo4
+  // <slider
+  //   :interval="3000"
+  //   :slides="['a.jpg','b.jpg','c.jpg']"
+  //   :indicators="true"
+  //   :button="true"
+  //   @prev
+  //   @next
+  // ></slider>
+  Vue.component('slider', {
+    props:['interval', 'slides', 'indicators', 'buttons'],
+    template:`
+      <section style="border:1px solid; width: 300px;">
+        <div>
+          <ul>
+            <li v-show="currentIndex === index"
+                v-for="(img, index) in slides">{{ img }}</li>
+          </ul>
+        </div>
+        <ul v-show="indicators" style="border-bottom:1px solid; display:flex;">
+          <li @click="currentIndex = i - 1"
+              v-for="i of slides.length"
+              :class="{checked: i-1 === currentIndex}"
+              style="margin:10px;" >{{ i }}</li>
+        </ul>
+        <button v-show="buttons" @click="prev"> < </button>
+        <button v-show="buttons" @click="next"> > </button>
+      </section>
+    `,
+    data(){
+      return {
+        currentIndex:0,
+      }
+    },
+    mounted(){
+      this.intervalId = setInterval(() => {
+        this.next()
+      },this.interval)
+    },
+    destroyed(){
+      clearInterval(this.intervalId)
+    },
+    methods:{
+      prev: function(){
+        this.currentIndex = (this.slides.length + this.currentIndex - 1) % this.slides.length
+        this.$emit('prev', this.currentIndex)
+      },
+      next: function(){
+        this.currentIndex = (this.currentIndex + 1) % this.slides.length
+        this.$emit('next', this.currentIndex)
+      },
+    },
+  })
+
+
+  //demo3
+  // <player
+  //     @volumechange="volumeChange"
+  //     @pause
+  //     @resume
+  //     src="xxx.mp4"
+  //     :initVolume="65"
+  //     :autoplay="false"
+  //   ></player>
+  Vue.component('player', {
+    props:['src', 'initvolume', 'autoplay'],
+    template:`
+      <section style="width:300px; border: 1px solid; margin-bottom: 20px;">
+        <div style="height: 100px; border-bottom: 1px solid;">
+          {{isPlaying ? '正在播放：' + src : src + ' 已暂停'}}
+        </div>
+        <button v-show="!isPlaying" @click="play"> > </button>
+        <button v-show="isPlaying" @click="pause"> || </button>
+        <input type="range" v-model="currentVolume" max="100" min="0">
+          {{currentVolume ? currentVolume : initvolume}}
+      </section>
+    `,
+    data(){
+      return{
+        isPlaying: this.autoplay,
+        currentVolume: this.initVolume,
+      }
+    },
+    watch: {
+      //实时监控音量变化
+      currentVolume: function(newVal){
+        this.$emit('volumechange', newVal)
+      }
+    },
+    methods:{
+      play: function(){
+        this.isPlaying = true
+        this.$emit('resume')
+      },
+      pause: function(){
+        this.isPlaying = false
+        this.$emit('pause')
+      }
+    },
+  })
+  var app = new Vue({
+    el:'#app',
+    data: {
+      showSlider:true,
+    },
+    methods: {
+      // volumeChange:function(volume){
+      //   console.log('current',volume)
+      // }
+    }
+  })
+
+
+  //demo1
   Vue.component('blog-post', {
     props: ['post'],
     template: `
@@ -54,11 +310,13 @@
         <button v-on:click="$emit('enlarge-text', 0.2)">
           Enlarge text
         </button>
+        <button v-on:click="$emit('shrink-text', 0.2)">
+          Shrink text
+        </button>
         <div v-html="post.content"></div>
       </div>
     `
   })
-
   new Vue({
     el: '#blog-posts-events-demo',
     data: {
@@ -72,6 +330,9 @@
     methods:{
       onEnlargeText: function(enlargeAmount){
         this.postFontSize += enlargeAmount
+      },
+      onShrinkText: function(shrinkAmount){
+        this.postFontSize -= shrinkAmount
       }
     },
   })

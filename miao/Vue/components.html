@@ -23,9 +23,41 @@
   <div id="like-demo1">
     <like></like>
   </div>
+
+  <div id="button-counter-demo1">
+    <button-counter-demo1 :start="9"></button-counter-demo1>
+  </div>
 </body>
 <script src="vue-2.5.17.js"></script>
 <script>
+  //demo3
+  Vue.component('button-counter-demo1', {
+    props:['start'],
+    template:`
+    <div>
+      <button @click="del">-</button>
+      <span>{{count}}</span>
+      <button @click="add">+</button>
+    </div>
+    `,
+    data: function(){
+      return {
+        count:this.start
+      }
+    },
+    methods: {
+      add:function(){
+        this.count++
+      },
+      del:function(){
+        this.count--
+      }
+    }
+  })
+  var btnCountDemo = new Vue({
+    el:'#button-counter-demo1',
+  })
+
   //demo2-全局组件
   Vue.component('like', {
     template:`
