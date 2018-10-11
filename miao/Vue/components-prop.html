@@ -75,7 +75,8 @@
 <script src="vue-2.5.17.js"></script>
 <script>
   //demo2
-  //inputDemo.searchText
+  // inputDemo.searchText
+  // <custom-input v-model="searchText"></custom-input>
   Vue.component('custom-input', {
     props: ['value'],
     template: `
@@ -153,24 +154,29 @@
   Vue.component('json-input', {
     props:['value'],
     template:`
-      <input type="text" v-model="jsonText">
+      <textarea type="text" v-model="jsonText" rows="10" cols="50"></textarea>
     `,
     data(){
       return {
-        jsonText: JSON.stringify(this.value)
+        jsonText: JSON.stringify(this.value,null,2)
       }
     },
     watch:{
-      value: function(newVal){
-        this.jsonText = JSON.stringify(newVal)
+      value: {
+        handler:function(newVal){
+          this.jsonText = JSON.stringify(newVal,null,2)
+        },
+        deep:true
       },
       jsonText: function(newVal){
-        this.$emit('input', JSON.parse(newVal))
+        try{
+          console.log(newVal)
+          this.$emit('input', JSON.parse(newVal))
+        }catch(e){
+          console.log(e)
+        }
       }
     },
-    methods:{
-
-    }
   })
 
   var inputDemo = new Vue({
@@ -181,8 +187,14 @@
       list:['a','b','c'],
       num:7,
       obj:{
-        'a':1,
-        'b':2,
+        a:1,
+        b:2,
+        c:{
+          d:'foo',
+          e:{
+            f:4,
+          }
+        }
       },
     },
   })
@@ -302,6 +314,13 @@
 
 
   //demo1
+  // <blog-post
+  //   v-for="post in posts"
+  //   v-bind:key="post.id"
+  //   v-bind:post="post"
+  //   v-on:enlarge-text="onEnlargeText"
+  //   v-on:shrink-text="onShrinkText"
+  // ></blog-post>
   Vue.component('blog-post', {
     props: ['post'],
     template: `

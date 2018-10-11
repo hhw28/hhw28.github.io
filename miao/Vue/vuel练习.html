@@ -141,12 +141,6 @@
     </table>
   </div>
 
-  <p>Using mustaches: {{ rawHtml }}</p>
-  <p>Using v-html directive: <span v-html="rawHtml"></span></p>
-  {{ number + 1 }} -->
-
-
-
   <template v-if="ok">
     <h1>Title</h1>
     <p>Paragraph 1</p>
@@ -154,13 +148,14 @@
   </template>
 
   <div id="app-14">
-    <p>{{amount}}</p>
     数量：<input type="number" v-model="amount" id="">
     单价：<input type="number" v-model="price" id="">
     总额：<input type="number" v-model="total" id="">
   </div>
 
   <div id="components-demo1">
+    <button-counter></button-counter>
+    <button-counter></button-counter>
     <button-counter></button-counter>
   </div>
   <div id="components-demo2">
@@ -177,7 +172,6 @@
       },
       template: '<button v-on:click="count++">You clicked me {{ count }} times.</button>'
     }
-
     var app13 = new Vue({
       el:'#components-demo1',
       components:{
@@ -185,6 +179,8 @@
         'button-counter':buttonCount
       }
     })
+
+
     var app15 = new Vue({
       el:'#components-demo2',
       //该Vue未被添加'button-counter'组件，所以不会被渲染，Unknown custom element: <button-counter>
@@ -193,9 +189,9 @@
     var app14 = new Vue({
       el:'#app-14',
       data:{
-        amount:0,
-        price:0,
-        total:0,
+        amount:1,
+        price:2,
+        total:2,
       },
       watch:{
         amount:function(){
