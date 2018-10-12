@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Hello World</title>
+    <!-- <script src="https://unpkg.com/react@15.6.2/dist/react-with-addons.js"></script> -->
+    <!-- <script src="https://unpkg.com/react-dom@15.6.2/dist/react-dom.js"></script> -->
+    <script src="https://unpkg.com/react@16/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+
+    <!-- Don't use this in production: -->
+    <script src="https://unpkg.com/babel-standalone@6.15.0/babel.min.js"></script>
+  </head>
+<body>
+
+  <div id="root"></div>
+  <script type="text/babel">
+
+    class Counter extends React.Component{
+      constructor(props){
+        super(props)
+        // this.props = props
+        this.state = {
+          count: props.start ? props.start : 0
+        }
+        // this.dec = this.dec.bind(this)
+        // this.inc = this.inc.bind(this)
+      }
+      dec(){
+        this.setState({
+          count: this.state.count - 1,
+        })
+        // console.log(this.state.count) 未实时更新count
+      }
+      inc = () => {
+        this.setState({
+          count: this.state.count + 1
+        })
+        this.props.onIncrement()
+      }
+
+      // <button onClick={::this.dec}> - </button>
+      // <button onClick={() => this.dec()}> - </button>
+      render(){
+        return (
+          <div>
+            <button onClick={this.dec.bind(this)}> - </button>
+            <span>{this.state.count}</span>
+            <button onClick={this.inc}> + </button>
+          </div>
+        )
+      }
+    }
+    class Repeat extends React.Component{
+      constructor(props){
+        super(props)
+        this.props = props
+      }
+      renderChildren(){
+        var child = []
+        for(var i=0;i<this.props.numTimes;i++){
+          child.push(this.props.children(i))
+        }
+        return child
+      }
+      render(){
+        return (
+          <div>
+            {this.renderChildren()}
+          </div>
+        )
+      }
+    }
+
+    ReactDOM.render(
+      <div>
+        <Repeat numTimes={5}>
+          {(index) => <div>{index}</div>}
+        </Repeat>
+        <h1>Hello, world!</h1>
+        <Counter start={5}/>
+        <Counter onIncrement={() => console.log('click inc!')} />
+      </div>,
+      document.getElementById('root')
+    )
+
+  </script>
+</body>
+</html>

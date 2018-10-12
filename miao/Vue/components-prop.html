@@ -19,9 +19,29 @@
     .checked{
       border: 1px solid;
     }
+
+    .liked{
+      background: pink;
+    }
   </style>
 </head>
 <body>
+  <div id="components-demo1">
+    <button-counter></button-counter>
+  </div>
+
+  <div id="components-demo2">
+    <button-counter></button-counter>
+  </div>
+
+  <div id="like-demo1">
+    <like></like>
+  </div>
+
+  <div id="button-counter-demo1">
+    <button-counter-demo1 :start="9"></button-counter-demo1>
+  </div>
+
   <div id="blog-posts-events-demo">
     <div :style="{ fontSize: postFontSize + 'em' }">
         <blog-post
@@ -69,6 +89,7 @@
       @prev
       @next
     ></slider>
+
 
   </div>
 </body>
@@ -354,6 +375,84 @@
         this.postFontSize -= shrinkAmount
       }
     },
+  })
+
+
+  //demo3
+  Vue.component('button-counter-demo1', {
+    props:['start'],
+    template:`
+    <div>
+      <button @click="del">-</button>
+      <span>{{count}}</span>
+      <button @click="add">+</button>
+    </div>
+    `,
+    data: function(){
+      return {
+        count:this.start
+      }
+    },
+    methods: {
+      add:function(){
+        this.count++
+      },
+      del:function(){
+        this.count--
+      }
+    }
+  })
+  var btnCountDemo = new Vue({
+    el:'#button-counter-demo1',
+  })
+
+  //demo2-全局组件(粉色喜欢按钮，点击喜欢+1，再点击取消喜欢-1)
+  Vue.component('like', {
+    template:`
+      <button :class="{liked:liked}" @click="toggleLike">
+        {{likeCount}}
+      </button>
+    `,
+    data: function(){
+      return {
+        likeCount:10,
+        liked:false,
+      }
+    },
+    methods:{
+      toggleLike: function(){
+        if(!this.liked){
+          this.likeCount++
+        }else{
+          this.likeCount--
+        }
+        this.liked = !this.liked
+      }
+    }
+  })
+  var likeDemo1 = new Vue({
+    el:'#like-demo1'
+  })
+
+  //demo1
+  var buttonCount = {
+    data: function () {
+      return {
+        count: 0
+      }
+    },
+    template: '<button v-on:click="count++">You clicked me {{ count }} times.</button>'
+  }
+  var app13 = new Vue({
+    el:'#components-demo1',
+    components:{
+      //元素名称 ： 被封装的组件对象
+      'button-counter':buttonCount
+    }
+  })
+  var app15 = new Vue({
+    el:'#components-demo2',
+    //该Vue未被添加'button-counter'组件，所以不会被渲染，Unknown custom element: <button-counter>
   })
 </script>
 </html>
