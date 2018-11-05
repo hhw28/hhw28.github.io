@@ -72,8 +72,65 @@
       }
     }
 
+    class Clock extends React.Component{
+      constructor(props){
+        super(props)
+        this.state = {
+          date: new Date()
+        }
+      }
+      //挂载
+      componentWillMount(){
+        this.intervalId = setInterval(() => {
+          console.log('interval...')
+          this.setState({
+            date: new Date()
+          })
+        }, 1000)
+      }
+      //销毁
+      componentWillUnmount(){
+        console.log('clear')
+        clearInterval(this.intervalId)
+      }
+      render(){
+        return <h2>Current time: {this.state.date.toLocaleString()}</h2>
+      }
+    }
+    class ClockApp extends React.Component{
+      state = {
+        show: true
+      }
+      toggle = () => {
+        this.setState({
+          show: !this.state.show
+        })
+      }
+      render(){
+        return (
+          <div>
+            <button onClick={this.toggle}>Toggle Time</button>
+            {this.state.show && <Clock />}
+          </div>
+        )
+      }
+    }
+
+
+    function NumberList(props) {
+      const numbers = props.numbers
+      const listItems = numbers.map((number) =>
+        <li>{number}</li>
+      )
+      return (
+        <ul>{listItems}</ul>
+      )
+    }
+
     ReactDOM.render(
       <div>
+        <NumberList numbers={[1, 2, 3, 4, 5]} />
+        <ClockApp/>
         <Repeat numTimes={5}>
           {(index) => <div>{index}</div>}
         </Repeat>

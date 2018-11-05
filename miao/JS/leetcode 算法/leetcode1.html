@@ -2156,18 +2156,33 @@ debugger
 }
 
 var validPalindrome = (s) => {
-  debugger
+  // debugger
     for (let i = 0, stop = s.length / 2; i < stop; i++) {
         let j = s.length - i - 1
         if (s[i] !== s[j]) {
           var a = s.substr(0, i) + s.substr(i + 1)
           var b = s.substr(0, j) + s.substr(j + 1)
 
-          return isPalindrome(a) || isPalindrome(b)
+          // return isPalindrome(a) || isPalindrome(b)
         }
     }
     return true
 }
 validPalindrome("tebbem")
+
+function a(n){
+  n = Math.floor(n)
+  n = n.toString()
+  // debugger
+  while(n.length < 4){
+    n = '0' + n
+  }
+
+  console.log(n)
+  return n
+}
+a(0.12)  //0000
+a(1.2)   //0001
+a(1200)
 </script>
 
