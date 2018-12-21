@@ -7,7 +7,8 @@
         /*宽度<=600px 背景为灰色*/
         body{
             background: gray;
-        }  
+            margin: 0;
+        }
         /*在页面900px>=宽度> 600px  时页面背景为黄色*/
         @media(min-width:600px){
             body{
@@ -28,24 +29,21 @@
         }
       </style>
     </head>
-    <body>
+    <body id="container">
         <h3>
             1. 在页面宽度> 1200px 时页面背景为红色<br>
             2. 在页面1200px>=宽度> 900px  时页面背景为绿色<br>
             3. 在页面900px>=宽度> 600px  时页面背景为黄色<br>
             4. 宽度<=600px 背景为灰色<br>
         </h3>
-        <p></p>
-        
-        <script src="js/jquery-3.2.1.min.js"></script>
+        <p id="text"></p>
         <script>
-            var width = $('body').innerWidth()
-            $('p').text('目前页面宽度是'+width)
-            
-            $(window).on('resize',function(){
-                var width = $('body').innerWidth()
-                $('p').text('目前页面宽度是'+width)
-            })
+
+            text.innerText = '目前页面宽度是' + window.getComputedStyle(container).width
+
+            window.onresize = function(){
+                text.innerText = '目前页面宽度是' + window.getComputedStyle(container).width
+            }
 
         </script>
     </body>
