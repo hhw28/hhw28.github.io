@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html>
+    <head>
+      <meta charset="utf-8">
+      <title>水平时间轴内容切换</title>
+      <style>
+          ol,li {
+              list-style: none;
+          }
+          #timeline{
+              width: 800px;
+              height: 100px;
+              margin: 100px auto 0;
+              position: relative;
+          }
+          #prev,#next{
+              border:1px solid #c8b6b6;
+              border-radius: 50%;
+              width: 40px;
+              height: 40px;
+              position: absolute;
+              top:30px;
+              /*文本居中*/
+              text-align: center;
+              line-height: 40px;
+              color: #c8b6b6;
+          }
+          #prev{
+              left:0;
+          }
+          #next{
+              right:0;
+          }
+          #events-wrapper{
+              position: relative;
+              margin: 0 50px;
+              height: 100%;
+              width: 700px;
+              overflow: hidden;
+          }
+          #events{
+              height: 1px;
+              width: 1000px;
+              background-color: #c8b6b6;
+              position: absolute;
+              top:50%;
+              transition: transform 0.5s;
+          }
+          #events .date{
+              position: absolute;
+              bottom: 10px;
+          }
+          #events .date::before{
+              content: '';
+              display: block;
+              width: 10px;
+              height: 10px;
+              position: absolute;
+              border:1px solid #c8b6b6;
+              border-radius: 50%;
+              top:24px;
+              left:20px;
+              background: #fff;
+          }
+          #events .date.previous::before{
+              border:1px solid green;
+          }
+          #events .date.chosen::before{
+              background: green;
+              border:1px solid green;
+          }
+          #filling-line{
+              height: 1px;
+              width: 40px;
+              position: absolute;
+              top:50%;
+              background-color: green;
+              transform-origin: left center;
+              transition:transform 0.5s;
+              transform:scaleX(1)
+          }
+      </style>
+    </head>
+    <body>
+        <div id="timeline">
+            <div id="prev">&lt;</div>  <!-- < -->
+            <div id="next">&gt;</div>  <!-- > -->
+            <div id="events-wrapper">
+                <div id="events">
+                    <ol>
+                        <li class="date previous" data-date="2016/01/16">16 Jan</li>
+                        <li class="date chosen" data-date="2016/01/16">16 Jan</li>
+                        <li class="date" data-date="2016/01/16">16 Jan</li>
+                        <li class="date" data-date="2016/01/16">16 Jan</li>
+                        <li class="date" data-date="2016/01/16">16 Jan</li>
+                        <li class="date" data-date="2016/01/16">16 Jan</li>
+                        <li class="date" data-date="2016/01/16">16 Jan</li>
+                        <li class="date" data-date="2016/01/16">16 Jan</li>
+                        <li class="date" data-date="2016/01/16">16 Jan</li>
+                    </ol>
+                </div>
+                <div id="filling-line"></div>
+            </div>
+        </div>
+        <script>
+            (function(){
+                let prev = document.getElementById('prev')
+                let next = document.getElementById('next')
+                let eventsWrapper = document.getElementById('events-wrapper')
+                let events = document.getElementById('events')
+                let fillingLine = document.getElementById('filling-line')
+                let dateNodes = events.getElementsByClassName('date')
+                let dates = []
+
+                const perDistance = 60
+                
+                Array.prototype.forEach.call(dateNodes,(dateNode) => {
+                    let dateStr = dateNode.dataset.date
+                    dates.push(datify(dateStr))
+                })
+                console.log(dates)
+
+                //根据字符串获取日期
+                function datify(dateStr){
+                    //2016/02/28
+                    let [year,month,date] = (dateStr || '').split('/')
+                    return new Date(year,month-1,date)
+                }
+            })()
+        </script>
+    </body>
+</html>

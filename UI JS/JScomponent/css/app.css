@@ -1,0 +1,84 @@
+li{
+    list-style: none;  
+}
+div,ol,li,h1{
+    margin: 0px;padding: 0px;
+}
+a{
+    text-decoration: none;
+}
+body{
+    background: #ccc !important;
+}
+.container{
+    margin: 4vw;
+    padding: 2vw 4vw;
+    border:1px solid #fff;
+    border-radius: 2vh;
+    background: #fff;
+}
+h1{
+    text-align: center;
+    padding: 3vw;
+    min-width: 354px;
+}
+.content{
+    
+}
+.content>li{
+    margin:1.1vw; 
+    margin-bottom: 3.5vw;
+    width: 290px;
+    border:1px solid #ccc;
+    border-radius: 5px;
+}
+.content li a img{
+    width: 259px;
+    height: 186px;
+}
+.content a h3{
+    text-align:center; 
+}
+.content a{
+    color:#000;
+}
+.content a:hover{
+    color: blue;
+}
+/* @media(min-width:668px){
+    .container{
+        width:392px !important;
+    }
+} */
+@media(min-width:400px){  
+    .container{
+        width:384px !important;
+    }
+}
+@media(min-width:768px){  
+    .container{
+        width:701px !important;
+    }
+}
+@media(min-width:992px){
+    .container{
+        width:1027px !important;
+    }
+}
+@media(min-width:1200px){
+    .container{
+        width:1410px !important;
+    }
+}
+@media(min-width:1700px){
+    .container{
+        width:1470px;
+    }
+}
+#myCarousel li{
+    width: 7%;
+}
+.carousel-caption{
+    font-size:18px;
+    margin-bottom: 5px;
+}

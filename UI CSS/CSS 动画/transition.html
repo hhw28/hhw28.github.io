@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html>
+    <head>
+      <meta charset="utf-8">
+      <title>HTML5 CSS3</title>
+      <style>
+          .content>div{
+              float: left;
+              margin: 20px;
+          }
+          .content{
+              max-width: 1000px;
+              margin: 0 auto;
+          }   
+          .box1{
+              width: 100px;
+              height: 100px;
+              border: 1px solid red;
+              border-radius: 10px;
+          }
+          .box2{
+              width: 100px;
+              height: 100px;
+              border: 1px solid red;
+              border-radius: 50px;            
+          }
+          .box3{
+              width: 100px;
+              height: 100px;
+              border: 1px solid red;
+              box-shadow: 5px 5px 10px red;
+          }
+          .box4{
+              width: 100px;
+              height: 100px;
+              border: 1px solid red;
+              box-shadow: inset 5px 5px 10px red;
+          }
+          .box5{
+              width: 100px;
+              height: 100px;
+              border: 1px solid red;
+              background: url(01.jpg) center center no-repeat;
+              background-size: contain;
+          }
+          .box51{
+              width: 100px;
+              height: 100px;
+              border: 1px solid red;
+              background: url(01.jpg) center center no-repeat;
+              background-size: cover;
+          }
+          .box6{
+              width: 100px;
+              height: 100px;             
+              background: linear-gradient(to bottom right,red,yellow,orange);
+          }
+          .box7{
+              width: 100px;
+              height: 100px;
+              background: radial-gradient(50px 50px at 50px,red,yellow,orange);
+          } 
+          .box8{
+              width: 100px;
+              height: 100px;
+              background: radial-gradient(50px 50px at 50px,red,yellow,orange);
+            
+              transition:0.3s;
+          }
+          .box8:hover{
+              width: 100px;
+              height: 100px;
+          }   
+          .box9{
+              width: 100px;
+              height: 100px;
+              border: 1px solid red;
+              position: relative;
+          }
+          .box9:hover{
+              animation: 3s rainbow;
+          }
+          @keyframes rainbow {
+              0% { background: #c00; }
+              50% { background: orange; width: 300px;height: 100px;left: 50px;}
+              100% { background: yellowgreen; width: 200px;height: 50px;}
+          } 
+          .box10{
+              width: 100px;
+              height: 100px;
+              background: url(01.jpg) center center no-repeat;
+              background-size: cover;
+              transform: rotateX(40deg);
+              /*transform-origin: 0% 0%;*/
+          }
+          .box11{
+              width: 100px;
+              height: 100px;
+              background: url(01.jpg) center center no-repeat;
+              background-size: cover;
+              transform:skew(10deg,20deg)
+          }    
+          .box12{
+              width: 100px;
+              height: 100px;
+              background: url(01.jpg) center center no-repeat;
+              background-size: cover;
+              transform:scale(0.8)
+          }  
+          .box13{
+              width: 100px;
+              height: 100px;
+              background: url(01.jpg) center center no-repeat;
+              background-size: cover;
+              transform: perspective(200px) rotateY(40deg);
+
+          }            
+      </style>
+    </head>
+    <body>
+        <div class="content">
+            <div class="box1">圆角 border-radius</div>
+            <div class="box2">圆形</div>
+            <div class="box3">阴影</div>
+            <div class="box4">内阴影</div>
+            <div class="box5">background-size:contain;</div>
+            <div class="box51">background-size:cover;</div>
+            
+            <div class="box6">渐变</div>
+            <div class="box7">圆周渐变</div>
+            <div class="box8">transition</div>
+            <div class="box9">动画放大偏移又缩小</div>
+            <div class="box10">2D旋转</div>
+            <div class="box11">transform:skew(10deg,20deg) 扭曲</div>        
+            <div class="box12">transform:scale(0.8) 缩放到0.8倍</div> 
+            <div class="box13">3D旋转</div>
+        </div>
+
+        <script>
+        </script>
+    </body>
+</html>

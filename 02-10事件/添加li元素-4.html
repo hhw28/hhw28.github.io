@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>点击添加li</title>
+</head>
+<body>
+  <ul class="ct">
+      <li>这里是</li>
+      <li>饥人谷</li>
+      <li>任务班</li>
+  </ul>
+  <input class="ipt-add-content" placeholder="添加内容"/>
+  <button id="btn-add-start">开头添加</button>
+  <button id="btn-add-end">结尾添加</button>
+
+  <script>
+      var btnStart = $('#btn-add-start')
+      var btnEnd =$('#btn-add-end')
+      var addContent = $('.ipt-add-content') 
+      var ct = $('.ct')
+
+      btnStart.addEventListener('click',content)
+      btnEnd.addEventListener('click',content)
+
+      function content(e){
+          if(addContent.value != 0 ){     //如果没有字符报错
+              var li = document.createElement('li')
+              li.innerText = addContent.value
+              console.log(this)
+              if(this.id === 'btn-add-start'){
+                    ct.insertBefore(li,ct.firstElementChild)
+              }
+              if(this.id === 'btn-add-end'){
+                    ct.appendChild(li)
+              }
+
+          }else{
+              alert('输入您所需要添加的内容')
+          }
+      }
+
+      ct.addEventListener('click',function(e){
+          console.log(e.target.innerText)
+      })
+
+
+      function $(obj){
+          return document.querySelector(obj)
+      }
+      function $$(array){
+          return document.querySelectorAll(array)
+      }
+  </script>
+</body>
+</html>

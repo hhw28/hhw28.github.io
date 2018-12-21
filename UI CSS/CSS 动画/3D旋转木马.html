@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <title>3D 旋转木马</title>
+  <style>
+    * {
+      background-color:rgba(0,0,0,0.1);
+    }
+
+    body{
+      width: 100vw;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin: 0;
+    }
+    @keyframes rotate{
+      from{
+        transform:rotateY(0deg);
+      }
+      to{
+        transform:rotateY(-360deg);
+      }
+    }
+    section{
+      perspective:500px;   /*对于舞台，加个视距*/
+
+      width:128px;
+      height:100px;  /*宽高和旋转的元素一致，避免旋转的时候有偏移的情况*/
+    }
+
+    main{
+      transform-style:preserve-3d;   /*对于容器，加个3D视图声明*/
+
+      height:100%;
+      width:100%;
+
+      animation-name: rotate;
+      animation-timing-function: linear;
+      animation-iteration-count: infinite;
+      animation-duration: 8s;
+    }
+
+    div{
+      width:128px;
+      height:100px;
+      background-image:linear-gradient(to right,orange,pink);
+      position:absolute;   /*让所有图片叠加，共用同一个中心点*/
+    }
+
+    /*360deg/9张图片=40deg每张图*/
+    div:nth-child(1) { transform: rotateY(  0deg ) translateZ(195.839px); }
+    div:nth-child(3) { transform: rotateY(  80deg ) translateZ(195.839px); }
+    div:nth-child(2) { transform: rotateY(  40deg ) translateZ(195.839px); }
+    div:nth-child(3) { transform: rotateY(  80deg ) translateZ(195.839px); }
+    div:nth-child(4) { transform: rotateY( 120deg ) translateZ(195.839px); }
+    div:nth-child(5) { transform: rotateY( 160deg ) translateZ(195.839px); }
+    div:nth-child(6) { transform: rotateY( 200deg ) translateZ(195.839px); }
+    div:nth-child(7) { transform: rotateY( 240deg ) translateZ(195.839px); }
+    div:nth-child(8) { transform: rotateY( 280deg ) translateZ(195.839px); }
+    div:nth-child(9) {
+      transform: rotateY( 320deg ) translateZ(195.839px);
+      background-image: url(https://ss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=1599076608,1978200784&fm=27&gp=0.jpg);
+      background-size: contain;
+      /* backface-visibility: hidden; */
+    }
+
+  </style>
+</head>
+<body>
+  <section>  <!--舞台-->
+    <main>  <!--容器-->
+      <div>1</div>
+      <div>2</div>
+      <div>3</div>
+      <div>4</div>
+      <div>5</div>
+      <div>6</div>
+      <div>7</div>
+      <div>8</div>
+      <div>9</div>
+    </main>
+  </section>
+
+</body>
+</html>

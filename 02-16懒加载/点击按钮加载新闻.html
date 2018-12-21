@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+    <head>
+      <meta charset="utf-8">
+      <title>点击按钮加载新闻</title>
+      <style>
+        ul,li{
+            list-style: none;
+        }
+        a{
+            text-decoration: none;
+            color: #333;
+        }
+        ul,li,a,div,h2,p{
+            margin: 0px;
+            padding: 0px;
+        }
+        .clearfix{
+            content: '';
+            display: block;
+            clear: both;
+        }
+        .content{
+            max-width: 500px;
+            margin: 0 auto;
+        }
+        .content .item{
+            margin: 20px 0px;
+        }
+        .content .item .img img{
+            width: 50px;
+            height: 50px;
+        }
+        .content .item .img{
+            float: left;
+        }
+        .content .item h2{
+            margin-left:60px;
+            font-size: 14px;
+        }
+        .content .item p{
+            margin-left:60px;
+            margin-top:6px;
+            color: #999;
+            font-size:14px;
+        }
+      </style>
+    </head>
+    <body>
+        <div class="content">
+            <ul class="news clearfix">
+                <li class="item">
+                    <a href="http://xw.qq.com/mil/20160830028700/MIL2016083002870002">
+                        <div class="img">
+                            <img src="http://inews.gtimg.com/newsapp_match/0/531338035/0" alt="">
+                        </div>
+                        <h2>外媒称中国已经决心造出世界先进的航空发动机</h2>
+                        <p>资料图：2012年11月14日，第九届中国国际航空航天博览会上...</p>
+                    </a>
+                </li>
+            </ul>
+        <button class="load-more clearfix">加载更多</button>
+        </div>
+        
+
+        <script src="http://apps.bdimg.com/libs/jquery/1.9.1/jquery.js"></script>
+        <script>
+           var pageIndex = 0
+
+            $('.load-more').on('click',function(){   //当点击加载更多按钮
+                $.get('/getNews',{page:pageIndex}).done(function(ret){     //向后端要数据，以及当数据来了之后
+                    if(ret.status === 0){  //和后端约定status: 0是成功
+                        pageIndex++; 
+                        appendHtml(ret.data)     //渲染
+                    }else{
+                        alert('获取新闻出错')  //获取的数据(后端返回的数据)不对导致失败
+                    }
+                }).fail(function(){
+                    alert('系统异常')   //断网等情况请求没有发送出去导致失败
+                })
+            })
+/*和后端约定返回给前端的数据格式为
+    [
+        {
+            link:'',
+            img:'',
+            title:'',
+            brif:''
+        }
+    ]
+    和后端约定
+    {
+        page:0  //当我每次发送p返回3条数据
+    }
+*/
+            function appendHtml(news){
+                if(news.length === 0){  //判断数据是否为0，若已经没有了则取消按钮告知用户没有数据了，并且return不再继续
+                    $('.load-more').remove()
+                    $('.content').append('<p>没有更多数据了</p>')
+                    return;
+                }
+                var htmls = ''
+                $.each(news,function(){
+                    htmls += '<li class="item">'
+                    htmls += '<a href="'+this.link+'">'
+                    htmls += '<div class="img"><img src="'+this.img+'" alt=""></div>'
+                    htmls += '<h2>'+this.title+'</h2>'
+                    htmls += '<p>'+this.brif+'</p></a></li>'
+                })
+                $('.news').append(htmls) //把拼接好的html加入
+            }
+
+           
+
+        </script>
+    </body>
+</html>

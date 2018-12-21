@@ -1,0 +1,14 @@
+{
+  "name": "gulp-demo1-wh",
+  "version": "1.0.0",
+  "description": "gulp的第一次尝试",
+  "main": "gulpfile.js",
+  "devDependencies": {
+    "gulp": "^3.9.1"
+  },
+  "scripts": {
+    "test": "echo \"你好\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC"
+}

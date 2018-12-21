@@ -1,0 +1,49 @@
+li{
+    list-style: none;  
+}
+div,ol,li,h1{
+    margin: 0px;padding: 0px;
+}
+a{
+    text-decoration: none;
+}
+body{
+    background: #ccc;
+}
+.container{
+    margin: 4vw;
+    padding: 2vw 4vw;
+    border:1px solid #fff;
+    border-radius: 2vh;
+    background: #fff;
+    min-width: 920px;
+
+}
+h1{
+    text-align: center;
+    padding: 3vw;
+}
+.content{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+
+}
+.content>li{
+    margin:1.1vw; 
+    border:1px solid #ccc;
+    border-radius: 5px;
+}
+.content li a img{
+    width: 259px;
+    height: 186px;
+}
+.content a h3{
+    text-align:center; 
+}
+.content a{
+    color:#000;
+}
+.content a:hover{
+    color: blue;
+}

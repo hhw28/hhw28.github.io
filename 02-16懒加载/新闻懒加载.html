@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html>
+    <head>
+      <meta charset="utf-8">
+      <title>新闻懒加载</title>
+      <style>
+        ul,li{
+            list-style: none;
+        }
+        a{
+            text-decoration: none;
+            color: #333;
+        }
+        ul,li,a,div,h2,p{
+            margin: 0px;
+            padding: 0px;
+        }
+        .clearfix{
+            content: '';
+            display: block;
+            clear: both;
+        }
+        .content{
+            max-width: 500px;
+            margin: 0 auto;
+        }
+        .content .item{
+            margin: 20px 0px;
+        }
+        .content .item .img img{
+            width: 50px;
+            height: 50px;
+        }
+        .content .item .img{
+            float: left;
+        }
+        .content .item h2{
+            margin-left:60px;
+            font-size: 14px;
+        }
+        .content .item p{
+            margin-left:60px;
+            margin-top:6px;
+            color: #999;
+            font-size:14px;
+        }
+        .load-more{
+            visibility: hidden;  /*这里不能用display：none，会导致高度计算有误，一直出现在窗口中*/
+        }
+      </style>
+    </head>
+    <body>
+        <div class="content">
+            <ul class="news clearfix">
+
+            </ul>
+        <!--<button class="load-more clearfix">加载更多</button>-->
+        <span class="load-more clearfix">加载更多</span>
+        </div>
+        
+
+        <script src="http://apps.bdimg.com/libs/jquery/1.9.1/jquery.js"></script>
+        <script>
+            var pageIndex = 0
+            var isOver = false  //判断数据是否全部到了，全部到了就不再发请求了
+            var isNewsArrive = true //判断数据是否到
+            
+            getNews() //未滚动前先获取一次，避免打开一片空白
+            $(window).on('scroll',checkNews)//当页面滚动的时候
+            
+            function checkNews(){
+                if(isShow($('.load-more')) && !isOver ){  //判断加载更多已经展示可以继续滚动，并且数据是否都获取完成，完成了就不再发相同请求了
+                    getNews()
+                } 
+            }
+            
+            function getNews(){
+                isNewsArrive = false //数据还未到
+                $.get('/getNews',{page:pageIndex}).done(function(ret){     //向后端要数据，以及当数据来了之后
+                    if(ret.status === 0){  //和后端约定status: 0是成功
+                        pageIndex++; 
+                        appendHtml(ret.data)     //渲染
+                        checkNews()
+                    }else{
+                        alert('获取新闻出错')  //获取的数据(后端返回的数据)不对导致失败
+                    }
+                    isNewsArrive = true  //数据到了
+                }).fail(function(){
+                    alert('系统异常')   //断网等情况请求没有发送出去导致失败
+                })
+            }
+/*和后端约定返回给前端的数据格式为
+    [
+        {
+            link:'',
+            img:'',
+            title:'',
+            brif:''
+        }
+    ]
+    和后端约定
+    {
+        page:0  //当我每次发送p返回3条数据
+    }
+*/
+            function appendHtml(news){
+                if(news.length === 0){  //判断后端返回的数据是否为0，若已经没有更多数据了
+                    isOver = true  //不再继续发送相同的请求
+                    $('.content').append('<p>没有更多数据了....</p>')  //并且添加文字说明告知没有数据了
+                    return;   //并且return 不再拼接html
+                }
+                var htmls = ''
+                $.each(news,function(){
+                    htmls += '<li class="item">'
+                    htmls += '<a href="'+this.link+'">'
+                    htmls += '<div class="img"><img src="'+this.img+'" alt=""></div>'
+                    htmls += '<h2>'+this.title+'</h2>'
+                    htmls += '<p>'+this.brif+'</p></a></li>'
+                })
+                $('.news').append(htmls) //把拼接好的html加入
+            }
+
+            function isShow($node){
+                var windowHeight = $(window).height(),   //窗口的高度
+                    scrollTop = $(window).scrollTop(),     //滚动距离顶点的距离
+                    offsetTop = $node.offset().top,     //传递的参数距离顶点的距离
+                    nodeHeight = $node.height();    //节点的自身高度
+
+                if(windowHeight + scrollTop > offsetTop && scrollTop < offsetTop + nodeHeight){   
+                    return true;
+                }else{
+                    return false;
+                }
+            }            
+
+           
+
+        </script>
+    </body>
+</html>

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <!-- <meta http-equiv="refresh" content="3"> -->
+    <title>三栏等高自适应布局</title>
+    <style>
+        body{
+            min-width: 500px;
+        }
+        header,main,footer{
+            border: 5px solid;
+        }
+        main{
+            border-color: red;
+            overflow: hidden;
+        }
+        /* main > *{
+            padding-bottom: 600px;
+            margin-bottom:-600px;
+        } */
+        main > div {
+            position: relative;
+        }
+        main > div::before{
+            content: '';
+            position: absolute;
+            height: 99999px;
+            width: 100%;
+            background-color: inherit;
+            z-index: -1;
+        }
+
+        main .left{
+            float: left;
+            background-color: pink;
+            width: 20%;
+        }
+        main .right{
+            float: right;
+            background-color: tan;
+            width: 30%;
+        }
+        main .middle{
+            /* overflow: hidden; */
+            display: flow-root;
+            background-color: yellow;
+        }
+
+    </style>
+</head>
+<body>
+
+    <header>header</header>
+    <main>
+        <div class="left">Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempora quod quia unde consequuntur assumenda, .</div>
+        <div class="right">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Asperiores maiores quibusdam dolore distinctio, est dignissimos accusamus repudiandae ea debitis voluptates, iusto dolor ipsa, pariatur unde totam doloremque assumenda perferendis ducimus?</div>
+        <div class="middle">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Asperiores maiores quibusdam dolore distinctio, est dignissimos perspiciatis accusamus eaque?</div>
+    </main>
+    <footer>footer</footer>
+
+</body>
+</html>

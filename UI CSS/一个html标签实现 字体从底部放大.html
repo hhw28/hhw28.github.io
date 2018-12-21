@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <!-- <meta http-equiv="refresh" content="3"> -->
+    <title>Document</title>
+    <style>
+        html,body{
+            margin: 0;
+            padding: 0;
+            height: 100%;
+        }
+/*第一题，只能使用一个标签实现效果*/
+        .box{
+            height: 100px;
+            width: 200px;
+            background-color: aquamarine;
+            border-bottom: 2px solid red;
+            box-sizing: border-box;
+        }
+        .box:hover{
+            font-size: 50px;
+            transition: 1s ;
+        }
+        /*伪元素 + 绝对定位到底部*/
+        .box1{
+            display: inline-block;
+            position: relative;
+        }
+        .box1::before{
+            content: '订阅博客';
+            position: absolute;
+            bottom: 0;
+        }
+        /*表格移到底部*/
+        .box2{
+            display: table-cell;  /*单元格不能设置margin*/
+            vertical-align: bottom;
+        }
+        /*padding-top 移到底部*/
+        .box3{
+            display: inline-block;
+            padding-top:70px;
+            margin-top:5px;
+        }
+        .box3:hover{
+            padding-top:25px;
+        }
+
+    </style>
+</head>
+<body>
+    <div>
+        <span class="box box1"></span>
+        <span class="box box2">订阅博客</span>
+        <span class="box box3">订阅博客</span>
+    </div>
+</body>
+</html>

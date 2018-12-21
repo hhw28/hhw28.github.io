@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>flex-邮箱</title>
+    <style>
+        body{
+            margin: 0;
+            padding: 0;
+
+            height: 100vh;
+            width: 100vw;
+
+            display: flex;
+            flex-direction: row;
+            flex-wrap:wrap;
+        }
+
+        section {
+            display: flex;
+        }
+        .left-side,.right-side {
+            width: 200px;
+            background-color: red;
+        }
+        .content {
+            flex-grow: 1;
+            background-color: olive;
+        }
+
+
+
+
+    </style>
+</head>
+<body>
+
+    <section>
+        <div class="left-side"></div>
+        <div class="content">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Non velit eligendi rem asperiores impedit sint iusto nostrum sapiente optio laboriosam, dignissimos sed corporis delectus officia et dolor repudiandae deserunt similique.</div>
+        <div class="right-side"></div>
+    </section>
+
+
+</body>
+</html>

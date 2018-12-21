@@ -1,0 +1,144 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>加载更多</title>
+    <style>
+      ul,a{
+        margin: 0;
+        padding: 0;
+      }
+      ul{
+        list-style: none;
+        margin-bottom: 20px;
+      }
+      a{
+        text-decoration: none;
+      }
+      #ct li{
+        border: 1px solid #9f9f9f;
+        border-radius: 4px;
+        margin: 10px;
+        padding: 10px;
+      }
+      #ct li:hover{
+        background: pink;
+      }
+      .btn{
+        border-radius: 4px;
+        background: pink;
+        color: #222;
+        padding: 10px;
+        display: block;
+        width: 100px;
+        text-align: center;
+        margin: 0 auto;
+      }
+    </style>
+</head>
+<body>
+  <ul id="ct"></ul>
+  <a id="load-more" class="btn" href="#">加载更多</a>
+  
+  <script src="http://apps.bdimg.com/libs/jquery/1.9.1/jquery.js"></script>
+
+  <script>
+//原生dom封装
+    var btn = document.querySelector('#load-more')
+    var ct = document.querySelector('#ct')
+    var pageIndex = 0
+    var isDataArrive = true  //1.检测后端数据是否返回
+    btn.addEventListener('click',function(e){
+      e.preventDefault() //取消a链接的默认跳转
+      if(!isDataArrive){
+        return  //若数据还没到，直接return不会继续，避免数据到来之前重复点击出现重复
+      }
+      loadData(function(news){
+        renderPage(news.data)
+        pageIndex = pageIndex + 5
+        isDataArrive = true   //3.数据已经到了，可以继续点击发送请求了
+      })
+      isDataArrive = false   //2.数据发送未到之前，会被直接return不能继续点击发送请求
+    })
+    function loadData(callback){
+      ajax({
+        type:'get',
+        url:'/getMore',
+        data:{
+          index:pageIndex,
+          length:5
+        },
+        onSuccess:callback,   //成功了执行调用loadData()时里面包含的函数，56行开始
+        onError:function(){ console.log('出错了') }
+      })
+    }
+    function ajax(options){
+      var xhr = new XMLHttpRequest()
+      xhr.onreadystatechange = function(){
+        if(xhr.readyState === 4 ){
+          if(xhr.status === 200 || xhr.status === 304){
+              console.log(xhr.responseText)
+              var results = JSON.parse(xhr.responseText)   //获取数据。和后端约定给JSON格式，所以使用JSON解析
+              options.onSuccess(results)
+          }else{
+              options.onError()
+          }
+        }
+      }
+//拼接url
+      var query = '?'
+      for(key in options.data){
+        query += key + '=' + options.data[key] + '&'
+      }
+      query = query.substr(0,query.length-1)  //通过上面的拼接，最后一位是&，需要把最后一个&去掉
+                      // '/getMore?index=pageIndex&length=5'   //pageIndex是个变量
+      xhr.open(options.type,options.url + query, true)    //配置参数
+      xhr.send()    //发送
+    }
+    function renderPage(news){
+      var fragment = document.createDocumentFragment()   //先创建一个空白节点，然后把我们的html放进这个容器，最后一起放进网页中
+      for(var i=0; i<news.length; i++){
+        var node = document.createElement('li')
+        node.innerText = news[i]
+        fragment.appendChild(node)
+      }
+      ct.appendChild(fragment)    
+    }
+    
+//jquery方法
+      // var $btn = $('#load-more');
+      // var $ct = $('#ct')
+      // var lock = false;
+      
+      // $btn.on('click', function(){
+      //     var pageIndex = $('#ct>li').length + 1;
+          
+      //     if(!lock){
+      //         lock = true;
+      //         $.ajax({
+      //             url: '/getMore',
+      //             type: 'get',
+      //             dataType: 'json',
+      //             data:{
+      //                 index: pageIndex,
+      //                 length: 3     //每次获取3条新闻
+      //             },
+      //             success: function(result){
+      //                 renderPage(result.data);
+      //                 lock = false;
+      //             },
+      //             error: function(){
+      //                 lock = false;
+      //             }
+      //         })
+      //     }
+      // })
+      // function renderPage(data){
+      //     for(var i = 0; i < data.length; i++){
+      //         $ct.append('<li>' + data[i] + '</li>');
+      //     }
+      // }
+  </script>
+  
+</body>
+</html>

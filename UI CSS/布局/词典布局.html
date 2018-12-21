@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <!-- <meta http-equiv="refresh" content="3"> -->
+    <title>词典布局</title>
+    <style>
+        html,body{
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            min-width: 400px;
+            /* font-size: 0;  使用inline-block布局时需要去除缝隙*/
+        }
+        section{
+            width: 100%;
+            height: 100%;
+        }
+        .red{
+            background-color: red;
+        }
+        .orange{
+            background-color: orange;
+        }
+        .pink{
+            background-color: pink;
+        }
+        .tan{
+            background-color: tan;
+        }
+        .aqua{
+            background-color: aqua;
+        }
+
+        /*float:left布局*/
+        .red,.orange,.pink{
+            width: 17%;
+            height: 100%;
+        }
+        .red{
+            float: left;
+            /* display: none; */
+        }
+        .orange,.pink{
+            float: right;
+        }
+        .tan,.aqua{
+            overflow: hidden;   /*宽度自适应*/
+        }
+        .tan{
+            height: 100px;
+        }
+        .aqua{
+            height: calc(100% - 100px);
+        }
+
+        /*inline-block布局
+        main,aside{
+            display: inline-block;
+            font-size: 16px;  为了去除缝隙对父元素设置了font-zise=0
+        }
+
+        /*绝对定位布局
+        section{
+            position: relative;
+        }
+        div{
+            position: absolute;
+        }
+        .red{
+            width: 17%;
+            height: 100%;
+            top: 0;
+            left: 0;
+        }
+        .orange{
+            width: calc(100% - 17%);
+            height: 100px;
+            top:0;
+            left: 17%;
+        }
+        .pink{
+            width: calc(100% - 17%);
+            height: calc(100% - 100px);
+            bottom: 0;
+            left: 17%;
+        }
+        .tan{
+            width: 17%;
+            height: 100%;
+            top: 0;
+            right: 17%;
+        }
+        .aqua{
+            width: 17%;
+            height: 100%;
+            top: 0;
+            right: 0;
+        } */
+    </style>
+</head>
+<body>
+    <section>
+        <div class="red"></div>
+        <div class="orange"></div>
+        <div class="pink"></div>
+        <div class="tan"></div>
+        <div class="aqua"></div>
+    </section>
+</body>
+</html>

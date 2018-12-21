@@ -1,0 +1,167 @@
+<html>
+    <head>
+        <meta charset="utf-8">
+    </head>
+    <ul>
+        <li>选项1</li>
+        <li>选项2</li>
+        <li>选项3</li>
+        <li>选项4</li>
+        <li>选项5</li>
+        <li>选项6</li>
+    </ul>
+    <script>
+        var items = document.querySelectorAll('li') 
+        for(var i=0;i<items.length;i++){
+            items[i].onclick = function(){
+                console.log(i)   //点击任何li此时i都为5
+            }
+        }
+        //方法1
+        var items = document.querySelectorAll('li') 
+        for(var i=0;i<items.length;i++){
+            !function(i){   //新建一个函数作用域，然后把i做为参数传入保存起来
+                items[i].onclick = function(){
+                    console.log(i)
+                }
+            }(i) 
+        }
+        //方法2
+        var items = document.querySelectorAll('li') 
+        for(var i=0;i<items.length;i++){
+            function temp(i){
+                return function(){
+                    console.log(i)
+                }
+            }
+            var fn = temp(i)
+            items[i].onclick = fn
+        }
+        //方法2优化后
+        var items = document.querySelectorAll('li') 
+        for(var i=0;i<items.length;i++){
+            items[i].onclick = function(i){
+                return function(){
+                    console.log(i)
+                }
+            }(i)
+        }
+//什么是闭包：「函数」和「函数内部能访问到的变量」（也叫环境）的总和，就是一个闭包。
+        
+        function xxx(){
+            var a = 1
+            return function(){
+                a++
+                console.log(a)
+            }
+        }
+        var yyy = xxx()
+        yyy()   //2
+        yyy()   //3
+        
+
+        function foo(){
+            var local = 1
+            function bar(){
+                local++
+                return local
+            }
+            return bar  //如果不 return，就无法使用这个闭包。
+                    //把 return bar 改成 window.bar = bar 也是一样的，只要让外面可以访问到这个 bar 函数就行了。
+                    //所以 return bar 只是为了 bar 能被使用，也跟闭包无关。
+        }
+        var func = foo()
+        func()
+
+//闭包的作用：闭包常常用来「间接访问一个变量」。换句话说，「隐藏一个变量」。
+//一般情况下使用闭包主要是为了：封装数据、暂存数据
+
+        !function(){
+            var lives = 50
+            window.add = function(){  //函数+变量lives = 构成一个闭包
+                lives += 1
+            }
+            window.del = function(){ //函数+变量lives = 构成另外一个闭包
+                lives -= 1
+            }
+        }()
+
+
+//1、如下代码输出多少？如果想输出3，那如何改造代码？
+        var fnArr = []
+        for (var i = 0; i < 10; i ++) {
+            fnArr[i] =  function(){
+                return i
+            }
+        }
+        console.log( fnArr[3]() ) // 10   
+/*      fnArr[3]() 拆开之后等于
+
+        var fn = fnArr[3]
+        fn()
+*/    
+    //改造后1
+        var fnArr = []
+        for (var i = 0; i < 10; i ++){
+            fnArr[i] = function(y){     
+                return function(){
+                    return y
+                }
+            }(i)
+        }
+        console.log( fnArr[3]() ) // 3
+    //改造后2
+        var fnArr = []
+        for (var i = 0; i < 10; i ++){
+            !function(i){
+                fnArr[i] =  function(){
+                    return i
+                }
+            }(i)
+        }
+        console.log( fnArr[3]() ) // 3
+    //改造后3，es6方法
+        var fnArr = []
+        for (let i = 0; i < 10; i ++) {
+            fnArr[i] =  function(){
+                return i
+            }
+        }
+        console.log( fnArr[3]() ) // 3
+
+   
+//2、如下代码输出多少？如何连续输出 0,1,2,3,4
+        for(var i=0; i<5; i++){
+            setTimeout(function(){
+                console.log('delayer:' + i )  //5,5,5,5,5
+            }, 0)
+        }
+    //改造1
+        for(var i=0; i<5; i++){
+            (function(y){
+                setTimeout(function(){
+                console.log('delayer:' + y )  //0,1,2,3,4
+                }, 0)
+            })(i)
+        }
+    //改造2
+        for(var i=0; i<5; i++){
+            setTimeout((function(y){
+                return function(){
+                console.log('delayer:' + y )  //0,1,2,3,4
+                }
+            }(i)), 0)    
+        }
+
+
+    
+//3、写一个 sum 函数，实现如下调用方式
+        function sum(a){
+            return function(b) {
+                return a + b
+            }
+        }
+        console.log( '数字为：'+sum(1)(2) )   //3     
+        console.log( '数字为：'+sum(5)(-1) )  //4
+    </script>
+</html>

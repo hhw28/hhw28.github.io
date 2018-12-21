@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>信息收集表单</title>
+	<meta charset="utf-8">
+	<style type="text/css">
+		.clear{
+			clear: both;
+		}
+		form{
+			margin: 0 auto;
+			width: 600px;
+			height: 525px;
+			box-shadow: 0px 8px 20px #b9b9b9;
+			color: #757575;
+			font-family: "Microsoft YaHei";
+		}
+		h2{
+			background: #009688;
+			color:#fff;
+			padding: 15px;
+		}
+		
+		.input{
+			padding:15px;
+			padding-top: 0px;
+			width: 570px;
+		}
+		.input div{
+			overflow: auto;
+		}
+		.input input,textarea{
+			border:0;
+			border-bottom: 1px solid #b9b9b9;
+			width: 100%;
+			padding: 8px;
+		}
+		.input .name p{
+			margin:0px;
+		}
+		.input p{
+			margin-bottom: 0px;
+		}
+		.check{
+			padding: 15px;
+			padding-top: 5px;
+		}
+		.check .checkbox{
+			float: left;
+			width: 75px;
+		}
+		.check .radio{
+			float: left;
+			width: 80px;
+			margin-left: 210px;
+			margin-bottom: 40px;
+		}
+		.check .submit{
+			background:#009688; 
+			border: none;
+			width: 60px;
+			height: 33px;
+			color: #fff;
+		}
+	</style>
+</head>
+<body>
+	<div>
+		<form>
+			<h2>信息收集表</h2>
+			<div class="input">
+				<div class="name">
+					<p>姓名</p>
+					<input type="text" name="name" placeholder=""> 
+				</div>
+				<div class="qq">
+					<p>QQ</p>
+					<input type="text" name="qq"> 
+				</div>
+				<div class="text">	
+					<p>要说的话</p>
+					<textarea name="text" cols="2" rows="3"></textarea>
+				</div>
+			</div>
+			<div class="check">
+				<div class="checkbox">
+					<label><input type="checkbox" name="love" value="Milk" checked>Milk</label>
+					<label><input type="checkbox" name="love" value="Sugar" >Sugar</label>
+					<label><input type="checkbox" name="love" value="Lemon" >Lemon</label>
+				</div>
+				<div class="radio">
+					<label><input type="radio" name="sex" value="man" checked>Male</label>
+					<label><input type="radio" name="sex" value="woman">Female</label>
+				</div>
+				<div class="clear"></div>
+				<input class="submit" type="submit" value="提交">
+			</div>
+			
+		</form>		
+	</div>
+</body>
+</html>

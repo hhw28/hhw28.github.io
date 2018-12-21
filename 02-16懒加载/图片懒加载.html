@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html>
+    <head>
+      <meta charset="utf-8">
+      <title>图片懒加载</title>
+      <style>
+        ul,li{
+            list-style: none;
+        }
+        .content{
+            width: 840px;
+            margin: 0 auto;
+        }
+        .clearfix{
+            content: '';
+            display: block;
+            clear: both;
+        }
+        .content li{
+            float: left;
+            margin: 10px;
+        }
+        .content li img{
+            width: 400px;
+            height: 400px;
+        }
+      </style>
+    </head>
+    <body>
+        <ul class="content clearfix">
+            <li>
+                <a href="#">
+                    <img src="http://kejian.jirengu.com/data/fe/%E8%AF%BE%E4%BB%B6/32-%E6%87%92%E5%8A%A0%E8%BD%BD/code/blank.jpg" data-src="http://cdn.jirengu.com/book.jirengu.com/img/1.jpg" alt="">
+                </a>
+            </li>
+            <li>
+                <a href="#">
+                    <img src="http://kejian.jirengu.com/data/fe/%E8%AF%BE%E4%BB%B6/32-%E6%87%92%E5%8A%A0%E8%BD%BD/code/blank.jpg" data-src="http://cdn.jirengu.com/book.jirengu.com/img/2.jpg" alt="">
+                </a>
+            </li>
+            <li>
+                <a href="#">
+                    <img src="http://kejian.jirengu.com/data/fe/%E8%AF%BE%E4%BB%B6/32-%E6%87%92%E5%8A%A0%E8%BD%BD/code/blank.jpg" data-src="http://cdn.jirengu.com/book.jirengu.com/img/3.jpg" alt="">
+                </a>
+            </li>
+            <li>
+                <a href="#">
+                    <img src="http://kejian.jirengu.com/data/fe/%E8%AF%BE%E4%BB%B6/32-%E6%87%92%E5%8A%A0%E8%BD%BD/code/blank.jpg" data-src="http://cdn.jirengu.com/book.jirengu.com/img/4.jpg" alt="">
+                </a>
+            </li>
+            <li>
+                <a href="#">
+                    <img src="http://kejian.jirengu.com/data/fe/%E8%AF%BE%E4%BB%B6/32-%E6%87%92%E5%8A%A0%E8%BD%BD/code/blank.jpg" data-src="http://cdn.jirengu.com/book.jirengu.com/img/5.jpg" alt="">
+                </a>
+            </li>
+            <li>
+                <a href="#">
+                    <img src="http://kejian.jirengu.com/data/fe/%E8%AF%BE%E4%BB%B6/32-%E6%87%92%E5%8A%A0%E8%BD%BD/code/blank.jpg" data-src="http://cdn.jirengu.com/book.jirengu.com/img/6.jpg" alt="">
+                </a>
+            </li>
+            <li>
+                <a href="#">
+                    <img src="http://kejian.jirengu.com/data/fe/%E8%AF%BE%E4%BB%B6/32-%E6%87%92%E5%8A%A0%E8%BD%BD/code/blank.jpg" data-src="http://cdn.jirengu.com/book.jirengu.com/img/7.jpg" alt="">
+                </a>
+            </li>
+            <li>
+                <a href="#">
+                    <img src="http://kejian.jirengu.com/data/fe/%E8%AF%BE%E4%BB%B6/32-%E6%87%92%E5%8A%A0%E8%BD%BD/code/blank.jpg" data-src="http://cdn.jirengu.com/book.jirengu.com/img/8.jpg" alt="">
+                </a>
+            </li>
+            <li>
+                <a href="#">
+                    <img src="http://kejian.jirengu.com/data/fe/%E8%AF%BE%E4%BB%B6/32-%E6%87%92%E5%8A%A0%E8%BD%BD/code/blank.jpg" data-src="http://cdn.jirengu.com/book.jirengu.com/img/9.jpg" alt="">
+                </a>
+            </li>
+            <li>
+                <a href="#">
+                    <img src="http://kejian.jirengu.com/data/fe/%E8%AF%BE%E4%BB%B6/32-%E6%87%92%E5%8A%A0%E8%BD%BD/code/blank.jpg" data-src="http://cdn.jirengu.com/book.jirengu.com/img/10.jpg" alt="">
+                </a>
+            </li>
+            <li>
+                <a href="#">
+                    <img src="http://kejian.jirengu.com/data/fe/%E8%AF%BE%E4%BB%B6/32-%E6%87%92%E5%8A%A0%E8%BD%BD/code/blank.jpg" data-src="http://cdn.jirengu.com/book.jirengu.com/img/11.jpg" alt="">
+                </a>
+            </li>
+            <li>
+                <a href="#">
+                    <img src="http://kejian.jirengu.com/data/fe/%E8%AF%BE%E4%BB%B6/32-%E6%87%92%E5%8A%A0%E8%BD%BD/code/blank.jpg" data-src="http://cdn.jirengu.com/book.jirengu.com/img/12.jpg" alt="">
+                </a>
+            </li>
+            <li>
+                <a href="#">
+                    <img src="http://kejian.jirengu.com/data/fe/%E8%AF%BE%E4%BB%B6/32-%E6%87%92%E5%8A%A0%E8%BD%BD/code/blank.jpg" data-src="http://cdn.jirengu.com/book.jirengu.com/img/13.jpg" alt="">
+                </a>
+            </li>
+            <li>
+                <a href="#">
+                    <img src="http://kejian.jirengu.com/data/fe/%E8%AF%BE%E4%BB%B6/32-%E6%87%92%E5%8A%A0%E8%BD%BD/code/blank.jpg" data-src="http://cdn.jirengu.com/book.jirengu.com/img/14.jpg" alt="">
+                </a>
+            </li>
+            <li>
+                <a href="#">
+                    <img src="http://kejian.jirengu.com/data/fe/%E8%AF%BE%E4%BB%B6/32-%E6%87%92%E5%8A%A0%E8%BD%BD/code/blank.jpg" data-src="http://cdn.jirengu.com/book.jirengu.com/img/15.jpg" alt="">
+                </a>
+            </li>
+            <li>
+                <a href="#">
+                    <img src="http://kejian.jirengu.com/data/fe/%E8%AF%BE%E4%BB%B6/32-%E6%87%92%E5%8A%A0%E8%BD%BD/code/blank.jpg" data-src="http://cdn.jirengu.com/book.jirengu.com/img/16.jpg" alt="">
+                </a>
+            </li>
+            <li>
+                <a href="#">
+                    <img src="http://kejian.jirengu.com/data/fe/%E8%AF%BE%E4%BB%B6/32-%E6%87%92%E5%8A%A0%E8%BD%BD/code/blank.jpg" data-src="http://cdn.jirengu.com/book.jirengu.com/img/17.jpg" alt="">
+                </a>
+            </li>
+            <li>
+                <a href="#">
+                    <img src="http://kejian.jirengu.com/data/fe/%E8%AF%BE%E4%BB%B6/32-%E6%87%92%E5%8A%A0%E8%BD%BD/code/blank.jpg" data-src="http://cdn.jirengu.com/book.jirengu.com/img/18.jpg" alt="">
+                </a>
+            </li>
+        </ul>
+        
+        <script src="../js/jquery-3.2.1.min.js"></script>
+        <script>
+            check();  //避免刚打开的时候不显示，只有滚动一点才显示的情况
+
+            $(window).on('scroll',check)
+            
+            function check(){
+                $('.content img').not('.show').each(function(){   //遍历所有图片
+                    if(isShow($(this))){       //如果该图片位置出现了
+                        showImg($(this))     //展示该图片
+                    }
+                })                
+            }
+
+            //判断一个元素是否有出现，出现为true
+            function isShow($node){    
+                var windowHeight = $(window).height(),
+                    scrollTop = $(window).scrollTop(),
+                    offsetTop = $node.offset().top,     //传递的参数距离顶点的距离
+                    nodeHeight = $node.height();    //节点的自身高度
+
+                if(windowHeight + scrollTop > offsetTop && scrollTop < offsetTop + nodeHeight){   
+                    return true;
+                }else{
+                    return false;
+                }
+            }
+            
+            //展示图片
+            function showImg($img){
+                $img.each(function(){
+                    var imgUrl = $(this).attr('data-src')
+                    $(this).attr('src',imgUrl)
+                    $(this).addClass('show')  //已经展示的加上一个class，之后查找的时候可以忽略不查找这些
+                })
+            }
+        </script>
+    </body>
+</html>

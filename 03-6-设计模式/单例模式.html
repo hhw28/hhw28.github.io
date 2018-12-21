@@ -1,0 +1,25 @@
+<script>
+//单例模式,obj1=obj2,创建出的对象都是相同的
+    var singleModule = (function(){
+        var instance;
+        function init(){
+            return{
+
+            }
+        }
+        return {
+            getInstance:function(){
+                if( !instance){
+                    instance = init();
+                }
+                return instance;
+            }
+        }     
+    })()
+
+    var obj1 = singleModule.getInstance()
+    var obj2 = singleModule.getInstance()
+
+    obj1 === obj2  //true
+ 
+</script>

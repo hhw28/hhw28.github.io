@@ -1,0 +1,74 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>ajax初体验-查找朋友</title>
+</head>
+<body>
+  <div class="query-area">
+    <input type="text" name="username" value="hunger" placeholder="hunger, ruoyu, anyone">
+    <button>查询朋友</button>   
+  </div>
+  <div class="detail-area">
+    <ul>     
+    </ul>
+
+  </div>
+
+  <script>
+    var btn = document.querySelector('.query-area button')
+    var input = document.querySelector('.query-area input')
+    var detailCt = document.querySelector('.detail-area ul')
+//异步
+    btn.addEventListener('click', function(){
+      var xhr = new XMLHttpRequest()
+      xhr.onreadystatechange = function(){
+       /*readyState==1 发送请求成功
+         readyState==2 服务器收到请求并xhr.status==200,但还未发送数据
+         readyState==3 服务器发送数据
+         readyState==4 服务器成功发送*/
+         if(xhr.readyState === 4 && (xhr.status === '200' || xhr.status === '304')){
+           var friends = JSON.parse(xhr.responseText)
+           var html = render(friends)
+           detailCt.innerHTML = html
+         }
+       }
+                   // '/getFriends?username=ruoyu'
+      xhr.open('get', '/getFriends?username=' + input.value, true)    //true代表异步，false代表同步，若不填默认为true异步
+      xhr.send()
+    })
+//同步(使用ajax非常不建议使用同步)
+    // btn.addEventListener('click', function(){
+    //   var xhr = new XMLHttpRequest()
+    //   xhr.open('get', '/getFriends?username=' + input.value, false)    
+    //   xhr.send()    
+//等数据来了再进行下一步，若数据非常大到来很慢，页面会卡死非常多时间
+    //   var friends = JSON.parse(xhr.responseText)
+    //   var html = render(friends)
+    //   detailCt.innerHTML = html
+    // })
+
+
+
+    function render(friends){
+      var html = ''
+      for(var i=0; i<friends.length; i++){
+        html += '<li>' + friends[i] + '</li>'
+      }
+      return html
+    }
+    // function render(friends){
+    //   detailCt.innerHTML = ''
+    //   var ct = document.createDocumentFragment()
+    //   for(var i = 0; i < friends.length; i++){
+    //     var node = document.createElement('li')
+    //     node.innerText = friends[i]
+    //     ct.appendChild(node)
+    //   }
+    //   detailCt.appendChild(ct)
+    // }
+
+  </script>
+  
+</body>
+</html>

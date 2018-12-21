@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+    <head>
+      <meta charset="utf-8">
+      <title>回到顶部</title>
+      <style>
+        body{
+            height: 5000px;
+        }
+        .go-top{
+            position: fixed;
+            right: 15px;
+            bottom: 20px;
+            background: #000;
+            color: #fff;
+            padding: 10px;
+
+            display: none;
+        }
+      </style>
+    </head>
+    <body>
+        <p>页面往下滚动哦~~ 按钮在右下角马上出现</p>
+        <div class="go-top">回到顶部</div>
+        
+        <script src="../js/jquery-3.2.1.min.js"></script>
+        <script>
+            $(window).on('scroll',function(){
+                var top = $(window).scrollTop();   //获取当前高度
+                if(top > 500){  
+                    $('.go-top').css('display','block')  //当滚动超过500显示回到顶部按钮
+                }else{
+                    $('.go-top').css('display','none')
+                }
+            }) 
+
+            $('.go-top').on('click',function(){
+                $(window).scrollTop(0)
+            })
+        </script>
+    </body>
+</html>

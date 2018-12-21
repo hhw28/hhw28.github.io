@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <!-- <meta http-equiv="refresh" content="3"> -->
+    <title>float-box</title>
+    <style>
+        * {
+            background-color:rgba(0,0,0,0.1);
+        }
+        section{
+            display:flex;
+            flex-wrap:wrap;
+        }
+        div{
+            width:150px;
+            margin:5px;
+            position:relative;
+            flex-grow:1;   /*当有剩余空间时平均分配到各个元素*/
+        }
+        div:before{
+            content:'';
+            display:block;
+            padding-bottom:100%;
+        }
+        div>span{
+            position:absolute;
+            top:0;
+            left:0;
+            right:0;
+            bottom:0;
+            overflow:hidden;
+        }
+        /*用于最后一行充数，避免因为个数太少正方形变的很大，具体数值根据想要实现的效果做调整*/
+        div:nth-last-child(-n+2){
+            height:0;
+        }
+
+    </style>
+</head>
+<body>
+    <section>
+        <div><span>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolorum dignissimos ut molestias accusamus ratione error quibusdam nemo culpa repellat, officia quasi aspernatur, expedita atque animi sapiente optio adipisci, iste, dicta.</span></div>
+        <div><span>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Temporibus distinctio doloribus consectetur quas repellendus, rem, veritatis obcaecati consequatur saepe et. Ipsa sapiente sed quos veniam dolorem adipisci molestias quasi laudantium?</span></div>
+        <div><span>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium blanditiis amet quae eligendi deserunt unde molestias sed, optio eaque vel, possimus voluptates quas repudiandae nisi, esse temporibus veniam? Aliquid, ea.</span></div>
+        <div><span>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Tempore quibusdam quisquam ipsam veniam non facilis nihil. Sunt commodi saepe dolor esse ut cumque eos libero ab architecto. Voluptate, veritatis, rerum!</span></div>
+        <div><span>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Modi esse incidunt ea a reprehenderit, laboriosam sunt quae quo. Commodi earum ipsa id at numquam dolorem non quo incidunt. Quae, odit!</span></div>
+        <div><span>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptate voluptatem praesentium delectus architecto itaque illo numquam voluptatibus labore nostrum fugiat ad autem, ipsa dolor optio maiores rerum ratione molestiae inventore.</span></div>
+        <div><span>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eum suscipit, dolore neque. Veniam vel in, sit ea minus delectus, culpa quis itaque ducimus, nihil dolores porro obcaecati nobis temporibus quo.</span></div>
+        <div><span>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Beatae, saepe sapiente eaque dicta quod eveniet magnam deleniti facilis? Aliquam ea, quas quia sed tenetur ut repudiandae voluptas temporibus numquam. Voluptas.</span></div>
+        <div><span>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quam saepe debitis numquam adipisci dolorem in, suscipit, minus expedita harum. Quaerat rerum atque reprehenderit quisquam, eligendi rem fuga optio cum dicta?</span></div>
+        <div><span>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Qui quibusdam voluptate, sunt labore natus beatae, sapiente ea, neque eius eaque vero! Possimus rem voluptatibus blanditiis voluptatum neque sint, dicta facere.</span></div>
+        <div><span>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quas maxime sit, magnam provident veniam, voluptates dolorum ipsam, animi voluptate dicta facere id aliquam rerum explicabo inventore. Repellat, sapiente, perferendis? Molestias!</span></div>
+        <div><span>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Illo nulla sapiente voluptate, vel aliquid dolorem mollitia. Ipsa quam enim fugiat iure, consequuntur! Doloribus delectus officiis sunt, esse iure possimus accusantium?</span></div>
+        <div><span>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Illo nulla sapiente voluptate, vel aliquid dolorem mollitia. Ipsa quam enim fugiat iure, consequuntur! Doloribus delectus officiis sunt, esse iure possimus accusantium?</span></div>
+    </section>
+</body>
+</html>

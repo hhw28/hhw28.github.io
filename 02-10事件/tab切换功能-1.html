@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>tab切换功能</title>
+  <style>
+      li{
+        list-style: none;
+      }
+      div,ol,li{
+          margin: 0px;padding: 0px;
+      }
+      .clearfix:after{
+          content: '';
+          display: block;
+          clear: both;
+      }
+      .tab{
+        border: 1px solid #cbcbcb;
+        width: 590px;
+        margin: 0 auto;
+        margin-top: 50px;
+
+      }
+      .nav{
+
+      }
+      .nav li{
+        float: left;
+        padding: 4px 80px;
+        border-right: 1px solid #cbcbcb;
+
+      }
+      .nav li:last-child{
+          border-right: 0px;
+      }
+      .nav .active:hover{
+          background: #ededed;
+      }
+      .content{
+        border-top: 1px solid #cbcbcb;
+        height: 150px;
+        padding: 20px;
+      }
+      .content li{
+          display: none;
+      }
+      .content .active{
+          display: block;
+      }
+  </style>
+</head>
+<body>
+    <div class="tab">
+        <ol class="nav clearfix">
+            <li class="active">tab1</li>
+            <li>tab2</li>
+            <li>tab3</li>
+        </ol>
+        <ol class="content">
+            <li class="active">内容1 <img src="1.jpg"></li>
+            <li>内容2<img src="2.jpg"></li>
+            <li>内容3<img src="3.jpg"></li>
+        </ol>
+    </div>
+    <div class="tab">
+        <ol class="nav clearfix">
+            <li class="active">tab1</li>
+            <li>tab2</li>
+            <li>tab3</li>
+        </ol>
+        <ol class="content">
+            <li class="active">内容1 <img src="1.jpg"></li>
+            <li>内容2<img src="2.jpg"></li>
+            <li>内容3<img src="3.jpg"></li>
+        </ol>
+    </div>
+    <script>
+
+            function Tab(ct){
+                this.ct = ct
+                this.init()
+                this.bind()
+            }
+
+            Tab.prototype.init = function(){
+                this.tabLis = this.ct.querySelectorAll('.nav>li')
+                this.tabPanels = this.ct.querySelectorAll('.content>li')
+            }
+
+            Tab.prototype.bind = function(){
+                var _this = this
+
+                this.tabLis.forEach(function(tabli){  //循环每一项
+                    tabli.onclick = function(e){
+                        var target = e.target
+                        var index = [].indexOf.call(_this.tabLis,target)  //获取点击的下标
+
+                        _this.tabLis.forEach(function(li){
+                            console.log(_this.tabLis)
+                            li.classList.remove('active')
+                        })
+                        target.classList.add('active')
+
+                        _this.tabPanels.forEach(function(panel){
+                            panel.classList.remove('active')
+                        })
+                        _this.tabPanels[index].classList.add('active')
+                    }
+                })
+            }
+            new Tab(document.querySelectorAll('.tab')[0])
+            new Tab(document.querySelectorAll('.tab')[1])
+    </script>
+</body>
+</html>

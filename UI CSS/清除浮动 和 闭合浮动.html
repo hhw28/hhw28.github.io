@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <title>清除浮动 和 闭合浮动</title>
+  <style>
+    * {
+        background-color:rgba(0,0,0,0.1);
+        padding:10px;
+    }
+    section{
+        border:5px solid red;
+        margin-top:100px;
+    }
+    .main{
+        width:300px;
+        float:left;
+        background-color:#ffe3d7;
+    }
+    .side{
+        float:left;
+        background-color:#add8e6;
+    }
+    footer{
+        border:5px solid;
+    }
+
+
+
+    .footer1{
+        clear:both;
+    }
+    .wrap2{
+        xoverflow:hidden;
+        xdisplay:flow-root;
+        display:table;
+    }
+  </style>
+</head>
+<body>
+
+    <section class="wrap1">
+      <div class="main">main：很抱歉，现代浏览器中我没能把wrap撑高(float:left)</div>
+      <div class="side">side：我也浮动了(float:left)</div>
+    </section>
+    <footer class="footer1">footer：我通过设置 clear:both <b>清除浮动</b>,虽然位置正确了,但是 wrap 的高度没变,有些不爽</footer>
+
+    <section class="wrap2">
+      <div class="main">main：wrap自己闭合浮动了，所以footer不用再清除浮动了(float:left)</div>
+      <div class="side">side：我也浮动了(float:left)</div>
+    </section>
+    <footer class="footer2">footer：这次 wrap 人品爆发了, 通过 .clearfix 已经<b>闭合浮动</b>了</footer>
+</body>
+</html>

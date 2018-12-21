@@ -1,0 +1,61 @@
+<script>
+//调用方式
+    document.querySelector('#btn').addEventListener('click', function(){
+        ajax({
+            url: '/login',    //接口地址
+            type: 'get',    // 类型， post 或者 get
+            data: {
+                username: 'xiaoming',
+                password: 'abcd1234'
+            },
+            success: function(ret){
+                console.log(ret)    // {status: 0}
+            },
+            error: function(){
+            console.log('出错了')
+            }
+        })
+    })
+
+//通用ajax封装
+    function ajax(opts){
+        //接收参数并设置默认参数，如果用户没输出参数则可使用默认参数
+        opts.success = opts.success || function(){}   // 若没有设置success方法，则使用一个空函数
+        opts.error = opts.error || function(){}
+        opts.type = opts.type || "get"               // 若用户没有设置类型，则默认get
+        opts.dataType = opts.dataType || "json"     // 默认JSON格式
+        opts.data = opts.data || {}                // 若未传递，默认为空
+        //拼接发送的参数
+        var dataStr = ''
+        for(var key in opts.data){
+            dataStr += key + '=' + opts.data[key] + "&"
+        }
+        dataStr = dataStr.substr(0, dataStr.length-1)   //减去最后多余的一位&
+
+        var xhr = new XMLHttpRequest()
+        xhr.onreadystatechange = function(){
+            if(xhr.readyState ===  4){
+                if(xhr.status === 200 || xhr.status === 304){
+                    if(opts.dataType === "text"){      //若数据类型是text就无需解析啦
+                        opts.success(xhr.responseText)
+                    }
+                    if(opts.dataType === "json"){     //若数据类型是json格式，需要解析
+                        var json = JSON.parse(xhr.responseText)
+                        opts.success(json)
+                    }else{
+                        opts.error()
+                    }
+                }
+            }
+        }
+        if(opts.type.toLowerCase() === 'post'){    //如果类型是POST请求
+            xhr.open(opts.type,opts.url, true)
+            xhr.setRequestHeader("Content-type","application/x-ww-form-urlencoded")
+            xhr.send(dataStr)
+        }
+        if(opts.type.toLowerCase() === 'get'){     //如果类型是GET请求
+            xhr.open(opts.type,opts.url + '?' + dataStr, true)
+            xhr.send()
+        }
+    }
+</script>

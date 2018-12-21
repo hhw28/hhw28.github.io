@@ -1,0 +1,21 @@
+<script>
+//利用函数作用域特性，把需要的东西做个包装
+
+    var Person =(function(){
+        var name = "robin"
+        function sayName(){
+            console.log(name)
+        }
+        return{
+            name:name,
+            sayName:sayName,
+            changeName:function(newName){
+                name = newName
+            }
+        }
+    })()
+
+    Person.sayName()   //robin 
+    Person.changeName("lisa")
+    Person.sayName()  //lisa
+</script>

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <!-- <meta http-equiv="refresh" content="3"> -->
+    <title>twitter点赞 爱心动画</title>
+</head>
+<style>
+    body{
+        width: 100vw;
+        height: 100vh;
+        margin: 0;
+        padding: 0;
+
+        display: table-cell;
+        vertical-align: middle;
+    }
+    p{
+        text-align: center;
+    }
+    p input{
+        display: none;
+    }
+    p label{
+        display: inline-block;
+        width: 100px;
+        height: 100px;
+        vertical-align: middle;
+        background: url(css-sprite-img/heart_animation.png) no-repeat;
+        background-position: 0 0;
+        transition: background-position 1s steps(28); /*雪碧图一共29种样式，从第一种到最后一种需要走28步*/
+        transition-duration: 0s;
+        cursor:pointer;
+    }
+    p input:checked ~ label{
+        transition-duration: 1s;
+        background-position: -2800px 0;
+    }
+</style>
+<body>
+    <p>
+        <input type="checkbox" name="" id="heart" value="">
+        <label class="k" for="heart"></label>
+    </p>
+
+</body>
+</html>

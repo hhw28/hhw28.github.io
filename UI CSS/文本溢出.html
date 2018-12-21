@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+	<title></title>
+	<style type="text/css">
+		div.box{
+			xborder: 5px solid;
+			overflow: hidden;
+			width: 1020px;
+			margin: auto;
+			margin-top: 80px;
+		}
+		div.people{
+			width: 300px;
+			float: left;
+			margin-left: 30px;
+			margin-bottom: 30px;
+			box-shadow: 0px 5px 13px #c0c0c0;
+		}
+		div img{
+			width: 300px;
+		}
+		.text{
+			margin: 20px;
+
+		}
+		.text1 p{   /*实现文本溢出显示省略号需以下三个属性共存*/
+			overflow: hidden;
+			text-overflow: ellipsis;  /*ellipsis椭圆省略号，该属性只能用于单行文本*/
+			white-space: nowrap;  /*nowrap不换行*/
+		}
+
+		.text2 p{
+			overflow : hidden;
+			text-overflow: ellipsis;
+			white-space: normal;  /*换行*/
+			display: -webkit-box;
+			-webkit-line-clamp: 3;
+			-webkit-box-orient: vertical;
+		}
+
+		.text3 p{
+			position:relative;
+			line-height:1.4em;
+			/* 3 times the line-height to show 3 lines */
+			height:4.2em;
+			overflow:hidden;
+		}
+		.text3 p::after {
+			content:"...";
+			color: #555;
+			font-weight:bold;
+			position:absolute;
+			bottom:0;
+			right:0;
+			padding:0 10px 1px 45px;
+			background:url(http://newimg88.b0.upaiyun.com/newimg88/2014/09/ellipsis_bg.png) repeat-y;
+		}
+	</style>
+</head>
+<body>
+	<div class="box">
+		<div class="people">
+			<img src="images/image1.jpg">
+			<div class="text text1">
+				<h3>单行文本溢出</h3>
+				<p>太阳的后裔太阳的后裔太阳的后裔太阳的后裔太阳的后裔太阳的后裔</p>
+			</div>
+		</div>
+		<div class="people">
+			<img src="images/image2.jpg">
+			<div class="text text2">
+				<h3>多行文本溢出，-webkit-浏览器和移动端</h3>
+				<p>太阳的后裔太阳的后裔太阳的后裔太阳的后裔太阳的后裔太阳的后裔太阳的后裔太裔太阳的后裔太阳的后裔太阳的后裔太阳的后裔太阳的后裔</p>
+			</div>
+		</div>
+		<div class="people">
+			<img src="images/image2.jpg">
+			<div class="text text3">
+				<h3>多行文本溢出，绝对定位图片覆盖</h3>
+				<p>太阳的后裔太阳的后裔太阳的后裔太阳的后裔太阳的后裔太阳的后裔太阳的后裔太裔太阳的后裔太阳的后裔太阳的后裔太阳的后裔太阳的后裔</p>
+			</div>
+		</div>
+	</div>
+
+</body>
+</html>

@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html>
+    <head>
+      <meta charset="utf-8">
+      <title>代理</title>
+      <style>
+            li{
+                list-style: none;  
+            }
+            div,ol,ul,li,p{
+                margin: 0px;padding: 0px;
+            }
+            a{
+                text-decoration: none;
+            }
+            .clearfix:after{
+                content: '';
+                display: block;
+                clear: both;
+            }
+            .ct{
+                width: 726px;
+                margin: 0 auto;
+                margin-top: 50px;       
+            }
+            .content{
+                margin-bottom: 15px;
+            }
+            .content .ware{
+                border: 1px solid #eee;
+                width: 180px;
+                float: left;
+                margin-left: 20px;
+                margin-bottom: 20px;
+                padding: 10px 20px 15px 20px;
+                position: relative;
+
+            }
+            .content .ware img{
+                display: block;
+                margin: 0 auto;
+                margin-bottom: 10px;
+            }
+            .content .ware .name{
+                word-break:break-all;
+                font-size: 15px;
+
+            }
+            .content .ware .price{
+                color: #c81623;
+            }
+            .content .ware .cover{
+                position: absolute;
+                top: 0px;
+                left: 0px;
+                right: 0px;
+                bottom: 0px;
+                background: rgba(0,0,0, 0.3);
+                transition: all 0.3s;
+                opacity: 0;
+            }
+            .content .hover .cover{
+                opacity: 1;
+            }
+            .content .ware .cover .btn{
+                border: 1px solid #c81623;
+                border-radius: 3px;
+                padding: 10px;
+                color: #c81623;
+                background: #fff;
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%,-50%);
+            }
+            .ct>.btn{
+                border: 1px solid #c81623;
+                border-radius: 3px;
+                padding: 10px 15px;
+                margin-left: 20px;
+                color: #c81623;
+                background: #fff;
+
+            }
+        </style>
+    </head>
+    <body>
+        <div class="ct">
+            <ol class="content clearfix">              
+                <li class="ware">
+                    <div class="cover ">
+                        <a class="btn" href="#">立即抢购</a>
+                    </div>
+                    <img src="image/jiezhi.jpg" alt="">
+                    <p class="name">热门1111111111111111111111111</p>
+                    <p class="price">￥1699.00</p>
+                </li>
+                <li class="ware">
+                    <div class="cover ">
+                        <a class="btn" href="#">立即抢购</a>
+                    </div>
+                    <img src="image/jiezhi.jpg" alt="">
+                    <p class="name">热门1111111111111111111111111</p>
+                    <p class="price">￥1699.00</p>
+                </li>
+                <li class="ware">
+                    <div class="cover ">
+                        <a class="btn" href="#">立即抢购</a>
+                    </div>
+                    <img src="image/jiezhi.jpg" alt="">
+                    <p class="name">热门1111111111111111111111111</p>
+                    <p class="price">￥1699.00</p>
+                </li>
+                <li class="ware">
+                    <div class="cover ">
+                        <a class="btn" href="#">立即抢购</a>
+                    </div>
+                    <img src="image/jiezhi.jpg" alt="">
+                    <p class="name">热门1111111111111111111111111</p>
+                    <p class="price">￥1699.00</p>
+                </li>
+                <li class="ware">
+                    <div class="cover ">
+                        <a class="btn" href="#">立即抢购</a>
+                    </div>
+                    <img src="image/jiezhi.jpg" alt="">
+                    <p class="name">热门1111111111111111111111111</p>
+                    <p class="price">￥1699.00</p>
+                </li>
+                <li class="ware">
+                    <div class="cover ">
+                        <a class="btn" href="#">立即抢购</a>
+                    </div>
+                    <img src="image/jiezhi.jpg" alt="">
+                    <p class="name">热门1111111111111111111111111</p>
+                    <p class="price">￥1699.00</p>
+                </li>
+            </ol>
+            <a class="btn">添加</a>
+        </div>
+
+
+
+
+        <script src="../js/jquery-3.2.1.min.js"></script>
+        <script>
+            var products = [
+                {
+                    img: 'http://img10.360buyimg.com/N3/jfs/t2242/92/1446546284/374195/9196ac66/56af0958N1a723458.jpg',
+                    name: '珂兰 黄金手 猴哥款',
+                    price: '￥405.00'
+                },{
+                    img: 'http://img10.360buyimg.com/N3/jfs/t2242/92/1446546284/374195/9196ac66/56af0958N1a723458.jpg',
+                    name: '珂兰 黄金转运珠 猴哥款',
+                    price: '￥100.00'
+                },{
+                    img: 'http://img10.360buyimg.com/N3/jfs/t2242/92/1446546284/374195/9196ac66/56af0958N1a723458.jpg',
+                    name: '珂兰 黄金手链 3D猴哥款',
+                    price: '￥45.00'
+                }
+            ];
+            function getStr(prod){
+                var html = ''
+                html += '<li class="ware">'
+                html += '    <div class="cover ">'
+                html += '        <a class="btn" href="javascript:void(0)">立即抢购</a>'  //href="javascript:void(0)" 可以取消a连接的跳转
+                html += '    </div>'
+                html += '    <img src="'+prod.img+'" alt="">'
+                html += '    <p class="name">'+prod.name+'</p>'
+                html += '    <p class="price">'+prod.price+'</p>'
+                html += '</li>'
+                return html
+            }                                   
+
+            $('.ct>.btn').on('click',function(){
+                $.each(products, function(idx, prod){
+                    var html = getStr(prod);
+                    $('.content').append(html);
+                });
+            });
+
+            $('.content').on('mouseover','.ware',function(){
+                $(this).addClass('hover')
+            })
+
+            $('.content').on('mouseout','.ware',function(){
+                $(this).removeClass('hover')
+            })
+            /*
+            $('.content>li').on('mouseout',function(){
+                $(this).removeClass('hover')
+            }) 若这样写会导致新添加的项目无法操作hover*/ 
+
+        </script>
+    </body>
+</html>

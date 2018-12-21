@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <!-- <meta http-equiv="refresh" content="3"> -->
+    <title>float-box</title>
+    <style>
+
+        ul,li{
+            margin: 0;
+            padding: 0;
+            list-style-type: none;
+            box-sizing: border-box;
+        }
+        ul{
+            overflow: hidden;
+        }
+        li{
+            border: 2px solid red;
+            float: left;
+            width: 30%;  /*一行三个加上margin值，每个的宽度33.3333%，刚好居中*/
+            margin: 1.6666666%;
+            position: relative;
+        }
+
+        /*使内容把li撑起来*/
+        li::before{
+            content: '';
+            display: block;
+            padding-bottom: 100%;  /*撑起正方形高度，同理padding-top也可*/
+        }
+
+        /*定位后内容脱离文档流，不改变文档流布局*/
+        div{
+            position: absolute;
+            top: 0;
+            left: 0;
+            bottom: 0;
+            right: 0;
+            overflow: auto;   /*内容超过，出现滚动条*/
+        }
+    </style>
+</head>
+<body>
+    <ul>
+        <li>
+            <div>Lorem ipsum dolor sit amet consectetur adipisicing elit. Similique, laudantium! Delectus rerum voluptas est vitae deserunt vero sed, Lorem ipsum, dolor sit amet consectetur adipisicing elit. Omnis id laboriosam voluptatibus iste earum ipsam nesciunt iure dicta incidunt cumque recusandae, iusto, assumenda atque distinctio natus doloribus odit nam! Unde. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Atque alias pariatur, minus saepe eaque inventore magnam illum a consequatur quod vel nostrum, quas voluptatibus? Nisi laudantium commodi qui sapiente perferendis. cumque totam ipsum ab nulla dolore reprehenderit ducimus impedit velit earum architecto?      Lorem ipsum dolor sit amet consectetur, adipisicing elit. Mollitia at sed qui aspernatur suscipit, consequuntur minus ab dolore a aliquid laborum blanditiis vel voluptatibus amet ipsa architecto sequi dolorem est!</div>
+        </li>
+        <li>
+            <div>实现正方形阵列，要求一行三个，总是保持正方形。<br>正方形里的内容数量不确定，如果太多，出现滚动条。</div>
+        </li>
+        <li>
+            <div></div>
+        </li>
+        <li>
+            <div></div>
+        </li>
+        <li>
+            <div></div>
+        </li>
+        <li>
+            <div></div>
+        </li>
+        <li>
+            <div></div>
+        </li>
+        <li>
+            <div></div>
+        </li>
+        <li>
+            <div></div>
+        </li>
+    </ul>
+</body>
+</html>

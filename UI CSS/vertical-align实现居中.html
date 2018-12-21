@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>vertical-align实现居中</title>
+	<style>
+
+		.box{
+			width: 400px;
+			height: 200px;
+			background: yellow;
+		}
+
+		.middle{
+			vertical-align: middle;
+		}
+
+		.middle:before{
+			content: '居中';
+			display: inline-block;
+			height: 80%;
+			background: red;
+			vertical-align: middle;
+		}
+
+		img{
+			width: 100px;
+			vertical-align: middle;
+		}
+
+		.big{
+			font-size: 30px;
+			vertical-align: middle;
+		}
+
+		.small{
+			vertical-align: middle;
+		}
+
+		.blue{
+			width: 200px;
+			height: 200px;
+			background: blue;
+		}
+
+		.blue:before{
+			content: '参考';
+			height: 100%;
+			background: red;
+			display: inline-block;
+			vertical-align: middle;
+		}
+
+		.red{
+			width: 50px;
+			height: 50px;
+			background: red;
+			display: inline-block;
+			vertical-align: middle;
+		}
+	</style>
+</head>
+<body>
+	<div class="box middle">
+		<img src="01.jpg">
+		<span>vertical-align实现居中</span>
+	</div>
+
+	<div class="blue">
+		<div class="red"></div>
+	</div>
+
+
+	<span class="big">vertical-align实现居中</span>
+	<span class="small">vertical-align实现居中</span>
+	<img  src="01.jpg">
+</body>
+</html>

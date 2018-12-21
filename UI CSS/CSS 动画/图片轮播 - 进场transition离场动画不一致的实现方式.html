@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"><!--让手机以device-width的宽度为初始包含块渲染页面，device-width根据设备的不同而不同，也可以填写一个纯数值-->
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <!-- <meta http-equiv="refresh" content="3"> 网页每隔3秒自动刷新 -->
+    <title>Document</title>
+
+    <style>
+        * {
+            background-color: rgba(0,0,0,0.1);
+        }
+        body{
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%,-50%);
+        }
+        div {
+            border: 5px solid;
+            width: 800px;
+            height: 500px;
+            position: relative;
+
+            overflow: hidden;
+        }
+
+        input {
+            position: relative;
+            z-index: 8  ;
+        }
+        input:checked + * + * + img {
+            left: 0;
+            animation: none;
+        }
+        div img {
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            left: 100%;
+            transition: 1s;
+            animation: slideLeftOut 1s;
+        }
+
+        @keyframes slideLeftOut {
+            from {
+                left: 0;
+            }
+            to {
+                left: -100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div>
+        <input type="radio" name="slider" id="">
+        <input type="radio" name="slider" id="">
+        <input type="radio" name="slider" id="">
+        <img src="https://drscdn.500px.org/photo/240118189/m%3D1170/v2?user_id=7012987&webp=true&sig=5eda43a9edd07fe8ed99fc15ed0de6557f33f0562610d71dc69b4192a923f69e" alt="">
+        <img src="https://drscdn.500px.org/photo/236646821/m%3D1170/v2?user_id=7012987&webp=true&sig=8e1230600c32bc82394c7dc61ab2fd8455287cbddac31dffb1e97c7007261c95" alt="">
+        <img src="https://drscdn.500px.org/photo/236605697/m%3D1170_k%3D1/v2?user_id=7012987&webp=true&sig=1787d6e378215eb41a1fd99cc5871ba895953e6520a21e69a8ebfbb689fba1df" alt="">
+    </div>
+</body>
+
+</html>

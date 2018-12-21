@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>flex-词典</title>
+    <style>
+        body{
+            margin: 0;
+            padding: 0;
+
+            display: flex;
+            flex-direction: row;
+
+            height: 100vh;
+            width: 100vw;
+        }
+        .aside{
+            width: 200px;
+            background-color: pink;
+        }
+        .main{
+            flex-grow: 1;
+        }
+        .top{
+            height: 180px;
+            justify-self: flex-start;
+            background-color: yellow;
+        }
+        .bottom{
+            height: calc(100vh - 180px);
+            background-color: aquamarine;
+        }
+
+
+    </style>
+</head>
+<body>
+    <div class="aside">1</div>
+    <div class="main">
+        <div class="top">2</div>
+        <div class="bottom">3</div>
+    </div>
+    <div class="aside">4</div>
+</body>
+</html>

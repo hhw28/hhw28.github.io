@@ -1,0 +1,69 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+	<title>使用一个html标签实现小三角（伪元素）</title>
+	<style type="text/css">
+		.box{
+			width:250px;
+			height:150px;
+			border:1px solid #888;
+
+			margin: 30px;
+			position: relative;
+		}
+
+		.one:before {
+			content: '';
+			position: absolute;
+			width: 0px;
+			height: 0px;
+
+			border-top:15px solid transparent;
+			border-right:15px solid transparent;
+			border-bottom:15px solid #888;
+			border-left:15px solid transparent; 
+
+			top: -30px;
+			left:15px; 
+		}
+
+		.two:before{
+			content: '';
+			position: absolute;
+			width: 0;
+			height: 0;
+
+			border-top:15px solid red;
+			border-right:15px solid red;
+			border-bottom:15px solid transparent;
+			border-left:15px solid transparent; 
+
+			left:221px; 
+			top: -1px;			
+		}
+
+		.three:before{
+			content: '';
+			position: absolute;
+
+			width: 15px;
+			height: 15px;
+			background: #fff;
+
+			transform: rotate(45deg);/*顺时针旋转45度*/
+			border-top: 1px solid #888;
+			border-left: 1px solid #888;
+
+			left: 20px;
+			top: -9px;
+		}
+
+
+	</style>
+</head>
+<body>
+	<div class="box one"></div>
+	<div class="box two"></div>
+	<div class="box three"></div>
+</body>
+</html>

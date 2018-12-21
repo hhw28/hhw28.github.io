@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>suggestion</title>
+</head>
+<body>
+    <div class="suggestion">
+        <div>
+            <input type="text">
+        </div>
+        <div>
+            <ul class="ct">
+                <li>1</li>
+                <li>2</li>
+                <li>3</li>
+            </ul>
+        </div>
+    </div>
+
+    <script>
+        var fakeDate=[
+            '111',
+            '222',
+            'segtser',
+            '23523'
+        ]
+        function search(keyword,fn){
+            setTimeout(function(){
+                var result = []
+                for(var i = 0 ;i<fakeDate.length;i++){
+                    if(fakeDate[i].indexOf(keyword) >= 0){
+                        result.push(fakeDate[i])
+                    }
+                }
+                fn(result)
+            },100)
+        }
+        $('input').on('input', function(){
+            if(this.value){
+                search(this.value, function(words){
+                    let ul = document.querySelector('#suggestion')
+                    ul.innerHTML = ''
+                    for(var i=0; i< words.length; i++){
+                        let li = document.createElement('li')
+                        li.innerText = words[i]
+                        ul.appendChild(li)
+                    }
+                }) // undefined
+            }
+        })
+        function $(obj){
+            return document.querySelector(obj)
+        }
+        function $$(array){
+            return document.querySelectorAll(array)
+        }
+    </script>
+</body>
+</html>

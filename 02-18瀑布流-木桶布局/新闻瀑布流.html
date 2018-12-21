@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html>
+    <head>
+      <meta charset="utf-8">
+      <title>新闻瀑布流</title>
+      <style>
+          div,ul,li,a,img,h2,p{
+              margin: 0;
+              padding: 0;
+          }
+          ul,li{
+              list-style: none;
+          }
+          a{
+              text-decoration: none;
+              color: #000;
+          }
+          .content{
+              width: 900px;
+              margin: 0 auto;
+          }
+          #pic-ct{
+            position: relative;
+          }
+          .clearfix{
+              content: '';
+              display: block;
+              clear: both;
+          }
+          .item{
+            position: absolute;
+            width: 260px;
+            margin-right: 10px;
+            margin-top:15px;
+
+            border: 1px solid #dfdfdf;
+            padding: 10px;
+          }
+          .item img{
+              width: 260px;
+          }
+          .item h2{
+              font-size: 17px;
+              border-bottom: 1px solid #dbdbdb;
+              padding: 5px;
+          }
+          .item p{
+              font-size: 12px;
+              color: #777371;
+              line-height: 20px;
+              margin-top: 5px;
+          }
+          #load{
+              visibility: hidden;
+              height:20px;
+          }
+          .hide{
+              display: none;
+          }
+
+      </style>
+    </head>
+    <body>
+        <div class="content">
+            <div class="ct-waterfall">
+                <ul id="pic-ct" class="clearfix" style="height: 1270px;">
+                    <!--<li class="item">
+                        <a href="#">
+                                <img src="http://n.sinaimg.cn/tech/transform/20170426/wXN8-fyepses8254927.jpg" alt="">
+                                <h2 class="title">揭示不同动物看世界的方式</h2>
+                                <p class="intro">人以特别的方式观察世界，极少有动物眼中的世界跟我们一样。</p>
+                        </a>
+                    </li>-->
+                    <li class="item hide"></li><!-- 用于计算 item 宽度和列数，但不展示出来-->
+                </ul>
+                <div id="load" class="clearfix">当我出现在窗口，会获取数据</div>
+            </div>
+        </div>
+        
+        <script src="http://apps.bdimg.com/libs/jquery/1.9.1/jquery.min.js"></script>
+        <script>
+/*
+1. 获取数据
+2. 拼装数据成dom 放到页面
+3. 使用瀑布流摆放dom位置
+
+若数据量很大
+1. 获取page=1的10条数据
+2. 把10条数据拼装成dom 放到页面
+3. 使用瀑布流摆放dom位置
+4. page++
+
+当页面滚动到某种情况下（比如在DOM的最后添加一个对象load，当看到load的时候获取）
+1. 获取page=2的10条数据
+2. 把10条数据拼装成dom 放到页面
+3. 使用瀑布流摆放dom位置
+4. page++
+*/
+            // Exposure.init($('#load'),function(){    //当load出现在窗口时
+            //     getData(function(data){         //向后台请求数据
+            //         var $nodes = renderData(data)   //数据返回后渲染成dom节点
+            //         WaterFall.start($nodes)     //把使用瀑布流摆放dom位置
+            //     })
+            // })
+
+//检查load是否出现（懒加载）
+            var ExposureTarget = (function(){   //Exposure暴露 Target目标
+                
+                function bind($target,handler){  //$target 指调用的时候传递的，handler函数
+                   
+                    $(window).on('scroll',function(){
+                        checkShow()  //当窗口滚动的时候检查 load 是否出现
+                    })
+                    
+                    function checkShow(){
+                        if(isShow($target)){   //当load在窗口出现了
+                            dosomething()
+                        }
+                    }
+                    function isShow($node){    
+                        var windowHeight = $(window).height(),
+                            scrollTop = $(window).scrollTop(),
+                            offsetTop = $node.offset().top,     //传递的参数距离顶点的距离
+                            nodeHeight = $node.height();    //节点的自身高度
+
+                        if(windowHeight + scrollTop > offsetTop && scrollTop < offsetTop + nodeHeight){   
+                            return true;   //当元素出现了，return true
+                        }else{
+                            return false;
+                        }
+                    }
+                }
+                return{
+                    bind:bind
+                }
+            })()
+            ExposureTarget.bind($('#load'),dosomething())
+
+
+//获取数据、拼装
+            function dosomething(callback){
+                var curPage = 1
+                var perPageCount = 10
+
+// jsonp 接口参数：http://platform.sina.com.cn/slide/album_tech?jsoncallback=func&app_key=1271687855&num=3&page=4
+                $.ajax({
+                    url:'http://platform.sina.com.cn/slide/album_tech',
+                    dataType:'jsonp',
+                    jsonp:'jsoncallback',
+                    data:{
+                        app_key:'1271687855',
+                        num:perPageCount,
+                        page:curPage
+                    },
+                    success:function(ret){
+                        if(ret.status.code === '0'){
+                            place(ret.data)
+                            curPage++
+                        }else{
+                            console.log('数据错误')
+                        }
+                    },
+                    error:function(){
+                        console.log('错误')
+                    },
+                    complete:function(){
+                        console.log('请求发送完成')
+                    }
+                })
+            }
+            function place(nodeList){
+
+                $.each(nodeList,function(index,item){
+                    var $node = renderData(item)
+                    $node.find('img').load(function(){   //等图片下载成功之后再添加到html中显示，避免导致高度叠加的情况
+                        $('#pic-ct').append($node)
+                        waterfull($node)
+                    })
+                })
+
+            }
+            function renderData(items){
+                var html = ''
+                    html += '<li class="item"><a href="'+ items.url +'">'
+                    html += '<img src="'+items.img_url+'" alt="">'
+                    html += '<h2 class="title">'+items.short_name+'</h2>'
+                    html += '<p class="intro">'+items.short_intro+'</p>'
+                    html += '</a></li>'
+                return  $(html) 
+            }
+
+            
+//瀑布流     
+            var itemArr = [],
+                $nodeWidth = $('.item').outerWidth(true),
+                colLength = parseInt($('#pic-ct').width()/$nodeWidth)  //获取每行存放个数
+            for(var i=0; i<colLength; i++){
+                itemArr.push(0)
+            }
+
+            function waterfull($nodes){    
+                // var $nodeWidth = $nodes.outerWidth(true)
+                // var colLength = parseInt($nodes.parent().width()/$nodeWidth)  //获取每行存放个数
+
+                $nodes.each(function(){
+                    var idx = 0
+                    var minSumHeight = itemArr[0]
+
+                    for(var i=0; i<itemArr.length; i++){
+                        if(itemArr[i] < minSumHeight){
+                            idx = i
+                            minSumHeight = itemArr[i]
+                        }
+                    }
+
+                    $(this).css({
+                        top:minSumHeight,   //该排在高度最小值的下面
+                        left:$(this).outerWidth(true)*idx,  //true包含边框  //确定放在哪列
+                        opacity:1
+                    })
+
+                    itemArr[idx] += $(this).outerHeight(true)  //排完后最小值 值增加了，把增加的值赋值
+                    $nodes.parent().height(Math.max.apply(null,itemArr)+394)  
+                })
+            }    
+        </script>
+    </body>
+</html>

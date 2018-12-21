@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>鼠标划过显示图片</title>
+</head>
+<body>
+    <ul class="ct">
+        <li data-img="1.jpg">鼠标放置查看图片1</li>
+        <li data-img="2.jpg">鼠标放置查看图片2</li>
+        <li data-img="3.jpg">鼠标放置查看图片3</li>
+    </ul>
+    <div class="img-preview"></div>
+
+    <script>
+    //你的代码
+        var ct = $('.ct')
+        var preview = $('.img-preview')
+
+        ct.addEventListener('mouseover',function(e){
+            if(e.target.tagName.toLowerCase() === 'li'){    //获取data-img属性值，匹配显示的图片是哪张
+                  var img = document.createElement('img')
+                  img.src = e.target.dataset.img    //获取图片本地地址
+                  preview.appendChild(img)    //当鼠标移上去给preview加个img标签
+              }      
+          })
+        ct.addEventListener('mouseout',function(e){
+            if(e.target.tagName.toLowerCase() === 'li'){
+                  preview.innerHTML = ''    //当鼠标移开preview中内容为空
+              }
+        })
+
+
+        function $(obj){
+            return document.querySelector(obj)
+        }
+        function $$(array){
+            return document.querySelectorAll(array)
+        }
+    </script>
+
+</body>
+</html>

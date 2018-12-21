@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html>
+    <head>
+      <meta charset="utf-8">
+      <title>tab切换jquery实现</title>
+      <style>
+            li{
+                list-style: none;  
+            }
+            div,ol,ul,li,p{
+                margin: 0px;padding: 0px;
+            }
+            a{
+                text-decoration: none;
+            }
+            .clearfix:after{
+                content: '';
+                display: block;
+                clear: both;
+            }
+            .tab{
+                width: 708px;
+                margin: 0 auto;
+                margin-top: 50px;       
+            }
+            .tab .nav{
+                border: 1px solid #cbcbcb;
+                border-top-left-radius: 4px;
+                border-top-right-radius: 4px;
+                border-bottom: none;
+                width:218px;
+            }
+            .nav li{
+                float: left;
+                padding: 10px 0px;
+            }
+            .nav li span{
+                padding: 0px 12px;
+                border-right: 1px solid #cbcbcb;
+            }
+            .nav li:last-child span{
+                border-right:none;
+            }
+            .nav .active{
+                background: #ccc;
+                color: #c81623;
+            }
+            .content{
+                border: 1px solid #cbcbcb;
+            }
+            .content>li{
+                display: none;
+            }
+            .content .active{
+                display: block;
+            }
+            .content .ware{
+                border: 1px solid #eee;
+                width: 180px;
+                float: left;
+                margin-left: 20px;
+                margin-top: 20px;
+                padding: 10px 20px 15px 20px;
+                position: relative;
+
+            }
+            .content .ware img{
+                display: block;
+                margin: 0 auto;
+                margin-bottom: 10px;
+            }
+            .content .ware p{
+                word-break:break-all;
+                font-size: 15px;
+
+            }
+            .content .ware .value{
+                color: #c81623;
+            }
+            .content .ware-ct{
+                margin-left: -20px;
+                margin-top: -20px;
+            }
+            .content .ware-ct .cover{
+                position: absolute;
+                top: 0px;
+                left: 0px;
+                right: 0px;
+                bottom: 0px;
+                background: rgba(0,0,0, 0.3);
+                transition: all 0.3s;
+                opacity: 0;
+            }
+            .content .ware-ct .hover .cover{
+                opacity: 1;
+            }
+            .content .ware-ct .cover .btn{
+                border: 1px solid #c81623;
+                border-radius: 3px;
+                padding: 10px;
+                color: #c81623;
+                background: #fff;
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%,-50%);
+            }
+        </style>
+    </head>
+    <body>
+        <div class="tab">
+            <ol class="nav clearfix">
+                <li class="active"><span>热门</span></li>
+                <li><span>珠宝首饰</span></li>
+                <li><span>奢侈品</span></li>
+            </ol>
+            <ol class="content clearfix">
+                <li class="active">
+                    <ul class="ware-ct">
+                        <li class="ware">
+                            <div class="cover ">
+                                <a class="btn" href="#">立即抢购</a>
+                            </div>
+                            <img src="image/jiezhi.jpg" alt="">
+                            <p>热门1111111111111111111111111</p>
+                            <p class="value">￥1699.00</p>
+                        </li>
+                       <li class="ware">
+                            <div class="cover ">
+                                <a class="btn" href="#">立即抢购</a>
+                            </div>
+                            <img src="image/jiezhi.jpg" alt="">
+                            <p>热门1111111111111111111111111</p>
+                            <p class="value">￥1699.00</p>
+                        </li>
+                        <li class="ware">
+                            <div class="cover ">
+                                <a class="btn" href="#">立即抢购</a>
+                            </div>
+                            <img src="image/jiezhi.jpg" alt="">
+                            <p>热门1111111111111111111111111</p>
+                            <p class="value">￥1699.00</p>
+                        </li>
+                        <li class="ware">
+                            <div class="cover ">
+                                <a class="btn" href="#">立即抢购</a>
+                            </div>
+                            <img src="image/jiezhi.jpg" alt="">
+                            <p>热门1111111111111111111111111</p>
+                            <p class="value">￥1699.00</p>
+                        </li>
+                        <li class="ware">
+                            <div class="cover ">
+                                <a class="btn" href="#">立即抢购</a>
+                            </div>
+                            <img src="image/jiezhi.jpg" alt="">
+                            <p>热门1111111111111111111111111</p>
+                            <p class="value">￥1699.00</p>
+                        </li>
+                        <li class="ware">
+                            <div class="cover ">
+                                <a class="btn" href="#">立即抢购</a>
+                            </div>
+                            <img src="image/jiezhi.jpg" alt="">
+                            <p>热门1111111111111111111111111</p>
+                            <p class="value">￥1699.00</p>
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <ul class="ware-ct">
+                        <li class="ware">
+                            <div class="cover ">
+                                <a class="btn" href="#">立即抢购</a>
+                            </div>
+                            <img src="image/xianglian.jpg" alt="">
+                            <p>珠宝首饰222222222222222222222</p>
+                            <p class="value">￥2389.00</p>
+                        </li>
+                       <li class="ware">
+                            <div class="cover ">
+                                <a class="btn" href="#">立即抢购</a>
+                            </div>
+                            <img src="image/xianglian.jpg" alt="">
+                            <p>珠宝首饰222222222222222222222</p>
+                            <p class="value">￥2389.00</p>
+                        </li>
+                        <li class="ware">
+                            <div class="cover ">
+                                <a class="btn" href="#">立即抢购</a>
+                            </div>
+                            <img src="image/xianglian.jpg" alt="">
+                            <p>珠宝首饰222222222222222222222</p>
+                            <p class="value">￥2389.00</p>
+                        </li>
+                        <li class="ware">
+                            <div class="cover ">
+                                <a class="btn" href="#">立即抢购</a>
+                            </div>
+                            <img src="image/xianglian.jpg" alt="">
+                            <p>珠宝首饰222222222222222222222</p>
+                            <p class="value">￥2389.00</p>
+                        </li>
+                        <li class="ware">
+                            <div class="cover ">
+                                <a class="btn" href="#">立即抢购</a>
+                            </div>
+                            <img src="image/xianglian.jpg" alt="">
+                            <p>珠宝首饰222222222222222222222</p>
+                            <p class="value">￥2389.00</p>
+                        </li>
+                        <li class="ware">
+                            <div class="cover ">
+                                <a class="btn" href="#">立即抢购</a>
+                            </div>
+                            <img src="image/xianglian.jpg" alt="">
+                            <p>珠宝首饰222222222222222222222</p>
+                            <p class="value">￥2389.00</p>
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <ul class="ware-ct">
+                        <li class="ware">
+                            <div class="cover ">
+                                <a class="btn" href="#">立即抢购</a>
+                            </div>
+                            <img src="image/jintiao.jpg" alt="">
+                            <p>奢侈品2222222222222222222222</p>
+                            <p class="value">￥899.00</p>
+                        </li>
+                       <li class="ware">
+                            <div class="cover ">
+                                <a class="btn" href="#">立即抢购</a>
+                            </div>
+                            <img src="image/jintiao.jpg" alt="">
+                            <p>奢侈品2222222222222222222222</p>
+                            <p class="value">￥899.00</p>
+                        </li>
+                        <li class="ware">
+                            <div class="cover ">
+                                <a class="btn" href="#">立即抢购</a>
+                            </div>
+                            <img src="image/jintiao.jpg" alt="">
+                            <p>奢侈品2222222222222222222222</p>
+                            <p class="value">￥899.00</p>
+                        </li>
+                        <li class="ware">
+                            <div class="cover ">
+                                <a class="btn" href="#">立即抢购</a>
+                            </div>
+                            <img src="image/jintiao.jpg" alt="">
+                            <p>奢侈品2222222222222222222222</p>
+                            <p class="value">￥899.00</p>
+                        </li>
+                        <li class="ware">
+                            <div class="cover ">
+                                <a class="btn" href="#">立即抢购</a>
+                            </div>
+                            <img src="image/jintiao.jpg" alt="">
+                            <p>奢侈品2222222222222222222222</p>
+                            <p class="value">￥899.00</p>
+                        </li>
+                        <li class="ware">
+                            <div class="cover ">
+                                <a class="btn" href="#">立即抢购</a>
+                            </div>
+                            <img src="image/jintiao.jpg" alt="">
+                            <p>奢侈品2222222222222222222222</p>
+                            <p class="value">￥899.00</p>
+                        </li>
+                    </ul>
+                </li>
+            </ol>
+        </div>
+        <div class="tab">
+            <ol class="nav clearfix">
+                <li class="active"><span>热门</span></li>
+                <li><span>珠宝首饰</span></li>
+                <li><span>奢侈品</span></li>
+            </ol>
+            <ol class="content clearfix">
+                <li class="active">
+                    <ul class="ware-ct">
+                        <li class="ware">
+                            <div class="cover ">
+                                <a class="btn" href="#">立即抢购</a>
+                            </div>
+                            <img src="image/jiezhi.jpg" alt="">
+                            <p>热门1111111111111111111111111</p>
+                            <p class="value">￥1699.00</p>
+                        </li>
+                       <li class="ware">
+                            <div class="cover ">
+                                <a class="btn" href="#">立即抢购</a>
+                            </div>
+                            <img src="image/jiezhi.jpg" alt="">
+                            <p>热门1111111111111111111111111</p>
+                            <p class="value">￥1699.00</p>
+                        </li>
+                        <li class="ware">
+                            <div class="cover ">
+                                <a class="btn" href="#">立即抢购</a>
+                            </div>
+                            <img src="image/jiezhi.jpg" alt="">
+                            <p>热门1111111111111111111111111</p>
+                            <p class="value">￥1699.00</p>
+                        </li>
+                        <li class="ware">
+                            <div class="cover ">
+                                <a class="btn" href="#">立即抢购</a>
+                            </div>
+                            <img src="image/jiezhi.jpg" alt="">
+                            <p>热门1111111111111111111111111</p>
+                            <p class="value">￥1699.00</p>
+                        </li>
+                        <li class="ware">
+                            <div class="cover ">
+                                <a class="btn" href="#">立即抢购</a>
+                            </div>
+                            <img src="image/jiezhi.jpg" alt="">
+                            <p>热门1111111111111111111111111</p>
+                            <p class="value">￥1699.00</p>
+                        </li>
+                        <li class="ware">
+                            <div class="cover ">
+                                <a class="btn" href="#">立即抢购</a>
+                            </div>
+                            <img src="image/jiezhi.jpg" alt="">
+                            <p>热门1111111111111111111111111</p>
+                            <p class="value">￥1699.00</p>
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <ul class="ware-ct">
+                        <li class="ware">
+                            <div class="cover ">
+                                <a class="btn" href="#">立即抢购</a>
+                            </div>
+                            <img src="image/xianglian.jpg" alt="">
+                            <p>珠宝首饰222222222222222222222</p>
+                            <p class="value">￥2389.00</p>
+                        </li>
+                       <li class="ware">
+                            <div class="cover ">
+                                <a class="btn" href="#">立即抢购</a>
+                            </div>
+                            <img src="image/xianglian.jpg" alt="">
+                            <p>珠宝首饰222222222222222222222</p>
+                            <p class="value">￥2389.00</p>
+                        </li>
+                        <li class="ware">
+                            <div class="cover ">
+                                <a class="btn" href="#">立即抢购</a>
+                            </div>
+                            <img src="image/xianglian.jpg" alt="">
+                            <p>珠宝首饰222222222222222222222</p>
+                            <p class="value">￥2389.00</p>
+                        </li>
+                        <li class="ware">
+                            <div class="cover ">
+                                <a class="btn" href="#">立即抢购</a>
+                            </div>
+                            <img src="image/xianglian.jpg" alt="">
+                            <p>珠宝首饰222222222222222222222</p>
+                            <p class="value">￥2389.00</p>
+                        </li>
+                        <li class="ware">
+                            <div class="cover ">
+                                <a class="btn" href="#">立即抢购</a>
+                            </div>
+                            <img src="image/xianglian.jpg" alt="">
+                            <p>珠宝首饰222222222222222222222</p>
+                            <p class="value">￥2389.00</p>
+                        </li>
+                        <li class="ware">
+                            <div class="cover ">
+                                <a class="btn" href="#">立即抢购</a>
+                            </div>
+                            <img src="image/xianglian.jpg" alt="">
+                            <p>珠宝首饰222222222222222222222</p>
+                            <p class="value">￥2389.00</p>
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <ul class="ware-ct">
+                        <li class="ware">
+                            <div class="cover ">
+                                <a class="btn" href="#">立即抢购</a>
+                            </div>
+                            <img src="image/jintiao.jpg" alt="">
+                            <p>奢侈品2222222222222222222222</p>
+                            <p class="value">￥899.00</p>
+                        </li>
+                       <li class="ware">
+                            <div class="cover ">
+                                <a class="btn" href="#">立即抢购</a>
+                            </div>
+                            <img src="image/jintiao.jpg" alt="">
+                            <p>奢侈品2222222222222222222222</p>
+                            <p class="value">￥899.00</p>
+                        </li>
+                        <li class="ware">
+                            <div class="cover ">
+                                <a class="btn" href="#">立即抢购</a>
+                            </div>
+                            <img src="image/jintiao.jpg" alt="">
+                            <p>奢侈品2222222222222222222222</p>
+                            <p class="value">￥899.00</p>
+                        </li>
+                        <li class="ware">
+                            <div class="cover ">
+                                <a class="btn" href="#">立即抢购</a>
+                            </div>
+                            <img src="image/jintiao.jpg" alt="">
+                            <p>奢侈品2222222222222222222222</p>
+                            <p class="value">￥899.00</p>
+                        </li>
+                        <li class="ware">
+                            <div class="cover ">
+                                <a class="btn" href="#">立即抢购</a>
+                            </div>
+                            <img src="image/jintiao.jpg" alt="">
+                            <p>奢侈品2222222222222222222222</p>
+                            <p class="value">￥899.00</p>
+                        </li>
+                        <li class="ware">
+                            <div class="cover ">
+                                <a class="btn" href="#">立即抢购</a>
+                            </div>
+                            <img src="image/jintiao.jpg" alt="">
+                            <p>奢侈品2222222222222222222222</p>
+                            <p class="value">￥899.00</p>
+                        </li>
+                    </ul>
+                </li>
+            </ol>
+        </div>
+
+        <script src="../js/jquery-3.2.1.min.js"></script>
+        <script>
+
+            $('.nav>li').on('click',function(){
+                var $this = $(this)
+                var index = $this.index();  //获取点击的下标，判断是第几个
+
+                $this.siblings().removeClass('active')  //若有多个tab，把选中的那个邻居删除active
+                $this.addClass('active')
+                // $('.nav>li').removeClass('active')  //把li上的active标签都删除
+                // $('.nav>li').eq(index).addClass('active')  //把点击的那个li添加上active
+
+                $this.parents('.tab').find('.content>li').removeClass('active')  //从父元素寻找正确的
+                $this.parents('.tab').find('.content>li').eq(index).addClass('active')
+                // $('.content>li').removeClass('active')  //上同理
+                // $('.content>li').eq(index).addClass('active')
+            })
+
+            $('.ware-ct>li').on('mouseover',function(){
+                $(this).addClass('hover')
+            })
+
+            $('.ware-ct>li').on('mouseout',function(){
+                $(this).removeClass('hover')
+            })
+
+        </script>
+    </body>
+</html>

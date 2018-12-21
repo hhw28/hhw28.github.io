@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+    <head>
+      <meta charset="utf-8">
+      <title>瀑布流布局</title>
+      <style>
+        .waterfall{
+            position: relative;
+        }
+        .item{
+            position: absolute;
+            width: 200px;
+            margin-right: 10px;
+            margin-top:10px;
+            /*transition: all 1s;*/
+        }
+        .h1{
+            height: 200px;
+            background-color: #7dd4fe;
+        }
+        .h2{
+            height: 300px;
+            background-color: #ff426e;
+        }
+        .h3{
+            height: 400px;
+            background-color: #7aa867;
+        }
+      </style>
+    </head>
+    <body>
+        <div class="waterfall">
+            <div class="item h1">1</div>
+            <div class="item h2">2</div>
+            <div class="item h3">3</div>
+            <div class="item h1">4</div>
+            <div class="item h2">5</div>
+            <div class="item h3">6</div>
+            <div class="item h1">7</div>
+            <div class="item h2">8</div>
+            <div class="item h3">9</div>
+            <div class="item h1">10</div>
+            <div class="item h1">11</div>
+            <div class="item h2">12</div>
+            <div class="item h3">13</div>
+            <div class="item h1">14</div>
+        </div>
+        
+        <script src="../js/jquery-3.2.1.min.js"></script>
+        <script>
+            // waterfull()  //刚打开页面布局一次
+
+            // $(window).resize(function(){
+            //     waterfull()     //当窗口宽度变动再变动一次
+            // })
+
+
+            // function waterfull(){
+            //     var $nodeWidth = $('.item').width()
+            //     var colLength = $('.content').width()/$nodeWidth  //获取每行存放个数
+            //     var itemArr = []
+
+            //     for(var i=0; i<colLength; i++){
+            //         itemArr[i] = 0
+            //     }
+            //     $('.item').each(function(){
+            //         var minValue = Math.min.apply(null,itemArr)  //获取数组最小值
+            //         var minIndex = itemArr.indexOf(minValue)  //获取最小值的下标
+
+            //         $(this).css({
+            //             top:itemArr[minIndex],   //该排在高度最小值的下面
+            //             left:$(this).outerWidth(true)*minIndex  //true包含边框  //确定哪列
+            //         })
+
+            //         itemArr[minIndex] += $(this).outerHeight(true)  //排完后最小值 值增加了，把增加的值赋值
+            //     })
+            // }
+
+		var WaterFall = (function(){
+
+			
+			function init($ct){
+				waterfull($ct)
+			}
+
+			function waterfull($ct){
+				var $nodeWidth = $ct.find('.item').width()
+				var colLength = $ct.width()/$nodeWidth  //获取每行存放个数
+				var itemArr = []
+
+				for(var i=0; i<colLength; i++){
+					itemArr[i] = 0
+				}
+				$ct.find('.item').each(function(){
+					var minValue = Math.min.apply(null,itemArr)  //获取数组最小值
+					var minIndex = itemArr.indexOf(minValue)  //获取最小值的下标
+
+					$(this).css({
+						top:itemArr[minIndex],   //排在高度最小值的下面
+						left:$(this).outerWidth(true)*minIndex  //true包含边框  //确定放在哪列
+					})
+
+					itemArr[minIndex] += $(this).outerHeight(true)  //排完后最小值 值增加了，把增加的值赋值
+
+					var maxValue = Math.max.apply(null,itemArr)
+					var maxIndex = itemArr.indexOf(maxValue)  //获取最大值
+					
+					$ct.css('height',itemArr[maxIndex])   //把最大赋给父容器设高度 
+				})
+			}    
+
+			return{
+				init:init
+			}
+		})()
+	
+		WaterFall.init($('.waterfall'))
+
+        </script>
+    </body>
+</html>

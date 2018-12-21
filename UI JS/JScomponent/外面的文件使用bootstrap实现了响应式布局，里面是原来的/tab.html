@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html>
+    <head>
+      <meta charset="utf-8">
+      <title>Tab组件-封装</title>
+      <style>
+            li{
+                list-style: none;  
+            }
+            div,ol,li{
+                margin: 0px;padding: 0px;
+            }
+            .clearfix:after{
+                content: '';
+                display: block;
+                clear: both;
+            }
+            .tab{
+                border: 1px solid #cbcbcb;
+                border-radius: 5px;
+                width: 590px;
+                margin: 0 auto;
+                margin-top: 50px;       
+            }
+            .nav {
+                margin: 20px;
+                border-bottom: 1px solid #cbcbcb;
+            }
+            .nav li{
+                float: left;
+                padding: 10px 15px;
+                border: 1px solid #fff;
+            }
+            .nav .active{
+                border: 1px solid #cbcbcb;
+                border-bottom: 2px solid #fff;
+                border-radius: 3px;
+
+                margin-bottom: -1px;
+            }
+            .content{
+                height: 150px;
+                padding: 15px 25px;
+            }
+            .content li{
+                display: none;
+            }
+            .content .active{
+                display: block;
+            }
+            .btn-back{
+                border:none;
+                border-radius: 5px;
+                padding: 10px 20px;
+                background: #ccc;
+                color: #fff;
+                font-size: 5vh;
+                position: fixed;
+                bottom:5vh;
+                right: 5vh; 
+            }
+            a{
+                text-decoration: none;
+            }
+        </style>
+    </head>
+    <body>
+        <a href="index.html" class="btn-back">返回<a>
+        <div class="tab">
+            <ol class="nav clearfix">
+                <li class="active">tab1</li>
+                <li>tab2</li>
+                <li>tab3</li>
+            </ol>
+            <ol class="content">
+                <li class="active">内容11111111111</li>
+                <li>内容2222222222222</li>
+                <li>内容3333333333333</li>
+            </ol>
+        </div>
+        
+        <div class="tab">
+            <ol class="nav clearfix">
+                <li class="active">tab1</li>
+                <li>tab2</li>
+                <li>tab3</li>
+            </ol>
+            <ol class="content">
+                <li class="active">内容11111111111</li>
+                <li>内容2222222222222</li>
+                <li>内容3333333333333</li>
+            </ol>
+        </div>
+
+        <div class="tab">
+            <ol class="nav clearfix">
+                <li class="active">tab1</li>
+                <li>tab2</li>
+                <li>tab3</li>
+                <li>tab4</li>
+            </ol>
+            <ol class="content">
+                <li class="active">内容11111111111</li>
+                <li>内容2222222222222</li>
+                <li>内容3333333333333</li>
+                <li>内容4444444444444</li>
+            </ol>
+        </div>
+
+
+        <script src="js/jquery-3.2.1.min.js"></script>
+        <script>
+/*
+//原生dom实现封装            
+            function Tab(ct){
+                this.ct = ct
+                this.init()
+                this.bind()
+            }
+
+            Tab.prototype.init = function(){
+                this.tabLis = this.ct.querySelectorAll('.nav>li')
+                this.tabPanels = this.ct.querySelectorAll('.content>li')
+            }
+
+            Tab.prototype.bind = function(){
+                var _this = this
+
+                this.tabLis.forEach(function(tabli){  //循环每一项
+                    tabli.onclick = function(e){
+                        var target = e.target
+                        var index = [].indexOf.call(_this.tabLis,target)  //获取点击的下标
+                        
+                        _this.tabLis.forEach(function(li){
+                            li.classList.remove('active')
+                        })
+                        target.classList.add('active')
+
+                        _this.tabPanels.forEach(function(panel){
+                            panel.classList.remove('active')
+                        })
+                        _this.tabPanels[index].classList.add('active')
+                    }
+                })
+            }
+            new Tab(document.querySelectorAll('.tab')[0])
+            new Tab(document.querySelectorAll('.tab')[1])
+            // new Tab(document.querySelectorAll('.tab')[2])
+*/
+//jQuery实现 封装
+            function Tab(ct){
+                this.ct = ct
+                this.init()
+                this.bind()
+            }
+            Tab.prototype.init = function(){
+                this.tabLis = this.ct.find('.nav>li')
+                this.tabPanels = this.ct.find('.content>li')                
+            }
+            Tab.prototype.bind = function(){
+                var _this = this
+                this.tabLis.on('click',function(){
+                    var $this = $(this)
+                    var index = $this.index();  //获取点击的下标，判断是第几个
+
+                    $this.siblings().removeClass('active')  //若有多个tab，把选中的那个邻居删除active
+                    $this.addClass('active')
+
+
+                    _this.tabPanels.removeClass('active')  //从父元素寻找正确的
+                    _this.tabPanels.eq(index).addClass('active')
+
+                })                
+            }   
+            new Tab($('.tab').eq(0)) 
+            new Tab($('.tab').eq(1))  
+            new Tab($('.tab').eq(2))    
+
+/*
+            $('.nav>li').on('click',function(){
+                var $this = $(this)
+                var index = $this.index();  //获取点击的下标，判断是第几个
+
+                $this.siblings().removeClass('active')  //若有多个tab，把选中的那个邻居删除active
+                $this.addClass('active')
+                // $('.nav>li').removeClass('active')  //把li上的active标签都删除
+                // $('.nav>li').eq(index).addClass('active')  //把点击的那个li添加上active
+
+                $this.parents('.tab').find('.content>li').removeClass('active')  //从父元素寻找正确的
+                $this.parents('.tab').find('.content>li').eq(index).addClass('active')
+                // $('.content>li').removeClass('active')  //上同理
+                // $('.content>li').eq(index).addClass('active')
+            })
+*/
+        </script>
+    </body>
+</html>

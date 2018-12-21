@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html>
+    <head>
+      <meta charset="utf-8">
+      <title>皮卡丘</title>
+      <style>
+          *{margin: 0;padding: 0;}
+          *{box-sizing: border-box}
+          *::before{box-sizing: border-box}
+          *::after{box-sizing: border-box}
+          body{
+              background: #ffe600;
+              display: flex;
+              justify-content: center;
+              align-items: center;
+              min-height: 100vh;   /**/
+          }
+          #container{
+              height: 300px;
+              width: 460px;
+              position: relative;
+          }
+          #nose{
+              border:10px solid transparent;
+              border-top-color: #000;   /*仅给上边框设置颜色，产生一个三角形*/
+
+              position: absolute;
+              left:50%;
+              transform: translateX(-50%); /*向X轴方向偏离自身幅度50%*/
+              top:100px;
+          }
+          #nose::before{
+              content: '';
+              display: block;
+              width: 20px;
+              height: 5px;
+              background: #000;
+
+              position: absolute;  
+              left: -10px;
+              top:-15px;
+              border-top-left-radius:30px; 
+              border-top-right-radius:30px;
+          }
+          .eye{
+              width: 60px;
+              height: 60px;
+              background: #2e2e2e;
+              border:3px solid black;
+              border-radius: 50%;
+              position:absolute;
+              top:70px;
+          }
+          .eye::before{
+              content: '';
+              display: block;
+              background: #fff;
+              width: 22px;
+              height: 22px;
+              border:3px solid #000;
+              border-radius: 50%;
+              position: absolute;
+              left: 7px;
+              top:1px;
+          }
+          .eye-left{
+              right: 50%;
+              margin-right:90px;
+          }
+          .eye-right{
+              left: 50%;
+              margin-left:90px;
+          }
+          .face{
+              width: 75px;
+              height: 75px;
+              background: red;
+              border:3px solid #000;
+              border-radius: 50%;
+              position: absolute;
+              top:170px;
+          }
+          .face-left{
+              right: 50%;
+              margin-right: 140px;
+          }
+          .face-right{
+              left: 50%;
+              margin-left: 140px;
+          }
+          .upperLip{
+              width: 100%;
+              position: absolute;
+              top:125px;
+              display: flex;
+              justify-content: center;
+              z-index: 1;
+          }
+          .upperLip::before{
+              content: '';
+              display: block;
+              border:3px solid #000;
+              border-top:none;
+              border-right: none;
+              border-bottom-left-radius: 40px 25px;
+              height: 26px;
+              width: 70px;
+              transform: rotateZ(-25deg);
+              background: #ffe600;
+          }
+          .upperLip::after{
+              content: '';
+              display: block;
+              border:3px solid #000;
+              border-top:none;
+              border-left: none;
+              border-bottom-right-radius: 40px 25px;
+              height: 25px;
+              width: 70px;
+              transform: rotateZ(25deg);
+              background: #ffe600;
+          }
+          .lowerLip-wrapper{
+              position: absolute;
+              width:100%;
+              top:135px;
+              height: 165px;
+              overflow: hidden;
+          }
+          .lowerLip{
+              border:3px solid #000;
+              border-bottom-left-radius: 100px 500px;
+              border-bottom-right-radius: 100px 500px;
+              position: absolute;
+              width: 140px;
+              height: 800px;    /*高度越高，可以获得的角度越尖*/
+              left: 50%;
+              bottom: 0px;
+              transform: translateX(-50%);
+              background:#ff4860;
+              /*舌苔*/
+              box-shadow: inset 0px 655px 0px 0px #9b000a;
+              border-top-left-radius: 100px 100px;
+              border-top-right-radius: 100px 100px;
+          }
+      </style>
+    </head>
+    <body>
+        <div id="container">
+            <div id="nose"></div>
+            <div class="eye eye-left"></div>
+            <div class="eye eye-right"></div>
+            <div class="upperLip"></div>
+            <div class="lowerLip-wrapper">
+                <div class="lowerLip"></div>
+            </div>
+
+            <div class="face face-left"></div>
+            <div class="face face-right"></div>
+        </div>
+        <script></script>
+    </body>
+</html>

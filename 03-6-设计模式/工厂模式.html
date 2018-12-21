@@ -1,0 +1,18 @@
+<script>  
+//构造函数模式基础版
+//函数内部创建一个对象(可以是字面量方式、构造函数方式、或其它方式)，再把这个对象return出来
+
+    function createPerson(opts){
+        var person = {
+            name : opts.name ||'robin'
+        }
+        person.sayName = function(){
+            console.log(this.name)
+        }
+        return person
+    }
+
+    var p1 = createPerson({name:'lisa'})
+    p1.sayName()   //lisa
+
+</script>

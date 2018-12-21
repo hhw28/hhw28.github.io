@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html>
+    <head>
+      <meta charset="utf-8">
+      <title>木桶布局</title>
+      <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        .img-preview{
+            width: 1000px;
+            margin: 0 auto;
+        }
+        .img-row {
+            margin-bottom: 8px;
+        }
+        .img-row:after {
+            content: "";
+            display: block;
+            clear: both;
+        }
+        .img-box {
+            float: left;
+        }
+        .img-preview  .img-row .img-box img{
+            margin-left: 8px;
+            border-radius: 3px;
+        }
+      </style>
+    </head>
+    <body>
+        <div class="img-preview">
+
+        </div>
+
+        
+        <script src="../js/jquery-3.2.1.min.js"></script>
+        <script>
+
+
+            function Barrel($ct){
+                this.$ct = $ct
+                this.baseHeight = 120 //设置图片高度给定
+                this.marginWidth = 8
+                this.rowList = []  //每行图片放置的数组
+                this.loadImg()
+            }
+            
+            Barrel.prototype = {
+
+                loadImg:function(){
+                    var _this = this;  
+                    var imgs = this.getImgUrls(50)  //获取到10张图片地址数组
+
+
+                    $.each(imgs,function(idx, url){  //遍历图片
+                        var img = new Image();
+                            img.src = url;   
+
+                        var imgWidth = img.innerwidth
+
+                        img.onload = function(){
+                            var imgInfo = {
+                                    target: $(img),
+                                    width: _this.baseHeight*(img.width/img.height),  //宽度等比缩放
+                                    height: _this.baseHeight,  //给定图片高度
+                                };
+                            _this.render(imgInfo);  //图片加载之后渲染
+                        }
+                    })
+                },
+
+                render:function(imgInfo){
+                    var clientWidth = this.$ct.width()  //定义容器宽度
+                    var rowWidth = 0  //全部图片宽度和
+                    var rouHeight = 0 //每行图片高度
+                    var lastImgInfo = imgInfo;
+
+                    this.rowList.push(imgInfo);  //把加载的图片放进数组
+
+                    for(var i=0; i<this.rowList.length; i++){
+                        rowWidth += this.rowList[i].width + this.marginWidth   //rowWidth += this.rowList[i].width
+                    }
+
+                    if(rowWidth > clientWidth){  //加载的图片宽度和 超过了 容器宽度
+                        this.rowList.pop()  //把数组最后一项取出
+
+                        rowWidth = rowWidth - lastImgInfo.width - this.marginWidth  //宽度和减去刚刚删除的那张图片宽度
+                        newRowHeight = clientWidth*this.baseHeight/rowWidth  // 当图片少了，需要把图片拉伸到正行，图片宽度等于容器宽度，图片等比缩放，此时图片高度增加
+
+                        this.layout(newRowHeight)  //把之前已经放进数组的图片 摆放到 页面
+                        this.rowList = []  //清空现在的数组，接着做下一行的
+                        this.rowList.push(imgInfo)  //把刚刚取出的图片放到新的下一行
+                    }
+                },
+
+                layout:function(newRowHeight){
+                    var $rowCt = $('<div class="img-row"></div>')  //每一行创建一个div
+
+                    $.each(this.rowList,function(idx,imgInfo){  //遍历图片数组
+                        var $imgCt = $('<div class="img-box"></div>'),  //每张图片创建一个div
+                            $img = $(imgInfo.target)  //加载的对象
+                            
+                            $img.height(newRowHeight);
+                            $imgCt.append($img);  //把图片对象添加到 图片div中
+                            $rowCt.append($imgCt)  //图片div添加到 每行的div中
+                    })
+                    this.$ct.append($rowCt)  //把每一行div 都添加到页面中
+                },
+
+                // getImgUrls:function(num){
+                //     var color,width,height,urls = []
+                //     for(var i=0; i<num; i++){
+                //         color = Math.random().toString(16).substring(2,8)  //随机获取一个0~1的小数，切换成16进制，然后取值下标2~7的6位数做为颜色
+                //         width = Math.floor(Math.random()*100+50)  //Math.floor向下取整数，最小宽度为50px
+                //         height = Math.floor(Math.random()*30+50) //高度比宽度小的几率大，最小高度为50
+
+                //         urls.push('http://placehold.it/'+width+'x'+height+'/'+color+'/fff')  //根据图片地址拼接字符串
+                //     }
+                //     return urls
+
+                // },
+                getImgUrls:function(num){
+                    var width,height,urls = []
+                    for(var i=0; i<num; i++){
+                        width = Math.floor(Math.random()*100+50)  //Math.floor向下取整数，最小宽度为50px
+                        height = Math.floor(Math.random()*30+50) //高度比宽度小的几率大，最小高度为50
+// https://unsplash.it/200/300
+                        urls.push('https://unsplash.it/'+width+'/'+height)  //根据图片地址拼接字符串
+                    }
+                    return urls
+
+                }
+            }
+
+            var barrels = new Barrel($('.img-preview'));
+        </script>
+    </body>
+</html>

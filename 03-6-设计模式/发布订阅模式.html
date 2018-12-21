@@ -1,0 +1,40 @@
+<script>
+    var EventCenter = (function(){
+        var events = {}
+
+        function on(evt,handler){
+            events[evt] = events[evt] || []   //若events[evt]中没有‘my_event’，则给一个空数组 
+            events[evt].push({
+                handler:handler    //把EventCenter.on的函数传入
+            // 此时events = {
+            //      'my_event':[{handler:function(data){
+            //          console.log('11111111111')  
+            //  }}],[{handler:function(data){
+            //          console.log('2222222')  
+            //  }}]
+            // }
+            })
+        }
+        function fire(evt,args){
+            if(!events[evt]){
+                return    //当events中没有传输进来的对象，直接return
+            }
+            for(var i=0; i<events[evt].length; i++){
+                events[evt][i].handler(args)
+            }
+        }
+
+        return{
+            on:on,
+            fire:fire
+        }
+    })()
+
+    EventCenter.on('my_event',function(data){
+        console.log('1111111 ')
+    })
+    EventCenter.on('my_event',function(data){
+        console.log('2222222')
+    })
+    EventCenter.fire('my_event')
+</script>

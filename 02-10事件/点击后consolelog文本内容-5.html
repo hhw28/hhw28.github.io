@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>点击后consolelog文本内容</title>
+</head>
+<body>
+    <ul class="ct">
+        <li>这里是</li>
+        <li>11111</li>
+        <li>22222</li>
+    </ul>
+    <script>
+    //todo ...
+    //方法1， 直接给元素绑定事件
+        var ct = $('.ct')
+        var liArr = $$('li')
+        // var liArr = document.getElementsByClassName('ct')[0].getElementsByTagName('li');
+
+        for(var i=0  ;i<liArr.length ;i++){
+            liArr[i].addEventListener('click',function(){
+                console.log(this.innerText)
+            })
+        }
+
+    //方法2 ，使用事件代理，把事件监听绑定到父容器上，根据事件的来源进行处理
+        // var ct = $('.ct')
+        // ct.addEventListener('click',function(e){
+        //     console.log(e.target.innerText);
+        // })
+
+
+        function $(obj){
+            return document.querySelector(obj)
+        }
+        function $$(array){
+            return document.querySelectorAll(array)
+        }
+    </script>
+</body>
+</html>

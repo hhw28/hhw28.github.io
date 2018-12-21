@@ -1,0 +1,51 @@
+﻿<!doctype html>
+<html>
+     <head>
+	     <meta charset="utf-8"/>
+		 <title>圣杯布局</title>
+		 <style type="text/css">
+		 	.aside{
+		 		width: 100px;
+		 		height: 300px;
+		 		background: red;
+
+		 		margin-left: -100%;  /*被挤下之后设置-margin回上去*/
+
+		 		position: relative;
+		 		left: -100px;  /*相对自身宽度左移*/
+		 	}
+		 	.extra{
+		 		width: 150px;
+		 		height: 300px;
+		 		background: yellow;
+
+		 		margin-left: -150px;/*被挤下之后设置-margin回上去*/
+
+		 		position: relative;
+		 		right: -150px;/*相对自身宽度左移*/
+		 	}
+		 	.main{
+		 		width: 100%;/*宽度自适应导致aside extra被挤下去了*/
+		 		height: 350px;
+		 		background: pink;
+
+		 	}
+
+		 	.aside,.main,.extra{
+		 		float: left;
+		 	}
+
+		 	.content{
+		 		padding-left: 100px;
+		 		padding-right: 150px;/*给aside extra留好位置，不会被main全部霸占*/
+		 	}
+		 </style>
+	 </head>
+     <body>
+	     <div class="content">
+	     	<div class="main">优先加载main，但是main最小宽度不能小于aside,否则extra会被挤下</div>
+	     	<div class="aside">aside</div>
+	     	<div class="extra">extra</div>
+	     </div>
+	 </body>
+</html>

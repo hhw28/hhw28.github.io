@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>状态锁</title>
+  <style>
+     
+  </style>
+</head>
+<body>
+    <p>点击按钮，使用 ajax 获取数据，在数据到来之前防止重复点击</p>
+    <button class="button" id="btn">状态锁</button>
+    <script>
+
+//题目3
+/*
+      var button = document.querySelector('.button')
+      var ajaxLock = true
+
+      button.addEventListener('click',function(){
+        if(!ajaxLock){
+          return    //服务器还未返回数据，锁未打开点击无效直接return
+        }
+
+        ajax({
+          ...
+          ajaxLock = true   //得到数据后，按钮恢复可以点击
+        })
+
+        ajaxLock = false   //请求发送完成，避免重复点击设置为false      
+      })
+*/
+//题目4
+     
+      function ajax(opts){
+          // todo ...
+          //接收参数并设置默认参数，如果用户没输出参数则可使用默认参数
+          opts.success = opts.success || function(){};
+          opts.error = opts.error || function(){};
+          opts.type = opts.type || "get";
+          opts.dataType = opts.dataType || "json";
+          opts.data = opts.data || {};
+          
+          //拼接提交的参数
+          var dataStr = "";
+          for(var key in opts.data){
+            dataStr += key + '=' + opts.data[key] + "&"
+          }
+
+          var xhr = new XMLHttpRequest()
+          xhr.onreadystatechange = function(){
+            if(xhr.readyState ===  4){
+              if(xhr.status === 200 || xhr.status === 304){
+                if(opts.dataType === "text"){
+                  opts.success(xhr.responseText)
+                }
+                if(opts.dataType === "json"){
+                  var json = JSON.parse(xhr.responseText);
+                  opts.success(json)
+                }
+              }else{
+                opts.error()
+              }
+            }
+
+          }
+          //减去最后一位
+          dataStr = dataStr.substr(0, dataStr.length-1);
+
+          if(opts.type.toLowerCase() === 'post'){
+            xhr.open(opts.type,opts.url,true)
+            xhr.setRequestHeader("Content-type","application/x-ww-form-urlencoded")
+            xhr.send(dataStr)
+          }
+          if(opts.type.toLowerCase() === 'get'){
+            xhr.open(opts.type,opts.url + '?' + dataStr ,true)
+            xhr.send()
+          }
+      }
+      
+      document.querySelector('#btn').addEventListener('click', function(){
+          ajax({
+              url: '/login',   //接口地址
+              type: 'get',               // 类型， post 或者 get,
+              data: {
+                  username: 'xiaoming',
+                  password: 'abcd1234'
+              },
+              success: function(ret){
+                  console.log(ret);       // {status: 0}
+              },
+              error: function(){
+                console.log('出错了')
+              }
+          })
+      });
+    </script>
+</body>
+</html>
