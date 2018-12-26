@@ -5,7 +5,7 @@
       <title>tab切换jquery实现</title>
       <style>
             li{
-                list-style: none;  
+                list-style: none;
             }
             div,ol,ul,li,p{
                 margin: 0px;padding: 0px;
@@ -21,7 +21,7 @@
             .tab{
                 width: 708px;
                 margin: 0 auto;
-                margin-top: 50px;       
+                margin-top: 50px;
             }
             .tab .nav{
                 border: 1px solid #cbcbcb;
@@ -442,7 +442,12 @@
         <script src="../js/jquery-3.2.1.min.js"></script>
         <script>
 
+            // document.querySelector('.nav').addEventListener('click', function(e){
+						// 	let li = e.target
+						// 	li.className = 'active'
+            // })
             $('.nav>li').on('click',function(){
+
                 var $this = $(this)
                 var index = $this.index();  //获取点击的下标，判断是第几个
 
