@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>公告文字轮播</title>
+  <style>
+  * {
+    padding: 0;
+    margin: 0;
+  }
+  .box {
+    margin-top: 200px;
+    height: 50px;
+    line-height: 50px;
+    background-color: #eee;
+    overflow: hidden;
+
+  }
+
+
+  </style>
+</head>
+
+<body>
+<div class="box">
+  <ul class="wrapper">
+    <li class="item">11111测试内容超多的情况</li>
+    <li class="item">2222222222测试内容超多的情况测情况测试试</li>
+    <li class="item">33333测试内容超多的情况</li>
+    <li class="item">11111测试内容超多的情况</li>
+  </ul>
+</div>
+
+<script>
+function sliderVertical() {
+// debugger
+  let wrapper  = document.getElementsByClassName('wrapper')[0]
+  let offset = 50 // 给定li高度
+  let timer
+  setInterval(() => {
+    if(timer){
+      clearInterval(timer)
+    }
+
+    // step数值越大，滚动速度越快
+    let step = 2
+    timer = setInterval(() => {
+      wrapper.style.transform = 'translateY(-' + (offset + step) + 'px)'
+      if(step >= 50) {
+        clearInterval(timer)
+      }
+      step += 2
+    }, 10)
+
+    offset += 50
+    let num = Math.floor(wrapper.offsetHeight / 50)
+    // 当ul移动到底时，从头开始
+    if (!(offset % ((num - 1) * 50))) {
+      offset = 0
+    }
+  }, 5000)
+
+}
+sliderVertical()
+</script>
+</body>
+</html>
