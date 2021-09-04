@@ -5,7 +5,7 @@
       <title>代理</title>
       <style>
             li{
-                list-style: none;  
+                list-style: none;
             }
             div,ol,ul,li,p{
                 margin: 0px;padding: 0px;
@@ -21,7 +21,7 @@
             .ct{
                 width: 726px;
                 margin: 0 auto;
-                margin-top: 50px;       
+                margin-top: 50px;
             }
             .content{
                 margin-bottom: 15px;
@@ -86,7 +86,7 @@
     </head>
     <body>
         <div class="ct">
-            <ol class="content clearfix">              
+            <ol class="content clearfix">
                 <li class="ware">
                     <div class="cover ">
                         <a class="btn" href="#">立即抢购</a>
@@ -142,7 +142,7 @@
 
 
 
-        <script src="../js/jquery-3.2.1.min.js"></script>
+        <script src="../static/js/jquery-3.2.1.min.js"></script>
         <script>
             var products = [
                 {
@@ -170,7 +170,7 @@
                 html += '    <p class="price">'+prod.price+'</p>'
                 html += '</li>'
                 return html
-            }                                   
+            }
 
             $('.ct>.btn').on('click',function(){
                 $.each(products, function(idx, prod){
@@ -189,7 +189,7 @@
             /*
             $('.content>li').on('mouseout',function(){
                 $(this).removeClass('hover')
-            }) 若这样写会导致新添加的项目无法操作hover*/ 
+            }) 若这样写会导致新添加的项目无法操作hover*/
 
         </script>
     </body>

@@ -36,7 +36,7 @@
             font-size: 5vh;
             position: fixed;
             bottom:5vh;
-            right: 5vh; 
+            right: 5vh;
         }
         a{
             text-decoration: none;
@@ -50,8 +50,8 @@
 
         </div>
 
-        
-        <script src="js/jquery-3.2.1.min.js"></script>
+
+        <script src="../../../static/js/jquery-3.2.1.min.js"></script>
         <script>
 
 
@@ -62,17 +62,17 @@
                 this.rowList = []  //每行图片放置的数组
                 this.loadImg()
             }
-            
+
             Barrel.prototype = {
 
                 loadImg:function(){
-                    var _this = this;  
+                    var _this = this;
                     var imgs = this.getImgUrls(50)  //获取到10张图片地址数组
 
 
                     $.each(imgs,function(idx, url){  //遍历图片
                         var img = new Image();
-                            img.src = url;   
+                            img.src = url;
 
                         var imgWidth = img.innerwidth
 
@@ -117,7 +117,7 @@
                     $.each(this.rowList,function(idx,imgInfo){  //遍历图片数组
                         var $imgCt = $('<div class="img-box"></div>'),  //每张图片创建一个div
                             $img = $(imgInfo.target)  //加载的对象
-                            
+
                             $img.height(newRowHeight);
                             $imgCt.append($img);  //把图片对象添加到 图片div中
                             $rowCt.append($imgCt)  //图片div添加到 每行的div中

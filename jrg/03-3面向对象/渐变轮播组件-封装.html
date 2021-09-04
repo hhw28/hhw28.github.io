@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html>
+    <head>
+      <meta charset="utf-8">
+      <title>渐变轮播组件-封装</title>
+      <style>
+        ul,li{
+            list-style:none;
+        }
+        a{
+            text-decoration: none;
+        }
+        ul,li,a,div,img{
+            margin: 0;
+            padding: 0;
+        }
+        .clearfix{
+            content: '';
+            display: block;
+            clear: both;
+        }
+        .carousel{
+            position: relative;
+            width: 400px;
+            height: 300px;
+            margin: 0 auto;
+        }
+        .carousel .img-ct{
+            position: relative;
+            width: 1600px;
+            height: 300px;
+        }
+        .carousel .img-ct li{
+            position: absolute;
+            display: none;
+        }
+        .carousel .img-ct li:first-child{
+            display: list-item;
+        }
+        .carousel .img-ct img{
+            width: 400px;
+            height: 300px;
+        }
+        .carousel .btn{
+            width: 50px;
+            height: 50px;
+            color: #fff;
+            border-radius: 50%;
+            background-color: #333;
+            opacity: 0.6;
+            text-align: center;
+            font-size: 34px;
+            display: block;
+
+            position: absolute;
+            top:50%;
+            margin-top:-25px;
+        }
+        .carousel .btn-pre{
+            left: 10px;
+        }
+        .carousel .btn-next{
+            right:10px;
+        }
+        .carousel .bullet{
+            position: absolute;
+            bottom: 15px;
+            left: 50%;
+            margin-left: -80px;
+        }
+        .carousel .bullet>li{
+            width: 30px;
+            height: 6px;
+            border-radius: 3px;
+            background-color: #fff;
+
+            float: left;
+            margin: 0 3px;
+        }
+        .carousel .bullet .active{
+            background-color: #666;
+        }
+      </style>
+    </head>
+    <body>
+        <div class="carousel">
+            <ul class="img-ct">
+                <li data-index="0"><a href="#"><img src="http://cdn.jirengu.com/book.jirengu.com/img/1.jpg" alt=""></a></li>
+                <li data-index="1"><a href="#"><img src="http://cdn.jirengu.com/book.jirengu.com/img/2.jpg" alt=""></a></li>
+                <li data-index="2"><a href="#"><img src="http://cdn.jirengu.com/book.jirengu.com/img/3.jpg" alt=""></a></li>
+                <li data-index="3"><a href="#"><img src="http://cdn.jirengu.com/book.jirengu.com/img/4.jpg" alt=""></a></li>
+            </ul>
+            <a class="btn btn-pre" href="#"><</a>
+            <a class="btn btn-next" href="#">></a>
+            <ul class="bullet clearfix">
+                <li class="active"></li>
+                <li></li>
+                <li></li>
+                <li></li>
+            </ul>
+        </div>
+        <div class="carousel">
+            <ul class="img-ct">
+                <li data-index="0"><a href="#"><img src="http://cdn.jirengu.com/book.jirengu.com/img/1.jpg" alt=""></a></li>
+                <li data-index="1"><a href="#"><img src="http://cdn.jirengu.com/book.jirengu.com/img/2.jpg" alt=""></a></li>
+                <li data-index="2"><a href="#"><img src="http://cdn.jirengu.com/book.jirengu.com/img/3.jpg" alt=""></a></li>
+                <li data-index="3"><a href="#"><img src="http://cdn.jirengu.com/book.jirengu.com/img/4.jpg" alt=""></a></li>
+            </ul>
+            <a class="btn btn-pre" href="#"><</a>
+            <a class="btn btn-next" href="#">></a>
+            <ul class="bullet clearfix">
+                <li class="active"></li>
+                <li></li>
+                <li></li>
+                <li></li>
+            </ul>
+        </div>
+        <script src="../../static/js/jquery-3.2.1.min.js"></script>
+        <script>
+
+                var Carousel = (function(){
+                    function _Carousel($ct){
+                        this.$ct = $ct
+                        this.init()
+                        this.bind()
+                        // this.autoPlay()
+                    }
+                    _Carousel.prototype.init = function(){
+                        this.$imgCt = this.$ct.find('.img-ct li')
+                        this.$preBtn = this.$ct.find('.btn-pre')
+                        this.$nextBtn = this.$ct.find('.btn-next')
+                        this.$bullet = this.$ct.find('.bullet')
+                        this.imgCount = this.$imgCt.children().length  //图片数量
+
+                        this.pageIndex = 0
+                        this.isAnimate = false  //判断是否重复点击，若已经在动画中则点击无效
+                    }
+                    _Carousel.prototype.bind = function(){
+                        var _this = this
+
+                        this.$preBtn.on('click',function(e){
+                            e.preventDefault()
+                            _this.playPre()
+                        })
+                        this.$nextBtn.on('click',function(e){
+                            e.preventDefault()
+                            _this.playNext()
+                        })
+                        this.$bullet.on('click','li',function(){
+                            var bulletIndex = $(this).index()
+                            _this.play(bulletIndex)
+                        })
+                    }
+                    _Carousel.prototype.play = function(idx){
+                        var _this = this
+
+                        if(this.isAnimate){
+                            return
+                        }
+                        this.isAnimate = true
+
+                        this.$imgCt.eq(this.pageIndex).fadeOut(500)   //把当前显示的图片隐藏
+                        this.$imgCt.eq(idx).fadeIn(500,function(){    //把需要展现的图片显示
+                            _this.isAnimate = false   //展示过程中把锁关闭，避免重复点击请求
+                        })
+                        this.pageIndex = idx  //把当前展示的页面记录到 页标中
+                        this.setBullet()  //下方小标志状态跟着变动
+                    }
+                    _Carousel.prototype.playNext = function(){
+                        this.play((this.pageIndex+1)%this.imgCount)  //当前页面+1 是下个展示的页面
+                    }
+                    _Carousel.prototype.playPre = function(){
+                        this.play((this.imgCount+this.pageIndex-1)%this.imgCount)  //当前页面-1 是上个页面，为避免pageIndex为0的时候按上出现-1的情况，所以再加上一个imgCount
+                    }
+                    _Carousel.prototype.setBullet = function(){
+                        this.$bullet.children()
+                                .removeClass('active')
+                                .eq(this.pageIndex)
+                                .addClass('active')
+                    }
+
+                    _Carousel.prototype.autoPlay = function(){
+                        var _this = this
+
+                        clock = setInterval(function(){
+                            _this.playNext()
+                        },1000)   //隔2秒自动 往下翻一页
+                    }
+                    _Carousel.prototype.stopAuto = function(){
+                        clearInterval(clock)  //如有需要可调用该函数停止自动翻页
+                    }
+                    return {
+                        init:function($ct){
+                            $ct.each(function(index,node){
+                                new _Carousel($(node))
+                            })
+                        }
+                    }
+                })()
+
+                Carousel.init($('.carousel'))
+
+
+
+
+        </script>
+    </body>
+</html>

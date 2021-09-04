@@ -5,7 +5,7 @@
       <title>jquery常用api</title>
       <style>
         ul,li{
-            list-style:none; 
+            list-style:none;
         }
         .each li{
             padding: 5px;
@@ -24,7 +24,7 @@
             background: pink;
         }
       </style>
-      <script src="../js/jquery-3.2.1.min.js"></script>
+      <script src="../static/js/jquery-3.2.1.min.js"></script>
       <script>
 //5.ready 可以把js放在前面
             //原生DOM
@@ -40,8 +40,8 @@
             })
       </script>
     </head>
-    <body>        
-        <p class="p1">我来展示隐藏和显示^ ^</p>   
+    <body>
+        <p class="p1">我来展示隐藏和显示^ ^</p>
         <button id="btn1">隐藏hide</button>
         <button id="btn2">显示show</button>
         <button id="btn3">切换toggle</button>
@@ -58,7 +58,7 @@
         <button id="btn12">多个动画</button>
 
         <script>
-//动画            
+//动画
             $('#btn1').on('click',function(){
                 $('.p1').hide(300);  //取值：'slow', 'normal', 'fast'或毫秒；
             })
@@ -89,7 +89,7 @@
                 console.log('123animate异步执行')
             })
         </script>
-        
+
         <ul class="each">
             <li>1-1</li>
             <li>1-2</li>
@@ -100,7 +100,7 @@
             <p class="1">1111111</p>
             <p class="2">我是2，但是我要在11前面<p>
         </div>
-         
+
          <div class="ct">
             <div class="box box1">box1</div>
             <p class="box box3">box3</p>
@@ -108,9 +108,9 @@
         </div>
         <button id="btn">点我</button>
 
-        
+
         <script>
-//1.修改html与clone            
+//1.修改html与clone
             //原生dom方法
             var item = document.createElement('item')
             var btn = document.getElementById('btn')
@@ -126,39 +126,39 @@
             $('.1').before($('.2'))  //若原html不存在该元素则添加，若存在则替换位置（把2掉到1前面）
             $('.1').before($('<p>before让我一直在111前面</P>'))
             $('.1').after('<div>after让我一直跟在11111后面<div>')
-            
+
             //以上类似剪切效果，若需要复制而不是剪切，如下
             $('.1').clone().appendTo('.clone')  //复制一个1到clone中
 
 
-//2.index           
+//2.index
             $('.box')   //得到类数组对象两个
             $('.box')[0]   //得到第一个box，但是是dom对象
             $('.box').eq(0)   //得到第一个box并且是jquery对象
             $('.box').eq(0).next()   //得到第一个box的下个jq对象
             $('.box').eq(0).prev()   //得到同辈元素的上一个
-            
+
             $('.box1').index()  //获取下标 0
             $('.box2').index()  //2
-         
- 
- //3.each          
+
+
+ //3.each
             // //传统遍历方法 寻找li中'1-'开头的对象
                var $eachLis = $('.each>li')
             // for(var i=0 ; i<$ctLis.length; i++){
             //     var $node = $ctLis.eq(i)   //若写成$ctLis[i]则获取的是dom对象
-            //     if($node.text().indexOf('1-')>-1){  
-            //         $node.addClass('on')    
+            //     if($node.text().indexOf('1-')>-1){
+            //         $node.addClass('on')
             //     }
             // }
             //jquery的.each方法 寻找li中'1-'开头的对象
             $eachLis.each(function(){
-                var $node = $(this);   
-                if($node.text().indexOf('1-')>-1){  
+                var $node = $(this);
+                if($node.text().indexOf('1-')>-1){
                     $node.addClass('on')
                 }
             })
-//4.extend          
+//4.extend
                 var obj = {}
                 var obj1 = {
                     name:'obj1',
@@ -173,9 +173,9 @@
                 $.extend(obj,obj1)
                 console.log(obj)  //name:'obj1',age:'1',friends:Array(3)
                 //深拷贝
-                $.extend(true,obj,obj1) 
+                $.extend(true,obj,obj1)
                 //2
-                $.extend(obj,obj1,obj2) 
+                $.extend(obj,obj1,obj2)
                 console.log(obj)   //name:'obj2',age:'1',friends:Array(3),sex:'male'
                 //3
                 var opts = $.extend({},obj1,obj2)
@@ -184,7 +184,7 @@
                 $.extend($.fn,obj2)
                 //5
                 $.fn.extend(obj2)
-                
+
                 //.extend常见用法
                 function getPeople(obj){
                     var defalut = {
@@ -194,10 +194,10 @@
                     }
                     //var opts = {}
                     var opts = $.extend({},defalut,obj)
-                    console.log(opts)       
-                }     
-        </script> 
-        
+                    console.log(opts)
+                }
+        </script>
+
 
     </body>
 </html>

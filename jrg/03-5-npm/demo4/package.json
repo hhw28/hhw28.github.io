@@ -1,0 +1,15 @@
+{
+  "name": "whdemo4",
+  "version": "1.0.6",
+  "description": "第一个命令行工具",
+  "main": "index.js",
+  "bin": {
+    "whdemo": "index.js",
+    "whdemo2": "index.js"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC"
+}

@@ -64,9 +64,9 @@
         }
         .carousel .bullet{
             position: absolute;
-            bottom: 15px;  
+            bottom: 15px;
             left: 50%;
-            margin-left: -80px;         
+            margin-left: -80px;
         }
         .carousel .bullet>li{
             width: 30px;
@@ -89,7 +89,7 @@
             font-size: 5vh;
             position: fixed;
             bottom:5vh;
-            right: 5vh; 
+            right: 5vh;
         }
         a{
         text-decoration: none;
@@ -130,10 +130,10 @@
                 <li></li>
             </ul>
         </div>
-        <a href="index.html" class="btn-back">返回<a>      
-        <script src="js/jquery-3.2.1.min.js"></script>
+        <a href="index.html" class="btn-back">返回<a>
+        <script src="../../../static/js/jquery-3.2.1.min.js"></script>
         <script>
-                                
+
                 var Carousel = (function(){
                     function _Carousel($ct){
                         this.$ct = $ct
@@ -146,7 +146,7 @@
                         this.$preBtn = this.$ct.find('.btn-pre')
                         this.$nextBtn = this.$ct.find('.btn-next')
                         this.$bullet = this.$ct.find('.bullet')
-                        this.imgCount = this.$imgCt.children().length  //图片数量      
+                        this.imgCount = this.$imgCt.children().length  //图片数量
 
                         this.pageIndex = 0
                         this.isAnimate = false  //判断是否重复点击，若已经在动画中则点击无效
@@ -164,7 +164,7 @@
                         })
                         this.$bullet.on('click','li',function(){
                             var bulletIndex = $(this).index()
-                            _this.play(bulletIndex) 
+                            _this.play(bulletIndex)
                         })
                     }
                     _Carousel.prototype.play = function(idx){
@@ -173,7 +173,7 @@
                         if(this.isAnimate){
                             return
                         }
-                        this.isAnimate = true    
+                        this.isAnimate = true
 
                         this.$imgCt.eq(this.pageIndex).fadeOut(500)   //把当前显示的图片隐藏
                         this.$imgCt.eq(idx).fadeIn(500,function(){    //把需要展现的图片显示
@@ -192,9 +192,9 @@
                         this.$bullet.children()
                                 .removeClass('active')
                                 .eq(this.pageIndex)
-                                .addClass('active')   
+                                .addClass('active')
                     }
-                    
+
                     _Carousel.prototype.autoPlay = function(){
                         var _this = this
 
@@ -218,7 +218,7 @@
 
 
 
-            
+
         </script>
     </body>
 </html>

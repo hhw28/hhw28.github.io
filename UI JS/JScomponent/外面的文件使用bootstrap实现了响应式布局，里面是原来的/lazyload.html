@@ -33,7 +33,7 @@
             font-size: 5vh;
             position: fixed;
             bottom:5vh;
-            right: 5vh; 
+            right: 5vh;
             cursor:pointer;
             outline: 0;
         }
@@ -133,8 +133,8 @@
                 </a>
             </li>
         </ul>
-        
-        <script src="js/jquery-3.2.1.min.js"></script>
+
+        <script src="../../../static/js/jquery-3.2.1.min.js"></script>
         <script>
             function Exposure($target,callback){
                 this.$target = $target
@@ -162,11 +162,11 @@
                     offsetTop = this.$target.offset().top,     //传递的参数距离顶点的距离
                     nodeHeight = this.$target.height();    //节点的自身高度
 
-                if(windowHeight + scrollTop > offsetTop && scrollTop < offsetTop + nodeHeight){   
+                if(windowHeight + scrollTop > offsetTop && scrollTop < offsetTop + nodeHeight){
                     return true;
                 }else{
                     return false;
-                }                
+                }
             }
 
             // $('.content img').each(function(idx,img){      //遍历每张图片
@@ -191,34 +191,34 @@
             function showImg($img){
                     var imgUrl = $img.attr('data-src')
                     $img.attr('src',imgUrl)
-            }            
+            }
 /*
             check();  //避免刚打开的时候不显示，只有滚动一点才显示的情况
 
             $(window).on('scroll',check)
-            
+
             function check(){
                 $('.content img').not('.show').each(function(){   //遍历所有图片
                     if(isShow($(this))){       //如果该图片位置出现了
                         showImg($(this))     //展示该图片
                     }
-                })                
+                })
             }
 
 //判断一个元素是否有出现，出现为true
-            function isShow($node){    
+            function isShow($node){
                 var windowHeight = $(window).height(),
                     scrollTop = $(window).scrollTop(),
                     offsetTop = $node.offset().top,     //传递的参数距离顶点的距离
                     nodeHeight = $node.height();    //节点的自身高度
 
-                if(windowHeight + scrollTop > offsetTop && scrollTop < offsetTop + nodeHeight){   
+                if(windowHeight + scrollTop > offsetTop && scrollTop < offsetTop + nodeHeight){
                     return true;
                 }else{
                     return false;
                 }
             }
-            
+
 //展示图片
             function showImg($img){
                 $img.each(function(){

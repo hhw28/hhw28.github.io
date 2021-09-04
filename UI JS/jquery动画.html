@@ -29,13 +29,13 @@
         .input{
             width: 400px;
             height: 50px;
-            
+
         }
       </style>
     </head>
     <body>
         <button class="btn">当点击时背景色变为红色再变为蓝色</button>
-        <p class="scroll">目前垂直滚动距离是0</p>        
+        <p class="scroll">目前垂直滚动距离是0</p>
         <div class="div">当鼠标放置到上面，背景色会改为红色，移出鼠标背景色变为白色</div>
         <input type="text" class="input" placeholder="请输入文字" >
         <div class="select">
@@ -48,7 +48,7 @@
             </select>
     	</div>
 
-        <script src="../js/jquery-3.2.1.min.js"></script>
+        <script src="../static/js/jquery-3.2.1.min.js"></script>
         <script>
 //题目7
 // 当点击$btn 时，让 $btn 的背景色变为红色再变为蓝色
@@ -83,10 +83,10 @@
             $('.input').css('border-color', 'initial')
             console.log($('.input').val())
         })
-// 当选择 select 后，获取用户选择的内容    
+// 当选择 select 后，获取用户选择的内容
         $(".select .selected").on("change",function(){
 			$(".select span").text($(".selected option:selected").text());
-		});               
+		});
 //题目6
         //     $node.addClass('active')// 给元素 $node 添加 class active
         //     $node.removeClass('active')// 给元素 $noed 删除 class active
@@ -110,11 +110,11 @@
         //     // 在$ct 内部最末尾添加元素$node
         //     $ct.append('$node')
         //     $node.appendTo('$ct')
-            
+
         //     $node.remove()// 删除$node
         //     $ct.empty()// 把$ct里内容清空
         //     $ct.html('<div class="btn"></div>')// 在$ct 里设置 html <div class="btn"></div>
-            
+
         //     // 获取、设置$node 的宽度、高度(分别不包括内边距、包括内边距、包括边框、包括外边距)
         //     //高度
         //     $node.height()//不包括内边距
@@ -125,14 +125,14 @@
         //     $node.width()//不包括内边距
         //     $node.innerWidth()//包括内边距
         //     $node.outerWidth()//包括边框
-        //     $node.outerWidth(true);//包括外边距           
-            
+        //     $node.outerWidth(true);//包括外边距
+
         //     $(window).scrollTop()// 获取窗口滚动条垂直滚动距离
 
         //     // 获取$node 到根节点水平、垂直偏移距离
         //     $node.offset().left
         //     $node.offset().top
-            
+
         //     // 修改$node 的样式，字体颜色设置红色，字体大小设置14px
         //     $node.css({
         //         'color':'red',
@@ -142,16 +142,16 @@
         //     $node.each(function(){
         //         console.log($this.text())
         //     })
-            
+
         //     $ct.find('.item')// 从$ct 里查找 class 为 .item的子元素
         //     $ct.children()// 获取$ct 里面的所有孩子
         //     $node.parent('.ct').children('.panel')// 对于$node，向上找到 class 为'.ct'的父亲，在从该父亲找到'.panel'的孩子
-            
+
         //     $node.length// 获取选择元素的数量
         //     $node.index()// 获取当前元素在兄弟中的排行
 
-        </script> 
-        
+        </script>
+
 
     </body>
 </html>
